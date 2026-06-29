@@ -188,7 +188,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 <header>
   <div class="wrap">
     <div class="head-row">
-      <div class="brand">
+      <a class="brand" href="/" onclick="switchView('thisweek');return false;" style="text-decoration:none;color:inherit">
         <div class="mark" aria-hidden="true">
           <svg viewBox="0 0 40 40" width="42" height="42">
             <rect x="0" y="0" width="40" height="40" fill="#DA1219"/>
@@ -204,7 +204,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <div class="wordmark">Amsterdam Pop-ups</div>
           <div class="tagline" data-i18n="tagline">what's on, off the beaten guide</div>
         </div>
-      </div>
+      </a>
       <div class="lang" role="group" aria-label="Language">
         <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
         <button id="lang-nl" onclick="setLang('nl')">NL</button>
