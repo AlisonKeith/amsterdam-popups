@@ -31,7 +31,7 @@
   --red:#DA1219; --red-deep:#7a1116; --red-tint:#FBEAEB; --red-tint-border:#F2CBCD;
   --ink:#1A1A1A; --ink-soft:#141414;
   --page:#FBFAF8; --card:#FFFFFF;
-  --muted:#6F6B64; --faint:#8F8A81;
+  --muted:#5F5E5A; --faint:#6B6A65;
   --line:#E6E2DB; --line-card:#EAE6DF;
   --c-food:#B5751E; --c-drink:#2E7D74; --c-markets:#5E7A33; --c-fashion:#84517E;
   --c-art:#3A5694; --c-shops:#A85734; --c-music:#9A4F6A; --c-film:#4F7A8A;
@@ -152,6 +152,9 @@ footer .wrap{padding:18px; font-size:12px; color:var(--faint); display:flex; jus
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 :focus-visible{outline:2px solid var(--red); outline-offset:2px}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:var(--red);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;text-decoration:none}
+.skip-link:focus{left:8px}
+.sr-only{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 nav.tabs .wrap::-webkit-scrollbar{display:none}
 .prose h2{font-size:15px; font-weight:600; margin:20px 0 5px; color:var(--ink)}
 .form-note{font-size:12px; color:var(--faint); margin-top:10px}
@@ -185,6 +188,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 </head>
 <body>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
 <header>
   <div class="wrap">
     <div class="head-row">
@@ -224,7 +228,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
   </div>
 </nav>
 
-<main>
+<main id="main-content">
   <div class="wrap">
 
     <!-- THIS WEEK -->
@@ -243,7 +247,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
             </div>
           </div>
           <div class="chips" id="chips"></div>
-          <div id="map"></div>
+          <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
+          <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
           <div class="ad-slot ad-mobile ad-top"><span class="ad-label" data-i18n="adLabel">Advertisement</span><span class="ad-hint">300×250 · responsive</span></div>
           <div class="cards" id="cards"></div>
@@ -267,7 +272,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     <section id="view-archive" class="view">
       <div class="search">
         <span class="si">⌕</span>
-        <input id="search" type="search" oninput="renderArchive()" data-i18n-ph="searchPh" placeholder="Search past pop-ups, places, neighbourhoods" />
+        <label for="search" class="sr-only">Search past pop-ups</label>
+        <input id="search" type="search" oninput="renderArchive()" data-i18n-ph="searchPh" placeholder="Search past pop-ups, places, neighbourhoods" aria-label="Search past pop-ups, places, neighbourhoods" />
       </div>
       <div id="archive"></div>
     </section>
@@ -277,7 +283,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
       <h1 data-i18n="tip">Tip us</h1>
       <p data-i18n="tipIntro"></p>
       <form name="tips" action="https://formspree.io/f/xjgqowrq" method="POST" onsubmit="return submitTip(event)">
-        <p class="hp"><label>Don't fill this in: <input name="_gotcha" /></label></p>
+        <p class="hp" aria-hidden="true"><label>Don't fill this in: <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
         <div class="field"><label data-i18n="fName">Your name (optional)</label><input name="name" /></div>
         <div class="field"><label data-i18n="fWhat">The pop-up — what and where</label><textarea name="popup" required></textarea></div>
         <div class="field"><label data-i18n="fWhen">When</label><input name="when" /></div>
@@ -298,7 +304,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
   </div>
 </main>
 
-<div id="consent" class="consent" role="dialog" aria-label="Cookie consent" style="display:none">
+<div id="consent" class="consent" role="dialog" aria-label="Cookie consent" aria-modal="true" style="display:none">
   <div class="consent-text" data-i18n="cookieText"></div>
   <div class="consent-actions">
     <button class="c-btn c-reject" onclick="consentChoice(false)" data-i18n="cookieReject">Reject</button>
@@ -717,7 +723,8 @@ function adSlot(kind){
 
 /* ---- cookie settings (reopen the banner to change consent) ---- */
 function setFab(show){ const f=document.getElementById("cookiefab"); if(f) f.style.display = show ? "inline-flex" : "none"; }
-function openConsent(){ const b=document.getElementById("consent"); if(b) b.style.display="flex"; setFab(false); }
+function openConsent(){ const b=document.getElementById("consent"); if(b){ b.style.display="flex"; b.querySelector("button").focus(); } setFab(false); }
+document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ const b=document.getElementById("consent"); if(b&&b.style.display==="flex") consentChoice(false); } });
 
 /* ---- consent (Consent Mode v2) ---- */
 function getCookie(n){ try{ return (document.cookie.split("; ").find(r=>r.indexOf(n+"=")===0)||"").split("=")[1]||null; }catch(e){ return null; } }
