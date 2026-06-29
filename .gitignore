@@ -1,0 +1,8 @@
+# Archives and OS clutter
+*.zip
+*.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code session files
+.claude/
