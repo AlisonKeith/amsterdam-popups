@@ -134,6 +134,7 @@ main{padding:18px 0 40px}
 form{margin-top:18px; max-width:520px}
 .field{margin-bottom:13px}
 .field label{display:block; font-size:13px; color:var(--muted); margin-bottom:5px}
+.field-label{display:block; font-size:13px; color:var(--muted); margin-bottom:0}
 .field input,.field textarea{width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-family:inherit; font-size:14px; background:#fff; color:var(--ink)}
 .field textarea{min-height:74px; resize:vertical}
 .field input:focus,.field textarea:focus{outline:none; border-color:var(--red); box-shadow:0 0 0 3px var(--red-tint)}
@@ -280,10 +281,25 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 
     <!-- TIP -->
     <section id="view-tip" class="view prose">
-      <h1 data-i18n="tip">Tip us</h1>
+      <h1 data-i18n="tip">Know a pop-up?</h1>
       <p data-i18n="tipIntro"></p>
       <form name="tips" action="https://formspree.io/f/xjgqowrq" method="POST" onsubmit="return submitTip(event)">
         <p class="hp" aria-hidden="true"><label>Don't fill this in: <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="field">
+          <fieldset style="border:0;padding:0;margin:0">
+            <legend class="field-label" data-i18n="fSubmitter">Are you…</legend>
+            <div style="display:flex;flex-direction:column;gap:7px;margin-top:6px">
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer">
+                <input type="radio" name="submitter_type" value="spotter" required style="accent-color:var(--red)" />
+                <span data-i18n="fSpotter">Someone who spotted it</span>
+              </label>
+              <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer">
+                <input type="radio" name="submitter_type" value="organiser" style="accent-color:var(--red)" />
+                <span data-i18n="fOrganiser">The organiser, listing your own</span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
         <div class="field"><label data-i18n="fName">Your name (optional)</label><input name="name" /></div>
         <div class="field"><label data-i18n="fWhat">The pop-up — what and where</label><textarea name="popup" required></textarea></div>
         <div class="field"><label data-i18n="fWhen">When</label><input name="when" /></div>
@@ -485,13 +501,14 @@ const EVENTS = [
 ];
 
 const I18N = {
-  en:{ thisweek:"This week", archive:"Archive", tip:"Tip us", about:"About",
-    all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", tipQ:"Know a pop-up we've missed?", tipCta:"Tip us",
+  en:{ thisweek:"This week", archive:"Archive", tip:"Know a pop-up?", about:"About",
+    all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", tipQ:"Know a pop-up we've missed — or running one yourself?", tipCta:"Know a pop-up?",
     tagline:"what's on, off the beaten guide",
     searchPh:"Search past pop-ups, places, neighbourhoods",
     none:"Nothing in this category this week — try another, or check the archive.",
     noResults:"No matches. Try a different word.",
-    tipIntro:"The best pop-ups spread by word of mouth. If you've spotted one — a supper club, a market, a residency, an opening — send it our way and we'll check it out.",
+    tipIntro:"Know a pop-up? Tell us about it.",
+    fSubmitter:"Are you…", fSpotter:"Someone who spotted it", fOrganiser:"The organiser, listing your own",
     fName:"Your name (optional)", fWhat:"The pop-up — what and where", fWhen:"When",
     fLink:"Link (Instagram, site, tickets)", fEmail:"Your email (optional)", fSend:"Send tip",
     fThanks:"Thanks — tip received. We'll take a look.",
@@ -501,13 +518,14 @@ const I18N = {
     cookieText:"This site stays cookie-free until you allow ads. Accept to enable advertising and basic measurement; reject to keep only what's strictly necessary — you can change this anytime on the Privacy page.",
     cookieAccept:"Accept", cookieReject:"Reject", cookieSettings:"Cookie settings", cookieFab:"Cookie choices",
     footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details" },
-  nl:{ thisweek:"Deze week", archive:"Archief", tip:"Tip ons", about:"Over",
-    all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", tipQ:"Mis je een pop-up?", tipCta:"Tip ons",
+  nl:{ thisweek:"Deze week", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
+    all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
     tagline:"wat er speelt, voorbij de gidsen",
     searchPh:"Zoek eerdere pop-ups, plekken, buurten",
     none:"Niets in deze categorie deze week — probeer een andere of bekijk het archief.",
     noResults:"Geen resultaten. Probeer een ander woord.",
-    tipIntro:"De beste pop-ups gaan van mond tot mond. Heb je er een gezien — een supperclub, een markt, een residentie, een opening — stuur 'm door, dan checken wij het.",
+    tipIntro:"Ken je een pop-up? Laat het ons weten.",
+    fSubmitter:"Ben je…", fSpotter:"Iemand die het gespot heeft", fOrganiser:"De organisator van je eigen pop-up",
     fName:"Je naam (optioneel)", fWhat:"De pop-up — wat en waar", fWhen:"Wanneer",
     fLink:"Link (Instagram, site, tickets)", fEmail:"Je e-mail (optioneel)", fSend:"Stuur tip",
     fThanks:"Bedankt — tip ontvangen. We kijken ernaar.",
