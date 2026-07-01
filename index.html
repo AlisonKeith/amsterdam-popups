@@ -833,7 +833,6 @@ function renderMap(list){
     const m = L.marker([ev.lat,ev.lng],{icon}).addTo(markerLayer);
     const pill = `<span class="pop-cat" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${c.label[lang]}</span>`;
     m.bindPopup(`${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${ev.addr[lang]}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`);
-    m.on("click",()=>flashCard(ev.id));
     markers[ev.id] = m;
     pts.push([ev.lat,ev.lng]);
   });
