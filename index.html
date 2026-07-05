@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Amsterdam Pop-ups — what's on, off the beaten guide</title>
-<meta name="description" content="A weekly, map-first guide to Amsterdam's temporary pop-ups, supper clubs, markets, artist-run spaces and one-off nights — the ones that don't make the usual guides." />
-<meta name="description" lang="nl" content="Een wekelijkse, kaartgerichte gids voor tijdelijke pop-ups in Amsterdam — supperclubs, markten, kunstenaarsruimtes en eenmalige avonden die de gewone gidsen missen." />
+<title>Amsterdam Pop-ups — dance, music, food &amp; art events this week</title>
+<meta name="description" content="The weekly map-first guide to Amsterdam events: pop-ups, supper clubs, street markets, contemporary dance, live music, art openings and one-off nights across Centrum, Noord, Oost, West and Zuid — updated every week." />
+<meta name="description" lang="nl" content="De wekelijkse kaartgids voor evenementen in Amsterdam: pop-ups, supperclubs, markten, hedendaagse dans, livemuziek, kunst en eenmalige avonden in Centrum, Noord, Oost, West en Zuid — elke week bijgewerkt." />
 <link rel="canonical" href="https://www.amsterdampopups.com/" />
 <link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/" />
 <link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/" />
 <link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.amsterdampopups.com/" />
-<meta property="og:title" content="Amsterdam Pop-ups — what's on, off the beaten guide" />
-<meta property="og:description" content="A weekly, map-first guide to Amsterdam's temporary pop-ups, supper clubs, markets, artist-run spaces and one-off nights — the ones that don't make the usual guides." />
+<meta property="og:title" content="Amsterdam Pop-ups — dance, music, food &amp; art events this week" />
+<meta property="og:description" content="The weekly map-first guide to Amsterdam events: pop-ups, supper clubs, markets, dance, live music, art and one-off nights across every neighbourhood — updated every week." />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:locale:alternate" content="nl_NL" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Amsterdam Pop-ups — what's on, off the beaten guide" />
-<meta name="twitter:description" content="A weekly, map-first guide to Amsterdam's temporary pop-ups, supper clubs, markets, artist-run spaces and one-off nights — the ones that don't make the usual guides." />
-<meta name="keywords" content="amsterdam pop-ups, amsterdam popups, tijdelijke evenementen amsterdam, supper clubs amsterdam, amsterdam markten, pop-up amsterdam deze week" />
+<meta name="twitter:title" content="Amsterdam Pop-ups — dance, music, food &amp; art events this week" />
+<meta name="twitter:description" content="The weekly map-first guide to Amsterdam events: pop-ups, supper clubs, markets, dance, live music, art and one-off nights across every neighbourhood — updated every week." />
+<meta name="keywords" content="amsterdam pop-ups, amsterdam popups, amsterdam events this week, amsterdam events this weekend, amsterdam dance events, amsterdam music events, amsterdam food markets, amsterdam art events, amsterdam film events, amsterdam fashion events, contemporary dance amsterdam, julidans amsterdam, live music amsterdam, street food amsterdam, pop-up market amsterdam, amsterdam centrum events, amsterdam noord events, amsterdam oost events, amsterdam west events, amsterdam jordaan events, de pijp events, houthavens events, amsterdam things to do, amsterdam weekend tips, tijdelijke evenementen amsterdam, amsterdam evenementen deze week, amsterdam evenementen dit weekend, hedendaagse dans amsterdam, livemuziek amsterdam, amsterdam markten, amsterdam kunstevents, amsterdam tips deze week, wat te doen in amsterdam" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3QJJ6WFJVM"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -96,7 +96,8 @@ main{padding:18px 0 40px}
 /* ---- map ---- */
 #map{height:380px; border-radius:14px; border:1px solid var(--line); margin:6px 0 16px; z-index:1; background:#EEEBE4}
 .leaflet-container{font-family:"Inter",sans-serif}
-.pin{width:16px; height:16px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,0.12)}
+.pin{width:16px; height:16px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,0.12); position:relative; display:flex; align-items:center; justify-content:center}
+.pin-badge{position:absolute; top:-7px; right:-7px; background:#111; color:#fff; border-radius:999px; font-size:9px; font-weight:700; line-height:1; padding:2px 4px; min-width:14px; text-align:center; box-shadow:0 0 0 1.5px #fff; pointer-events:none}
 .leaflet-popup-content{margin:11px 13px; font-size:13px; line-height:1.45}
 .leaflet-popup-content b{font-size:13.5px}
 .pop-cat{font-size:11px; font-weight:500; padding:2px 7px; border-radius:999px; display:inline-block; margin-bottom:5px}
@@ -2177,13 +2178,40 @@ function initMap(){
 function renderMap(list){
   markerLayer.clearLayers(); markers = {};
   const pts = [];
+  // Group events by coordinate key
+  const groups = {};
   list.forEach(ev => {
+    const key = `${ev.lat},${ev.lng}`;
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(ev);
+  });
+  list.forEach(ev => {
+    const key = `${ev.lat},${ev.lng}`;
+    const group = groups[key];
     const c = catBy[ev.cat];
+    const count = group.length;
+    const badge = count > 1 ? `<span class="pin-badge">${count}</span>` : "";
     const icon = L.divIcon({ className:"", iconSize:[16,16], iconAnchor:[8,8],
-      html:`<div class="pin" style="background:${c.hex}"></div>` });
+      html:`<div class="pin" style="background:${c.hex}">${badge}</div>` });
     const m = L.marker([ev.lat,ev.lng],{icon}).addTo(markerLayer);
     const pill = `<span class="pop-cat" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${c.label[lang]}</span>`;
-    m.bindPopup(`${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${ev.addr[lang]}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`);
+    // Build popup listing all events at this location
+    let popupHtml;
+    if(count > 1 && group[0].id === ev.id){
+      // Only render the stacked popup on the first event (to avoid duplicates)
+      const items = group.map(e => {
+        const ec = catBy[e.cat];
+        const ep = `<span class="pop-cat" style="background:${tintBg(ec.hex)};color:${darkText(ec.hex)}">${ec.label[lang]}</span>`;
+        return `${ep} <b>${e.name}</b><br>${e.when[lang]} · ${e.time[lang]}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      }).join("<hr style='margin:6px 0;border-color:#eee'>");
+      popupHtml = `<b>${ev.addr[lang]}</b><br>${ev.hood[lang]}<br><br>${items}`;
+    } else if(count === 1) {
+      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${ev.addr[lang]}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+    } else {
+      // Stacked markers below first — bind same popup as first
+      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${ev.addr[lang]}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+    }
+    m.bindPopup(popupHtml);
     markers[ev.id] = m;
     pts.push([ev.lat,ev.lng]);
   });
