@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -19,6 +19,10 @@
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Amsterdam Pop-ups — dance, music, food &amp; art events this week" />
 <meta name="twitter:description" content="The weekly map-first guide to Amsterdam events: pop-ups, supper clubs, markets, dance, live music, art and one-off nights across every neighbourhood — updated every week." />
+<meta name="geo.region" content="NL-NH" />
+<meta name="geo.placename" content="Amsterdam" />
+<meta name="geo.position" content="52.3676;4.9041" />
+<meta name="ICBM" content="52.3676, 4.9041" />
 <meta name="keywords" content="amsterdam pop-ups, amsterdam popups, amsterdam events this week, amsterdam events this weekend, amsterdam dance events, amsterdam music events, amsterdam food markets, amsterdam art events, amsterdam film events, amsterdam fashion events, contemporary dance amsterdam, julidans amsterdam, live music amsterdam, street food amsterdam, pop-up market amsterdam, amsterdam centrum events, amsterdam noord events, amsterdam oost events, amsterdam west events, amsterdam jordaan events, de pijp events, houthavens events, amsterdam things to do, amsterdam weekend tips, tijdelijke evenementen amsterdam, amsterdam evenementen deze week, amsterdam evenementen dit weekend, hedendaagse dans amsterdam, livemuziek amsterdam, amsterdam markten, amsterdam kunstevents, amsterdam tips deze week, wat te doen in amsterdam" />
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3QJJ6WFJVM"></script>
 <script>
@@ -43,6 +47,7 @@
   --c-food:#B5751E; --c-drink:#2E7D74; --c-markets:#5E7A33; --c-fashion:#84517E;
   --c-art:#3A5694; --c-shops:#A85734; --c-music:#9A4F6A; --c-film:#4F7A8A;
   --c-active:#2D7F5E;
+  --c-dance:#6B3FA0; --c-workshops:#C4883A;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -97,6 +102,7 @@ main{padding:18px 0 40px}
 /* ---- map ---- */
 #map{height:380px; border-radius:14px; border:1px solid var(--line); margin:6px 0 16px; z-index:1; background:#EEEBE4}
 .leaflet-container{font-family:"Inter",sans-serif}
+.intro-text{font-size:.75rem;color:#888;margin:.35rem 0 .6rem;line-height:1.5;width:100%;box-sizing:border-box}
 .pin{width:16px; height:16px; border-radius:50%; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,0.12); position:relative; display:flex; align-items:center; justify-content:center}
 .pin-badge{position:absolute; top:-7px; right:-7px; background:#111; color:#fff; border-radius:999px; font-size:9px; font-weight:700; line-height:1; padding:2px 4px; min-width:14px; text-align:center; box-shadow:0 0 0 1.5px #fff; pointer-events:none}
 .leaflet-popup-content{margin:11px 13px; font-size:13px; line-height:1.45}
@@ -257,6 +263,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
             </div>
           </div>
           <div class="chips" id="chips"></div>
+          <p class="intro-text" id="intro-en">Amsterdam's weekly guide to pop-up events — street food markets, contemporary dance, live music, art openings, supper clubs and one-off nights across Centrum, Noord, Oost, West, De Pijp, Jordaan and beyond. Updated every Monday.</p>
+          <p class="intro-text" id="intro-nl" style="display:none">De wekelijkse gids voor pop-upevenementen in Amsterdam — straatvoedselmarkten, hedendaagse dans, livemuziek, kunstopeningen, supperclubs en eenmalige avonden in Centrum, Noord, Oost, West, De Pijp, Jordaan en verder. Elke maandag bijgewerkt.</p>
           <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
           <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
@@ -392,7 +400,9 @@ const CATEGORIES = [
   { id:"shops",   color:"var(--c-shops)",   hex:"#A85734", label:{en:"Pop-up Shops",    nl:"Pop-upwinkels"} },
   { id:"music",   color:"var(--c-music)",   hex:"#9A4F6A", label:{en:"Music",           nl:"Muziek"} },
   { id:"film",    color:"var(--c-film)",    hex:"#4F7A8A", label:{en:"Film",            nl:"Film"} },
-  { id:"active",  color:"var(--c-active)",  hex:"#2D7F5E", label:{en:"Active & Outdoor", nl:"Actief & Buiten"} }
+  { id:"active",    color:"var(--c-active)",    hex:"#2D7F5E", label:{en:"Active & Outdoor",  nl:"Actief & Buiten"} },
+  { id:"dance",     color:"var(--c-dance)",     hex:"#6B3FA0", label:{en:"Dance & Theatre",  nl:"Dans & Theater"} },
+  { id:"workshops", color:"var(--c-workshops)", hex:"#C4883A", label:{en:"Workshops",        nl:"Workshops"} }
 ];
 
 const EVENTS = [
@@ -590,7 +600,7 @@ const EVENTS = [
            nl:"De enige wekelijkse jungle en drum & bass avond van Nederland, 21 jaar op rij — deze week: Tantrum Desire."},
     url:"https://www.melkweg.nl/" },
 
-  { id:"rijksmuseum-drawing-outside", week:"2026-07-06", cat:"art",
+  { id:"rijksmuseum-drawing-outside", week:"2026-07-06", cat:"workshops",
     name:"Drawing Outside — Rijksmuseum Summer Workshop",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.36, lng:4.8852,
     when:{en:"Mon 6 – Sun 12 Jul (daily)",nl:"ma 6 – zo 12 jul (dagelijks)"}, time:{en:"Daily — book a slot at rijksmuseum.nl",nl:"Dagelijks — reserveer een slot op rijksmuseum.nl"},
@@ -600,7 +610,7 @@ const EVENTS = [
            nl:"Ezels en materialen in de Rijksmuseum-tuin — inlooplesson tekenen voor kinderen en families, dagelijks 4 jul–30 aug. Reserveer online."},
     url:"https://www.rijksmuseum.nl/nl/zien-en-doen/families-kinderen/buiten-tekenen" },
 
-  { id:"vangogh-impressionistic-workshop", week:"2026-07-06", cat:"art",
+  { id:"vangogh-impressionistic-workshop", week:"2026-07-06", cat:"workshops",
     name:"Impressionistic Painting Workshop — Van Gogh Museum",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.3584, lng:4.8811,
     when:{en:"Mon 6 & Sun 12 Jul",nl:"ma 6 & zo 12 jul"}, time:{en:"NL 10:30 · EN 14:00",nl:"NL 10:30 · EN 14:00"},
@@ -610,7 +620,7 @@ const EVENTS = [
            nl:"Rondleiding gevolgd door schilderworkshop geïnspireerd op Van Goghs techniek — NL 10:30 en EN 14:00."},
     url:"https://www.vangoghmuseum.nl/" },
 
-  { id:"jd-unravel-0706", week:"2026-07-06", cat:"art",
+  { id:"jd-unravel-0706", week:"2026-07-06", cat:"dance",
     name:"Julidans: Unravel — Elsa 'Zema' Mulder",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Mon 6 Jul",nl:"ma 6 jul"}, time:{en:"18:30",nl:"18:30"},
@@ -620,7 +630,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Unravel van Elsa 'Zema' Mulder. Hedendaagse dans in ITA Studio 1."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-backtokidal-0706", week:"2026-07-06", cat:"art",
+  { id:"jd-backtokidal-0706", week:"2026-07-06", cat:"dance",
     name:"Julidans: Back to Kidal — Serge Aimé Coulibaly",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Mon 6 Jul",nl:"ma 6 jul"}, time:{en:"20:00–21:15",nl:"20:00–21:15"},
@@ -630,7 +640,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Back to Kidal, Serge Aimé Coulibaly / Faso Danse Théâtre. ITA Grote Zaal."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-suiteofdances-0706", week:"2026-07-06", cat:"art",
+  { id:"jd-suiteofdances-0706", week:"2026-07-06", cat:"dance",
     name:"Julidans: A Suite of Dances — Dance On Ensemble",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Mon 6 Jul",nl:"ma 6 jul"}, time:{en:"20:30–21:45",nl:"20:30–21:45"},
@@ -640,7 +650,7 @@ const EVENTS = [
            nl:"Julidans 2026 — A Suite of Dances / A Day in the Studio. Noa Eshkol / Noé Soulier / Dance On Ensemble."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-anthology-0706", week:"2026-07-06", cat:"art",
+  { id:"jd-anthology-0706", week:"2026-07-06", cat:"dance",
     name:"Julidans: Anthology — Andreas Hannes",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3642, lng:4.8802,
     when:{en:"Mon 6 Jul",nl:"ma 6 jul"}, time:{en:"21:00",nl:"21:00"},
@@ -731,7 +741,7 @@ const EVENTS = [
            nl:"Een forró-dansavond bij Breugem Meeting Point — Braziliaans dansen in het proeflokaal van de brouwerij."},
     url:"https://www.breugemmeetingpoint.nl/agenda" },
 
-  { id:"jd-anthology-0707", week:"2026-07-06", cat:"art",
+  { id:"jd-anthology-0707", week:"2026-07-06", cat:"dance",
     name:"Julidans: Anthology — Andreas Hannes",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3642, lng:4.8802,
     when:{en:"Tue 7 Jul",nl:"di 7 jul"}, time:{en:"19:00",nl:"19:00"},
@@ -741,7 +751,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Anthology van Andreas Hannes. Theater Bellevue."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-spinoza-0707", week:"2026-07-06", cat:"art",
+  { id:"jd-spinoza-0707", week:"2026-07-06", cat:"dance",
     name:"Julidans: Spinoza — NITE / Club Guy & Roni",
     hood:{en:"Amstelveen/Bos",nl:"Amstelveen/Bos"}, lat:52.3217, lng:4.8259,
     when:{en:"Tue 7 Jul",nl:"di 7 jul"}, time:{en:"20:15",nl:"20:15"},
@@ -751,7 +761,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Spinoza, NITE / Club Guy & Roni / HIIIT / Het Muziektheater. Buiten Bostheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-tempest-0707", week:"2026-07-06", cat:"art",
+  { id:"jd-tempest-0707", week:"2026-07-06", cat:"dance",
     name:"Julidans: Tempest — Lisbeth Gruwez / Voetvolk",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3712, lng:4.8938,
     when:{en:"Tue 7 Jul",nl:"di 7 jul"}, time:{en:"20:30–21:30",nl:"20:30–21:30"},
@@ -761,7 +771,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Tempest, Lisbeth Gruwez & Maarten Van Cauwenberghe / Voetvolk. de Brakke Grond."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-suiteofdances-0707", week:"2026-07-06", cat:"art",
+  { id:"jd-suiteofdances-0707", week:"2026-07-06", cat:"dance",
     name:"Julidans: A Suite of Dances — Dance On Ensemble",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Tue 7 Jul",nl:"di 7 jul"}, time:{en:"20:30–21:45",nl:"20:30–21:45"},
@@ -771,7 +781,7 @@ const EVENTS = [
            nl:"Julidans 2026 — A Suite of Dances / A Day in the Studio. Noa Eshkol / Noé Soulier / Dance On Ensemble."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-doublebill-0707", week:"2026-07-06", cat:"art",
+  { id:"jd-doublebill-0707", week:"2026-07-06", cat:"dance",
     name:"Julidans: Double Bill — Puff & Sons of Soil",
     hood:{en:"Zuidoost",nl:"Zuidoost"}, lat:52.3145, lng:4.9602,
     when:{en:"Tue 7 Jul",nl:"di 7 jul"}, time:{en:"20:30–21:45",nl:"20:30–21:45"},
@@ -872,7 +882,7 @@ const EVENTS = [
            nl:"Ijs, poolbiljart en zomerverhalen bij Hartwig Proxy — de publieke ruimte van de kunstfoundation op de Parnassusweg, wo–za 14:00–20:00 van 8 jul t/m 15 aug."},
     url:"https://hartwigproxy.nl/programme/summer-at-proxy" },
 
-  { id:"jd-tempest-0708", week:"2026-07-06", cat:"art",
+  { id:"jd-tempest-0708", week:"2026-07-06", cat:"dance",
     name:"Julidans: Tempest — Lisbeth Gruwez / Voetvolk",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3712, lng:4.8938,
     when:{en:"Wed 8 Jul",nl:"wo 8 jul"}, time:{en:"19:00–20:00",nl:"19:00–20:00"},
@@ -882,7 +892,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Tempest, Lisbeth Gruwez & Maarten Van Cauwenberghe / Voetvolk. de Brakke Grond."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-becominggod-0708", week:"2026-07-06", cat:"art",
+  { id:"jd-becominggod-0708", week:"2026-07-06", cat:"dance",
     name:"Julidans: Becoming God — Melyn Chow / Frascati",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Wed 8 Jul",nl:"wo 8 jul"}, time:{en:"19:00–20:00",nl:"19:00–20:00"},
@@ -892,7 +902,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Becoming God, Melyn Chow / Frascati Producties. Frascati."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-spinoza-0708", week:"2026-07-06", cat:"art",
+  { id:"jd-spinoza-0708", week:"2026-07-06", cat:"dance",
     name:"Julidans: Spinoza — NITE / Club Guy & Roni",
     hood:{en:"Amstelveen/Bos",nl:"Amstelveen/Bos"}, lat:52.3217, lng:4.8259,
     when:{en:"Wed 8 Jul",nl:"wo 8 jul"}, time:{en:"20:15",nl:"20:15"},
@@ -902,7 +912,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Spinoza, NITE / Club Guy & Roni / HIIIT / Het Muziektheater. Buiten Bostheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-rite-0708", week:"2026-07-06", cat:"art",
+  { id:"jd-rite-0708", week:"2026-07-06", cat:"dance",
     name:"Julidans: Ri Te — Israel Galván & Marlene Monteiro Freitas",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Wed 8 Jul",nl:"wo 8 jul"}, time:{en:"20:30–21:35",nl:"20:30–21:35"},
@@ -912,7 +922,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Ri Te, Israel Galván & Marlene Monteiro Freitas. Frascati."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-doublebill-0708", week:"2026-07-06", cat:"art",
+  { id:"jd-doublebill-0708", week:"2026-07-06", cat:"dance",
     name:"Julidans: Double Bill — Puff & Sons of Soil",
     hood:{en:"Zuidoost",nl:"Zuidoost"}, lat:52.3145, lng:4.9602,
     when:{en:"Wed 8 Jul",nl:"wo 8 jul"}, time:{en:"20:30–21:45",nl:"20:30–21:45"},
@@ -922,7 +932,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Double Bill: Puff (Alice Ripoll & Hiltinho Fantástico) en Sons of Soil (Sheree Lenting). Bijlmer Parktheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-antigone-0708", week:"2026-07-06", cat:"art",
+  { id:"jd-antigone-0708", week:"2026-07-06", cat:"dance",
     name:"Julidans: Antigone — Alan Lucien Øyen / Winterguests",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Wed 8 Jul",nl:"wo 8 jul"}, time:{en:"20:30–23:00",nl:"20:30–23:00"},
@@ -963,7 +973,7 @@ const EVENTS = [
            nl:"30 minuten 1:1 met geurkunstenaar Frank Bloem (The Snifferoo) bij Mediamatic — intiem kunstenaarsgesprek over geur en geheugen."},
     url:"https://offbeat.amsterdam/event/meet-a-maker-34" },
 
-  { id:"continuosly-constructing-bounce", week:"2026-07-06", cat:"art",
+  { id:"continuosly-constructing-bounce", week:"2026-07-06", cat:"dance",
     name:"Continuously Constructing — Solo Exhibition: Rika Maja Duevel",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.3619, lng:4.8729,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"15:00 (opening)",nl:"15:00 (opening)"},
@@ -973,7 +983,7 @@ const EVENTS = [
            nl:"Tentoonstelling opening bij BounceSpace — solotentoonstelling van Rika Maja Duevel over opbouwen en afbreken."},
     url:"https://bouncespace.co/" },
 
-  { id:"skateles-voor-kids", week:"2026-07-06", cat:"art",
+  { id:"skateles-voor-kids", week:"2026-07-06", cat:"active",
     name:"Skateles voor Kids",
     hood:{en:"Hamerkwartier, Noord",nl:"Hamerkwartier, Noord"}, lat:52.399, lng:4.921,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"16:00–17:00",nl:"16:00–17:00"},
@@ -983,7 +993,7 @@ const EVENTS = [
            nl:"Skateles voor kinderen van 8–12 jaar — max 5 per groep bij Skatecafe in het Hamerkwartier."},
     url:"https://offbeat.amsterdam/event/skateles-voor-kids" },
 
-  { id:"degrowth-internet-workshop", week:"2026-07-06", cat:"art",
+  { id:"degrowth-internet-workshop", week:"2026-07-06", cat:"workshops",
     name:"Workshop: Imagining Degrowth on the Internet",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.377, lng:4.916,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"16:00–18:00",nl:"16:00–18:00"},
@@ -1023,7 +1033,7 @@ const EVENTS = [
            nl:"Twee uur Proxy Choir onder leiding van Laura Polence — participatief stemwerk bij Hartwig Proxy. RSVP: proxy@hartwigartfoundation.nl."},
     url:"https://hartwigproxy.nl/programme/laura-polence-july" },
 
-  { id:"jd-antigone-0709", week:"2026-07-06", cat:"art",
+  { id:"jd-antigone-0709", week:"2026-07-06", cat:"dance",
     name:"Julidans: Antigone — Alan Lucien Øyen / Winterguests",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"18:00–20:30",nl:"18:00–20:30"},
@@ -1053,7 +1063,7 @@ const EVENTS = [
            nl:"Activistische lezing bij OT301 — Revolutionist Nights over de insectenindustrie."},
     url:"https://ot301.nl/" },
 
-  { id:"jd-becominggod-0709", week:"2026-07-06", cat:"art",
+  { id:"jd-becominggod-0709", week:"2026-07-06", cat:"dance",
     name:"Julidans: Becoming God — Melyn Chow / Frascati",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"19:00–20:00",nl:"19:00–20:00"},
@@ -1063,7 +1073,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Becoming God, Melyn Chow / Frascati Producties."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-combatdeslianes-0709", week:"2026-07-06", cat:"art",
+  { id:"jd-combatdeslianes-0709", week:"2026-07-06", cat:"dance",
     name:"Julidans: Combat des Lianes — Zora Snake",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3642, lng:4.8802,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"19:00–20:20",nl:"19:00–20:20"},
@@ -1103,7 +1113,7 @@ const EVENTS = [
            nl:"Sahand Sahebdivani en Rasha Hilwi verweven persoonlijke verhalen, liedjes en volksverhalen uit Palestina en Iran bij Mezrab."},
     url:"https://offbeat.amsterdam/event/a-trail-of-pomegranate-seeds-or-sahand-sahebdivani-and-rasha-hilwi" },
 
-  { id:"jd-spinoza-0709", week:"2026-07-06", cat:"art",
+  { id:"jd-spinoza-0709", week:"2026-07-06", cat:"dance",
     name:"Julidans: Spinoza — NITE / Club Guy & Roni",
     hood:{en:"Amstelveen/Bos",nl:"Amstelveen/Bos"}, lat:52.3217, lng:4.8259,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"20:15",nl:"20:15"},
@@ -1113,7 +1123,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Spinoza, NITE / Club Guy & Roni / HIIIT / Het Muziektheater. Buiten Bostheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-rite-0709", week:"2026-07-06", cat:"art",
+  { id:"jd-rite-0709", week:"2026-07-06", cat:"dance",
     name:"Julidans: Ri Te — Israel Galván & Marlene Monteiro Freitas",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"20:30–21:35",nl:"20:30–21:35"},
@@ -1133,7 +1143,7 @@ const EVENTS = [
            nl:"Amsterdams jazztrio Carlos Ayuso live bij Contra — dinner en optreden in het hart van de oude binnenstad."},
     url:"https://offbeat.amsterdam/event/dinner-concert-carlos-ayuso-trio" },
 
-  { id:"jd-assetliability-0709", week:"2026-07-06", cat:"art",
+  { id:"jd-assetliability-0709", week:"2026-07-06", cat:"dance",
     name:"Julidans: Asset Liability & Equity — Connor Schumacher",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"21:00–22:25",nl:"21:00–22:25"},
@@ -1154,7 +1164,7 @@ const EVENTS = [
     url:"https://offbeat.amsterdam/event/barretje-spelen-7" },
 
   // Friday 10 Jul
-  { id:"good-morning-yoga-nieuwland", week:"2026-07-06", cat:"art",
+  { id:"good-morning-yoga-nieuwland", week:"2026-07-06", cat:"active",
     name:"Good Morning Yoga — All Levels",
     hood:{en:"Dapperbuurt, Oost",nl:"Dapperbuurt, Oost"}, lat:52.361, lng:4.933,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"08:00",nl:"08:00"},
@@ -1174,7 +1184,7 @@ const EVENTS = [
            nl:"5-gangen vocale compositie en smaken van Claire Adams op een voormalig vluchtelingenboot door de grachten — Tomoko Mukaiyama bij Mediamatic."},
     url:"https://offbeat.amsterdam/event/eat-2" },
 
-  { id:"jd-combatdeslianes-0710", week:"2026-07-06", cat:"art",
+  { id:"jd-combatdeslianes-0710", week:"2026-07-06", cat:"dance",
     name:"Julidans: Combat des Lianes — Zora Snake",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3642, lng:4.8802,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"13:00–14:20",nl:"13:00–14:20"},
@@ -1224,7 +1234,7 @@ const EVENTS = [
            nl:"Kate Briggs leest uit haar vertaling van Hélène Bessette, in gesprek met Mia You — bij Perdu."},
     url:"https://offbeat.amsterdam/event/twenty-minutes-of-silence" },
 
-  { id:"jd-becominggod-0710", week:"2026-07-06", cat:"art",
+  { id:"jd-becominggod-0710", week:"2026-07-06", cat:"dance",
     name:"Julidans: Becoming God — Melyn Chow / Frascati",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"19:00–20:00",nl:"19:00–20:00"},
@@ -1244,7 +1254,7 @@ const EVENTS = [
            nl:"Goatmother, Lukraak, Robert Nettleship en Doukus — hardcore, rave en multidisciplinaire kunst bij Cinetol."},
     url:"https://offbeat.amsterdam/event/where-wild-goats-roam-or-goatmother-lukraak-robert-nettleship-doukus" },
 
-  { id:"jd-spinoza-0710", week:"2026-07-06", cat:"art",
+  { id:"jd-spinoza-0710", week:"2026-07-06", cat:"dance",
     name:"Julidans: Spinoza — NITE / Club Guy & Roni",
     hood:{en:"Amstelveen/Bos",nl:"Amstelveen/Bos"}, lat:52.3217, lng:4.8259,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"20:15",nl:"20:15"},
@@ -1254,7 +1264,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Spinoza. Buiten Bostheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-winged-0710", week:"2026-07-06", cat:"art",
+  { id:"jd-winged-0710", week:"2026-07-06", cat:"dance",
     name:"Julidans: Winged — Kalpana Raghuraman",
     hood:{en:"Nieuw-West",nl:"Nieuw-West"}, lat:52.3591, lng:4.8073,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"20:30",nl:"20:30"},
@@ -1264,7 +1274,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Winged van Kalpana Raghuraman / Kalpanarts / HIIIT. De Meervaart."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-againforever-0710", week:"2026-07-06", cat:"art",
+  { id:"jd-againforever-0710", week:"2026-07-06", cat:"dance",
     name:"Julidans: Again Forever — Lisa Vereertbrugghen",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3712, lng:4.8938,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"20:30–21:30",nl:"20:30–21:30"},
@@ -1274,7 +1284,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Again Forever van Lisa Vereertbrugghen / CAMPO. de Brakke Grond."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-shakeshakeshake-0710", week:"2026-07-06", cat:"art",
+  { id:"jd-shakeshakeshake-0710", week:"2026-07-06", cat:"dance",
     name:"Julidans: Shake Shake Shake — De Dansers (FREE outdoor)",
     hood:{en:"Vondelpark, Zuid",nl:"Vondelpark, Zuid"}, lat:52.3584, lng:4.871,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"20:30–21:30",nl:"20:30–21:30"},
@@ -1375,7 +1385,7 @@ const EVENTS = [
            nl:"Koreaanse fried chicken en nieuwe wijnlanceringen in een verborgen souterrain van de wijnhandelaar — een voormalige groentenkelder in Oud-West."},
     url:"https://www.sous.nl/" },
 
-  { id:"jd-movingmornings-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-movingmornings-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Moving Mornings — Participatory Workshop",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"11:00–12:30",nl:"11:00–12:30"},
@@ -1385,7 +1395,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Moving Mornings participatieve dansworkshop, open voor alle niveaus 16+. ITA Studio 1."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"punch-needle-monique-clara", week:"2026-07-06", cat:"art",
+  { id:"punch-needle-monique-clara", week:"2026-07-06", cat:"workshops",
     name:"Punch Needle with Monique Clara",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.366, lng:4.908,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"12:00",nl:"12:00"},
@@ -1415,7 +1425,7 @@ const EVENTS = [
            nl:"Gratis winkel — breng wat je niet nodig hebt, neem wat je nodig hebt. Elke zaterdag sinds 2005 bij Joe's Garage."},
     url:"https://offbeat.amsterdam/event/give-away-shop-73" },
 
-  { id:"family-embodiment-practice", week:"2026-07-06", cat:"art",
+  { id:"family-embodiment-practice", week:"2026-07-06", cat:"dance",
     name:"Family Embodiment Practice: Book Kin, Home Arrival",
     hood:{en:"Dapperbuurt, Oost",nl:"Dapperbuurt, Oost"}, lat:52.36, lng:4.935,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"15:30–18:00",nl:"15:30–18:00"},
@@ -1435,7 +1445,7 @@ const EVENTS = [
            nl:"Solo cello van Lucija Gregov in de kelderruimte van Hartwig Proxy — intieme experimentele muziek. RSVP: proxy@hartwigartfoundation.nl."},
     url:"https://hartwigproxy.nl/programme/cellar-series-1" },
 
-  { id:"jd-againforever-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-againforever-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Again Forever — Lisa Vereertbrugghen",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3712, lng:4.8938,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"17:00–18:00",nl:"17:00–18:00"},
@@ -1455,7 +1465,7 @@ const EVENTS = [
            nl:"Vijf jaar Murmur — charwinoa, deboleena, glabra, maatje paatje & rozaly, plus BBQ van aniketh."},
     url:"https://offbeat.amsterdam/event/murmur-5-year-anniversary-with-charwinoa-deboleena-glabra-maatje-paatje-rozaly" },
 
-  { id:"jd-languageofbirds-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-languageofbirds-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Language of the Birds — Reza Mirabi",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"19:00–20:10",nl:"19:00–20:10"},
@@ -1465,7 +1475,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Language of the Birds van Reza Mirabi. Frascati."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-delaythesadness-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-delaythesadness-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Delay the Sadness — Sharon Eyal / S-E-D",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"19:30–20:25",nl:"19:30–20:25"},
@@ -1485,7 +1495,7 @@ const EVENTS = [
            nl:"Afstudeershowcase en kunstexpo bij OCCII — nieuwe kunstenaars presenteren werk."},
     url:"https://offbeat.amsterdam/event/2kool4artskool" },
 
-  { id:"jd-spinoza-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-spinoza-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Spinoza — NITE / Club Guy & Roni",
     hood:{en:"Amstelveen/Bos",nl:"Amstelveen/Bos"}, lat:52.3217, lng:4.8259,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"20:15",nl:"20:15"},
@@ -1495,7 +1505,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Spinoza. Buiten Bostheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-winged-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-winged-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Winged — Kalpana Raghuraman",
     hood:{en:"Nieuw-West",nl:"Nieuw-West"}, lat:52.3591, lng:4.8073,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"20:30",nl:"20:30"},
@@ -1505,7 +1515,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Winged van Kalpana Raghuraman / Kalpanarts / HIIIT. De Meervaart."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-mercuryrising-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-mercuryrising-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Mercury Rising — Jefta van Dinther",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"21:00–22:10",nl:"21:00–22:10"},
@@ -1515,7 +1525,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Mercury Rising van Jefta van Dinther. Frascati."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-combatdeslianes-0711", week:"2026-07-06", cat:"art",
+  { id:"jd-combatdeslianes-0711", week:"2026-07-06", cat:"dance",
     name:"Julidans: Combat des Lianes — Zora Snake",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3642, lng:4.8802,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"21:00–22:20",nl:"21:00–22:20"},
@@ -1616,7 +1626,7 @@ const EVENTS = [
            nl:"Kwaliteitsambachtelijke producten, muziek en eetkraampjes in het Amstelpark in Zuid."},
     url:"https://www.puremarkt.nl/" },
 
-  { id:"jd-movingmornings-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-movingmornings-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Moving Mornings — Participatory Workshop",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"11:00–12:30",nl:"11:00–12:30"},
@@ -1676,7 +1686,7 @@ const EVENTS = [
            nl:"Drie jaar met Rita — een jaren 90-risograaf krijgt een afscheidsshow, met toespraken, muziek en collectief monotype printen bij OT301."},
     url:"https://offbeat.amsterdam/event/ritas-goodbye-party" },
 
-  { id:"jd-matchwatch-uh-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-matchwatch-uh-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Match & Watch — Último Helecho",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"18:45–20:40",nl:"18:45–20:40"},
@@ -1686,7 +1696,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Match & Watch: Último Helecho, Nina Laisné / François Chaignaud / Nadia Larcher. ITA Grote Zaal."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-languageofbirds-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-languageofbirds-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Language of the Birds — Reza Mirabi",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"19:00–20:10",nl:"19:00–20:10"},
@@ -1696,7 +1706,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Language of the Birds van Reza Mirabi. Frascati."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-ultimohelecho-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-ultimohelecho-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Último Helecho — Nina Laisné / François Chaignaud",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"19:30–20:40",nl:"19:30–20:40"},
@@ -1706,7 +1716,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Último Helecho van Nina Laisné / François Chaignaud / Nadia Larcher. ITA Grote Zaal."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-delaythesadness-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-delaythesadness-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Delay the Sadness — Sharon Eyal / S-E-D",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.364, lng:4.8823,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"20:00–20:55",nl:"20:00–20:55"},
@@ -1716,7 +1726,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Delay the Sadness van Sharon Eyal / S-E-D. ITA Rabozaal."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-spinoza-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-spinoza-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Spinoza — NITE / Club Guy & Roni",
     hood:{en:"Amstelveen/Bos",nl:"Amstelveen/Bos"}, lat:52.3217, lng:4.8259,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"20:15",nl:"20:15"},
@@ -1726,7 +1736,7 @@ const EVENTS = [
            nl:"Julidans 2026 — Spinoza. Buiten Bostheater."},
     url:"https://www.ita.nl/en/agenda/" },
 
-  { id:"jd-mercuryrising-0712", week:"2026-07-06", cat:"art",
+  { id:"jd-mercuryrising-0712", week:"2026-07-06", cat:"dance",
     name:"Julidans: Mercury Rising — Jefta van Dinther",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3704, lng:4.8936,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"21:00–22:10",nl:"21:00–22:10"},
@@ -1759,7 +1769,7 @@ const EVENTS = [
            nl:"Een open filosofisch gesprek in de OBA — dit keer rond 'Filosofencitaten'. Geen voorkennis nodig, alleen nieuwsgierigheid."},
     url:"https://somo.social/en/e/socrates-cafe-at-oba-philosoph-706" },
 
-  { id:"ick-we-dance-together-mon", week:"2026-07-06", cat:"art",
+  { id:"ick-we-dance-together-mon", week:"2026-07-06", cat:"dance",
     name:"We Dance Together — Open Presentation",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.362, lng:4.868,
     when:{en:"Mon 6 Jul",nl:"ma 6 jul"}, time:{en:"20:00",nl:"20:00"},
@@ -1770,7 +1780,7 @@ const EVENTS = [
     url:"https://eventbrite.nl/e/open-presentation-we-dance-together-tickets-1992754291703" },
 
   // Tuesday 7 Jul
-  { id:"chiaras-ravioli-workshop-tue", week:"2026-07-06", cat:"food",
+  { id:"chiaras-ravioli-workshop-tue", week:"2026-07-06", cat:"workshops",
     name:"Ravioli & Tortelli Pasta Workshop — Chiara's Food",
     hood:{en:"De Pijp",nl:"De Pijp"}, lat:52.352, lng:4.902,
     when:{en:"Tue 7 Jul",nl:"di 7 jul"}, time:{en:"18:00–21:00",nl:"18:00–21:00"},
@@ -1842,7 +1852,7 @@ const EVENTS = [
            nl:"Een solotentoonstelling van Indrani Chatterjee over ontheemding en thuishoren, te zien bij De Vlug Artist's Incubator."},
     url:"https://eventbrite.co.uk/e/tickets-between-places-solo-exhibition-by-indrani-chatterjee-1990856381628" },
 
-  { id:"cyanotype-workshop-kinderboekwinkel", week:"2026-07-06", cat:"art",
+  { id:"cyanotype-workshop-kinderboekwinkel", week:"2026-07-06", cat:"workshops",
     name:"Knutselworkshop Cyanotype",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.373, lng:4.881,
     when:{en:"Thu 9 Jul",nl:"do 9 jul"}, time:{en:"18:00–20:00",nl:"18:00–20:00"},
@@ -1933,7 +1943,7 @@ const EVENTS = [
            nl:"Women & Pride poëzie-avond bij Boekhandel Scheltema met dichter Sarah Ringoet — een gratis literair evenement in het hart van de stad."},
     url:"https://eventbrite.nl/e/women-pride-presents-sarah-ringoet-poetry-reading-tickets-1990994701749" },
 
-  { id:"ick-kaleido-auditie-fri", week:"2026-07-06", cat:"art",
+  { id:"ick-kaleido-auditie-fri", week:"2026-07-06", cat:"dance",
     name:"KALEIDO: Dé Auditie (ICK Dans)",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.362, lng:4.868,
     when:{en:"Fri 10 Jul",nl:"vr 10 jul"}, time:{en:"13:30–15:30",nl:"13:30–15:30"},
@@ -1964,7 +1974,7 @@ const EVENTS = [
            nl:"Een bezield peddelervaraing door Amsterdam's wateren — beweging, mindfulness en de Amsterdamse grachten. Geschikt voor alle niveaus."},
     url:"https://www.facebook.com/events/2430507090766206/" },
 
-  { id:"slow-roll-photo-walk-sat", week:"2026-07-06", cat:"art",
+  { id:"slow-roll-photo-walk-sat", week:"2026-07-06", cat:"workshops",
     name:"Slow Roll #4: Photo Walk + Coffee for Creatives",
     hood:{en:"De Pijp",nl:"De Pijp"}, lat:52.3544, lng:4.8964,
     when:{en:"Sat 11 Jul",nl:"za 11 jul"}, time:{en:"13:00–15:00",nl:"13:00–15:00"},
@@ -2035,7 +2045,7 @@ const EVENTS = [
            nl:"Een bijzondere zondagochtend bij Galerie Ron Mandos — kunstenaars Lena Bril, Katinka Lampe en Cathelijne Blok in gesprek, gemodereerd door Galerie Ron Mandos."},
     url:"https://eventbrite.nl/e/rm-sunday-session-with-lena-bril-katinka-lampe-cathelijne-blok-tickets-199221381" },
 
-  { id:"painting-underwater-creatures-sun", week:"2026-07-06", cat:"art",
+  { id:"painting-underwater-creatures-sun", week:"2026-07-06", cat:"workshops",
     name:"Painting Underwater Creatures — Watercolour Workshop",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.3658, lng:4.8692,
     when:{en:"Sun 12 Jul",nl:"zo 12 jul"}, time:{en:"15:00",nl:"15:00"},
@@ -2627,6 +2637,8 @@ function setLang(l){
   lang = l;
   document.getElementById("lang-en").classList.toggle("on", l==="en");
   document.getElementById("lang-nl").classList.toggle("on", l==="nl");
+  document.getElementById("intro-en").style.display = l==="en" ? "" : "none";
+  document.getElementById("intro-nl").style.display = l==="nl" ? "" : "none";
   applyI18n(); renderChips(); renderThisWeek(); renderArchive();
 }
 
@@ -2677,14 +2689,52 @@ function initConsent(){
   else { if(b) b.style.display="flex"; setFab(false); }
 }
 
+/* ---- structured data (JSON-LD) ---- */
+function injectEventSchema(){
+  const list = EVENTS.filter(e => e.week === currentWeek.id);
+  const items = list.map(e => {
+    const ev = {
+      "@type":"Event",
+      "name":e.name,
+      "description":e.blurb.en,
+      "url":e.url,
+      "eventStatus":"https://schema.org/EventScheduled",
+      "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
+      "location":{
+        "@type":"Place",
+        "name":e.addr.en,
+        "address":{"@type":"PostalAddress","addressLocality":"Amsterdam","addressCountry":"NL"},
+        "geo":{"@type":"GeoCoordinates","latitude":e.lat,"longitude":e.lng}
+      },
+      "organizer":{"@type":"Organization","name":"Amsterdam Pop-ups","url":"https://www.amsterdampopups.com/"}
+    };
+    if(e.days && e.days.length){
+      ev.startDate = e.days[0];
+      if(e.days.length > 1) ev.endDate = e.days[e.days.length-1];
+    }
+    if(e.price === null){
+      ev.offers = {"@type":"Offer","price":"0","priceCurrency":"EUR","availability":"https://schema.org/InStock"};
+    } else if(e.price && e.price.en){
+      ev.offers = {"@type":"Offer","name":e.price.en,"availability":"https://schema.org/InStock"};
+    }
+    return ev;
+  });
+  const s = document.createElement("script");
+  s.type = "application/ld+json";
+  s.textContent = JSON.stringify({"@context":"https://schema.org","@graph":items});
+  document.head.appendChild(s);
+}
+
 /* ---- boot ---- */
 initMap();
 applyI18n();
 renderChips();
 renderThisWeek();
+injectEventSchema();
 initConsent();
 window.addEventListener("resize", () => { if(map) map.invalidateSize(); });
 setTimeout(() => { if(map) map.invalidateSize(); }, 60);
 </script>
 </body>
 </html>
+
