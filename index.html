@@ -48,6 +48,7 @@
   --c-art:#3A5694; --c-shops:#A85734; --c-music:#9A4F6A; --c-film:#4F7A8A;
   --c-active:#2D7F5E;
   --c-dance:#6B3FA0; --c-workshops:#C4883A;
+  --c-family:#D4A017;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -384,6 +385,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
    ============================================================ */
 
 const WEEKS = [
+  { id:"2026-08-14", label:{ en:"14–23 Aug",      nl:"14–23 aug"      } },
   { id:"2026-07-06", label:{ en:"6 – 12 Jul",     nl:"6 – 12 jul"     } },
   { id:"2026-06-29", label:{ en:"29 Jun – 5 Jul", nl:"29 jun – 5 jul" } },
   { id:"2026-06-27", label:{ en:"27 Jun – 3 Jul", nl:"27 jun – 3 jul" } },
@@ -399,13 +401,166 @@ const CATEGORIES = [
   { id:"shops",   color:"var(--c-shops)",   hex:"#A85734", label:{en:"Pop-up Shops",    nl:"Pop-upwinkels"} },
   { id:"music",   color:"var(--c-music)",   hex:"#9A4F6A", label:{en:"Music",           nl:"Muziek"} },
   { id:"film",    color:"var(--c-film)",    hex:"#4F7A8A", label:{en:"Film",            nl:"Film"} },
+  { id:"family",  color:"var(--c-family)",  hex:"#D4A017", label:{en:"Kids & Family",   nl:"Gezin & Kids"} },
   { id:"active",    color:"var(--c-active)",    hex:"#2D7F5E", label:{en:"Active & Outdoor",  nl:"Actief & Buiten"} },
   { id:"dance",     color:"var(--c-dance)",     hex:"#6B3FA0", label:{en:"Dance & Theatre",  nl:"Dans & Theater"} },
   { id:"workshops", color:"var(--c-workshops)", hex:"#C4883A", label:{en:"Workshops",        nl:"Workshops"} }
 ];
 
 const EVENTS = [
-  // ---- This week (6 – 12 Jul) ----
+  // ---- This week (14 – 23 Aug) ----
+
+  { id:"amstelveld-aug", week:"2026-08-14", cat:"markets",
+    name:"Curiosamarkt Amstelveld",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3627, lng:4.8981,
+    when:{en:"Fri 14 Aug",nl:"vr 14 aug"}, time:{en:"08:00–16:30",nl:"08:00–16:30"},
+    days:["2026-08-14"],
+    addr:{en:"Amstelveld 1, Amsterdam",nl:"Amstelveld 1, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"120 stalls of genuine antiques, vintage and curiosities on the pretty Amstelveld square — private sellers only, no traders, no new goods.",
+           nl:"120 kraampjes met echte antiek, vintage en curiosa op het sfeervolle Amstelveld — alleen particulieren, geen handelaren."},
+    url:"https://www.vanaerlebv.nl" },
+
+  { id:"gracht-sax-noorderpark", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Arcis Saxophon Quartett",
+    hood:{en:"Noord",nl:"Noord"}, lat:52.3946, lng:4.9195,
+    when:{en:"Fri 14 Aug",nl:"vr 14 aug"}, time:{en:"14:00–15:00",nl:"14:00–15:00"},
+    days:["2026-08-14"],
+    addr:{en:"Noorderpark, Amsterdam",nl:"Noorderpark, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"The Arcis Saxophon Quartett plays a swinging free outdoor concert in Noorderpark — one of the Grachtenfestival's neighbourhood picks.",
+           nl:"Het Arcis Saxophon Quartett speelt een swingend gratis buitenconcert in het Noorderpark."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-tjs-dnb", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — TJ's Pretty People",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3612, lng:4.8998,
+    when:{en:"Fri 14 Aug",nl:"vr 14 aug"}, time:{en:"16:00–17:00",nl:"16:00–17:00"},
+    days:["2026-08-14"],
+    addr:{en:"De Nederlandsche Bank, Frederiksplein 1, Amsterdam",nl:"De Nederlandsche Bank, Frederiksplein 1, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"Jazz Competition 2026 winners play a free concert in one of Amsterdam's most unexpected venues — the central bank.",
+           nl:"De winnaar van de Jazz Competition 2026 speelt gratis in een van de meest onverwachte concertzalen van Amsterdam — de Nederlandsche Bank."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-fenne", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — FENNE in het Concertgebouw",
+    hood:{en:"Zuid",nl:"Zuid"}, lat:52.3564, lng:4.8795,
+    when:{en:"Fri 14 Aug",nl:"vr 14 aug"}, time:{en:"19:30 & 21:30",nl:"19:30 & 21:30"},
+    days:["2026-08-14"],
+    addr:{en:"Het Concertgebouw, Concertgebouwplein 10, Amsterdam",nl:"Het Concertgebouw, Concertgebouwplein 10, Amsterdam"}, price:{en:"Tickets via concertgebouw.nl",nl:"Tickets via concertgebouw.nl"},
+    blurb:{en:"FENNE brings close harmony jazz to the Concertgebouw for two intimate Basement Sessions — one of the festival's standout ticketed nights.",
+           nl:"FENNE brengt close harmony jazz naar het Concertgebouw voor twee intieme Basement Sessions."},
+    url:"https://www.concertgebouw.nl" },
+
+  { id:"gracht-nina-rompa", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Nina Rompa & 3VIOLAS",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3702, lng:4.9001,
+    when:{en:"Fri 14 Aug",nl:"vr 14 aug"}, time:{en:"20:00–21:00",nl:"20:00–21:00"},
+    days:["2026-08-14"],
+    addr:{en:"Zuiderkerk, Zandstraat 17k, Amsterdam",nl:"Zuiderkerk, Zandstraat 17k, Amsterdam"}, price:{en:"Tickets",nl:"Tickets"},
+    blurb:{en:"Jazz Gems première — Nina Rompa and three violas in a beautiful Zuiderkerk premiere, one of the festival's most anticipated new acts.",
+           nl:"Jazz Gems-première — Nina Rompa en drie violen in een première in de Zuiderkerk."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-junior-droomtrein", week:"2026-08-14", cat:"family",
+    name:"Junior Grachtenfestival — De Droomtrein (3+)",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3700, lng:4.8843,
+    when:{en:"Sat 15 Aug",nl:"za 15 aug"}, time:{en:"11:00–11:40",nl:"11:00–11:40"},
+    days:["2026-08-15"],
+    addr:{en:"Felix Meritis, Keizersgracht 324, Amsterdam",nl:"Felix Meritis, Keizersgracht 324, Amsterdam"}, price:{en:"Tickets (child or adult)",nl:"Tickets (kind of volwassene)"},
+    blurb:{en:"A dreamy music-theatre train journey for little ones — the Junior Grachtenfestival's Saturday show for ages 3 and up.",
+           nl:"Een dromerige muziektheatertreinreis voor de kleinsten — het Junior Grachtenfestival op zaterdagochtend voor kinderen vanaf 3 jaar."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-orgel-westerkerk", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Orgelconcours Westerkerk",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3745, lng:4.8840,
+    when:{en:"Sat 15 Aug",nl:"za 15 aug"}, time:{en:"13:00–13:45",nl:"13:00–13:45"},
+    days:["2026-08-15"],
+    addr:{en:"Westerkerk, Prinsengracht 281, Amsterdam",nl:"Westerkerk, Prinsengracht 281, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"The Organ Competition winners play a free lunchtime concert in the iconic Westerkerk — one of the most beautiful free slots of the weekend.",
+           nl:"De winnaars van het Orgelconcours spelen gratis een lunchconcert in de iconische Westerkerk."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-njjo", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Nationaal Jeugd Jazz Orkest",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3657, lng:4.9022,
+    when:{en:"Sat 15 Aug",nl:"za 15 aug"}, time:{en:"17:00–18:00",nl:"17:00–18:00"},
+    days:["2026-08-15"],
+    addr:{en:"H'ART Museum, Amstel 51, Amsterdam",nl:"H'ART Museum, Amstel 51, Amsterdam"}, price:{en:"Tickets",nl:"Tickets"},
+    blurb:{en:"The National Youth Jazz Orchestra with Reinier Baas at H'ART Museum — young talent, fresh energy, one of the Grachtenfestival's most talked-about combinations.",
+           nl:"Het Nationaal Jeugd Jazz Orkest met Reinier Baas in het H'ART Museum — jong talent, frisse energie."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-stabat-mater", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Stabat Mater, Dominicuskerk",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3771, lng:4.8944,
+    when:{en:"Sat 15 Aug",nl:"za 15 aug"}, time:{en:"20:00–21:00",nl:"20:00–21:00"},
+    days:["2026-08-15"],
+    addr:{en:"Dominicuskerk, Spuistraat 12, Amsterdam",nl:"Dominicuskerk, Spuistraat 12, Amsterdam"}, price:{en:"Tickets",nl:"Tickets"},
+    blurb:{en:"Pergolesi's Stabat Mater on Maria Hemelvaart in the Dominicuskerk — one of the Grachtenfestival's most beautiful evening settings.",
+           nl:"Pergolesi's Stabat Mater op Maria Hemelvaart in de Dominicuskerk — een van de mooiste avondlocaties van het festival."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-albobj", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Alistair Payne's ALBOBJ",
+    hood:{en:"Oost",nl:"Oost"}, lat:52.3538, lng:4.9118,
+    when:{en:"Sat 15 Aug",nl:"za 15 aug"}, time:{en:"21:00–22:00",nl:"21:00–22:00"},
+    days:["2026-08-15"],
+    addr:{en:"Norrsken House, Wibautstraat 150, Amsterdam",nl:"Norrsken House, Wibautstraat 150, Amsterdam"}, price:{en:"Tickets",nl:"Tickets"},
+    blurb:{en:"Jazz Gems première from Alistair Payne's ALBOBJ at Norrsken House — a late-night festival highlight in a buzzy creative hub.",
+           nl:"Jazz Gems-première van Alistair Payne's ALBOBJ bij Norrsken House — een laat festivalhoogtepunt."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-estafette", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Muziekkapellen Estafette",
+    hood:{en:"City-wide",nl:"Stadsbrede route"}, lat:52.3676, lng:4.9041,
+    when:{en:"Sun 16 Aug",nl:"zo 16 aug"}, time:{en:"10:00–21:00",nl:"10:00–21:00"},
+    days:["2026-08-16"],
+    addr:{en:"10 parks across Amsterdam — see grachtenfestival.nl for full route",nl:"10 parken door Amsterdam — zie grachtenfestival.nl voor de volledige route"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"A city-wide relay of free outdoor concerts hopping from park to park all day — starts in Osdorp at 10:00, ends at Tolhuistuin at 21:00. Classical Indian, percussion, jazz, soul, strings and harp along the way.",
+           nl:"Een stadsbrede estafette van gratis buitenconcerten van park naar park — start om 10:00 in het Stadspark Osdorp, eindigt om 21:00 bij Tolhuistuin."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-vokall", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Vokall Records × Oosterpark",
+    hood:{en:"Oost",nl:"Oost"}, lat:52.3602, lng:4.9205,
+    when:{en:"Sun 16 Aug",nl:"zo 16 aug"}, time:{en:"15:00–18:00",nl:"15:00–18:00"},
+    days:["2026-08-16"],
+    addr:{en:"Muziekkoepel Oosterpark, Oosterpark, Amsterdam",nl:"Muziekkoepel Oosterpark, Oosterpark, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"Amsterdam label Vokall Records takes over the Oosterpark bandstand for three hours of soul, neo-R&B and storytelling — free and one of the weekend's best picks.",
+           nl:"Amsterdams label Vokall Records neemt drie uur lang de muziekkoepel van het Oosterpark over met soul, neo-R&B en verhalen — gratis."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-junior-tappin", week:"2026-08-14", cat:"family",
+    name:"Junior Grachtenfestival — Tappin-It (6+)",
+    hood:{en:"West",nl:"West"}, lat:52.3762, lng:4.8672,
+    when:{en:"Sun 16 Aug",nl:"zo 16 aug"}, time:{en:"11:00–12:00",nl:"11:00–12:00"},
+    days:["2026-08-16"],
+    addr:{en:"Move Amsterdam, Jan van Galenstraat 6, Amsterdam",nl:"Move Amsterdam, Jan van Galenstraat 6, Amsterdam"}, price:{en:"Tickets (child or adult)",nl:"Tickets (kind of volwassene)"},
+    blurb:{en:"A family show full of dance and sign language for ages 6 and up — the Junior Grachtenfestival's closing Sunday performance.",
+           nl:"Een familievoorstelling vol dans en gebaren voor kinderen vanaf 6 jaar — de slotvoorstelling van het Junior Grachtenfestival."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-concours-vondelpark", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Conservatorium Concours Finalists",
+    hood:{en:"Zuid",nl:"Zuid"}, lat:52.3584, lng:4.8711,
+    when:{en:"Sun 16 Aug",nl:"zo 16 aug"}, time:{en:"12:00–13:30",nl:"12:00–13:30"},
+    days:["2026-08-16"],
+    addr:{en:"Vondelpark Openluchttheater, Vondelpark 5, Amsterdam",nl:"Vondelpark Openluchttheater, Vondelpark 5, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"The Grachtenfestival conservatoire competition finalists play a free open-air set in the Vondelpark Openluchttheater — new talent in the best outdoor setting in the city.",
+           nl:"De finalisten van het Grachtenfestival Conservatorium Concours spelen gratis in het Vondelpark Openluchttheater."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  { id:"gracht-four-seasons-straat", week:"2026-08-14", cat:"music",
+    name:"Grachtenfestival — Max Richter's Four Seasons, STRAAT",
+    hood:{en:"Noord",nl:"Noord"}, lat:52.4019, lng:4.8939,
+    when:{en:"Sun 16 Aug",nl:"zo 16 aug"}, time:{en:"20:00–21:00",nl:"20:00–21:00"},
+    days:["2026-08-16"],
+    addr:{en:"STRAAT Museum, Tt. Neveritaweg 15, Amsterdam",nl:"STRAAT Museum, Tt. Neveritaweg 15, Amsterdam"}, price:{en:"Tickets (almost sold out)",nl:"Tickets (bijna uitverkocht)"},
+    blurb:{en:"Lisa Jacobs and The String Soloists close the Grachtenfestival with Max Richter's recomposed Four Seasons at STRAAT Museum — the most atmospheric closing concert of the year.",
+           nl:"Lisa Jacobs en The String Soloists sluiten het Grachtenfestival af met Max Richters herwerkte Four Seasons in het STRAAT Museum — het meest sfeervolle slotconcert van het jaar."},
+    url:"https://www.grachtenfestival.nl/programma-en-tickets" },
+
+  // ---- Previous week (6 – 12 Jul) ----
 
   // Monday 6 Jul
   { id:"gv-malak-mon", week:"2026-07-06", cat:"food",
