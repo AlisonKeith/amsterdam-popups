@@ -3,6 +3,23 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#FBFAF8" id="theme-color-meta" />
+<script>
+/* Set the theme attribute before first paint, so there's no flash of the wrong theme. */
+(function(){
+  try{
+    var t = localStorage.getItem("theme");
+    if(t !== "light" && t !== "dark") t = null;
+    var dark = t ? t === "dark" : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    if(t) document.documentElement.setAttribute("data-theme", t);
+    if(dark){
+      var m = document.getElementById("theme-color-meta");
+      if(m) m.setAttribute("content", "#161310");
+    }
+  }catch(e){}
+})();
+</script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <title>Amsterdam Pop-ups — dance, music, food &amp; art events this week</title>
 <meta name="description" content="Amsterdam Pop-ups is a weekly, map-first guide to the city's temporary happenings — supper clubs, outdoor cinemas, food festivals, Michelin chef pop-ups, music in parks, kids & family events, markets and one-off nights that don't make the mainstream guides. Updated every week in English and Dutch." />
@@ -73,6 +90,32 @@
     --chip-text:#E8E3DA; --pin-ring:#F2EEE7; --badge-bg:#0D0B09;
   }
 }
+/* Explicit overrides from the theme toggle — win over the media query above regardless
+   of system setting, since an attribute selector on :root is more specific than a bare :root. */
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --red-text:#FF6E63; --red-glow:rgba(255,110,98,.28); --submit-hover:#C11017;
+  --red-deep:#FFB4A8; --red-tint:#3A1512; --red-tint-border:#5C231D;
+  --ink:#F2EEE7;
+  --page:#161310; --card:#221E1A;
+  --muted:#B8B2A8; --faint:#948C81;
+  --line:#37312A; --line-card:#3D362E; --card-hover:#5A5045;
+  --input-bg:#1D1A16; --map-bg:#1B1815; --prose-text:#DAD5CC;
+  --ad-border:#443C33; --ad-bg:#201C18; --ad-label:#A69C8E;
+  --chip-text:#E8E3DA; --pin-ring:#F2EEE7; --badge-bg:#0D0B09;
+}
+:root[data-theme="light"]{
+  color-scheme: light;
+  --red-text:#DA1219; --red-glow:rgba(218,18,25,.16); --submit-hover:#c11017;
+  --red-deep:#7a1116; --red-tint:#FBEAEB; --red-tint-border:#F2CBCD;
+  --ink:#1A1A1A;
+  --page:#FBFAF8; --card:#FFFFFF;
+  --muted:#5F5E5A; --faint:#6B6A65;
+  --line:#E6E2DB; --line-card:#EAE6DF; --card-hover:#d8d2c8;
+  --input-bg:#FFFFFF; --map-bg:#EEEBE4; --prose-text:#3c3933;
+  --ad-border:#CFC8BC; --ad-bg:#F7F4EF; --ad-label:#6E6659;
+  --chip-text:#3a3733; --pin-ring:#FFFFFF; --badge-bg:#111111;
+}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{
@@ -93,6 +136,15 @@ header{padding:18px 0 0}
 .lang{display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; font-size:12px; flex:none}
 .lang button{appearance:none; border:0; background:transparent; padding:5px 11px; cursor:pointer; color:var(--muted); font-family:inherit; font-size:12px}
 .lang button.on{background:var(--red); color:#fff; font-weight:500}
+.head-actions{display:flex; align-items:center; gap:8px; flex:none}
+.theme-toggle{appearance:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted); padding:5px 11px; font-family:inherit; font-size:12px; cursor:pointer}
+.theme-toggle:hover{color:var(--ink); border-color:var(--card-hover)}
+.theme-toggle svg{width:14px; height:14px; flex:none}
+@media (max-width:420px){ .theme-toggle span{display:none} .theme-toggle{padding:6px} }
+.listen-btn{appearance:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted); padding:6px 13px; font-family:inherit; font-size:12.5px; cursor:pointer; margin:0 0 12px}
+.listen-btn:hover{color:var(--ink); border-color:var(--card-hover)}
+.listen-btn svg{width:14px; height:14px; flex:none}
+.listen-btn.playing{background:var(--red-tint); border-color:var(--red-tint-border); color:var(--red-deep)}
 .flagstrip{display:flex; height:3px; margin-top:14px}
 .flagstrip i{display:block}
 .flagstrip .r{flex:1; background:var(--red)} .flagstrip .b{width:66px; background:var(--ink-soft)}
@@ -305,9 +357,15 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <div class="tagline" data-i18n="tagline">what's on, off the beaten guide</div>
         </div>
       </a>
-      <div class="lang" role="group" aria-label="Language">
-        <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
-        <button id="lang-nl" onclick="setLang('nl')">NL</button>
+      <div class="head-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" onclick="cycleTheme()">
+          <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+          <span id="theme-label">Auto</span>
+        </button>
+        <div class="lang" role="group" aria-label="Language">
+          <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
+          <button id="lang-nl" onclick="setLang('nl')">NL</button>
+        </div>
       </div>
     </div>
     <div class="flagstrip" aria-hidden="true"><i class="r"></i><i class="b"></i><i class="r"></i></div>
@@ -327,13 +385,20 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 <main id="main-content">
   <div class="wrap">
 
+    <button id="listen-btn" class="listen-btn" type="button" onclick="toggleListen()" aria-pressed="false" hidden>
+      <svg id="listen-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 9v6h4l5 5V4L8 9H4z"/><path d="M17 8.5a5 5 0 0 1 0 7"/><path d="M19.5 6a8.5 8.5 0 0 1 0 12"/>
+      </svg>
+      <span id="listen-label">Listen</span>
+    </button>
+
     <!-- THIS WEEK -->
-    <section id="view-thisweek" class="view on">
+    <section id="view-thisweek" class="view on" aria-labelledby="heading-thisweek">
       <div class="tw">
         <div class="tw-main">
           <div class="weekhead">
             <div>
-              <h1 data-i18n="thisweek">This week</h1>
+              <h1 id="heading-thisweek" data-i18n="thisweek">This week</h1>
               <div class="range" id="weekrange"></div>
             </div>
             <div class="daytoggle" id="daytoggle" role="group" aria-label="Day filter">
@@ -368,7 +433,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     </section>
 
     <!-- ARCHIVE -->
-    <section id="view-archive" class="view">
+    <section id="view-archive" class="view" aria-labelledby="heading-archive">
+      <h1 id="heading-archive" class="sr-only" data-i18n="archive">Archive</h1>
       <div class="search">
         <span class="si">⌕</span>
         <label for="search" class="sr-only">Search past pop-ups</label>
@@ -378,8 +444,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     </section>
 
     <!-- TIP -->
-    <section id="view-tip" class="view prose">
-      <h1 data-i18n="tip">Know a pop-up?</h1>
+    <section id="view-tip" class="view prose" aria-labelledby="heading-tip">
+      <h1 id="heading-tip" data-i18n="tip">Know a pop-up?</h1>
       <p data-i18n="tipIntro"></p>
       <form name="tips" action="https://formspree.io/f/xjgqowrq" method="POST" onsubmit="return submitTip(event)">
         <p class="hp" aria-hidden="true"><label>Don't fill this in: <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
@@ -410,8 +476,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     </section>
 
     <!-- ABOUT -->
-    <section id="view-about" class="view prose">
-      <h1 data-i18n="about">About</h1>
+    <section id="view-about" class="view prose" aria-labelledby="heading-about">
+      <h1 id="heading-about" data-i18n="about">About</h1>
       <p data-i18n="aboutBody"></p>
     </section>
 
@@ -3576,7 +3642,10 @@ const I18N = {
     fPriv:"We only use this to follow up on your tip. See the Privacy page.",
     cookieText:"This site stays cookie-free until you allow ads. Accept to enable advertising and basic measurement; reject to keep only what's strictly necessary — you can change this anytime on the Privacy page.",
     cookieAccept:"Accept", cookieReject:"Reject", cookieSettings:"Cookie settings", cookieFab:"Cookie choices",
-    footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details" },
+    footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details",
+    themeAuto:"Auto", themeLight:"Light", themeDark:"Dark",
+    themeAriaTpl:(cur,next)=>`Theme: ${cur} — click to switch to ${next}`,
+    listenStart:"Listen", listenStop:"Stop listening" },
   nl:{ thisweek:"Deze week", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
     all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
     tagline:"wat er speelt, voorbij de gidsen",
@@ -3593,7 +3662,10 @@ const I18N = {
     fPriv:"We gebruiken dit alleen om op je tip te reageren. Zie de Privacy-pagina.",
     cookieText:"Deze site gebruikt geen cookies totdat je advertenties toestaat. Accepteer om advertenties en basismeting in te schakelen; weiger om alleen het strikt noodzakelijke te houden — je kunt dit altijd aanpassen op de Privacy-pagina.",
     cookieAccept:"Accepteren", cookieReject:"Weigeren", cookieSettings:"Cookie-instellingen", cookieFab:"Cookievoorkeuren",
-    footL:"Gemaakt door locals · geen onderdeel van de gemeente Amsterdam", more:"Bekijk" }
+    footL:"Gemaakt door locals · geen onderdeel van de gemeente Amsterdam", more:"Bekijk",
+    themeAuto:"Automatisch", themeLight:"Licht", themeDark:"Donker",
+    themeAriaTpl:(cur,next)=>`Thema: ${cur} — klik om te wisselen naar ${next}`,
+    listenStart:"Voorlezen", listenStop:"Stop met voorlezen" }
 };
 
 /* ---- state ---- */
@@ -3627,37 +3699,79 @@ const ICO = {
 function fact(ico,txt){ return txt ? `<span class="fact">${ico}${txt}</span>` : ""; }
 
 /* ---- map ---- */
-let baseTiles;
-function cartoVariant(){
-  return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark_all" : "light_all";
+/* ---- theme (light / dark / auto) ---- */
+function getStoredTheme(){ try{ return localStorage.getItem("theme"); }catch(e){ return null; } }
+function setStoredTheme(v){ try{ if(v) localStorage.setItem("theme", v); else localStorage.removeItem("theme"); }catch(e){} }
+function systemPrefersDark(){ return !!(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches); }
+function isDarkMode(){
+  const t = getStoredTheme();
+  if(t === "light") return false;
+  if(t === "dark") return true;
+  return systemPrefersDark();
 }
-function initMap(){
-  map = L.map("map",{ scrollWheelZoom:true, touchZoom:true }).setView([52.3676,4.9041],12.5);
-  // Clean CARTO basemap (light or dark, matching system theme), with an automatic OpenStreetMap fallback if tiles are blocked.
+const THEME_ICONS = {
+  auto:'<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 0 0 17z" fill="currentColor" stroke="none"/>',
+  light:'<circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2.5M12 19v2.5M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2.5 12H5M19 12h2.5M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/>',
+  dark:'<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>'
+};
+function updateThemeButton(){
+  const btn = document.getElementById("theme-toggle");
+  if(!btn) return;
+  const stored = getStoredTheme();
+  const mode = stored || "auto";
+  const names = { auto:t("themeAuto"), light:t("themeLight"), dark:t("themeDark") };
+  document.getElementById("theme-label").textContent = names[mode];
+  document.getElementById("theme-icon").innerHTML = THEME_ICONS[mode];
+  const next = mode === "auto" ? "light" : mode === "light" ? "dark" : "auto";
+  btn.setAttribute("aria-label", t("themeAriaTpl")(names[mode], names[next]));
+}
+function applyTheme(){
+  const stored = getStoredTheme();
+  if(stored) document.documentElement.setAttribute("data-theme", stored);
+  else document.documentElement.removeAttribute("data-theme");
+  const metaColor = document.getElementById("theme-color-meta");
+  if(metaColor) metaColor.setAttribute("content", isDarkMode() ? "#161310" : "#FBFAF8");
+  updateThemeButton();
+  swapMapTiles();
+}
+function cycleTheme(){
+  const mode = getStoredTheme() || "auto";
+  const next = mode === "auto" ? "light" : mode === "light" ? "dark" : "auto";
+  setStoredTheme(next === "auto" ? null : next);
+  applyTheme();
+}
+
+/* ---- map ---- */
+let baseTiles, usingTileFallback = false;
+function cartoVariant(){ return isDarkMode() ? "dark_all" : "light_all"; }
+function makeBaseTiles(){
   const carto = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${cartoVariant()}/{z}/{x}/{y}{r}.png`,{
     subdomains:"abcd", maxZoom:19, crossOrigin:true,
     attribution:'&copy; OpenStreetMap &copy; CARTO'
   });
   let switched = false;
   carto.on("tileerror", function(){
-    if(switched) return; switched = true;
+    if(switched) return; switched = true; usingTileFallback = true;
     map.removeLayer(carto);
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
+    baseTiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
       maxZoom:19, crossOrigin:true, attribution:'&copy; OpenStreetMap contributors'
     }).addTo(map);
   });
-  carto.addTo(map);
-  baseTiles = carto;
+  return carto;
+}
+function swapMapTiles(){
+  if(!map || usingTileFallback) return; // don't fight the OSM fallback once triggered
+  if(baseTiles) map.removeLayer(baseTiles);
+  baseTiles = makeBaseTiles().addTo(map);
+}
+function initMap(){
+  map = L.map("map",{ scrollWheelZoom:true, touchZoom:true }).setView([52.3676,4.9041],12.5);
+  baseTiles = makeBaseTiles().addTo(map);
   markerLayer = L.layerGroup().addTo(map);
-  // Swap the basemap live if the OS theme changes while the tab is open.
+  // Follow the OS theme live, but only when the visitor hasn't picked an explicit theme.
   if(window.matchMedia){
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
-      if(!map || !baseTiles) return;
-      map.removeLayer(baseTiles);
-      baseTiles = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${cartoVariant()}/{z}/{x}/{y}{r}.png`,{
-        subdomains:"abcd", maxZoom:19, crossOrigin:true,
-        attribution:'&copy; OpenStreetMap &copy; CARTO'
-      }).addTo(map);
+      if(!getStoredTheme()) applyTheme();
     });
   }
 }
@@ -3798,14 +3912,71 @@ function renderArchive(){
   el.innerHTML = any ? html : `<div class="empty">${t("noResults")}</div>`;
 }
 
+/* ---- listen (text-to-speech) ---- */
+function stopSpeech(){
+  if("speechSynthesis" in window) window.speechSynthesis.cancel();
+  updateListenButton(false);
+}
+function collectReadableText(){
+  const activeView = document.querySelector(".view.on");
+  if(!activeView) return "";
+  const clone = activeView.cloneNode(true);
+  clone.querySelectorAll(".ad-slot, script, [aria-hidden=\"true\"], .sr-only").forEach(n => n.remove());
+  let text = clone.textContent.replace(/\s+/g," ").trim();
+  // Cap the read-aloud length: "This week" and "Archive" can hold 100+ event cards, and
+  // reading every word of every card would run 30+ minutes. Screen reader users already have
+  // full navigable access via the page's headings/landmarks; this button is a quick audio
+  // overview, so it stops after a reasonable chunk and points people at the filters instead.
+  const CAP = 3000;
+  if(text.length > CAP){
+    let cut = text.slice(0, CAP);
+    const lastSpace = cut.lastIndexOf(" ");
+    if(lastSpace > CAP * 0.8) cut = cut.slice(0, lastSpace);
+    text = cut + (lang === "nl"
+      ? ". Er is meer inhoud dan hier is voorgelezen. Gebruik de filters hierboven, of het archief, om de lijst te verkleinen."
+      : ". There's more content than read here. Use the filters above, or the archive search, to narrow the list down.");
+  }
+  return text;
+}
+function toggleListen(){
+  if(!("speechSynthesis" in window)) return;
+  if(window.speechSynthesis.speaking){ stopSpeech(); return; }
+  const text = collectReadableText();
+  if(!text) return;
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = lang === "nl" ? "nl-NL" : "en-GB";
+  utter.onend = () => updateListenButton(false);
+  utter.onerror = () => updateListenButton(false);
+  window.speechSynthesis.speak(utter);
+  updateListenButton(true);
+}
+function updateListenButton(playing){
+  const btn = document.getElementById("listen-btn");
+  if(!btn) return;
+  btn.setAttribute("aria-pressed", playing ? "true" : "false");
+  btn.classList.toggle("playing", playing);
+  const label = document.getElementById("listen-label");
+  if(label) label.textContent = playing ? t("listenStop") : t("listenStart");
+}
+function initListenButton(){
+  const btn = document.getElementById("listen-btn");
+  if(!btn) return;
+  if("speechSynthesis" in window) btn.hidden = false;
+  document.addEventListener("visibilitychange", () => { if(document.hidden) stopSpeech(); });
+}
+
 /* ---- views ---- */
 function switchView(name){
+  stopSpeech();
   document.querySelectorAll(".view").forEach(v => v.classList.remove("on"));
   document.getElementById("view-"+name).classList.add("on");
   document.querySelectorAll(".tab").forEach(tb => tb.classList.toggle("on", tb.dataset.view===name));
   if(name==="thisweek" && map){ setTimeout(()=>{ map.invalidateSize(); renderThisWeek(); },30); }
   if(name==="archive") renderArchive();
   window.scrollTo({top:0, behavior:"smooth"});
+  // Move focus to the new view's heading so screen reader / keyboard users are told the view changed.
+  const heading = document.getElementById("heading-"+name);
+  if(heading){ heading.setAttribute("tabindex","-1"); heading.focus({preventScroll:true}); }
 }
 
 /* ---- language ---- */
@@ -3815,12 +3986,14 @@ function applyI18n(){
   document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
 }
 function setLang(l){
+  stopSpeech();
   lang = l;
   document.getElementById("lang-en").classList.toggle("on", l==="en");
   document.getElementById("lang-nl").classList.toggle("on", l==="nl");
   document.getElementById("intro-en").style.display = l==="en" ? "" : "none";
   document.getElementById("intro-nl").style.display = l==="nl" ? "" : "none";
   applyI18n(); renderChips(); renderThisWeek(); renderArchive();
+  updateThemeButton(); updateListenButton(false);
 }
 
 /* ---- tip form ---- */
@@ -3907,12 +4080,14 @@ function injectEventSchema(){
 }
 
 /* ---- boot ---- */
+applyTheme();
 initMap();
 applyI18n();
 renderChips();
 renderThisWeek();
 injectEventSchema();
 initConsent();
+initListenButton();
 window.addEventListener("resize", () => { if(map) map.invalidateSize(); });
 setTimeout(() => { if(map) map.invalidateSize(); }, 60);
 </script>
