@@ -75,6 +75,8 @@
   --c-family:#D4A017;
   --c-sport:#2E6B9E;
   --c-queer:#E0218A;
+  --c-business:#3D4A5C;
+  --c-networking:#2E9BA6;
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -553,7 +555,9 @@ const CATEGORIES = [
   { id:"active",    color:"var(--c-active)",    hex:"#2D7F5E", label:{en:"Active & Outdoor",  nl:"Actief & Buiten"} },
   { id:"dance",     color:"var(--c-dance)",     hex:"#6B3FA0", label:{en:"Dance & Theatre",  nl:"Dans & Theater"} },
   { id:"workshops", color:"var(--c-workshops)", hex:"#C4883A", label:{en:"Workshops",        nl:"Workshops"} },
-  { id:"queer",     color:"var(--c-queer)",     hex:"#E0218A", label:{en:"Queer",            nl:"Queer"}, rainbow:true }
+  { id:"queer",     color:"var(--c-queer)",     hex:"#E0218A", label:{en:"Queer",            nl:"Queer"}, rainbow:true },
+  { id:"business",    color:"var(--c-business)",    hex:"#3D4A5C", label:{en:"Business",    nl:"Zakelijk"} },
+  { id:"networking",  color:"var(--c-networking)",  hex:"#2E9BA6", label:{en:"Networking",  nl:"Netwerken"} }
 ];
 
 const EVENTS = [
@@ -1628,6 +1632,16 @@ const EVENTS = [
     blurb:{en:"Irish stand-up Sharon Em — nominated for Best Debut at Edinburgh Fringe 2024 — brings her light-hearted, dry-witted show to Scala's intimate foodbar and theatre. Sharp 20-minute sets with time to eat and drink.",
            nl:"Iers stand-upcomédienne Sharon Em brengt haar luchtige, droogkomische show naar Scala. Scherpe 20-minuten sets met tijd om te eten en drinken."},
     url:"https://www.eventbrite.nl/e/scala-presents-stand-up-comedy-with-sharon-em-tickets-1993440923464" },
+
+  { id:"aabc-summer-soiree", week:"2026-08-14", cats:["drink","business","networking"],
+    name:"August Summer Soirée — Amsterdam American Business Club",
+    hood:{en:"Zuid",nl:"Zuid"}, lat:52.3549, lng:4.8565,
+    when:{en:"Tue 25 Aug",nl:"di 25 aug"}, time:{en:"18:30–21:00",nl:"18:30–21:00"},
+    days:["2026-08-25"],
+    addr:{en:"De Vondeltuin, Vondelpark 7, Amsterdam",nl:"De Vondeltuin, Vondelpark 7, Amsterdam"}, price:{en:"€29 non-members · member/guest tickets available",nl:"€29 niet-leden · leden-/gastentickets beschikbaar"},
+    blurb:{en:"The Amsterdam American Business Club's summer mixer at De Vondeltuin, one of Amsterdam's most relaxed outdoor venues — an evening of informal networking, good conversation and summer atmosphere in the heart of the Vondelpark. Open to members and their guests. Dress code: Summer Chic.",
+           nl:"De zomerborrel van de Amsterdam American Business Club bij De Vondeltuin, een van de meest ontspannen buitenlocaties van Amsterdam — een avond informeel netwerken, goede gesprekken en zomerse sfeer in het hart van het Vondelpark. Open voor leden en hun gasten. Dresscode: Summer Chic."},
+    url:"https://aabc.nl/event-6749993/Registration" },
 
   // ---- Previous week (6 – 12 Jul) ----
 
