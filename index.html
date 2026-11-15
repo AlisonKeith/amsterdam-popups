@@ -241,6 +241,15 @@ main{padding:18px 0 40px}
 .facts{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px}
 .fact{display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--faint)}
 .ico{width:13px; height:13px; flex:none; opacity:.85}
+.fact-maps{appearance:none; border:0; background:transparent; padding:0; margin:0; display:inline-flex; align-items:center; gap:5px; font-family:inherit; font-size:12px; color:var(--faint); cursor:pointer; text-align:left; border-radius:4px; max-width:100%}
+.fact-maps span{text-decoration:underline; text-underline-offset:2px; text-decoration-color:var(--line)}
+.fact-maps:hover,.fact-maps[aria-expanded="true"]{color:var(--red-text)}
+.fact-maps:hover span,.fact-maps[aria-expanded="true"] span{text-decoration-color:var(--red-text)}
+.mapchooser{position:fixed; z-index:2000; min-width:200px; max-width:calc(100vw - 16px); background:var(--card); color:var(--ink); border:1px solid var(--line-card); border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.18); padding:6px; display:none}
+.mapchooser.open{display:block}
+.mapchooser a{display:block; padding:8px 12px; color:var(--ink); text-decoration:none; font-size:13.5px; line-height:1.3; border-radius:8px; font-family:inherit; font-weight:400}
+.mapchooser a:hover{background:var(--red-tint); color:var(--red-deep)}
+.mapchooser a:focus-visible{outline:2px solid var(--red-text); outline-offset:2px}
 .card .more{display:inline-flex; align-items:center; gap:4px; margin-top:8px; font-size:12.5px; color:var(--red-text); font-weight:500; text-decoration:none}
 .empty{color:var(--muted); font-size:14px; padding:24px 4px; text-align:center}
 
@@ -4616,7 +4625,9 @@ const I18N = {
     footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details",
     themeAuto:"Auto", themeLight:"Light", themeDark:"Dark",
     themeAriaTpl:(cur,next)=>`Theme: ${cur} — click to switch to ${next}`,
-    listenStart:"Listen", listenStop:"Stop listening" },
+    listenStart:"Listen", listenStop:"Stop listening",
+    mapsAria:(place)=>`Open in maps: ${place}`,
+    mapsApple:"Apple Maps", mapsGoogle:"Google Maps", mapsWaze:"Waze", mapsOsm:"OpenStreetMap" },
   nl:{ thisweek:"Deze week", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
     all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", rAll:"Alles", rOneoff:"Eenmalig", rRegular:"Terugkerend", rAria:"Filter op eenmalige of terugkerende evenementen", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
     tagline:"wat er speelt, voorbij de gidsen",
@@ -4636,7 +4647,9 @@ const I18N = {
     footL:"Gemaakt door locals · geen onderdeel van de gemeente Amsterdam", more:"Bekijk",
     themeAuto:"Automatisch", themeLight:"Licht", themeDark:"Donker",
     themeAriaTpl:(cur,next)=>`Thema: ${cur} — klik om te wisselen naar ${next}`,
-    listenStart:"Voorlezen", listenStop:"Stop met voorlezen" }
+    listenStart:"Voorlezen", listenStop:"Stop met voorlezen",
+    mapsAria:(place)=>`Openen in kaarten: ${place}`,
+    mapsApple:"Apple Kaarten", mapsGoogle:"Google Maps", mapsWaze:"Waze", mapsOsm:"OpenStreetMap" }
 };
 
 /* ---- state ---- */
@@ -4753,6 +4766,99 @@ function initMap(){
     });
   }
 }
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+function mapChooserLinks(lat, lng, label){
+  const q = encodeURIComponent(label);
+  const ll = `${lat},${lng}`;
+  return [
+    { key:"mapsApple",  href:`https://maps.apple.com/?q=${q}&ll=${ll}` },
+    { key:"mapsGoogle", href:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(label+" "+ll)}` },
+    { key:"mapsWaze",   href:`https://waze.com/ul?ll=${ll}&navigate=yes` },
+    { key:"mapsOsm",    href:`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}` }
+  ];
+}
+function mapsButton(ev){
+  const label = ev.addr[lang] || ev.name;
+  return `<button type="button" class="fact-maps" aria-expanded="false" aria-controls="mapchooser" aria-label="${escapeHtml(t("mapsAria")(label))}" data-lat="${ev.lat}" data-lng="${ev.lng}" data-label="${escapeHtml(label)}" onclick="event.stopPropagation(); toggleMapChooser(this)">${ICO.pin}<span>${escapeHtml(ev.addr[lang])}</span></button>`;
+}
+
+let mapChooserEl = null, mapChooserBtn = null;
+function ensureMapChooser(){
+  if(mapChooserEl) return mapChooserEl;
+  const el = document.createElement("div");
+  el.id = "mapchooser";
+  el.className = "mapchooser";
+  el.hidden = true;
+  document.body.appendChild(el);
+  document.addEventListener("click", e => {
+    if(!mapChooserBtn) return;
+    if(el.contains(e.target) || mapChooserBtn.contains(e.target)) return;
+    closeMapChooser(false);
+  });
+  document.addEventListener("keydown", mapChooserKey);
+  window.addEventListener("resize", () => closeMapChooser(false));
+  window.addEventListener("scroll", () => closeMapChooser(false), true);
+  mapChooserEl = el;
+  return el;
+}
+function placeMapChooser(btn, el){
+  const r = btn.getBoundingClientRect();
+  const mw = Math.min(240, window.innerWidth - 16);
+  el.style.width = mw + "px";
+  el.hidden = false;
+  el.classList.add("open");
+  const h = el.offsetHeight;
+  let top = r.bottom + 6;
+  if(top + h > window.innerHeight - 8) top = Math.max(8, r.top - h - 6);
+  let left = r.left;
+  if(left + mw > window.innerWidth - 8) left = window.innerWidth - 8 - mw;
+  if(left < 8) left = 8;
+  el.style.top = top + "px";
+  el.style.left = left + "px";
+}
+function closeMapChooser(restoreFocus){
+  const btn = mapChooserBtn;
+  if(mapChooserEl){
+    mapChooserEl.classList.remove("open");
+    mapChooserEl.hidden = true;
+    mapChooserEl.innerHTML = "";
+  }
+  if(btn){
+    btn.setAttribute("aria-expanded", "false");
+    if(restoreFocus) btn.focus();
+  }
+  mapChooserBtn = null;
+}
+function toggleMapChooser(btn){
+  if(mapChooserBtn === btn){ closeMapChooser(false); return; }
+  closeMapChooser(false);
+  const el = ensureMapChooser();
+  const lat = btn.dataset.lat, lng = btn.dataset.lng, label = btn.dataset.label || "";
+  el.innerHTML = mapChooserLinks(lat, lng, label).map(item =>
+    `<a href="${item.href}" target="_blank" rel="noopener">${escapeHtml(t(item.key))}</a>`
+  ).join("");
+  mapChooserBtn = btn;
+  btn.setAttribute("aria-expanded", "true");
+  placeMapChooser(btn, el);
+}
+function mapChooserKey(e){
+  if(!mapChooserBtn || !mapChooserEl || !mapChooserEl.classList.contains("open")) return;
+  if(e.key==="Escape"){ e.preventDefault(); closeMapChooser(true); return; }
+  if(e.key!=="Tab") return;
+  const items = [...mapChooserEl.querySelectorAll("a")];
+  if(!items.length) return;
+  const first = items[0], last = items[items.length-1];
+  if(!e.shiftKey && (document.activeElement===mapChooserBtn || document.activeElement===last)){
+    e.preventDefault();
+    if(document.activeElement===mapChooserBtn) first.focus();
+    else closeMapChooser(false);
+  } else if(e.shiftKey && (document.activeElement===first || document.activeElement===mapChooserBtn)){
+    e.preventDefault();
+    closeMapChooser(true);
+  }
+}
 function renderMap(list){
   markerLayer.clearLayers(); markers = {};
   const pts = [];
@@ -4782,12 +4888,12 @@ function renderMap(list){
         const ep = `<span class="pop-cat" style="background:${tintBg(ec.hex)};color:${darkText(ec.hex)}">${catLabelHtml(ec)}</span>`;
         return `${ep} <b>${e.name}</b><br>${e.when[lang]} · ${e.time[lang]}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
       }).join("<hr style='margin:6px 0;border-color:#eee'>");
-      popupHtml = `<b>${ev.addr[lang]}</b><br>${ev.hood[lang]}<br><br>${items}`;
+      popupHtml = `${mapsButton(ev)}<br>${ev.hood[lang]}<br><br>${items}`;
     } else if(count === 1) {
-      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${ev.addr[lang]}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
     } else {
       // Stacked markers below first — bind same popup as first
-      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${ev.addr[lang]}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
     }
     m.bindPopup(popupHtml);
     markers[ev.id] = m;
@@ -4868,7 +4974,7 @@ function recurtoggleKey(e){
 /* ---- this week ---- */
 function cardHtml(ev){
   const c = catBy[ev.cats[0]];
-  const facts = `<div class="facts">${fact(ICO.clock, ev.when[lang]+" · "+ev.time[lang])}${fact(ICO.pin, ev.addr[lang])}${ev.price?fact(ICO.tag, ev.price[lang]):""}</div>`;
+  const facts = `<div class="facts">${fact(ICO.clock, ev.when[lang]+" · "+ev.time[lang])}${mapsButton(ev)}${ev.price?fact(ICO.tag, ev.price[lang]):""}</div>`;
   return `<article class="card" data-id="${ev.id}" onclick="focusEvent('${ev.id}')">
     <div class="card-top">
       <span class="pill" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>
@@ -4893,6 +4999,7 @@ function weekCountText(n, scope){
   return n===0 ? "No events this week" : n===1 ? "1 event this week" : `${n} events this week`;
 }
 function renderThisWeek(){
+  closeMapChooser(false);
   const weekLive = weekStillLive(currentWeek.id);
   document.getElementById("weekrange").textContent = weekLive ? currentWeek.label[lang] : "";
   const published = EVENTS.filter(e => e.week === currentWeek.id);
@@ -4928,6 +5035,7 @@ function flashCard(id){
 
 /* ---- archive ---- */
 function renderArchive(){
+  closeMapChooser(false);
   const q = (document.getElementById("search").value || "").trim().toLowerCase();
   const el = document.getElementById("archive");
   const match = ev => {
@@ -5118,6 +5226,8 @@ function injectEventSchema(){
 /* ---- boot ---- */
 applyTheme();
 initMap();
+if(map) map.on("popupclose", () => closeMapChooser(false));
+ensureMapChooser();
 applyI18n();
 renderChips();
 renderThisWeek();
