@@ -1,133 +1,397 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://www.amsterdampopups.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/this-week.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/this-week.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/deze-week.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/this-week.html"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/deze-week.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/this-week.html"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/deze-week.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/this-week.html"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/food/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/food/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/eten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/food/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/eten/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/food/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/eten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/food/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/drink/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/drink/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/drinken/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/drink/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/drinken/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/drink/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/drinken/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/drink/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/markets/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/markets/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/markten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/markets/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/markten/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/markets/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/markten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/markets/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/christmas-markets/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/christmas-markets/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/kerstmarkten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/christmas-markets/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/kerstmarkten/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/christmas-markets/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/kerstmarkten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/christmas-markets/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/sinterklaas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/sinterklaas/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/sinterklaas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/sinterklaas/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/sinterklaas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/sinterklaas/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/sinterklaas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/sinterklaas/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/fashion-vintage/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/fashion-vintage/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/mode-vintage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/fashion-vintage/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/mode-vintage/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/fashion-vintage/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/mode-vintage/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/fashion-vintage/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/art-design/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/art-design/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/kunst-design/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/art-design/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/kunst-design/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/art-design/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/kunst-design/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/art-design/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/pop-up-shops/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/pop-up-shops/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/pop-upwinkels/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/pop-up-shops/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/pop-upwinkels/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/pop-up-shops/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/pop-upwinkels/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/pop-up-shops/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/music/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/music/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/muziek/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/music/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/muziek/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/music/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/muziek/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/music/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/nightlife/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/nightlife/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/nachtleven/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/nightlife/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/nachtleven/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/nightlife/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/nachtleven/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/nightlife/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/film/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/film/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/film/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/film/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/film/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/film/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/film/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/film/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/kids-family/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/kids-family/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/gezin-kids/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/kids-family/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/gezin-kids/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/kids-family/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/gezin-kids/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/kids-family/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/sport/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/sport/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/sport/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/sport/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/sport/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/sport/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/sport/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/active-outdoor/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/active-outdoor/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/actief-buiten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/active-outdoor/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/actief-buiten/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/active-outdoor/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/actief-buiten/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/active-outdoor/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/theatre-dance/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/theatre-dance/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/theater-dans/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/theatre-dance/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/theater-dans/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/theatre-dance/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/theater-dans/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/theatre-dance/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/comedy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/comedy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/comedy-cabaret/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/comedy/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/comedy-cabaret/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/comedy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/comedy-cabaret/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/comedy/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/workshops/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/workshops/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/workshops/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/workshops/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/workshops/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/queer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/queer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/queer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/queer/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/queer/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/queer/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/queer/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/queer/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/business/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/business/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/zakelijk/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/business/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/zakelijk/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/business/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/zakelijk/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/business/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.amsterdampopups.com/networking/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/networking/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/netwerken/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/networking/"/>
+    <lastmod>2026-11-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/netwerken/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/networking/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/netwerken/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/networking/"/>
     <lastmod>2026-11-16</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
