@@ -4080,9 +4080,10 @@ function cycleTheme(){
 
 /* ---- map ---- */
 let baseTiles, usingTileFallback = false;
+const CARTO_KEY = "cb1_59ke_1_cd5111510aa2bc631ba544ae"; // browser key, locked to amsterdampopups.com in the CARTO dashboard
 function cartoVariant(){ return isDarkMode() ? "dark_all" : "light_all"; }
 function makeBaseTiles(){
-  const carto = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${cartoVariant()}/{z}/{x}/{y}{r}.png`,{
+  const carto = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${cartoVariant()}/{z}/{x}/{y}{r}.png?key=${CARTO_KEY}`,{
     subdomains:"abcd", maxZoom:19, crossOrigin:true,
     attribution:'&copy; OpenStreetMap &copy; CARTO'
   });
