@@ -5,6 +5,8 @@
 //   llms.txt            short site summary for AI tools (https://llmstxt.org)
 //   sitemap.xml         rewritten in full (root, plain list, category pages, privacy)
 //   index.html          only the "browse by category" footer links between the build-static:browse markers
+// Every generated page carries the root page's own Google Analytics tag, cookie banner and consent code
+// (copied from index.html at build time, so ?notrack and Consent Mode behave exactly as on /).
 // Run after every weekly edition is staged:  node tools/build-static.js
 // Running it twice gives the same files. Uses only Node's standard library. Exits non-zero if the data cannot be read.
 //
@@ -111,6 +113,36 @@ const schemaSrc = (() => {
 })();
 const {SCHEMA_TYPE, schemaPlace, schemaOffer} = Function(`"use strict"; ${schemaSrc}; return {SCHEMA_TYPE, schemaPlace, schemaOffer};`)();
 
+// Google Analytics + cookie consent, taken verbatim from index.html (one source of truth).
+function between(startMark, endMark, label){
+  const a = html.indexOf(startMark), b = html.indexOf(endMark, a + 1);
+  if(a < 0 || b < 0) throw new Error(`${label} not found in index.html`);
+  return html.slice(a, b);
+}
+const GA_HEAD = (html.match(/<script>\n\(function\(\)\{\n  var notrack = false;[\s\S]*?\n\}\)\(\);\n<\/script>\n/) || [])[0];
+if(!GA_HEAD || !GA_HEAD.includes("G-3QJJ6WFJVM")) throw new Error("GA tag not found in index.html");
+const CONSENT_CSS = between(".consent{", "</style>", "cookie banner CSS").trimEnd();
+const CONSENT_HTML = between('<div id="consent"', "\n<footer>", "cookie banner HTML").trimEnd();
+const CONSENT_JS = between("/* ---- cookie settings", "/* ---- structured data", "consent code").trimEnd();
+const I18N = (() => {
+  const start = html.indexOf("const I18N = {");
+  if(start < 0) throw new Error("const I18N not found in index.html");
+  return Function(`"use strict"; return ${html.slice(html.indexOf("{", start), html.indexOf("\n};", start) + 2)};`)();
+})();
+// Banner in the page language: texts from I18N, root-relative privacy link.
+function consentBlock(L){
+  let out = CONSENT_HTML.replace(/(<(\w+)\b[^>]*\bdata-i18n="(\w+)"[^>]*>)[^<]*(<\/\2>)/g, (m, open, tag, key, close) => {
+    if(typeof I18N[L][key] !== "string") throw new Error(`I18N.${L}.${key} missing`);
+    return open + esc(I18N[L][key]) + close;
+  }).replace('href="privacy.html"', 'href="/privacy.html"');
+  if(!out.includes('href="/privacy.html"')) throw new Error("cookie banner privacy link not found");
+  return `${out}
+<script>
+${CONSENT_JS}
+initConsent();
+</script>`;
+}
+
 const week = WEEKS[0];
 const catBy = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
 for(const c of CATEGORIES) if(!NO_PAGE.has(c.id) && !CAT_PAGES[c.id]) throw new Error(`category "${c.id}" has no entry in CAT_PAGES (tools/build-static.js)`);
@@ -169,11 +201,11 @@ ${e.org ? `          <dt>${T.org}</dt><dd>${e.org.url ? `<a href="${esc(e.org.ur
     </li>`; };
 
 const STYLE = `<style>
-:root{--red:#DA1219;--ink:#1A1A1A;--page:#FBFAF8;--muted:#5F5B55;--line:#E6E2DB}
+:root{--red:#DA1219;--ink:#1A1A1A;--page:#FBFAF8;--muted:#5F5B55;--line:#E6E2DB;--card:#FFFFFF;--card-hover:#d8d2c8;--prose-text:#3c3933}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
 .wrap{max-width:720px;margin:0 auto;padding:0 18px}
-a{color:var(--red)} a:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+a{color:var(--red)} a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .skip-link{position:absolute;left:-9999px}.skip-link:focus{left:8px;top:8px;background:#fff;padding:6px 10px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 h1{font-size:1.5rem;margin:18px 0 6px} h2{font-size:1.1rem;margin:0 0 4px}
@@ -183,6 +215,7 @@ dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8p
 p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-top:12px;font-size:.9rem;color:var(--muted)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
+${CONSENT_CSS}
 </style>`;
 
 // Footer link list to every category page that has events this week (current page marked).
@@ -211,7 +244,7 @@ ${GENERATED}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}" />
 ${robots ? `<meta name="robots" content="${robots}" />\n` : ""}<link rel="canonical" href="${SITE}${url}" />
-${STYLE}
+${GA_HEAD}${STYLE}
 ${ld}</head>
 <body>
 <a class="skip-link" href="#list">${T.skip}</a>
@@ -230,6 +263,7 @@ ${events.map(e => item(e, L, "h2")).join("\n")}
 ${browseNav(L, currentId)}  <p>${T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
 </footer>
 </div>
+${consentBlock(L)}
 </body>
 </html>
 `;
