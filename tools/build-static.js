@@ -1,17 +1,22 @@
 #!/usr/bin/env node
 // Builds the no-JavaScript pages from the EVENTS data in index.html:
-//   this-week.html      plain HTML list of this week's events (with Event JSON-LD), for crawlers, AI search and readers without JavaScript
-//   <slug>/index.html   one plain page per category (this week's events in it, with Event JSON-LD)
-//   llms.txt            short site summary for AI tools (https://llmstxt.org)
-//   sitemap.xml         rewritten in full (root, plain list, category pages, privacy)
-//   index.html          only the "browse by category" footer links between the build-static:browse markers
+//   this-week.html         plain HTML list of this week's events (with Event JSON-LD), for crawlers, AI search and readers without JavaScript
+//   <slug>/index.html      one plain page per category (this week's events in it, with Event JSON-LD)
+//   nl/index.html          the Dutch main page: a copy of index.html that starts in Dutch (Dutch text in the HTML,
+//                          lang="nl", NL canonical); same code, so the map, filters and expired-event hiding work as on /
+//   nl/deze-week.html      Dutch plain list;  nl/<nl-slug>/index.html  Dutch category pages
+//   llms.txt               short site summary for AI tools (https://llmstxt.org)
+//   sitemap.xml            rewritten in full (EN and NL pages, with hreflang alternates)
+//   index.html             only the "browse by category" footer links (between the build-static:browse markers)
+//                          and the hreflang links in <head>
+// Every page gets hreflang en / nl / x-default (x-default = the English URL) and a self-referencing canonical.
 // Every generated page carries the root page's own Google Analytics tag, cookie banner and consent code
 // (copied from index.html at build time, so ?notrack and Consent Mode behave exactly as on /).
 // Run after every weekly edition is staged:  node tools/build-static.js
 // Running it twice gives the same files. Uses only Node's standard library. Exits non-zero if the data cannot be read.
 //
 // To retire a category page (e.g. Sinterklaas after 5 Dec): add its id to NO_PAGE below and run the build.
-// Its folder is deleted (only if it carries the GENERATED marker), and it leaves the sitemap, llms.txt and footer.
+// Its EN and NL folders are deleted (only if they carry the GENERATED marker), and it leaves the sitemap, llms.txt and footer.
 "use strict";
 const fs = require("fs");
 const path = require("path");
@@ -80,6 +85,7 @@ const TXT = {
       catH1:l => `${l} in Amsterdam this week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam this week (${w}) · Amsterdam Pop-ups`,
       catDesc:(l, n, w) => `${n} ${l} ${n === 1 ? "event" : "events"} in Amsterdam for ${w}: pop-ups and one-offs with dates, times, venues, prices and organiser links.`,
+      other:"Nederlands", otherLang:"nl",
       empty:a => `Nothing in this category this week. Try another category below, or see ${a}all this week's events</a>.`},
   nl:{when:"Wanneer", where:"Waar", price:"Prijs", org:"Organisator", free:"Gratis", regular:"Terugkerend",
       details:n => `Details en tickets voor ${n}`, detailsSr:" (site van de organisator)", skip:"Naar de lijst",
@@ -90,6 +96,7 @@ const TXT = {
       catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam deze week (${w}) · Amsterdam Pop-ups`,
       catDesc:(l, n, w) => `${n} ${n === 1 ? "event" : "events"} in ${l} in Amsterdam, ${w}: pop-ups en eenmalige events met data, tijden, locaties, prijzen en links naar de organisator.`,
+      other:"English", otherLang:"en",
       empty:a => `Deze week niets in deze categorie. Probeer een andere categorie hieronder, of bekijk ${a}alle events van deze week</a>.`}
 };
 
@@ -231,9 +238,14 @@ ${links}
 `;
 }
 
-// One plain list page (this week, or a category).
-function listPage({L, title, desc, url, robots, headerExtra, h1, lead, events, ld, currentId}){
-  const T = TXT[L];
+// hreflang alternates: en and nl versions, x-default = English.
+const hreflang = alt => `<link rel="alternate" hreflang="en" href="${SITE}${alt.en}" />
+<link rel="alternate" hreflang="nl" href="${SITE}${alt.nl}" />
+<link rel="alternate" hreflang="x-default" href="${SITE}${alt.en}" />`;
+
+// One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
+function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId}){
+  const T = TXT[L], url = alt[L], other = T.otherLang;
   return `<!DOCTYPE html>
 <html lang="${L}">
 <head>
@@ -244,13 +256,14 @@ ${GENERATED}
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}" />
 ${robots ? `<meta name="robots" content="${robots}" />\n` : ""}<link rel="canonical" href="${SITE}${url}" />
+${hreflang(alt)}
 ${GA_HEAD}${STYLE}
 ${ld}</head>
 <body>
 <a class="skip-link" href="#list">${T.skip}</a>
 <div class="wrap">
 <header>
-  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}${headerExtra || ""}</p>
+  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}${headerExtra || ""} · <a href="${alt[other]}" hreflang="${other}" lang="${other}">${T.other}</a></p>
 </header>
 <main>
   <h1>${esc(h1)}</h1>
@@ -270,13 +283,22 @@ ${consentBlock(L)}
 }
 
 // ---- this-week.html ----
+const WEEK_ALT = {en:"/this-week.html", nl:"/nl/deze-week.html"};
 const thisWeek = listPage({
-  L:"en", url:"/this-week.html",
+  L:"en", alt:WEEK_ALT,
   title:`Amsterdam pop-ups this week, ${week.label.en} · plain list`,
   desc:`All ${list.length} pop-ups and one-off events in Amsterdam for ${week.label.en}: food, art, family and culture, with dates, times, venues, prices and organiser links.`,
   h1:`Amsterdam pop-ups this week: ${week.label.en}`,
   lead:`  <p>${list.length} temporary and one-off events: food, art, family and culture, from markets and supper clubs to comedy, music and nightlife. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>`,
   events:list, ld:jsonLd(list, "en")
+});
+const dezeWeek = listPage({
+  L:"nl", alt:WEEK_ALT,
+  title:`Pop-ups in Amsterdam deze week, ${week.label.nl} · lijst`,
+  desc:`Alle ${list.length} pop-ups en eenmalige events in Amsterdam voor ${week.label.nl}: eten, kunst, gezin en cultuur, met data, tijden, locaties, prijzen en links naar de organisator.`,
+  h1:`Pop-ups in Amsterdam deze week: ${week.label.nl}`,
+  lead:`  <p>${list.length} tijdelijke en eenmalige events: eten, kunst, gezin en cultuur, van markten en supperclubs tot comedy, muziek en nachtleven. ${TXT.nl.check}</p>`,
+  events:list, ld:""
 });
 
 // ---- category pages ----
@@ -285,7 +307,7 @@ const thisWeek = listPage({
 function catPage(c, L){
   const evs = inCat(c.id), T = TXT[L], label = c.label[L];
   return listPage({
-    L, url:catPath(c.id, L), currentId:c.id,
+    L, alt:{en:catPath(c.id, "en"), nl:catPath(c.id, "nl")}, currentId:c.id,
     title:T.catTitle(label, week.label[L]),
     desc:T.catDesc(label, evs.length, week.label[L]),
     robots:evs.length ? "" : "noindex, follow",
@@ -296,13 +318,16 @@ function catPage(c, L){
   });
 }
 
-const writes = [["this-week.html", thisWeek]];
-for(const c of pageCats) writes.push([path.join(CAT_PAGES[c.id].en.slug, "index.html"), catPage(c, "en")]);
+const writes = [["this-week.html", thisWeek], [path.join("nl", "deze-week.html"), dezeWeek]];
+for(const c of pageCats){
+  writes.push([path.join(CAT_PAGES[c.id].en.slug, "index.html"), catPage(c, "en")]);
+  writes.push([path.join("nl", CAT_PAGES[c.id].nl.slug, "index.html"), catPage(c, "nl")]);
+}
 
 // Retired categories: remove their generated folders (only files that carry the GENERATED marker).
 for(const id of NO_PAGE){
   if(!CAT_PAGES[id]) continue;
-  for(const rel of [path.join(CAT_PAGES[id].en.slug, "index.html")]){
+  for(const rel of [path.join(CAT_PAGES[id].en.slug, "index.html"), path.join("nl", CAT_PAGES[id].nl.slug, "index.html")]){
     const f = path.join(ROOT, rel);
     if(fs.existsSync(f) && fs.readFileSync(f, "utf8").includes(GENERATED)){
       fs.unlinkSync(f);
@@ -317,17 +342,84 @@ const browseBlock = `<!-- build-static:browse:start -->
   <nav class="wrap browse" aria-labelledby="browse-h">
     <h2 id="browse-h" data-txt-en="${TXT.en.browse}" data-txt-nl="${TXT.nl.browse}">${TXT.en.browse}</h2>
     <ul>
-${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-txt-en="${esc(c.label.en)}" data-txt-nl="${esc(c.label.nl)}">${esc(c.label.en)}</a></li>`).join("\n")}
+${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc(c.label.en)}" data-txt-nl="${esc(c.label.nl)}">${esc(c.label.en)}</a></li>`).join("\n")}
     </ul>
   </nav>
 <!-- build-static:browse:end -->`;
 const browseRe = /<!-- build-static:browse:start -->[\s\S]*?<!-- build-static:browse:end -->/;
 if(!browseRe.test(html)) throw new Error("index.html has no build-static:browse markers");
-const newIndex = html.replace(browseRe, browseBlock);
+const hreflangRe = /<link rel="alternate" hreflang="en" [^>]*\/>\n<link rel="alternate" hreflang="nl" [^>]*\/>\n<link rel="alternate" hreflang="x-default" [^>]*\/>/;
+if(!hreflangRe.test(html)) throw new Error("index.html has no hreflang en/nl/x-default block");
+const ROOT_ALT = {en:"/", nl:"/nl/"};
+const newIndex = html.replace(browseRe, browseBlock).replace(hreflangRe, hreflang(ROOT_ALT));
+
+// ---- nl/index.html: the main page starting in Dutch ----
+// Same file as index.html with only these changes, each checked: lang, Dutch text in the HTML at load
+// (data-i18n texts, intro, title, descriptions), NL canonical/og:url, root-relative links, the footer links
+// pointing at the Dutch pages, and no Google Analytics tag (no tracking on new pages without Alison's yes).
+function readObj(name){
+  const start = newIndex.indexOf(`const ${name} = {`);
+  if(start < 0) throw new Error(`const ${name} not found in index.html`);
+  const end = newIndex.indexOf("\n};", start);
+  return Function(`"use strict"; return ${newIndex.slice(newIndex.indexOf("{", start), end + 2)};`)();
+}
+function buildNlIndex(){
+  const I18N = readObj("I18N");
+  const nlTitle = (newIndex.match(/document\.title = lang === "nl" \? "([^"]+)"/) || [])[1];
+  const nlDesc = (newIndex.match(/md\.setAttribute\("content", lang === "nl" \? "([^"]+)"/) || [])[1];
+  if(!nlTitle || !nlDesc) throw new Error("Dutch title/description not found in applyI18n()");
+  let out = newIndex;
+  const swap = (from, to, n = 1) => {
+    const count = typeof from === "string" ? out.split(from).length - 1 : (out.match(new RegExp(from.source, "g")) || []).length;
+    if(count !== n) throw new Error(`nl/index.html: expected ${n} match(es) for ${from}, found ${count}`);
+    out = typeof from === "string" ? out.split(from).join(to) : out.replace(new RegExp(from.source, "g"), to);
+  };
+  const appStart = out.indexOf('<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/');
+  if(appStart < 0) throw new Error("app script not found in index.html");
+  // Dutch text for every data-i18n element and placeholder in the markup (the app script is left alone)
+  let markup = out.slice(0, appStart), n = 0;
+  markup = markup.replace(/<(\w+)\b([^>]*\bdata-i18n="(\w+)"[^>]*)>([^<]*)<\/\1>/g, (m, tag, attrs, key) => {
+    if(typeof I18N.nl[key] !== "string") throw new Error(`I18N.nl.${key} missing`);
+    n++; return `<${tag}${attrs}>${esc(I18N.nl[key])}</${tag}>`;
+  });
+  if(n !== (markup.match(/data-i18n="/g) || []).length) throw new Error("nl/index.html: not every data-i18n element could be translated");
+  markup = markup.replace(/(data-i18n-ph="(\w+)" placeholder=")[^"]*(" aria-label=")[^"]*"/g, (m, a, key, b) => `${a}${esc(I18N.nl[key])}${b}${esc(I18N.nl[key])}"`);
+  markup = markup.replace(/(<(\w+)[^>]*data-txt-nl="([^"]*)"[^>]*>)[^<]*(<\/\2>)/g, "$1$3$4");
+  markup = markup.replace(/(<a [^>]*)href="[^"]*"([^>]*data-href-nl="([^"]*)")/g, '$1href="$3"$2');
+  out = markup + out.slice(appStart);
+  swap('<html lang="en">', '<html lang="nl">');
+  swap("<head>\n", `<head>\n${GENERATED}\n`);
+  swap(/<title>[^<]*<\/title>/, `<title>${esc(nlTitle)}</title>`);
+  swap(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(nlDesc)}" />`);
+  swap(`<link rel="canonical" href="${SITE}/" />`, `<link rel="canonical" href="${SITE}/nl/" />`);
+  swap(`<meta property="og:url" content="${SITE}/" />`, `<meta property="og:url" content="${SITE}/nl/" />`);
+  swap(/<meta property="og:title" content="[^"]*" \/>/, `<meta property="og:title" content="${esc(nlTitle)}" />`);
+  swap(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${esc(nlDesc)}" />`);
+  swap(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${esc(nlTitle)}" />`);
+  swap(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(nlDesc)}" />`);
+  swap('<meta property="og:locale" content="en_GB" />\n<meta property="og:locale:alternate" content="nl_NL" />',
+       '<meta property="og:locale" content="nl_NL" />\n<meta property="og:locale:alternate" content="en_GB" />');
+  // Google Analytics loader removed (the consent banner stays: its choice is site-wide)
+  swap(/<script>\n\(function\(\)\{\n  var notrack = false;[\s\S]*?\n\}\)\(\);\n<\/script>\n/, "");
+  if(/googletagmanager|G-3QJJ6WFJVM/.test(out)) throw new Error("nl/index.html still contains the GA tag");
+  swap('href="favicon.svg"', 'href="/favicon.svg"');
+  swap('href="privacy.html"', 'href="/privacy.html"', 3);
+  swap('<a class="brand" href="/" ', '<a class="brand" href="/nl/" ');
+  swap('<button id="lang-en" class="on" onclick="setLang(\'en\')">EN</button>\n          <button id="lang-nl" onclick="setLang(\'nl\')">NL</button>',
+       '<button id="lang-en" onclick="setLang(\'en\')">EN</button>\n          <button id="lang-nl" class="on" onclick="setLang(\'nl\')">NL</button>');
+  swap('<p class="intro-text" id="intro-en">', '<p class="intro-text" id="intro-en" style="display:none">');
+  swap('<p class="intro-text" id="intro-nl" style="display:none">', '<p class="intro-text" id="intro-nl">');
+  swap(/<noscript>\n      <p>[^\n]*<\/p>\n    <\/noscript>/,
+       `<noscript>\n      <p>Deze gids heeft JavaScript nodig voor de kaart en filters. <a href="/nl/deze-week.html">Lees de events van deze week als gewone lijst</a>, met data, locaties, prijzen en links naar de organisator.</p>\n    </noscript>`);
+  swap('<span id="listen-label">Listen</span>', `<span id="listen-label">${esc(I18N.nl.listenStart)}</span>`);
+  swap('let lang = "en";', 'let lang = "nl";');
+  return out;
+}
+const nlIndex = buildNlIndex();
 
 // ---- llms.txt ----
 const cats = CATEGORIES.map(c => `- ${c.label.en} (NL: ${c.label.nl})`).join("\n");
-const catLinks = live.map(c => `- [${c.label.en} this week](${SITE}${catPath(c.id, "en")}): ${inCat(c.id).length} events`).join("\n");
+const catLinks = live.map(c => `- [${c.label.en} this week](${SITE}${catPath(c.id, "en")}): ${inCat(c.id).length} events (Dutch: [${c.label.nl}](${SITE}${catPath(c.id, "nl")}))`).join("\n");
 const llms = `# Amsterdam Pop-ups
 
 > A weekly, map-first guide to temporary, pop-up and one-off events in Amsterdam: food, art, family and culture. Every event is checked on the organiser's own page before it is listed. English and Dutch.
@@ -338,6 +430,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 
 - [This week's events as a plain list](${SITE}/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](${SITE}/): map, category and day filters, English/Dutch toggle, archive
+- Dutch versions: [interactive guide](${SITE}/nl/), [plain list](${SITE}/nl/deze-week.html), and each category page below under /nl/
 
 ## This week by category
 
@@ -356,27 +449,30 @@ Events can belong to several categories. "Regular" marks weekly or recurring ser
 `;
 
 // ---- sitemap.xml ----
-const urlEntry = (loc, lastmod, freq, prio) => `  <url>
+const urlEntry = (loc, lastmod, freq, prio, alt) => `  <url>
     <loc>${SITE}${loc}</loc>
-${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ""}    <changefreq>${freq}</changefreq>
+${alt ? ["en", "nl", "x-default"].map(h => `    <xhtml:link rel="alternate" hreflang="${h}" href="${SITE}${alt[h === "nl" ? "nl" : "en"]}"/>\n`).join("") : ""}${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ""}    <changefreq>${freq}</changefreq>
     <priority>${prio}</priority>
   </url>`;
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${[
-  urlEntry("/", week.id, "weekly", "1.0"),
-  urlEntry("/this-week.html", week.id, "weekly", "0.8"),
-  ...live.map(c => urlEntry(catPath(c.id, "en"), week.id, "weekly", "0.7")),
+  urlEntry("/", week.id, "weekly", "1.0", ROOT_ALT),
+  urlEntry("/nl/", week.id, "weekly", "1.0", ROOT_ALT),
+  urlEntry("/this-week.html", week.id, "weekly", "0.8", WEEK_ALT),
+  urlEntry("/nl/deze-week.html", week.id, "weekly", "0.8", WEEK_ALT),
+  ...live.flatMap(c => { const alt = {en:catPath(c.id, "en"), nl:catPath(c.id, "nl")};
+    return [urlEntry(alt.en, week.id, "weekly", "0.7", alt), urlEntry(alt.nl, week.id, "weekly", "0.7", alt)]; }),
   urlEntry("/privacy.html", "", "yearly", "0.3")
 ].join("\n")}
 </urlset>
 `;
 
-writes.push(["llms.txt", llms], ["sitemap.xml", sitemap], ["index.html", newIndex]);
+writes.push(["llms.txt", llms], ["sitemap.xml", sitemap], ["index.html", newIndex], [path.join("nl", "index.html"), nlIndex]);
 for(const [rel, content] of writes){
   const f = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(f), {recursive:true});
   fs.writeFileSync(f, content);
 }
 
-console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); llms.txt: ${CATEGORIES.length} categories; sitemap: ${live.length + 3} URLs, lastmod ${week.id}`);
+console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 5} URLs, lastmod ${week.id}`);
