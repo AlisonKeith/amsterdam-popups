@@ -85,7 +85,6 @@ const TXT = {
       catH1:l => `${l} in Amsterdam this week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam this week (${w}) · Amsterdam Pop-ups`,
       catDesc:(l, n, w) => `${n} ${l} ${n === 1 ? "event" : "events"} in Amsterdam for ${w}: pop-ups and one-offs with dates, times, venues, prices and organiser links.`,
-      other:"Nederlands", otherLang:"nl",
       empty:a => `Nothing in this category this week. Try another category below, or see ${a}all this week's events</a>.`},
   nl:{when:"Wanneer", where:"Waar", price:"Prijs", org:"Organisator", free:"Gratis", regular:"Terugkerend",
       details:n => `Details en tickets voor ${n}`, detailsSr:" (site van de organisator)", skip:"Naar de lijst",
@@ -96,7 +95,6 @@ const TXT = {
       catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam deze week (${w}) · Amsterdam Pop-ups`,
       catDesc:(l, n, w) => `${n} ${n === 1 ? "event" : "events"} in ${l} in Amsterdam, ${w}: pop-ups en eenmalige events met data, tijden, locaties, prijzen en links naar de organisator.`,
-      other:"English", otherLang:"en",
       empty:a => `Deze week niets in deze categorie. Probeer een andere categorie hieronder, of bekijk ${a}alle events van deze week</a>.`}
 };
 
@@ -222,6 +220,7 @@ dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8p
 p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-top:12px;font-size:.9rem;color:var(--muted)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
+.langs{font-size:.9rem;margin:0 0 8px} .langs a[aria-current]{color:var(--ink);font-weight:600;text-decoration:none}
 ${CONSENT_CSS}
 </style>`;
 
@@ -245,7 +244,7 @@ const hreflang = alt => `<link rel="alternate" hreflang="en" href="${SITE}${alt.
 
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
 function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId}){
-  const T = TXT[L], url = alt[L], other = T.otherLang;
+  const T = TXT[L], url = alt[L];
   return `<!DOCTYPE html>
 <html lang="${L}">
 <head>
@@ -263,7 +262,8 @@ ${ld}</head>
 <a class="skip-link" href="#list">${T.skip}</a>
 <div class="wrap">
 <header>
-  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}${headerExtra || ""} · <a href="${alt[other]}" hreflang="${other}" lang="${other}">${T.other}</a></p>
+  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}${headerExtra || ""}</p>
+  <nav class="langs" aria-label="${L === "nl" ? "Taal" : "Language"}"><a href="${alt.en}" hreflang="en" lang="en"${L === "en" ? ' aria-current="page"' : ""}>English</a> · <a href="${alt.nl}" hreflang="nl" lang="nl"${L === "nl" ? ' aria-current="page"' : ""}>Nederlands</a></nav>
 </header>
 <main>
   <h1>${esc(h1)}</h1>
@@ -403,8 +403,8 @@ function buildNlIndex(){
   swap('href="favicon.svg"', 'href="/favicon.svg"');
   swap('href="privacy.html"', 'href="/privacy.html"', 3);
   swap('<a class="brand" href="/" ', '<a class="brand" href="/nl/" ');
-  swap('<button id="lang-en" class="on" onclick="setLang(\'en\')">EN</button>\n          <button id="lang-nl" onclick="setLang(\'nl\')">NL</button>',
-       '<button id="lang-en" onclick="setLang(\'en\')">EN</button>\n          <button id="lang-nl" class="on" onclick="setLang(\'nl\')">NL</button>');
+  swap('<a id="lang-en" class="on" href="/" hreflang="en" lang="en" aria-current="page">', '<a id="lang-en" href="/" hreflang="en" lang="en">');
+  swap('<a id="lang-nl" href="/nl/" hreflang="nl" lang="nl">', '<a id="lang-nl" class="on" href="/nl/" hreflang="nl" lang="nl" aria-current="page">');
   swap('<p class="intro-text" id="intro-en">', '<p class="intro-text" id="intro-en" style="display:none">');
   swap('<p class="intro-text" id="intro-nl" style="display:none">', '<p class="intro-text" id="intro-nl">');
   swap(/<noscript>\n      <p>[^\n]*<\/p>\n    <\/noscript>/,

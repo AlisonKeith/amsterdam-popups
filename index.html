@@ -174,6 +174,9 @@ header{padding:18px 0 0}
 .lang{display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; font-size:12px; flex:none}
 .lang button{appearance:none; border:0; background:transparent; padding:5px 11px; cursor:pointer; color:var(--muted); font-family:inherit; font-size:12px}
 .lang button.on{background:var(--red); color:#fff; font-weight:500}
+.lang a{padding:5px 11px; color:var(--muted); text-decoration:none; font-size:12px}
+.lang a.on{background:var(--red); color:#fff; font-weight:500}
+.lang a:focus-visible{outline:2px solid var(--ink); outline-offset:-3px}
 .head-actions{display:flex; align-items:center; gap:8px; flex:none}
 .theme-toggle{appearance:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted); padding:5px 11px; font-family:inherit; font-size:12px; cursor:pointer}
 .theme-toggle:hover{color:var(--ink); border-color:var(--card-hover)}
@@ -428,10 +431,10 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
           <span id="theme-label">Auto</span>
         </button>
-        <div class="lang" role="group" aria-label="Language">
-          <button id="lang-en" class="on" onclick="setLang('en')">EN</button>
-          <button id="lang-nl" onclick="setLang('nl')">NL</button>
-        </div>
+        <nav class="lang" aria-label="Language">
+          <a id="lang-en" class="on" href="/" hreflang="en" lang="en" aria-current="page">EN<span class="sr-only"> – English</span></a>
+          <a id="lang-nl" href="/nl/" hreflang="nl" lang="nl">NL<span class="sr-only"> – Nederlands</span></a>
+        </nav>
       </div>
     </div>
     <div class="flagstrip" aria-hidden="true"><i class="r"></i><i class="b"></i><i class="r"></i></div>

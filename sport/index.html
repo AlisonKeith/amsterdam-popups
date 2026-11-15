@@ -68,6 +68,7 @@ dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8p
 p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-top:12px;font-size:.9rem;color:var(--muted)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
+.langs{font-size:.9rem;margin:0 0 8px} .langs a[aria-current]{color:var(--ink);font-weight:600;text-decoration:none}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
 .consent-text{flex:1; min-width:220px; font-size:12.5px; color:var(--prose-text); line-height:1.5}
 .consent-actions{display:flex; align-items:center; gap:8px}
@@ -484,7 +485,8 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
 <a class="skip-link" href="#list">Skip to the list</a>
 <div class="wrap">
 <header>
-  <p><a href="/">Amsterdam Pop-ups</a>: the interactive guide with map, filters and Dutch version · <a href="/this-week.html">All this week's events</a> · <a href="/nl/sport/" hreflang="nl" lang="nl">Nederlands</a></p>
+  <p><a href="/">Amsterdam Pop-ups</a>: the interactive guide with map, filters and Dutch version · <a href="/this-week.html">All this week's events</a></p>
+  <nav class="langs" aria-label="Language"><a href="/sport/" hreflang="en" lang="en" aria-current="page">English</a> · <a href="/nl/sport/" hreflang="nl" lang="nl">Nederlands</a></nav>
 </header>
 <main>
   <h1>Sport in Amsterdam this week</h1>
