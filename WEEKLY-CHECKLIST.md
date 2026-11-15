@@ -57,6 +57,9 @@ one page per category (`/comedy/`, `/kids-family/` … with Event structured
 data), the "This week by category" links in the footer of `index.html`,
 `llms.txt`, and `sitemap.xml`. Commit all of it with the edition.
 
+- Every generated page carries the same GA tag, cookie banner and consent
+  code as `index.html`; the build copies them from there, so change them only
+  in `index.html` (and only with Alison's yes) and rebuild.
 - A category with no events this week keeps its page with a "nothing this
   week" note, marked noindex and left out of the sitemap, llms.txt and footer.
 - A new category needs a slug and a one-line intro in `CAT_PAGES` in
