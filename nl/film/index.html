@@ -36,14 +36,21 @@
   function gtag(){ dataLayer.push(arguments); }
   window.gtag = gtag;
   if (notrack) return;
-  /* Consent Mode v2 — default everything to denied until the visitor chooses (EEA/UK/CH requirement + a sane global default). */
+  /* Consent Mode v2, basic: default everything to denied, and don't fetch gtag.js at all until the visitor accepts.
+     Until then the commands below only wait in dataLayer, so nothing is loaded from or sent to Google. */
   gtag('consent','default',{ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied', wait_for_update:500});
   gtag('js', new Date());
-  var s = document.createElement('script');
-  s.async = true;
-  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3QJJ6WFJVM';
-  document.head.appendChild(s);
+  window.apLoadGA = function(){
+    if (window.apGALoaded) return;
+    window.apGALoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3QJJ6WFJVM';
+    document.head.appendChild(s);
+  };
   gtag('config', 'G-3QJJ6WFJVM');
+  /* Returning visitor who accepted before: load straight away (initConsent() then sends the "granted" update). */
+  try { if (document.cookie.split('; ').indexOf('apu_consent=granted') !== -1) window.apLoadGA(); } catch (e) {}
 })();
 </script>
 <style>
@@ -734,6 +741,8 @@ function getCookie(n){ try{ return (document.cookie.split("; ").find(r=>r.indexO
 function setCookie(n,v){ try{ document.cookie=n+"="+v+";path=/;max-age=15552000;samesite=lax"; }catch(e){} }
 function applyConsent(granted){
   try{ gtag("consent","update",{ad_storage:granted?"granted":"denied",ad_user_data:granted?"granted":"denied",ad_personalization:granted?"granted":"denied",analytics_storage:granted?"granted":"denied"}); }catch(e){}
+  // basic consent mode: gtag.js is fetched only now, after Accept (no-op with ?notrack, or if already loaded)
+  if(granted && window.apLoadGA) window.apLoadGA();
   /* if(granted){ load adsbygoogle.js once here, then push each ad slot } */
 }
 function consentChoice(granted){ applyConsent(granted); setCookie("apu_consent", granted?"granted":"denied"); const b=document.getElementById("consent"); if(b) b.style.display="none"; setFab(true); }
