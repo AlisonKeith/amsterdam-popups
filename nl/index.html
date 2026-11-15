@@ -399,7 +399,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 </head>
 <body>
 
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<a href="#main-content" class="skip-link">Naar de inhoud</a>
 <header>
   <div class="wrap">
     <div class="head-row">
@@ -425,7 +425,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
           <span id="theme-label">Auto</span>
         </button>
-        <nav class="lang" aria-label="Language">
+        <nav class="lang" aria-label="Taal">
           <a id="lang-en" href="/" hreflang="en" lang="en">EN<span class="sr-only"> – English</span></a>
           <a id="lang-nl" class="on" href="/nl/" hreflang="nl" lang="nl" aria-current="page">NL<span class="sr-only"> – Nederlands</span></a>
         </nav>
@@ -471,12 +471,12 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
               <div class="range" id="weekrange"></div>
             </div>
             <div class="weekfilters">
-              <div class="daytoggle" id="daytoggle" role="group" aria-label="Day filter">
+              <div class="daytoggle" id="daytoggle" role="group" aria-label="Dagfilter">
                 <button class="on" data-day="all" onclick="setDay('all')" data-i18n="dAll">Hele week</button>
                 <button data-day="weekend" onclick="setDay('weekend')" data-i18n="dWeekend">Weekend</button>
                 <button data-day="today" onclick="setDay('today')" data-i18n="dToday">Vandaag</button>
               </div>
-              <div class="daytoggle" id="recurtoggle" role="radiogroup" aria-label="Filter by one-off or regular events" onkeydown="recurtoggleKey(event)">
+              <div class="daytoggle" id="recurtoggle" role="radiogroup" aria-label="Filter op eenmalige of terugkerende evenementen" onkeydown="recurtoggleKey(event)">
                 <button type="button" class="on" role="radio" aria-checked="true" tabindex="0" data-recur="all" onclick="setRecur('all')" data-i18n="rAll">Alles</button>
                 <button type="button" role="radio" aria-checked="false" tabindex="-1" data-recur="oneoff" onclick="setRecur('oneoff')" data-i18n="rOneoff">Eenmalig</button>
                 <button type="button" role="radio" aria-checked="false" tabindex="-1" data-recur="regular" onclick="setRecur('regular')" data-i18n="rRegular">Terugkerend</button>
@@ -486,8 +486,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <div class="chips" id="chips"></div>
           <p class="intro-text" id="intro-en" style="display:none">Amsterdam's weekly guide to pop-up events — street food markets, comedy, theatre and dance, live music, nightlife, art openings, supper clubs, Sinterklaas visits and one-off nights across Centrum, Noord, Oost, West, De Pijp, Jordaan and beyond. Updated every week.</p>
           <p class="intro-text" id="intro-nl">De wekelijkse gids voor pop-upevenementen in Amsterdam — straatvoedselmarkten, comedy en cabaret, theater en dans, livemuziek, nachtleven, kunstopeningen, supperclubs, Sinterklaasfeesten en eenmalige avonden in Centrum, Noord, Oost, West, De Pijp, Jordaan en verder. Elke week bijgewerkt.</p>
-          <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
-          <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
+          <p id="map-desc" class="sr-only">Interactieve kaart van pop-ups in Amsterdam. Gebruik de pijltjestoetsen om de kaart te verschuiven, +/- om te zoomen, en klik op een markering voor de details. De volledige lijst met events staat onder de kaart.</p>
+          <div id="map" role="img" aria-label="Kaart van Amsterdam Pop-ups" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
           <div class="ad-slot ad-mobile ad-top"><span class="ad-label" data-i18n="adLabel">Advertentie</span><span class="ad-hint">300×250 · responsive</span></div>
           <div id="resultsLive" class="sr-only"></div>
@@ -501,7 +501,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
              On deploy, after consent, replace each placeholder with a responsive AdSense unit, e.g.:
              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX"
                   data-ad-format="auto" data-full-width-responsive="true"></ins> -->
-        <aside class="rail" aria-label="Advertisements">
+        <aside class="rail" aria-label="Advertenties">
           <div class="ad-slot ad-rail"><span class="ad-label" data-i18n="adLabel">Advertentie</span><span class="ad-hint">300×250</span></div>
           <div class="ad-slot ad-rail"><span class="ad-label" data-i18n="adLabel">Advertentie</span><span class="ad-hint">300×250</span></div>
         </aside>
@@ -513,7 +513,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
       <h1 id="heading-archive" class="sr-only" data-i18n="archive">Archief</h1>
       <div class="search">
         <span class="si">⌕</span>
-        <label for="search" class="sr-only">Search past pop-ups</label>
+        <label for="search" class="sr-only">Zoek eerdere pop-ups</label>
         <input id="search" type="search" oninput="renderArchive()" data-i18n-ph="searchPh" placeholder="Zoek eerdere pop-ups, plekken, buurten" aria-label="Zoek eerdere pop-ups, plekken, buurten" />
       </div>
       <div id="archive"></div>
@@ -560,7 +560,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
   </div>
 </main>
 
-<div id="consent" class="consent" role="dialog" aria-label="Cookie consent" aria-modal="true" style="display:none">
+<div id="consent" class="consent" role="dialog" aria-label="Cookietoestemming" aria-modal="true" style="display:none">
   <div class="consent-text" data-i18n="cookieText">Deze site gebruikt geen cookies totdat je advertenties toestaat. Accepteer om advertenties en basismeting in te schakelen; weiger om alleen het strikt noodzakelijke te houden — je kunt dit altijd aanpassen op de Privacy-pagina.</div>
   <div class="consent-actions">
     <button class="c-btn c-reject" onclick="consentChoice(false)" data-i18n="cookieReject">Weigeren</button>
@@ -569,7 +569,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
   </div>
 </div>
 
-<button id="cookiefab" class="cookie-fab" type="button" onclick="openConsent()" aria-label="Cookie choices" style="display:none">
+<button id="cookiefab" class="cookie-fab" type="button" onclick="openConsent()" aria-label="Cookievoorkeuren" style="display:none">
   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
     <circle cx="12" cy="12" r="9"/>
     <circle cx="9" cy="10" r="1" fill="currentColor" stroke="none"/>

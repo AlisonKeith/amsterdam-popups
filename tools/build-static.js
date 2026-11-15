@@ -134,6 +134,21 @@ const I18N = (() => {
   if(start < 0) throw new Error("const I18N not found in index.html");
   return Function(`"use strict"; return ${html.slice(html.indexOf("{", start), html.indexOf("\n};", start) + 2)};`)();
 })();
+// Dutch versions of the screen-reader-only labels in index.html's markup (used on /nl/ and the Dutch banner).
+const nlSr = () => [
+  ['>Skip to main content</a>', '>Naar de inhoud</a>'],
+  ['<nav class="lang" aria-label="Language">', '<nav class="lang" aria-label="Taal">'],
+  ['aria-label="Day filter"', 'aria-label="Dagfilter"'],
+  ['aria-label="Filter by one-off or regular events"', `aria-label="${esc(I18N.nl.rAria)}"`],
+  ['aria-label="Amsterdam pop-ups map"', 'aria-label="Kaart van Amsterdam Pop-ups"'],
+  ['>Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>',
+   '>Interactieve kaart van pop-ups in Amsterdam. Gebruik de pijltjestoetsen om de kaart te verschuiven, +/- om te zoomen, en klik op een markering voor de details. De volledige lijst met events staat onder de kaart.</p>'],
+  ['aria-label="Advertisements"', 'aria-label="Advertenties"'],
+  ['<label for="search" class="sr-only">Search past pop-ups</label>', '<label for="search" class="sr-only">Zoek eerdere pop-ups</label>'],
+  ['aria-label="Cookie consent"', 'aria-label="Cookietoestemming"'],
+  ['aria-label="Cookie choices"', `aria-label="${esc(I18N.nl.cookieFab)}"`]
+];
+
 // Banner in the page language: texts from I18N, root-relative privacy link.
 function consentBlock(L){
   let out = CONSENT_HTML.replace(/(<(\w+)\b[^>]*\bdata-i18n="(\w+)"[^>]*>)[^<]*(<\/\2>)/g, (m, open, tag, key, close) => {
@@ -141,6 +156,8 @@ function consentBlock(L){
     return open + esc(I18N[L][key]) + close;
   }).replace('href="privacy.html"', 'href="/privacy.html"');
   if(!out.includes('href="/privacy.html"')) throw new Error("cookie banner privacy link not found");
+  if(L === "nl") for(const [en, nl] of nlSr()) if(out.includes(en)) out = out.split(en).join(nl);
+  if(L === "nl" && /aria-label="Cookie (consent|choices)"/.test(out)) throw new Error("Dutch cookie banner still has English labels");
   return `${out}
 <script>
 ${CONSENT_JS}
@@ -410,6 +427,7 @@ function buildNlIndex(){
   swap(/<noscript>\n      <p>[^\n]*<\/p>\n    <\/noscript>/,
        `<noscript>\n      <p>Deze gids heeft JavaScript nodig voor de kaart en filters. <a href="/nl/deze-week.html">Lees de events van deze week als gewone lijst</a>, met data, locaties, prijzen en links naar de organisator.</p>\n    </noscript>`);
   swap('<span id="listen-label">Listen</span>', `<span id="listen-label">${esc(I18N.nl.listenStart)}</span>`);
+  for(const [en, nl] of nlSr()) swap(en, nl);
   swap('let lang = "en";', 'let lang = "nl";');
   return out;
 }
