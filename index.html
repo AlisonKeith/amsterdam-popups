@@ -4749,7 +4749,7 @@ function renderChips(){
   const el = document.getElementById("chips");
   let html = `<button class="chip ${activeCat==="all"?"on":""}" onclick="setCat('all')">${t("all")}</button>`;
   CATEGORIES.forEach(c => {
-    html += `<button class="chip ${activeCat===c.id?"on":""}" onclick="setCat('${c.id}')"><span class="dot" style="background:${catSwatch(c)}"></span>${c.bauble?baubleSvg():""}${c.label[lang]}</button>`;
+    html += `<button class="chip ${activeCat===c.id?"on":""}" onclick="setCat('${c.id}')">${c.bauble?baubleSvg():`<span class="dot" style="background:${catSwatch(c)}"></span>`}${c.label[lang]}</button>`;
   });
   el.innerHTML = html;
 }
