@@ -5205,12 +5205,20 @@ function initConsent(){
 }
 
 /* ---- structured data (JSON-LD) ---- */
+// schema.org Event subtype from the main category (cats[0]); every category also goes into "keywords".
+const SCHEMA_TYPE = {
+  music:"MusicEvent", nightlife:"MusicEvent", film:"ScreeningEvent", dance:"TheaterEvent", comedy:"ComedyEvent",
+  art:"VisualArtsEvent", food:"FoodEvent", drink:"FoodEvent", markets:"SaleEvent", christmas:"SaleEvent", shops:"SaleEvent",
+  family:"ChildrensEvent", sinterklaas:"ChildrensEvent", sport:"SportsEvent", active:"SportsEvent",
+  workshops:"EducationEvent", queer:"SocialEvent", business:"BusinessEvent", networking:"BusinessEvent"
+};
 function injectEventSchema(){
   const list = weekStillLive(currentWeek.id) ? EVENTS.filter(e => e.week === currentWeek.id && eventStillOn(e)) : [];
   const items = list.map(e => {
     const ev = {
-      "@type":"Event",
+      "@type":SCHEMA_TYPE[e.cats[0]] || "Event",
       "name":e.name,
+      "keywords":e.cats.map(id => catBy[id].label.en).join(", "),
       "description":e.blurb.en,
       "url":e.url,
       "eventStatus":"https://schema.org/EventScheduled",
