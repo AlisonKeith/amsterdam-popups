@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Builds the no-JavaScript pages from the EVENTS data in index.html:
-//   this-week.html      plain HTML list of this week's events, for crawlers, AI search and readers without JavaScript
+//   this-week.html      plain HTML list of this week's events (with Event JSON-LD), for crawlers, AI search and readers without JavaScript
 //   <slug>/index.html   one plain page per category (this week's events in it, with Event JSON-LD)
 //   llms.txt            short site summary for AI tools (https://llmstxt.org)
 //   sitemap.xml         rewritten in full (root, plain list, category pages, privacy)
@@ -276,7 +276,7 @@ const thisWeek = listPage({
   desc:`All ${list.length} pop-ups and one-off events in Amsterdam for ${week.label.en}: food, art, family and culture, with dates, times, venues, prices and organiser links.`,
   h1:`Amsterdam pop-ups this week: ${week.label.en}`,
   lead:`  <p>${list.length} temporary and one-off events: food, art, family and culture, from markets and supper clubs to comedy, music and nightlife. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>`,
-  events:list, ld:""
+  events:list, ld:jsonLd(list, "en")
 });
 
 // ---- category pages ----
