@@ -5385,14 +5385,15 @@ function schemaOffer(e){
   if(one && !/^free registration/i.test(txt)) return Object.assign({"@type":"Offer","price":amt(one[1])}, base);
   return null;
 }
+// Text fields follow the page language at load (English on /, Dutch on /nl/).
 function injectEventSchema(){
   const list = weekStillLive(currentWeek.id) ? EVENTS.filter(e => e.week === currentWeek.id && eventStillOn(e)) : [];
   const items = list.map(e => {
     const ev = {
       "@type":SCHEMA_TYPE[e.cats[0]] || "Event",
       "name":e.name,
-      "keywords":e.cats.map(id => catBy[id].label.en).join(", "),
-      "description":e.blurb.en,
+      "keywords":e.cats.map(id => catBy[id].label[lang]).join(", "),
+      "description":e.blurb[lang],
       "url":e.url,
       "eventStatus":"https://schema.org/EventScheduled",
       "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
@@ -5406,6 +5407,7 @@ function injectEventSchema(){
     if(e.org){ ev.organizer = {"@type":"Organization","name":e.org.name}; if(e.org.url) ev.organizer.url = e.org.url; }
     if(e.img) ev.image = [e.img];
     const offer = schemaOffer(e);
+    if(offer && lang !== "en" && offer.description && e.price && e.price[lang]) offer.description = e.price[lang];
     if(offer) ev.offers = offer;
     return ev;
   });

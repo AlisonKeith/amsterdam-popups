@@ -4,7 +4,7 @@
 //   <slug>/index.html      one plain page per category (this week's events in it, with Event JSON-LD)
 //   nl/index.html          the Dutch main page: a copy of index.html that starts in Dutch (Dutch text in the HTML,
 //                          lang="nl", NL canonical); same code, so the map, filters and expired-event hiding work as on /
-//   nl/deze-week.html      Dutch plain list;  nl/<nl-slug>/index.html  Dutch category pages
+//   nl/deze-week.html      Dutch plain list (Dutch Event JSON-LD);  nl/<nl-slug>/index.html  Dutch category pages
 //   llms.txt               short site summary for AI tools (https://llmstxt.org)
 //   sitemap.xml            rewritten in full (EN and NL pages, with hreflang alternates)
 //   index.html             only the "browse by category" footer links (between the build-static:browse markers)
@@ -298,7 +298,7 @@ const dezeWeek = listPage({
   desc:`Alle ${list.length} pop-ups en eenmalige events in Amsterdam voor ${week.label.nl}: eten, kunst, gezin en cultuur, met data, tijden, locaties, prijzen en links naar de organisator.`,
   h1:`Pop-ups in Amsterdam deze week: ${week.label.nl}`,
   lead:`  <p>${list.length} tijdelijke en eenmalige events: eten, kunst, gezin en cultuur, van markten en supperclubs tot comedy, muziek en nachtleven. ${TXT.nl.check}</p>`,
-  events:list, ld:""
+  events:list, ld:jsonLd(list, "nl")
 });
 
 // ---- category pages ----
