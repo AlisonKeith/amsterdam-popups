@@ -301,6 +301,10 @@ form{margin-top:18px; max-width:520px}
 
 footer{border-top:1px solid var(--line); margin-top:30px}
 footer .wrap{padding:18px; font-size:12px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+footer .browse{display:block; padding-bottom:0}
+footer .browse h2{font-size:12px; font-weight:600; margin:0 0 6px; color:var(--muted)}
+footer .browse ul{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px 14px}
+footer .browse a{color:var(--muted)}
 
 @media (max-width:560px){
   #map{height:320px}
@@ -580,6 +584,33 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 </button>
 
 <footer>
+<!-- build-static:browse:start -->
+  <nav class="wrap browse" aria-labelledby="browse-h">
+    <h2 id="browse-h" data-txt-en="This week by category" data-txt-nl="Deze week per categorie">This week by category</h2>
+    <ul>
+      <li><a href="/food/" data-txt-en="Food" data-txt-nl="Eten">Food</a></li>
+      <li><a href="/drink/" data-txt-en="Drink" data-txt-nl="Drinken">Drink</a></li>
+      <li><a href="/markets/" data-txt-en="Markets" data-txt-nl="Markten">Markets</a></li>
+      <li><a href="/christmas-markets/" data-txt-en="Christmas Markets" data-txt-nl="Kerstmarkten">Christmas Markets</a></li>
+      <li><a href="/sinterklaas/" data-txt-en="Sinterklaas" data-txt-nl="Sinterklaas">Sinterklaas</a></li>
+      <li><a href="/fashion-vintage/" data-txt-en="Fashion &amp; Vintage" data-txt-nl="Mode &amp; Vintage">Fashion &amp; Vintage</a></li>
+      <li><a href="/art-design/" data-txt-en="Art &amp; Design" data-txt-nl="Kunst &amp; Design">Art &amp; Design</a></li>
+      <li><a href="/pop-up-shops/" data-txt-en="Pop-up Shops" data-txt-nl="Pop-upwinkels">Pop-up Shops</a></li>
+      <li><a href="/music/" data-txt-en="Music" data-txt-nl="Muziek">Music</a></li>
+      <li><a href="/nightlife/" data-txt-en="Nightlife" data-txt-nl="Nachtleven">Nightlife</a></li>
+      <li><a href="/film/" data-txt-en="Film" data-txt-nl="Film">Film</a></li>
+      <li><a href="/kids-family/" data-txt-en="Kids &amp; Family" data-txt-nl="Gezin &amp; Kids">Kids &amp; Family</a></li>
+      <li><a href="/sport/" data-txt-en="Sport" data-txt-nl="Sport">Sport</a></li>
+      <li><a href="/active-outdoor/" data-txt-en="Active &amp; Outdoor" data-txt-nl="Actief &amp; Buiten">Active &amp; Outdoor</a></li>
+      <li><a href="/theatre-dance/" data-txt-en="Theatre &amp; Dance" data-txt-nl="Theater &amp; Dans">Theatre &amp; Dance</a></li>
+      <li><a href="/comedy/" data-txt-en="Comedy" data-txt-nl="Comedy/Cabaret">Comedy</a></li>
+      <li><a href="/workshops/" data-txt-en="Workshops" data-txt-nl="Workshops">Workshops</a></li>
+      <li><a href="/queer/" data-txt-en="Queer" data-txt-nl="Queer">Queer</a></li>
+      <li><a href="/business/" data-txt-en="Business" data-txt-nl="Zakelijk">Business</a></li>
+      <li><a href="/networking/" data-txt-en="Networking" data-txt-nl="Netwerken">Networking</a></li>
+    </ul>
+  </nav>
+<!-- build-static:browse:end -->
   <div class="wrap">
     <span data-i18n="footL">Made by locals · not affiliated with the City of Amsterdam</span>
     <span>
@@ -5257,6 +5288,9 @@ function applyI18n(){
   if(md) md.setAttribute("content", lang === "nl" ? "Wekelijkse kaartgids voor pop-ups en eenmalige events in Amsterdam: eten, kunst, gezin en cultuur, van markten en supperclubs tot comedy en muziek." : "Weekly map-first guide to Amsterdam's pop-ups and one-off events: food, art, family days and culture, from markets and supper clubs to comedy and music.");
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  // generated links (footer "browse by category"): text and target per language, from data-txt-en/-nl and data-href-en/-nl
+  document.querySelectorAll("[data-txt-"+lang+"]").forEach(el => { el.textContent = el.getAttribute("data-txt-"+lang); });
+  document.querySelectorAll("[data-href-"+lang+"]").forEach(el => { el.setAttribute("href", el.getAttribute("data-href-"+lang)); });
   const rg = document.getElementById("recurtoggle");
   if(rg) rg.setAttribute("aria-label", t("rAria"));
 }
