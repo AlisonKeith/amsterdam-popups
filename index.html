@@ -43,14 +43,40 @@
 <meta name="geo.position" content="52.3676;4.9041" />
 <meta name="ICBM" content="52.3676, 4.9041" />
 <meta name="keywords" content="Amsterdam pop-ups, Amsterdam events this weekend, Amsterdam kids events, Amsterdam outdoor cinema, Amsterdam food festivals, Amsterdam music in parks, Amsterdam markets, Amsterdam supper clubs, Amsterdam gratis evenementen, Amsterdam dit weekend, Amsterdam kinderen, Amsterdam openlucht, Amsterdam tijdelijke evenementen, Amsterdam Grachtenfestival, Amsterdam openluchtbioscoop, Amsterdam zomer 2026, what's on Amsterdam, Amsterdam family events" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3QJJ6WFJVM"></script>
 <script>
+(function(){
+  var notrack = false;
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has('notrack')) {
+      try { localStorage.setItem('ap_notrack', '1'); } catch (e) {}
+      notrack = true;
+    } else if (params.has('track')) {
+      try { localStorage.removeItem('ap_notrack'); } catch (e) {}
+    } else {
+      try { notrack = localStorage.getItem('ap_notrack') === '1'; } catch (e) {}
+    }
+    if (params.has('notrack') || params.has('track')) {
+      params.delete('notrack');
+      params.delete('track');
+      var qs = params.toString();
+      try { history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : '') + window.location.hash); } catch (e) {}
+    }
+  } catch (e) {}
+  if (notrack) window['ga-disable-G-3QJJ6WFJVM'] = true;
   window.dataLayer = window.dataLayer || [];
   function gtag(){ dataLayer.push(arguments); }
+  window.gtag = gtag;
+  if (notrack) return;
   /* Consent Mode v2 — default everything to denied until the visitor chooses (EEA/UK/CH requirement + a sane global default). */
   gtag('consent','default',{ad_storage:'denied', ad_user_data:'denied', ad_personalization:'denied', analytics_storage:'denied', wait_for_update:500});
   gtag('js', new Date());
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=G-3QJJ6WFJVM';
+  document.head.appendChild(s);
   gtag('config', 'G-3QJJ6WFJVM');
+})();
 </script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
 <style>
