@@ -4983,7 +4983,8 @@ function recurtoggleKey(e){
 
 /* ---- this week ---- */
 function cardTagsHtml(ev){
-  const extra = ev.cats.slice(1).map(id => catBy[id]);
+  // Display cap: main pill + up to 2 tags. Every tag stays in the data, so all filters still find the event.
+  const extra = ev.cats.slice(1, 3).map(id => catBy[id]);
   if(!extra.length) return "";
   return `<ul class="card-tags" aria-label="${t("alsoIn")}">${extra.map(c => `<li>${c.tree ? treeSvg() : `<span class="dot" style="background:${catSwatch(c)}" aria-hidden="true"></span>`}${c.label[lang]}</li>`).join("")}</ul>`;
 }
