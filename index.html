@@ -204,12 +204,12 @@ main{padding:18px 0 40px}
 .chip .dot{width:9px; height:9px; border-radius:50%; flex:none}
 .chip.on{background:var(--red); border-color:var(--red); color:#fff; font-weight:500}
 .chip.on .dot{display:none}
-.bauble{flex:none; width:11px; height:11px; display:block; color:#9B2D3A}
-.chip .bauble{color:#9B2D3A}
-.chip.on .bauble{color:#fff}
+.tree{flex:none; width:11px; height:11px; display:block; color:#9B2D3A}
+.chip .tree{color:#9B2D3A}
+.chip.on .tree{color:#fff}
 .pill{display:inline-flex; align-items:center; gap:4px}
-.pill .bauble,.pop-cat .bauble{width:10px; height:10px; color:currentColor}
-.pin .bauble{width:10px; height:10px; color:#fff; filter:drop-shadow(0 0 1px rgba(0,0,0,.3))}
+.pill .tree,.pop-cat .tree{width:10px; height:10px; color:currentColor}
+.pin .tree{width:10px; height:10px; color:#fff; filter:drop-shadow(0 0 1px rgba(0,0,0,.3))}
 
 /* ---- map ---- */
 #map{height:380px; border-radius:14px; border:1px solid var(--line); margin:6px 0 16px; z-index:1; background:var(--map-bg)}
@@ -584,7 +584,7 @@ const CATEGORIES = [
   { id:"food",    color:"var(--c-food)",    hex:"#B5751E", label:{en:"Food",            nl:"Eten"} },
   { id:"drink",   color:"var(--c-drink)",   hex:"#2E7D74", label:{en:"Drink",           nl:"Drinken"} },
   { id:"markets", color:"var(--c-markets)", hex:"#5E7A33", label:{en:"Markets",         nl:"Markten"} },
-  { id:"christmas", color:"var(--c-christmas)", hex:"#9B2D3A", label:{en:"Christmas markets", nl:"Kerstmarkten"}, bauble:true },
+  { id:"christmas", color:"var(--c-christmas)", hex:"#9B2D3A", label:{en:"Christmas markets", nl:"Kerstmarkten"}, tree:true },
   { id:"fashion", color:"var(--c-fashion)", hex:"#84517E", label:{en:"Fashion & Vintage", nl:"Mode & Vintage"} },
   { id:"art",     color:"var(--c-art)",     hex:"#3A5694", label:{en:"Art & Design",    nl:"Kunst & Design"} },
   { id:"shops",   color:"var(--c-shops)",   hex:"#A85734", label:{en:"Pop-up Shops",    nl:"Pop-upwinkels"} },
@@ -4611,10 +4611,10 @@ function darkText(hex){
 }
 const RAINBOW = "linear-gradient(90deg,#E40303 0 16.6%,#FF8C00 16.6% 33.3%,#FFED00 33.3% 50%,#008026 50% 66.6%,#24408E 66.6% 83.3%,#732982 83.3% 100%)";
 function catSwatch(c){ return c.rainbow ? RAINBOW : c.hex; } // tiny rainbow dot/pin for Queer, flat hex for everything else
-function baubleSvg(){
-  return `<svg class="bauble" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false"><rect x="6.2" y="1.6" width="3.6" height="1.6" rx=".35" fill="currentColor"/><path d="M8 1.6v1.7" stroke="currentColor" stroke-width="1.15" stroke-linecap="round"/><circle cx="8" cy="9.2" r="5.15" fill="currentColor"/><path d="M6.2 8c.7-.85 1.35-1.25 1.8-1.25.55 0 1.1.45 1.75 1.2" fill="none" stroke="#fff" stroke-width="1.05" stroke-linecap="round" opacity=".8"/></svg>`;
+function treeSvg(){
+  return `<svg class="tree" viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false"><path d="M8 1 11.5 5.2H9.9l2.9 3.6H11l3 3.6H2l3-3.6H3.2l2.9-3.6H4.5z" fill="currentColor"/><rect x="6.9" y="12.4" width="2.2" height="2.6" fill="currentColor"/></svg>`;
 }
-function catLabelHtml(c){ return (c.bauble ? baubleSvg() : "") + c.label[lang]; }
+function catLabelHtml(c){ return (c.tree ? treeSvg() : "") + c.label[lang]; }
 
 const ICO = {
   clock:'<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
@@ -4718,7 +4718,7 @@ function renderMap(list){
     const count = group.length;
     const badge = count > 1 ? `<span class="pin-badge">${count}</span>` : "";
     const icon = L.divIcon({ className:"", iconSize:[16,16], iconAnchor:[8,8],
-      html:`<div class="pin" style="background:${catSwatch(c)}">${c.bauble?baubleSvg():""}${badge}</div>` });
+      html:`<div class="pin" style="background:${catSwatch(c)}">${c.tree?treeSvg():""}${badge}</div>` });
     const m = L.marker([ev.lat,ev.lng],{icon}).addTo(markerLayer);
     const pill = `<span class="pop-cat" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>`;
     // Build popup listing all events at this location
@@ -4749,7 +4749,7 @@ function renderChips(){
   const el = document.getElementById("chips");
   let html = `<button class="chip ${activeCat==="all"?"on":""}" onclick="setCat('all')">${t("all")}</button>`;
   CATEGORIES.forEach(c => {
-    html += `<button class="chip ${activeCat===c.id?"on":""}" onclick="setCat('${c.id}')">${c.bauble?baubleSvg():`<span class="dot" style="background:${catSwatch(c)}"></span>`}${c.label[lang]}</button>`;
+    html += `<button class="chip ${activeCat===c.id?"on":""}" onclick="setCat('${c.id}')">${c.tree?treeSvg():`<span class="dot" style="background:${catSwatch(c)}"></span>`}${c.label[lang]}</button>`;
   });
   el.innerHTML = html;
 }
