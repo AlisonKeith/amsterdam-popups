@@ -9,6 +9,29 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
 
+## This week by category
+
+- [Food this week](https://www.amsterdampopups.com/food/): 16 events
+- [Drink this week](https://www.amsterdampopups.com/drink/): 9 events
+- [Markets this week](https://www.amsterdampopups.com/markets/): 8 events
+- [Christmas Markets this week](https://www.amsterdampopups.com/christmas-markets/): 3 events
+- [Sinterklaas this week](https://www.amsterdampopups.com/sinterklaas/): 3 events
+- [Fashion & Vintage this week](https://www.amsterdampopups.com/fashion-vintage/): 8 events
+- [Art & Design this week](https://www.amsterdampopups.com/art-design/): 12 events
+- [Pop-up Shops this week](https://www.amsterdampopups.com/pop-up-shops/): 1 events
+- [Music this week](https://www.amsterdampopups.com/music/): 35 events
+- [Nightlife this week](https://www.amsterdampopups.com/nightlife/): 3 events
+- [Film this week](https://www.amsterdampopups.com/film/): 11 events
+- [Kids & Family this week](https://www.amsterdampopups.com/kids-family/): 10 events
+- [Sport this week](https://www.amsterdampopups.com/sport/): 10 events
+- [Active & Outdoor this week](https://www.amsterdampopups.com/active-outdoor/): 6 events
+- [Theatre & Dance this week](https://www.amsterdampopups.com/theatre-dance/): 11 events
+- [Comedy this week](https://www.amsterdampopups.com/comedy/): 6 events
+- [Workshops this week](https://www.amsterdampopups.com/workshops/): 7 events
+- [Queer this week](https://www.amsterdampopups.com/queer/): 5 events
+- [Business this week](https://www.amsterdampopups.com/business/): 1 events
+- [Networking this week](https://www.amsterdampopups.com/networking/): 1 events
+
 ## Categories
 
 - Food (NL: Eten)
