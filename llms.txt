@@ -1,0 +1,40 @@
+# Amsterdam Pop-ups
+
+> A weekly, map-first guide to temporary, pop-up and one-off events in Amsterdam: food, art, family and culture. Every event is checked on the organiser's own page before it is listed. English and Dutch.
+
+The guide is edited by hand and updated every week (Monday to Sunday). Each listing has a date, time, venue address, price and a link to the organiser's page. Past weeks stay in the Archive on the main site.
+
+## This week (16 – 22 Nov, 94 events)
+
+- [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, description and organiser link; readable without JavaScript
+- [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
+
+## Categories
+
+- Food (NL: Eten)
+- Drink (NL: Drinken)
+- Markets (NL: Markten)
+- Christmas Markets (NL: Kerstmarkten)
+- Sinterklaas (NL: Sinterklaas)
+- Fashion & Vintage (NL: Mode & Vintage)
+- Art & Design (NL: Kunst & Design)
+- Pop-up Shops (NL: Pop-upwinkels)
+- Music (NL: Muziek)
+- Nightlife (NL: Nachtleven)
+- Film (NL: Film)
+- Kids & Family (NL: Gezin & Kids)
+- Sport (NL: Sport)
+- Active & Outdoor (NL: Actief & Buiten)
+- Theatre & Dance (NL: Theater & Dans)
+- Comedy (NL: Comedy/Cabaret)
+- Workshops (NL: Workshops)
+- Queer (NL: Queer)
+- Business (NL: Zakelijk)
+- Networking (NL: Netwerken)
+
+Events can belong to several categories. "Regular" marks weekly or recurring series; everything else is a one-off or limited run.
+
+## Contact
+
+- Tips and corrections: hello@amsterdampopups.com
+- [Privacy](https://www.amsterdampopups.com/privacy.html)

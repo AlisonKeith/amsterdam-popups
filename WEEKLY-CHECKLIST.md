@@ -43,6 +43,13 @@ event's own page; leave `url` out if the page gives none, and leave `org` out
 if no organiser is named) and `img` (the page's own event image, e.g. its
 og:image; never a logo, never guessed). These feed Google's event details.
 
+Then rebuild the no-JavaScript copies and commit them with the edition:
+
+    node tools/build-static.js
+
+This rewrites `this-week.html` (plain list for search engines and AI tools),
+`llms.txt`, and the `this-week.html` date in `sitemap.xml`.
+
 ## 4. Review before it ships
 
 - [ ] Read the diff Claude Code shows you before approving
@@ -53,6 +60,7 @@ og:image; never a logo, never guessed). These feed Google's event details.
 
 - [ ] Open the live site after pushing and check the new week shows up
 - [ ] Last week's listings should have dropped into the Archive automatically
+- [ ] /this-week.html and /llms.txt show the new week and event count
 
 ---
 
