@@ -94,7 +94,7 @@
   --input-bg:#FFFFFF; --map-bg:#EEEBE4; --prose-text:#3c3933;
   --ad-border:#CFC8BC; --ad-bg:#F7F4EF; --ad-label:#6E6659;
   --chip-text:#3a3733; --pin-ring:#FFFFFF; --badge-bg:#111111;
-  --c-food:#B5751E; --c-drink:#2E7D74; --c-markets:#5E7A33; --c-christmas:#9B2D3A; --c-fashion:#84517E;
+  --c-food:#B5751E; --c-drink:#2E7D74; --c-markets:#5E7A33; --c-christmas:#4C9C70; --c-fashion:#84517E;
   --c-art:#3A5694; --c-shops:#A85734; --c-music:#9A4F6A; --c-film:#4F7A8A;
   --c-active:#2D7F5E;
   --c-dance:#6B3FA0; --c-workshops:#C4883A;
@@ -115,7 +115,7 @@
     --line:#37312A; --line-card:#3D362E; --card-hover:#5A5045;
     --input-bg:#1D1A16; --map-bg:#1B1815; --prose-text:#DAD5CC;
     --ad-border:#443C33; --ad-bg:#201C18; --ad-label:#A69C8E;
-    --chip-text:#E8E3DA; --pin-ring:#F2EEE7; --badge-bg:#0D0B09;
+    --chip-text:#E8E3DA; --pin-ring:#F2EEE7; --badge-bg:#0D0B09; --c-christmas:#7FD99B;
   }
 }
 /* Explicit overrides from the theme toggle — win over the media query above regardless
@@ -130,7 +130,7 @@
   --line:#37312A; --line-card:#3D362E; --card-hover:#5A5045;
   --input-bg:#1D1A16; --map-bg:#1B1815; --prose-text:#DAD5CC;
   --ad-border:#443C33; --ad-bg:#201C18; --ad-label:#A69C8E;
-  --chip-text:#E8E3DA; --pin-ring:#F2EEE7; --badge-bg:#0D0B09;
+  --chip-text:#E8E3DA; --pin-ring:#F2EEE7; --badge-bg:#0D0B09; --c-christmas:#7FD99B;
 }
 :root[data-theme="light"]{
   color-scheme: light;
@@ -142,7 +142,7 @@
   --line:#E6E2DB; --line-card:#EAE6DF; --card-hover:#d8d2c8;
   --input-bg:#FFFFFF; --map-bg:#EEEBE4; --prose-text:#3c3933;
   --ad-border:#CFC8BC; --ad-bg:#F7F4EF; --ad-label:#6E6659;
-  --chip-text:#3a3733; --pin-ring:#FFFFFF; --badge-bg:#111111;
+  --chip-text:#3a3733; --pin-ring:#FFFFFF; --badge-bg:#111111; --c-christmas:#4C9C70;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
@@ -204,8 +204,8 @@ main{padding:18px 0 40px}
 .chip .dot{width:9px; height:9px; border-radius:50%; flex:none}
 .chip.on{background:var(--red); border-color:var(--red); color:#fff; font-weight:500}
 .chip.on .dot{display:none}
-.tree{flex:none; width:11px; height:11px; display:block; color:#9B2D3A}
-.chip .tree{color:#9B2D3A}
+.tree{flex:none; width:11px; height:11px; display:block; color:var(--c-christmas)}
+.chip .tree{color:var(--c-christmas)}
 .chip.on .tree{color:#fff}
 .pill{display:inline-flex; align-items:center; gap:4px}
 .pill .tree,.pop-cat .tree{width:10px; height:10px; color:currentColor}
@@ -584,7 +584,7 @@ const CATEGORIES = [
   { id:"food",    color:"var(--c-food)",    hex:"#B5751E", label:{en:"Food",            nl:"Eten"} },
   { id:"drink",   color:"var(--c-drink)",   hex:"#2E7D74", label:{en:"Drink",           nl:"Drinken"} },
   { id:"markets", color:"var(--c-markets)", hex:"#5E7A33", label:{en:"Markets",         nl:"Markten"} },
-  { id:"christmas", color:"var(--c-christmas)", hex:"#9B2D3A", label:{en:"Christmas markets", nl:"Kerstmarkten"}, tree:true },
+  { id:"christmas", color:"var(--c-christmas)", hex:"#4C9C70", label:{en:"Christmas markets", nl:"Kerstmarkten"}, tree:true },
   { id:"fashion", color:"var(--c-fashion)", hex:"#84517E", label:{en:"Fashion & Vintage", nl:"Mode & Vintage"} },
   { id:"art",     color:"var(--c-art)",     hex:"#3A5694", label:{en:"Art & Design",    nl:"Kunst & Design"} },
   { id:"shops",   color:"var(--c-shops)",   hex:"#A85734", label:{en:"Pop-up Shops",    nl:"Pop-upwinkels"} },
