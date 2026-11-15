@@ -55,17 +55,19 @@ Then rebuild the no-JavaScript copies and commit them with the edition:
 This rewrites `this-week.html` (plain list for search engines and AI tools),
 one page per category (`/comedy/`, `/kids-family/` … with Event structured
 data), the "This week by category" links in the footer of `index.html`,
-`llms.txt`, and `sitemap.xml`. Commit all of it with the edition.
+`llms.txt`, and `sitemap.xml`, plus the Dutch versions: `/nl/` (the main page
+starting in Dutch, generated from `index.html`, so never edit `nl/` by hand),
+`/nl/deze-week.html` and `/nl/<categorie>/`. Commit all of it with the edition.
 
 - Every generated page carries the same GA tag, cookie banner and consent
   code as `index.html`; the build copies them from there, so change them only
   in `index.html` (and only with Alison's yes) and rebuild.
 - A category with no events this week keeps its page with a "nothing this
   week" note, marked noindex and left out of the sitemap, llms.txt and footer.
-- A new category needs a slug and a one-line intro in `CAT_PAGES` in
+- A new category needs an EN and NL slug and one-line intro in `CAT_PAGES` in
   `tools/build-static.js` (the build stops and says so if it is missing).
 - Seasonal removal (e.g. Sinterklaas after 5 Dec): add the id to `NO_PAGE` in
-  `tools/build-static.js` and run the build; its page folder is deleted and it
+  `tools/build-static.js` and run the build; its EN and NL folders are deleted and it
   drops out of the sitemap, llms.txt and footer.
 
 ## 4. Review before it ships
