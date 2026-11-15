@@ -38,6 +38,11 @@ Paste the verified list in one message, e.g.:
 If you don't have coordinates for an address, ask Claude Code to geocode it —
 don't guess lat/lng yourself.
 
+For each new event, also fill `org:{name, url}` (the organiser named on the
+event's own page; leave `url` out if the page gives none, and leave `org` out
+if no organiser is named) and `img` (the page's own event image, e.g. its
+og:image; never a logo, never guessed). These feed Google's event details.
+
 ## 4. Review before it ships
 
 - [ ] Read the diff Claude Code shows you before approving
