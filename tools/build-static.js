@@ -356,7 +356,7 @@ const newIndex = html.replace(browseRe, browseBlock).replace(hreflangRe, hreflan
 // ---- nl/index.html: the main page starting in Dutch ----
 // Same file as index.html with only these changes, each checked: lang, Dutch text in the HTML at load
 // (data-i18n texts, intro, title, descriptions), NL canonical/og:url, root-relative links, the footer links
-// pointing at the Dutch pages, and no Google Analytics tag (no tracking on new pages without Alison's yes).
+// pointing at the Dutch pages. The GA tag and cookie banner stay exactly as on / (Alison's yes, 15 Nov 2026).
 function readObj(name){
   const start = newIndex.indexOf(`const ${name} = {`);
   if(start < 0) throw new Error(`const ${name} not found in index.html`);
@@ -399,9 +399,7 @@ function buildNlIndex(){
   swap(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(nlDesc)}" />`);
   swap('<meta property="og:locale" content="en_GB" />\n<meta property="og:locale:alternate" content="nl_NL" />',
        '<meta property="og:locale" content="nl_NL" />\n<meta property="og:locale:alternate" content="en_GB" />');
-  // Google Analytics loader removed (the consent banner stays: its choice is site-wide)
-  swap(/<script>\n\(function\(\)\{\n  var notrack = false;[\s\S]*?\n\}\)\(\);\n<\/script>\n/, "");
-  if(/googletagmanager|G-3QJJ6WFJVM/.test(out)) throw new Error("nl/index.html still contains the GA tag");
+  if(!out.includes(GA_HEAD)) throw new Error("nl/index.html lost the GA tag");
   swap('href="favicon.svg"', 'href="/favicon.svg"');
   swap('href="privacy.html"', 'href="/privacy.html"', 3);
   swap('<a class="brand" href="/" ', '<a class="brand" href="/nl/" ');
