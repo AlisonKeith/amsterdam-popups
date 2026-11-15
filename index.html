@@ -197,6 +197,8 @@ main{padding:18px 0 40px}
 .daytoggle{display:inline-flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; background:var(--card)}
 .daytoggle button{appearance:none; border:0; background:transparent; cursor:pointer; font-family:inherit; font-size:12.5px; color:var(--muted); padding:6px 13px; white-space:nowrap}
 .daytoggle button.on{background:var(--red); color:#fff; font-weight:500}
+.weekfilters{display:flex; flex-wrap:wrap; gap:8px; align-items:center}
+#recurtoggle button:focus-visible{outline:none; box-shadow:inset 0 0 0 2px #fff, inset 0 0 0 4px var(--ink)}
 
 /* ---- chips ---- */
 .chips{display:flex; flex-wrap:wrap; gap:8px; padding:2px 0 8px}
@@ -441,10 +443,17 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
               </div>
               <div class="range" id="weekrange"></div>
             </div>
-            <div class="daytoggle" id="daytoggle" role="group" aria-label="Day filter">
-              <button class="on" data-day="all" onclick="setDay('all')" data-i18n="dAll">All week</button>
-              <button data-day="weekend" onclick="setDay('weekend')" data-i18n="dWeekend">Weekend</button>
-              <button data-day="today" onclick="setDay('today')" data-i18n="dToday">Today</button>
+            <div class="weekfilters">
+              <div class="daytoggle" id="daytoggle" role="group" aria-label="Day filter">
+                <button class="on" data-day="all" onclick="setDay('all')" data-i18n="dAll">All week</button>
+                <button data-day="weekend" onclick="setDay('weekend')" data-i18n="dWeekend">Weekend</button>
+                <button data-day="today" onclick="setDay('today')" data-i18n="dToday">Today</button>
+              </div>
+              <div class="daytoggle" id="recurtoggle" role="radiogroup" aria-label="Filter by one-off or regular events" onkeydown="recurtoggleKey(event)">
+                <button type="button" class="on" role="radio" aria-checked="true" tabindex="0" data-recur="all" onclick="setRecur('all')" data-i18n="rAll">All</button>
+                <button type="button" role="radio" aria-checked="false" tabindex="-1" data-recur="oneoff" onclick="setRecur('oneoff')" data-i18n="rOneoff">One-offs</button>
+                <button type="button" role="radio" aria-checked="false" tabindex="-1" data-recur="regular" onclick="setRecur('regular')" data-i18n="rRegular">Regular</button>
+              </div>
             </div>
           </div>
           <div class="chips" id="chips"></div>
@@ -603,7 +612,7 @@ const CATEGORIES = [
 const EVENTS = [
   // ---- This week (16 – 22 Nov) ----
 
-  { id:"queerhub-pride-film", week:"2026-11-16", cats:["film","queer","food"],
+  { id:"queerhub-pride-film", week:"2026-11-16", cats:["film","queer","food"], recur:"oneoff",
     name:"Film, Food & Solidarity: Pride (2014) at QueerHub Nieuw-West",
     hood:{en:"Nieuw-West",nl:"Nieuw-West"}, lat:52.3631, lng:4.8012,
     when:{en:"Mon 16 Nov",nl:"ma 16 nov"}, time:{en:"18:00–21:30 (meal 18:30, film 19:00)",nl:"18:00–21:30 (maaltijd 18:30, film 19:00)"},
@@ -613,7 +622,7 @@ const EVENTS = [
            nl:"Samen eten en kijken naar Pride, over lhbtiq+-activisten die in 1984 stakende mijnwerkers steunden, met een Nederlandstalig nagesprek onder leiding van Rahma el Hannoufi."},
     url:"https://www.pinknieuwwest.org/activiteit/film-food-solidarity-pride-16-november/" },
 
-  { id:"mezrab-samizdat", week:"2026-11-16", cats:["art"],
+  { id:"mezrab-samizdat", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Samizdat: Stories from the Underground",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3760, lng:4.9276,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"20:00 (doors 19:00)",nl:"20:00 (deur 19:00)"},
@@ -623,7 +632,7 @@ const EVENTS = [
            nl:"Een verhalenavond met persoonlijke verhalen over de politieke strijd van nu, van oorlogen en revoluties tot kleine bevrijdingen. Engelstalig, met soep."},
     url:"https://mezrab.nl/events/samizdat-stories-from-the-underground-2-2026-11-17/" },
 
-  { id:"capital-c-omen-opening", week:"2026-11-16", cats:["art"],
+  { id:"capital-c-omen-opening", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Opening: Omen — Gabriel Lester at Capital C",
     hood:{en:"Weesperbuurt, Centrum",nl:"Weesperbuurt, Centrum"}, lat:52.3620, lng:4.9082,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"17:00–20:00",nl:"17:00–20:00"},
@@ -633,7 +642,7 @@ const EVENTS = [
            nl:"Amsterdam Art Week-opening van Gabriel Lesters expositie met nieuwe experimenten in papier, hout, verf, licht en fotografie, midden in het gebouw van Capital C."},
     url:"https://amsterdamart.com/en/programme/opening-omen-gabriel-lester/" },
 
-  { id:"richel-omelas", week:"2026-11-16", cats:["queer","art"],
+  { id:"richel-omelas", week:"2026-11-16", cats:["queer","art"], recur:"oneoff",
     name:"Collectief FAKT — Omelas",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3711, lng:4.8900,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"20:00",nl:"20:00"},
@@ -643,7 +652,7 @@ const EVENTS = [
            nl:"Queer theater naar Ursula Le Guins 'Omelas': Emma wordt verliefd op een activistische filmstudente en verliest zichzelf in haar activisme. Door een duo dat meer queer vrouwelijke verhalen maakt."},
     url:"https://theaterderichel.nl/evenementen/collectief-fakt-omelas/" },
 
-  { id:"occii-hackedepiciotto", week:"2026-11-16", cats:["music"],
+  { id:"occii-hackedepiciotto", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Hackedepicciotto + Glice",
     hood:{en:"Schinkelbuurt, Zuid",nl:"Schinkelbuurt, Zuid"}, lat:52.3543, lng:4.8553,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"20:30 (doors 20:00)",nl:"20:30 (deur 20:00)"},
@@ -653,7 +662,7 @@ const EVENTS = [
            nl:"Avant-gardeduo Alexander Hacke (Einstürzende Neubauten) en Danielle de Picciotto voor het eerst sinds 2022 in Amsterdam, met noiseduo Glice als voorprogramma."},
     url:"https://occii.org/events/hackedepiciotto-glice/" },
 
-  { id:"cavia-lesvia", week:"2026-11-16", cats:["film","queer"],
+  { id:"cavia-lesvia", week:"2026-11-16", cats:["film","queer"], recur:"oneoff",
     name:"Lesvia + Mr. Dimitris and Mrs. Dimitroula",
     hood:{en:"Staatsliedenbuurt, West",nl:"Staatsliedenbuurt, West"}, lat:52.3821, lng:4.8703,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"20:30",nl:"20:30"},
@@ -663,7 +672,7 @@ const EVENTS = [
            nl:"Documentaire over ruim veertig jaar lesbische gemeenschap op Lesbos en de spanningen met de dorpsbewoners, door de lesbische filmmaker Tzeli Hadjidimitriou, die er opgroeide, plus haar korte film. Engels ondertiteld."},
     url:"https://filmhuiscavia.nl/programma/november-2026#lesvia" },
 
-  { id:"bimhuis-marike-van-dijk", week:"2026-11-16", cats:["music"],
+  { id:"bimhuis-marike-van-dijk", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Marike van Dijk: Thús (BIMHUIS commission 2026)",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3780, lng:4.9129,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"20:30 (café from 18:30)",nl:"20:30 (café vanaf 18:30)"},
@@ -673,7 +682,7 @@ const EVENTS = [
            nl:"Saxofonist Marike van Dijk presenteert Thús, een nieuwe compositieopdracht over haar Friese wortels voor internationaal septet en koor, met taal en stem centraal."},
     url:"https://www.bimhuis.nl/agenda/marike-van-dijk-thus/" },
 
-  { id:"hazenstraat-gallery-brunch", week:"2026-11-16", cats:["art","food"],
+  { id:"hazenstraat-gallery-brunch", week:"2026-11-16", cats:["art","food"], recur:"oneoff",
     name:"Brunch at the Hazenstraat Galleries",
     hood:{en:"Jordaan",nl:"Jordaan"}, lat:52.3707, lng:4.8799,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"10:00–12:00",nl:"10:00–12:00"},
@@ -683,7 +692,7 @@ const EVENTS = [
            nl:"Vijf Jordaanse galeries openen vroeg voor een Amsterdam Art Week-brunch: koffie en eten terwijl je langs de nieuwe exposities loopt."},
     url:"https://amsterdamart.com/en/programme/brunch-at-the-hazenstraat-galleries/" },
 
-  { id:"occii-12fu-allarme", week:"2026-11-16", cats:["music"],
+  { id:"occii-12fu-allarme", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"12FU presents: Allarme + All Male Videoshop + Prom Vagabonds",
     hood:{en:"Schinkelbuurt, Zuid",nl:"Schinkelbuurt, Zuid"}, lat:52.3543, lng:4.8553,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:30 (doors 20:00)",nl:"20:30 (deur 20:00)"},
@@ -693,7 +702,7 @@ const EVENTS = [
            nl:"Post-punk- en noisekwartet Allarme uit Warschau, met de Nederlandse noisepunkbands All Male Videoshop en Prom Vagabonds en DJ Disko Mads."},
     url:"https://occii.org/events/12fu-allarme/" },
 
-  { id:"mezrab-alt-comedy", week:"2026-11-16", cats:["art"],
+  { id:"mezrab-alt-comedy", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"The ALT Mezrab Comedy Night",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3760, lng:4.9276,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:00 (doors 19:00)",nl:"20:00 (deur 19:00)"},
@@ -703,7 +712,7 @@ const EVENTS = [
            nl:"De nieuwe alternatieve comedyshow van Mezrab: stand-up met poppen, improvisatie en nagespeelde filmscènes. Engelstalig."},
     url:"https://mezrab.nl/events/the-alt-mezrab-comedy-night-30/" },
 
-  { id:"bimhuis-cissoko-brotto", week:"2026-11-16", cats:["music"],
+  { id:"bimhuis-cissoko-brotto", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Ablaye Cissoko & Cyrille Brotto",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3780, lng:4.9129,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:30–22:00",nl:"20:30–22:00"},
@@ -713,7 +722,7 @@ const EVENTS = [
            nl:"De Senegalese koraspeler en zanger Ablaye Cissoko en de Franse accordeonist Cyrille Brotto presenteren hun nieuwe duo-album Djiyo."},
     url:"https://www.bimhuis.nl/agenda/ablaye-cissoko-cyrille-brotto/" },
 
-  { id:"cbk-zuidoost-family-day", week:"2026-11-16", cats:["family","art","workshops"],
+  { id:"cbk-zuidoost-family-day", week:"2026-11-16", cats:["family","art","workshops"], recur:"oneoff",
     name:"Family Day + closing of Cahaya Maluku at CBK Zuidoost",
     hood:{en:"Bijlmer, Zuidoost",nl:"Bijlmer, Zuidoost"}, lat:52.3162, lng:4.9572,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"12:00–17:00",nl:"12:00–17:00"},
@@ -723,7 +732,7 @@ const EVENTS = [
            nl:"Workshops voor alle leeftijden, met hapjes en drankjes, op de slotdag van Cahaya Maluku, een groepsexpositie van Molukse kunstenaars."},
     url:"https://amsterdamart.com/en/programme/familiedag/" },
 
-  { id:"treehouse-kids-tour-glerum", week:"2026-11-16", cats:["family","art"],
+  { id:"treehouse-kids-tour-glerum", week:"2026-11-16", cats:["family","art"], recur:"oneoff",
     name:"Kids tour with artist Quintus Glerum at Treehouse NDSM",
     hood:{en:"NDSM, Noord",nl:"NDSM, Noord"}, lat:52.4012, lng:4.8956,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"14:00–15:00",nl:"14:00–15:00"},
@@ -733,7 +742,7 @@ const EVENTS = [
            nl:"Kunstenaar Quintus Glerum neemt kinderen van 7 tot 12 mee op een tour over wat mens en machine gemeen hebben. Daarna tekenen ze een eigen wezen dat op een scherm tot leven komt."},
     url:"https://amsterdamart.com/en/programme/live-radio-show-artist-talk-quintus-glerumtreehouse-ndsm/" },
 
-  { id:"mezrab-orchestre-partout", week:"2026-11-16", cats:["music"],
+  { id:"mezrab-orchestre-partout", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Orchestre Partout Jam",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3760, lng:4.9276,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"20:00–23:00 (doors 19:00)",nl:"20:00–23:00 (deur 19:00)"},
@@ -743,7 +752,7 @@ const EVENTS = [
            nl:"Open podium waar muzikanten van overal improviseren tussen Midden-Oosterse en westerse tradities, met Háshem Kabreet en een huisband. Neem je instrument mee of kom luisteren."},
     url:"https://mezrab.nl/events/orchestre-partout-jam-6/" },
 
-  { id:"bimhuis-yad-oud", week:"2026-11-16", cats:["music"],
+  { id:"bimhuis-yad-oud", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"YAD Oud & Amsterdams Andalusisch Orkest",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3780, lng:4.9129,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"20:30–22:00",nl:"20:30–22:00"},
@@ -753,7 +762,7 @@ const EVENTS = [
            nl:"Slotconcert van UD Festival 2026: de gemaskerde Bahreinse ud-speler YAD Oud, die ud mengt met ambient en elektronica, met het Amsterdams Andalusisch Orkest."},
     url:"https://www.bimhuis.nl/agenda/yad-oud-amsterdams-andalusisch-orkest/" },
 
-  { id:"kalhor-westerkerk", week:"2026-11-16", cats:["music"],
+  { id:"kalhor-westerkerk", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Kayhan Kalhor & Ensemble at the Westerkerk",
     hood:{en:"Jordaan / Grachtengordel",nl:"Jordaan / Grachtengordel"}, lat:52.3745, lng:4.8840,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"20:00–21:30 (doors 19:30)",nl:"20:00–21:30 (deur 19:30)"},
@@ -763,7 +772,7 @@ const EVENTS = [
            nl:"De Iraanse kamanchehspeler Kayhan Kalhor en zijn ensemble (setar, zang, tombak) spelen één avond in de Westerkerk."},
     url:"https://www.eventbrite.com.au/e/tickets-kayhan-kalhor-ensemble-live-in-amsterdam-2003405766578" },
 
-  { id:"harmony-opening", week:"2026-11-16", cats:["music"],
+  { id:"harmony-opening", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Opening Ceremony",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"20:00–21:30",nl:"20:00–21:30"},
@@ -773,7 +782,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: de openingsceremonie."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-sven-vaeth", week:"2026-11-16", cats:["music"],
+  { id:"harmony-sven-vaeth", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Sven Väth presents Inner Horizon",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"20:00–22:30",nl:"20:00–22:30"},
@@ -783,7 +792,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Sven Väth presenteert Inner Horizon, met Roman Flügel (ambient live)."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-paschburg", week:"2026-11-16", cats:["music"],
+  { id:"harmony-paschburg", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Niklas Paschburg",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"20:00–22:30",nl:"20:00–22:30"},
@@ -793,7 +802,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Niklas Paschburg, met Laura Masotto."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-jon-hopkins", week:"2026-11-16", cats:["music"],
+  { id:"harmony-jon-hopkins", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Jon Hopkins",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"20:00–22:30",nl:"20:00–22:30"},
@@ -803,7 +812,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Jon Hopkins met Maddie Ashman en Leo Abrahams, plus Barker (ambient live)."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-yehezkel-raz", week:"2026-11-16", cats:["music"],
+  { id:"harmony-yehezkel-raz", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Yehezkel Raz",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"10:30–13:00",nl:"10:30–13:00"},
@@ -813,7 +822,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Yehezkel Raz, met Jakub Dubik."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-boysen", week:"2026-11-16", cats:["music"],
+  { id:"harmony-boysen", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Ben Lukas Boysen",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"15:30–18:00",nl:"15:30–18:00"},
@@ -823,7 +832,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Ben Lukas Boysen, met Koki Nakano."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-morgenstern", week:"2026-11-16", cats:["music"],
+  { id:"harmony-morgenstern", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Lisa Morgenstern & Bulgarian Voices Berlin",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:30–23:00",nl:"20:30–23:00"},
@@ -833,7 +842,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Lisa Morgenstern met Bulgarian Voices Berlin."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-canto-ostinato", week:"2026-11-16", cats:["music"],
+  { id:"harmony-canto-ostinato", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Canto Ostinato on six grand pianos",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"10:30–13:00",nl:"10:30–13:00"},
@@ -843,7 +852,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Canto Ostinato van Simeon ten Holt door Jeroen van Veen and Friends op zes vleugels."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-van-veen-einaudi", week:"2026-11-16", cats:["music"],
+  { id:"harmony-van-veen-einaudi", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Jeroen van Veen plays Einaudi & Glass",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"15:30–18:00",nl:"15:30–18:00"},
@@ -853,7 +862,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Jeroen van Veen speelt Einaudi en Glass, met Joachim Eijlander."},
     url:"https://harmony.now/" },
 
-  { id:"harmony-shahabi", week:"2026-11-16", cats:["music"],
+  { id:"harmony-shahabi", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony — Shida Shahabi",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"20:30–23:00",nl:"20:30–23:00"},
@@ -863,7 +872,7 @@ const EVENTS = [
            nl:"Een losse Harmony-luisterceremonie met live muziek, licht en beeld in de ronde Gashouder: Shida Shahabi, met Shards."},
     url:"https://harmony.now/" },
 
-  { id:"biotopia-bellevue", week:"2026-11-16", cats:["dance"],
+  { id:"biotopia-bellevue", week:"2026-11-16", cats:["dance"], recur:"oneoff",
     name:"Biotopia — SHIFFT",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3641, lng:4.8804,
     when:{en:"Tue 17 & Wed 18 Nov",nl:"di 17 & wo 18 nov"}, time:{en:"20:30",nl:"20:30"},
@@ -873,7 +882,7 @@ const EVENTS = [
            nl:"Vijf dansers laten alles achter op zoek naar een plek die nog niet bestaat, in een voorstelling over de kracht en kwetsbaarheid van samenleven."},
     url:"https://www.theaterbellevue.nl/agenda/biotopia-rh8v" },
 
-  { id:"vietti-de-willem", week:"2026-11-16", cats:["food","drink"],
+  { id:"vietti-de-willem", week:"2026-11-16", cats:["food","drink"], recur:"oneoff",
     name:"Vietti x De Willem — Barolo & truffle dinner",
     hood:{en:"Haarlemmerbuurt, Centrum",nl:"Haarlemmerbuurt, Centrum"}, lat:52.3850, lng:4.8832,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"From 18:00",nl:"Vanaf 18:00"},
@@ -883,7 +892,7 @@ const EVENTS = [
            nl:"Eenmalig wijndiner: viergangen truffelmenu met Barolo's van Vietti uit Piemonte — Urs Vetter van het wijnhuis vertelt erbij."},
     url:"https://de-willem.nl/agenda/vietti-x-de-willem-barolo-en-truffel-op-17-november/" },
 
-  { id:"occii-clothes-swap", week:"2026-11-16", cats:["fashion"],
+  { id:"occii-clothes-swap", week:"2026-11-16", cats:["fashion"], recur:"oneoff",
     name:"Clothes Swap — All Community Access Boutique",
     hood:{en:"Schinkelbuurt, Zuid",nl:"Schinkelbuurt, Zuid"}, lat:52.3543, lng:4.8553,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"18:00–21:00",nl:"18:00–21:00"},
@@ -893,7 +902,7 @@ const EVENTS = [
            nl:"Neem tot vijf nette kledingstukken mee en ruil ze voor iets nieuws — gratis DIY-kledingruil voor alle genders in het OCCII."},
     url:"https://occii.org/events/clothes-swap-all-community-access-boutique-2/" },
 
-  { id:"expats-connect-idock", week:"2026-11-16", cats:["networking"],
+  { id:"expats-connect-idock", week:"2026-11-16", cats:["networking"], recur:"oneoff",
     name:"Expats Connect: Career Switch + Networking",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3847, lng:4.8941,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"18:30–20:30",nl:"18:30–20:30"},
@@ -903,7 +912,7 @@ const EVENTS = [
            nl:"Afterwork-borrel voor internationals die carrièreswitch willen maken — cv- en LinkedIn-tips, live cv-feedback en volop netwerken."},
     url:"https://www.eventbrite.nl/e/expats-connect-career-switch-networking-tickets-2003608291335" },
 
-  { id:"kimchi-stretch-fold", week:"2026-11-16", cats:["workshops","food"],
+  { id:"kimchi-stretch-fold", week:"2026-11-16", cats:["workshops","food"], recur:"oneoff",
     name:"Craft Club: Kimchi Making",
     hood:{en:"Noord",nl:"Noord"}, lat:52.3967, lng:4.9074,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"19:00–21:00",nl:"19:00–21:00"},
@@ -913,7 +922,7 @@ const EVENTS = [
            nl:"Praktische fermentatieworkshop met de huischef: leer de wetenschap achter de smaak, maak kimchi van wintergroente en neem je eigen pot mee naar huis."},
     url:"https://www.stretchandfold.nl/events/the-art-of-kimchi-october-zpcn3" },
 
-  { id:"rijksakademie-open-studios", week:"2026-11-16", cats:["art"],
+  { id:"rijksakademie-open-studios", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Rijksakademie Open Studios 2026",
     hood:{en:"Weesperbuurt, Centrum",nl:"Weesperbuurt, Centrum"}, lat:52.3629, lng:4.9178,
     when:{en:"Thu 19 – Sun 22 Nov",nl:"do 19 – zo 22 nov"}, time:{en:"12:00–19:00 (Fri till 20:00)",nl:"12:00–19:00 (vr tot 20:00)"},
@@ -923,7 +932,7 @@ const EVENTS = [
            nl:"Eén keer per jaar opent de Rijksakademie haar ateliers: 48 kunstenaars en 5 tech fellows tonen schilderkunst, film, keramiek, geluid en games."},
     url:"https://rijksakademie.nl/en/open-studios/2026" },
 
-  { id:"aaw-gallery-night", week:"2026-11-16", cats:["art"],
+  { id:"aaw-gallery-night", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Amsterdam Art Week — Festive Gallery Night",
     hood:{en:"City-wide",nl:"Stadsbreed"}, lat:52.3644, lng:4.8872,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"Evening; guided tours 17:00–20:00",nl:"Avond; rondleidingen 17:00–20:00"},
@@ -933,7 +942,7 @@ const EVENTS = [
            nl:"Eén avond lang blijven galeries in heel Amsterdam laat open met nieuwe exposities. Ga zelf op pad of meld je aan voor een wandel- of fietstour (centrum, Jordaan/West, Noord)."},
     url:"https://amsterdamart.com/en/festive-gallery-night/" },
 
-  { id:"mezrab-alaa-zouiten", week:"2026-11-16", cats:["music"],
+  { id:"mezrab-alaa-zouiten", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Alaa Zouiten Trio — Flamenco meets Moorish-Andalusian music",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3760, lng:4.9276,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"20:30 (doors 19:45)",nl:"20:30 (deur 19:45)"},
@@ -943,7 +952,7 @@ const EVENTS = [
            nl:"Oud-speler Alaa Zouiten, gitarist Naoufal Montassere en percussionist Antonio 'Pumuki' Moreno spelen het album Flamenco Moro in Mezrab."},
     url:"https://mezrab.nl/events/alaa-zouiten-aficionado/" },
 
-  { id:"pdz-kino-drag-cow", week:"2026-11-16", cats:["film","queer"],
+  { id:"pdz-kino-drag-cow", week:"2026-11-16", cats:["film","queer"], recur:"oneoff",
     name:"Pakhuis Kino: De-domestication & i am not (your) human",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3768, lng:4.9222,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"20:00",nl:"20:00"},
@@ -953,7 +962,7 @@ const EVENTS = [
            nl:"Twee korte films over het dekoloniseren van lichaam, land en identiteit, een live talk met Daniel Hellmann — en een drag-koe als finale. Engelstalig."},
     url:"https://dezwijger.nl/programma/filmscreening-de-domestication-i-am-not-your-human" },
 
-  { id:"idfa-final-days", week:"2026-11-16", cats:["film"],
+  { id:"idfa-final-days", week:"2026-11-16", cats:["film"], recur:"oneoff",
     name:"IDFA 2026 — final days",
     hood:{en:"Vondelpark, Zuid",nl:"Vondelpark, Zuid"}, lat:52.3611, lng:4.8750,
     when:{en:"Mon 16 – Sun 22 Nov",nl:"ma 16 – zo 22 nov"}, time:{en:"All day, various cinemas",nl:"Hele dag, diverse zalen"},
@@ -963,7 +972,7 @@ const EVENTS = [
            nl:"'s Werelds grootste documentairefestival sluit zondag af — met de laatste vertoningen, filmmakerstalks (ma & wo) en Shorts Day (do), met Het Documentaire Paviljoen als ontmoetingsplek."},
     url:"https://festival.idfa.nl/en/" },
 
-  { id:"winterterras-ndsm", week:"2026-11-16", cats:["food","drink","family"],
+  { id:"winterterras-ndsm", week:"2026-11-16", cats:["food","drink","family"], recur:"oneoff",
     name:"Het Amsterdamse Winterterras",
     hood:{en:"NDSM, Noord",nl:"NDSM, Noord"}, lat:52.4012, lng:4.8956,
     when:{en:"Fri 20 – Sun 22 Nov",nl:"vr 20 – zo 22 nov"}, time:{en:"Fri 16:00–23:00, Sat 14:00–23:00, Sun 14:00–22:00",nl:"vr 16:00–23:00, za 14:00–23:00, zo 14:00–22:00"},
@@ -973,7 +982,7 @@ const EVENTS = [
            nl:"Tweede weekend van een overdekt winterterras in een dome in de NDSM-loods — Amsterdamse horeca onder één dak, dj's, meezingers en een Mini-Terras voor kids."},
     url:"https://hetamsterdamsewinterterras.nl/" },
 
-  { id:"le-foodwalk-winter", week:"2026-11-16", cats:["food"],
+  { id:"le-foodwalk-winter", week:"2026-11-16", cats:["food"], recur:"oneoff",
     name:"Le Foodwalk Winter",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3761, lng:4.9004,
     when:{en:"Fri 20 & Sat 21 Nov",nl:"vr 20 & za 21 nov"}, time:{en:"Start between 17:00 and 19:00",nl:"Start tussen 17:00 en 19:00"},
@@ -983,7 +992,7 @@ const EVENTS = [
            nl:"Winterse wandelfoodtour: haal je stempelkaart op de Zeedijk en proef vijf bites bij vijf restaurants langs een route door het centrum. Elke vr & za t/m 23 jan."},
     url:"https://lefoodwalk.nl/" },
 
-  { id:"motief-van-gendt-hallen", week:"2026-11-16", cats:["food"],
+  { id:"motief-van-gendt-hallen", week:"2026-11-16", cats:["food"], recur:"oneoff",
     name:"Pop-up restaurant at the Van Gendt Hallen",
     hood:{en:"Oostenburg",nl:"Oostenburg"}, lat:52.3716, lng:4.9257,
     when:{en:"Fri 20 & Sat 21 Nov",nl:"vr 20 & za 21 nov"}, time:{en:"Fri & Sat evenings (booking required)",nl:"vr & za avond (reserveren verplicht)"},
@@ -993,7 +1002,7 @@ const EVENTS = [
            nl:"Zes weekenden lang een pop-uprestaurant in de Van Gendt Hallen met een viergangen chefsmenu, als voorproefje van de toekomstige horeca."},
     url:"https://oostenburg.nl/actueel/pop-up-restaurant-opent-zes-weekenden-in-de-van-gendt-hallen/" },
 
-  { id:"beaujolais-stretch-fold", week:"2026-11-16", cats:["drink","music"],
+  { id:"beaujolais-stretch-fold", week:"2026-11-16", cats:["drink","music"], recur:"oneoff",
     name:"Beaujolais Nouveau & Beats",
     hood:{en:"Noord",nl:"Noord"}, lat:52.3967, lng:4.9074,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"18:00–22:00",nl:"18:00–22:00"},
@@ -1003,7 +1012,7 @@ const EVENTS = [
            nl:"Proost op de nieuwe Beaujolais Nouveau met Franse wijn, hapjes en goede muziek in een rooftopcafé in Noord."},
     url:"https://www.stretchandfold.nl/events/beaujolais-nouveau-beats-2026" },
 
-  { id:"posthoornkerk-vintage-fair", week:"2026-11-16", cats:["fashion","markets","art"],
+  { id:"posthoornkerk-vintage-fair", week:"2026-11-16", cats:["fashion","markets","art"], recur:"oneoff",
     name:"Vintage, Brocante, Antiques, Art & Design Fair",
     hood:{en:"Haarlemmerbuurt, Centrum",nl:"Haarlemmerbuurt, Centrum"}, lat:52.3813, lng:4.8906,
     when:{en:"Fri 20 – Sun 22 Nov",nl:"vr 20 – zo 22 nov"}, time:{en:"Fri & Sat 11:00–18:00, Sun 11:00–17:00",nl:"vr & za 11:00–18:00, zo 11:00–17:00"},
@@ -1013,7 +1022,7 @@ const EVENTS = [
            nl:"Zo'n 35 standhouders vullen een prachtig gerestaureerde kerk met vintage, brocante, antiek, kunst en design — drie dagen snuffelen."},
     url:"https://stadsherstel.nl/cultuuragenda/vintage-brocante-antiek-kunst-design-2/" },
 
-  { id:"dehallen-holiday-gift-shop", week:"2026-11-16", cats:["shops"],
+  { id:"dehallen-holiday-gift-shop", week:"2026-11-16", cats:["shops"], recur:"oneoff",
     name:"The Creative Lab — Holiday Gift Shop",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.3666, lng:4.8688,
     when:{en:"Opens Fri 20 Nov (until 20 Dec)",nl:"Opent vr 20 nov (t/m 20 dec)"}, time:{en:"Tue–Sun 11:30–18:30",nl:"di–zo 11:30–18:30"},
@@ -1023,7 +1032,7 @@ const EVENTS = [
            nl:"De feestelijke pop-upwinkel van The Creative Lab is terug in De Hallen, met elke week wisselende makers, vintageverkopers en sieradenontwerpers."},
     url:"https://www.dehallen-amsterdam.nl/agenda/the-creative-lab---holiday-gift-shop" },
 
-  { id:"super-sonic-jazz-fri", week:"2026-11-16", cats:["music"],
+  { id:"super-sonic-jazz-fri", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Super-Sonic Jazz Festival — Friday",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3622, lng:4.8838,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"19:00 (doors 18:30)",nl:"19:00 (deur 18:30)"},
@@ -1033,7 +1042,7 @@ const EVENTS = [
            nl:"Dag één van de tiende Super-Sonic Jazz Festival, in de Grote Zaal, Kleine Zaal en Kelder van Paradiso. Aftrap instore bij Rush Hour, Spuistraat 110, om 17:30."},
     url:"https://www.paradiso.nl/en/program/super-sonic-jazz-festival-friday/2751594" },
 
-  { id:"super-sonic-jazz-sat", week:"2026-11-16", cats:["music"],
+  { id:"super-sonic-jazz-sat", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Super-Sonic Jazz Festival — Saturday",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3622, lng:4.8838,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"19:00 (doors 18:30)",nl:"19:00 (deur 18:30)"},
@@ -1043,7 +1052,7 @@ const EVENTS = [
            nl:"Dag twee van de tiende Super-Sonic Jazz Festival in alle zalen van Paradiso, met Children of Zeus als vervanger van Ragz Originale."},
     url:"https://www.paradiso.nl/en/program/super-sonic-jazz-festival-saturday/2907934" },
 
-  { id:"super-sonic-jazz-sun", week:"2026-11-16", cats:["music"],
+  { id:"super-sonic-jazz-sun", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Super-Sonic Jazz Festival — Sunday",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3622, lng:4.8838,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"14:00 Isaiah Collier plays Coltrane (doors 13:30); evening 19:00 (doors 18:30)",nl:"14:00 Isaiah Collier speelt Coltrane (deur 13:30); avond 19:00 (deur 18:30)"},
@@ -1053,7 +1062,7 @@ const EVENTS = [
            nl:"De slotdag van de tiende Super-Sonic Jazz Festival: 's middags speelt Isaiah Collier Coltrane, 's avonds een programma in alle zalen van Paradiso."},
     url:"https://www.paradiso.nl/en/program/super-sonic-jazz-festival-sunday/2907947" },
 
-  { id:"broth-stretch-fold", week:"2026-11-16", cats:["food"],
+  { id:"broth-stretch-fold", week:"2026-11-16", cats:["food"], recur:"oneoff",
     name:"BROTH: Korean Kitchen Takeover",
     hood:{en:"Noord",nl:"Noord"}, lat:52.3967, lng:4.9074,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"18:00–21:00",nl:"18:00–21:00"},
@@ -1063,7 +1072,7 @@ const EVENTS = [
            nl:"Eenmalige Koreaanse keukenovername rond een speciale winterbouillon, met yakgwa-honinggebak en brandnetelijs als toetje."},
     url:"https://www.stretchandfold.nl/events/broth-korean-kitchen-takeover" },
 
-  { id:"raam-bird-calls", week:"2026-11-16", cats:["family","art"],
+  { id:"raam-bird-calls", week:"2026-11-16", cats:["family","art"], recur:"oneoff",
     name:"World Championship Bird Calls & Songs",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3756, lng:4.9094,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"16:00–19:00",nl:"16:00–19:00"},
@@ -1073,7 +1082,7 @@ const EVENTS = [
            nl:"Hoe goed ken jij de geluiden van het bos? Een speelse vogelgeluidenquiz tussen de houtskooltekeningen van Anouk Griffioen — luister, raad en win de 'wereldbeker'."},
     url:"https://www.raamartspace.com/events/wereldkampioenschap-vogelgeluiden-herkennen" },
 
-  { id:"popprijs-finale", week:"2026-11-16", cats:["music"],
+  { id:"popprijs-finale", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Finale Amsterdamse Popprijs 2026",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3650, lng:4.8816,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"19:00 (doors 18:30)",nl:"19:00 (deur 18:30)"},
@@ -1083,7 +1092,7 @@ const EVENTS = [
            nl:"Zes Amsterdamse bands krijgen ieder 20 minuten om jury en publiek te overtuigen in de finale van de Amsterdamse Popprijs."},
     url:"https://www.melkweg.nl/nl/agenda/finale-amsterdamse-popprijs-2026-21-11-2026/" },
 
-  { id:"idfa-dance-night", week:"2026-11-16", cats:["music","film"],
+  { id:"idfa-dance-night", week:"2026-11-16", cats:["music","film"], recur:"oneoff",
     name:"IDFA Dance Night",
     hood:{en:"Vondelpark, Zuid",nl:"Vondelpark, Zuid"}, lat:52.3611, lng:4.8750,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:00–02:30",nl:"20:00–02:30"},
@@ -1093,7 +1102,7 @@ const EVENTS = [
            nl:"Van documentaire naar dansvloer: het gratis slotfeest van IDFA in het Vondelpark-paviljoen, met het IDFA DJ Team de hele nacht — en karaoke."},
     url:"https://festival.idfa.nl/en/composition/de7ad047-9e31-4e58-aa1f-3d37ec3680c3/idfa-dance-night/" },
 
-  { id:"pure-markt-markthal", week:"2026-11-16", cats:["markets","food"],
+  { id:"pure-markt-markthal", week:"2026-11-16", cats:["markets","food"], recur:"oneoff",
     name:"Pure Markt — Centrale Markthal edition",
     hood:{en:"West",nl:"West"}, lat:52.3783, lng:4.8656,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"12:00–19:00",nl:"12:00–19:00"},
@@ -1103,7 +1112,7 @@ const EVENTS = [
            nl:"Pure Markt op haar nieuwste locatie: eten, drinken en makers overdekt in de Centrale Markthal uit de jaren '30. Geen pinautomaat ter plekke."},
     url:"https://puremarkt.nl/locaties/centrale-markthallen/" },
 
-  { id:"sunday-market-oostenburg", week:"2026-11-16", cats:["christmas","markets"],
+  { id:"sunday-market-oostenburg", week:"2026-11-16", cats:["christmas","markets"], recur:"oneoff",
     name:"Sunday Market Oostenburg — winter edition",
     hood:{en:"Oostenburg",nl:"Oostenburg"}, lat:52.3721, lng:4.9280,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"11:00–17:00",nl:"11:00–17:00"},
@@ -1113,7 +1122,7 @@ const EVENTS = [
            nl:"Eenmalige winterse pop-up van de Sunday Market op Oostenburg — makers, ontwerpers en foodies in feeststemming."},
     url:"https://www.sundaymarket.nl/markt/sunday-market-oostenburg-2026-11-22/" },
 
-  { id:"swap-club-millesime", week:"2026-11-16", cats:["fashion"],
+  { id:"swap-club-millesime", week:"2026-11-16", cats:["fashion"], recur:"oneoff",
     name:"Vintage Clothing Swap — The Swap Club x Millesime",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3654, lng:4.8852,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"12:00–14:00 or 14:00–16:00",nl:"12:00–14:00 of 14:00–16:00"},
@@ -1123,7 +1132,7 @@ const EVENTS = [
            nl:"Neem tot 10 items mee en ruil ze voor vintage uit de collectie van Millesime aan de Leidsestraat."},
     url:"https://luma.com/fyduzib8" },
 
-  { id:"kids-buy-art-gwen-park", week:"2026-11-16", cats:["family","art"],
+  { id:"kids-buy-art-gwen-park", week:"2026-11-16", cats:["family","art"], recur:"oneoff",
     name:"Kids Buy Art — Family Sunday at Gwen Park",
     hood:{en:"Oud-Zuid",nl:"Oud-Zuid"}, lat:52.3518, lng:4.8582,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"12:00–14:00",nl:"12:00–14:00"},
@@ -1133,7 +1142,7 @@ const EVENTS = [
            nl:"Een familietour bij Gwen Park tijdens Amsterdam Art Week waarin kinderen de leiding hebben en een klein werk kunnen kiezen uit een serie die Bohyeon Hwang speciaal voor jonge verzamelaars maakte."},
     url:"https://amsterdamart.com/en/programme/family-sunday-tour-kids-buy-art/" },
 
-  { id:"oorkaan-vijf", week:"2026-11-16", cats:["family","music"],
+  { id:"oorkaan-vijf", week:"2026-11-16", cats:["family","music"], recur:"oneoff",
     name:"Vijf! (5+) — Oorkaan Ensemble",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3783, lng:4.9131,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"13:30",nl:"13:30"},
@@ -1144,7 +1153,7 @@ const EVENTS = [
     url:"https://www.muziekgebouw.nl/nl/agenda/vijf-5-qvhx" },
 
 
-  { id:"qru-rommelmarkt-last", week:"2026-11-16", cats:["markets"],
+  { id:"qru-rommelmarkt-last", week:"2026-11-16", cats:["markets"], recur:"regular",
     name:"QRU flea market: last one of 2026",
     hood:{en:"Spaklerweg, Oost",nl:"Spaklerweg, Oost"}, lat:52.3433, lng:4.9191,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"10:00–17:00",nl:"10:00–17:00"},
@@ -1154,7 +1163,7 @@ const EVENTS = [
            nl:"De laatste rommelmarkt van het seizoen onder het spoor bij QRU: tientallen kramen met vintage kleding, boeken, speelgoed, platen en meubels, grotendeels overdekt. Live muziek van Unborn Brothers."},
     url:"https://qru.amsterdam/events/rommelmarkt-zondag-22-november-de-laatste-van-het-jaar/" },
 
-  { id:"dehallen-speel-deel-ruil", week:"2026-11-16", cats:["family","markets","workshops"],
+  { id:"dehallen-speel-deel-ruil", week:"2026-11-16", cats:["family","markets","workshops"], recur:"oneoff",
     name:"Play, Share, Swap & Recycle: toy and kids' clothes swap",
     hood:{en:"Kinkerbuurt, West",nl:"Kinkerbuurt, West"}, lat:52.3666, lng:4.8688,
     when:{en:"Sat 21 & Sun 22 Nov",nl:"za 21 & zo 22 nov"}, time:{en:"11:00–16:00",nl:"11:00–16:00"},
@@ -1164,7 +1173,7 @@ const EVENTS = [
            nl:"Een weekend lang speelgoed en kinderkleding ruilen (max. 5 stuks per persoon), met recycleworkshops en Repair Café Jeltje dat kapot speelgoed repareert."},
     url:"https://motherhood.amsterdam/speel-deel/amsterdam-november-swap-2026" },
 
-  { id:"cavia-europa-von-trier", week:"2026-11-16", cats:["film"],
+  { id:"cavia-europa-von-trier", week:"2026-11-16", cats:["film"], recur:"oneoff",
     name:"Europa trilogy: Europa (Lars von Trier, 1991)",
     hood:{en:"Staatsliedenbuurt, West",nl:"Staatsliedenbuurt, West"}, lat:52.3821, lng:4.8703,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"20:30",nl:"20:30"},
@@ -1174,7 +1183,7 @@ const EVENTS = [
            nl:"De afsluiter van Cavia's reeks over Lars von Triers zelden vertoonde Europa-trilogie: een naïeve Amerikaan komt na de oorlog naar Frankfurt en raakt verstrikt in een liefdesaffaire. Engels ondertiteld."},
     url:"https://filmhuiscavia.nl/programma/november-2026" },
 
-  { id:"cavia-right-now-wrong-then", week:"2026-11-16", cats:["film"],
+  { id:"cavia-right-now-wrong-then", week:"2026-11-16", cats:["film"], recur:"oneoff",
     name:"Right Now, Wrong Then (Hong Sang-soo, 2015)",
     hood:{en:"Staatsliedenbuurt, West",nl:"Staatsliedenbuurt, West"}, lat:52.3821, lng:4.8703,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"20:30",nl:"20:30"},
@@ -1184,7 +1193,7 @@ const EVENTS = [
            nl:"Hong Sang-soo vertelt twee versies van een toevallige ontmoeting tussen een filmregisseur en een kunstenares in Suwon, met soju, lange wandelingen en botte eerlijkheid. Koreaans, Engels ondertiteld."},
     url:"https://filmhuiscavia.nl/programma/november-2026" },
 
-  { id:"uitkijk-vertigo-mythologica", week:"2026-11-16", cats:["film"],
+  { id:"uitkijk-vertigo-mythologica", week:"2026-11-16", cats:["film"], recur:"oneoff",
     name:"Cinema Mythologica: Vertigo (1958)",
     hood:{en:"Grachtengordel, Centrum",nl:"Grachtengordel, Centrum"}, lat:52.3648, lng:4.8844,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"20:30",nl:"20:30"},
@@ -1194,7 +1203,7 @@ const EVENTS = [
            nl:"Hitchcocks Vertigo in de reeks van De Uitkijk over de mythen achter bekende films. Engels gesproken en ondertiteld, 150 minuten."},
     url:"https://www.uitkijk.nl/film/cinema-mythologica-vertigo-1958" },
 
-  { id:"uitkijk-in-the-mood-for-love", week:"2026-11-16", cats:["film"],
+  { id:"uitkijk-in-the-mood-for-love", week:"2026-11-16", cats:["film"], recur:"oneoff",
     name:"In the Mood for Love (4K restoration)",
     hood:{en:"Grachtengordel, Centrum",nl:"Grachtengordel, Centrum"}, lat:52.3648, lng:4.8844,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"16:50",nl:"16:50"},
@@ -1204,7 +1213,7 @@ const EVENTS = [
            nl:"Wong Kar-wais liefdesverhaal uit 2000, gefilmd door Christopher Doyle, in een 4K-restauratie. Engels ondertiteld."},
     url:"https://www.uitkijk.nl/film/in-the-mood-for-love" },
 
-  { id:"hoff-soumsoum-uitkijk", week:"2026-11-16", cats:["film"],
+  { id:"hoff-soumsoum-uitkijk", week:"2026-11-16", cats:["film"], recur:"oneoff",
     name:"HoFF: Soumsoum, The Night of the Stars (Mahamat-Saleh Haroun)",
     hood:{en:"Grachtengordel, Centrum",nl:"Grachtengordel, Centrum"}, lat:52.3648, lng:4.8844,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"15:00",nl:"15:00"},
@@ -1214,7 +1223,7 @@ const EVENTS = [
            nl:"In de Ennedi-woestijn in Tsjaad heeft de 17-jarige Kellou visioenen die ze niet kan verklaren, tot ze de verstoten Aya ontmoet. Film uit 2026 op het Humans of Film Festival, Frans en Tsjadisch Arabisch, Engels ondertiteld."},
     url:"https://www.uitkijk.nl/film/ho-ff-soumsoum-the-night-of-the-stars-2026" },
 
-  { id:"meervaart-adrenaline-ruggeds", week:"2026-11-16", cats:["dance"],
+  { id:"meervaart-adrenaline-ruggeds", week:"2026-11-16", cats:["dance"], recur:"oneoff",
     name:"The Ruggeds: Adrenaline",
     hood:{en:"Osdorp, Nieuw-West",nl:"Osdorp, Nieuw-West"}, lat:52.3589, lng:4.8074,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"19:30",nl:"19:30"},
@@ -1224,7 +1233,7 @@ const EVENTS = [
            nl:"Tweevoudig wereldkampioen breakingcrew The Ruggeds danst op breakbeat-drums, hangt in de lampen en zwaait over het publiek. De voorstelling speelde al meer dan 100 keer wereldwijd. Taal geen probleem."},
     url:"https://meervaart.nl/agenda/adrenaline" },
 
-  { id:"meervaart-studio-djitt", week:"2026-11-16", cats:["music"],
+  { id:"meervaart-studio-djitt", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Meervaart Studio Live Sessions: Djitt & live band",
     hood:{en:"Osdorp, Nieuw-West",nl:"Osdorp, Nieuw-West"}, lat:52.3589, lng:4.8074,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"20:00",nl:"20:00"},
@@ -1234,7 +1243,7 @@ const EVENTS = [
            nl:"Zangeres Djitt, oud-talent van Meervaart Studio, en een liveband mengen r&b, jazz en klassieke invloeden in de Blauwe Zaal, ingericht als intieme club."},
     url:"https://meervaart.nl/agenda/meervaart-studio-live-sessions-djitt" },
 
-  { id:"boom-josh-thomas", week:"2026-11-16", cats:["art"],
+  { id:"boom-josh-thomas", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Josh Thomas: Jiggle, Jiggle",
     hood:{en:"Jordaan",nl:"Jordaan"}, lat:52.3728, lng:4.8790,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"19:30",nl:"19:30"},
@@ -1244,7 +1253,7 @@ const EVENTS = [
            nl:"De Australische comedian Josh Thomas, maker van Please Like Me, staat met zijn stand-upshow bij Boom Chicago. Engelstalig."},
     url:"https://boomchicago.nl/shows/josh-thomas/" },
 
-  { id:"zuidermrkt-21-nov", week:"2026-11-16", cats:["markets","food"],
+  { id:"zuidermrkt-21-nov", week:"2026-11-16", cats:["markets","food"], recur:"regular",
     name:"Zuidermrkt",
     hood:{en:"Oud-Zuid",nl:"Oud-Zuid"}, lat:52.3556, lng:4.8745,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"09:30–17:00",nl:"09:30–17:00"},
@@ -1254,7 +1263,7 @@ const EVENTS = [
            nl:"Een coöperatieve buurtmarkt, gerund door en voor de leden — geen winstoogmerk, gewoon buren die biologische groente, brood en andere wekelijkse boodschappen verkopen op de hoek van de Jacob Obrechtstraat en de Johannes Verhulststraat."},
     url:"https://www.zuidermrkt.nl/" },
 
-  { id:"vrijdagmarkt-minervaplein", week:"2026-11-16", cats:["markets","food"],
+  { id:"vrijdagmarkt-minervaplein", week:"2026-11-16", cats:["markets","food"], recur:"regular",
     name:"Friday market on Minervaplein",
     hood:{en:"Apollobuurt, Zuid",nl:"Apollobuurt, Zuid"}, lat:52.3470, lng:4.8725,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"09:00–17:00",nl:"09:00–17:00"},
@@ -1264,7 +1273,7 @@ const EVENTS = [
            nl:"Een kleine biologische boerenmarkt op de kop van de Minervalaan en de Stadionweg, met verse seizoens- en streekproducten en een terras als je wilt blijven lunchen."},
     url:"https://www.iamsterdam.com/uit/agenda/winkelen/markten/minervamarkt" },
 
-  { id:"arma-apartment-pauw", week:"2026-11-16", cats:["fashion"],
+  { id:"arma-apartment-pauw", week:"2026-11-16", cats:["fashion"], recur:"oneoff",
     name:"ARMA Apartment pop-up at PAUW",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.3575, lng:4.8788,
     when:{en:"Tue 17 – Sat 21 Nov",nl:"di 17 – za 21 nov"}, time:{en:"10:00–18:00",nl:"10:00–18:00"},
@@ -1274,7 +1283,7 @@ const EVENTS = [
            nl:"Leer, suède en shearling uit de herfst-wintercollectie van ARMA, te zien als een tijdelijk appartement-pop-up in de curated space van PAUW aan de Van Baerlestraat."},
     url:"https://armastore.com/en-eu/pages/the-arma-apartment-pop-up" },
 
-  { id:"the-hand-john-lobb-sciamat", week:"2026-11-16", cats:["fashion"],
+  { id:"the-hand-john-lobb-sciamat", week:"2026-11-16", cats:["fashion"], recur:"oneoff",
     name:"John Lobb By Request + Sciamat at The Hand",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.3587, lng:4.8785,
     when:{en:"Fri 20 & Sat 21 Nov",nl:"vr 20 & za 21 nov"}, time:{en:"10:00–17:30",nl:"10:00–17:30"},
@@ -1284,7 +1293,7 @@ const EVENTS = [
            nl:"Twee dagen bij The Hand met Sanche de Laage van John Lobb en Nicola Ricci van Sciamat: schoenen op maat tegen ready-to-wear-prijs, of Italiaans maatwerk. Binnenlopen kan; reserveren wordt aangeraden."},
     url:"https://meetthehand.com/pages/john-lobb-event-amsterdam" },
 
-  { id:"felix-bon-bini-na-mi-sono", week:"2026-11-16", cats:["music","art"],
+  { id:"felix-bon-bini-na-mi-sono", week:"2026-11-16", cats:["music","art"], recur:"oneoff",
     name:"Bon biní na mi soño — Juny Martina",
     hood:{en:"Grachtengordel, Centrum",nl:"Grachtengordel, Centrum"}, lat:52.3700, lng:4.8843,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:00 (doors 19:30)",nl:"20:00 (deur 19:30)"},
@@ -1294,7 +1303,7 @@ const EVENTS = [
            nl:"Juny Martina maakt van Felix Meritis een droomwereld van muziek, film, performance en beeldende kunst, tussen Curaçao en Nederland, Papiamentu en Nederlands, met een afterparty van BULGAR."},
     url:"https://felixmeritis.nl/programma/bon-bini-na-mi-sono/" },
 
-  { id:"hoxton-lloyd-beaujolais", week:"2026-11-16", cats:["drink","food"],
+  { id:"hoxton-lloyd-beaujolais", week:"2026-11-16", cats:["drink","food"], recur:"oneoff",
     name:"Beaujolais Breman at The Hoxton Lloyd",
     hood:{en:"Oostelijk Havengebied",nl:"Oostelijk Havengebied"}, lat:52.3742, lng:4.9348,
     when:{en:"Thu 19 – Sun 22 Nov",nl:"do 19 – zo 22 nov"}, time:{en:"18:00–22:00",nl:"18:00–22:00"},
@@ -1304,7 +1313,7 @@ const EVENTS = [
            nl:"Een Franse Beaujolais Nouveau-avond in The Hoxton Lloyd: lekker eten, gezellig gezelschap en een glas van de nieuwe oogst, zonder poespas. Je kunt gewoon binnenlopen."},
     url:"https://thehoxton.com/nl/amsterdam-lloyd/whats-on/beaujolais-breman/" },
 
-  { id:"straat-by-night", week:"2026-11-16", cats:["art"],
+  { id:"straat-by-night", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"STRAAT by NIGHT: ART IS NOT A CRIME",
     hood:{en:"NDSM, Noord",nl:"NDSM, Noord"}, lat:52.4013, lng:4.8966,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"17:00–21:00 (flash tours 18:00 & 18:45)",nl:"17:00–21:00 (flitsrondleidingen 18:00 en 18:45)"},
@@ -1315,7 +1324,7 @@ const EVENTS = [
     url:"https://www.straatmuseum.com/en/activities/straat-by-night" },
 
 
-  { id:"kameleon-frascati", week:"2026-11-16", cats:["art"],
+  { id:"kameleon-frascati", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Sadettin Kırmızıyüz: Kameleon",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3703, lng:4.8937,
     when:{en:"Tue 17 – Sat 21 Nov",nl:"di 17 – za 21 nov"}, time:{en:"20:30",nl:"20:30"},
@@ -1326,7 +1335,7 @@ const EVENTS = [
     url:"https://www.frascatitheater.nl/nl/agenda/kameleon-5c6h" },
 
 
-  { id:"frascati-under-construction-nov", week:"2026-11-16", cats:["art","dance"],
+  { id:"frascati-under-construction-nov", week:"2026-11-16", cats:["art","dance"], recur:"oneoff",
     name:"Under Construction November '26: three new makers",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3703, lng:4.8937,
     when:{en:"Thu 19 – Sat 21 Nov",nl:"do 19 – za 21 nov"}, time:{en:"20:00",nl:"20:00"},
@@ -1337,7 +1346,7 @@ const EVENTS = [
     url:"https://www.frascatitheater.nl/nl/agenda/under-construction-november-26-12tz" },
 
 
-  { id:"wintermarkt-leidseplein", week:"2026-11-16", cats:["christmas","markets"],
+  { id:"wintermarkt-leidseplein", week:"2026-11-16", cats:["christmas","markets"], recur:"oneoff",
     name:"Winter Market Leidseplein",
     hood:{en:"Leidseplein, Centrum",nl:"Leidseplein, Centrum"}, lat:52.3633, lng:4.8835,
     when:{en:"Mon 16 – Sun 22 Nov (daily)",nl:"ma 16 – zo 22 nov (dagelijks)"}, time:{en:"Mon–Fri 12:00–23:00; Sat & Sun 11:00–23:00",nl:"ma–vr 12:00–23:00; za & zo 11:00–23:00"},
@@ -1347,7 +1356,7 @@ const EVENTS = [
            nl:"Houten chalets op het Leidseplein en het Kleine-Gartmanplantsoen met kerstversiering, cadeaus, kaas, oliebollen en warme snacks, plus een glühweintoren en een grote kerstboom. Tot 3 januari."},
     url:"https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/" },
 
-  { id:"atay-stories-pastilla", week:"2026-11-16", cats:["food","art"],
+  { id:"atay-stories-pastilla", week:"2026-11-16", cats:["food","art"], recur:"oneoff",
     name:"Atay Stories: Morocco told through tea",
     hood:{en:"Slotervaart, Nieuw-West",nl:"Slotervaart, Nieuw-West"}, lat:52.3498, lng:4.8286,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"14:30–16:00",nl:"14:30–16:00"},
@@ -1357,7 +1366,7 @@ const EVENTS = [
            nl:"Yamna van Pastilla Club schenkt verschillende Marokkaanse theesoorten en vertelt over hun herkomst, met muziek van zanger en synthspeler Anas Soudfa. Eenmalig met Theater van Deyssel, Nederlands gesproken."},
     url:"https://www.frascatitheater.nl/nl/agenda/atay-stories-x5vt" },
 
-  { id:"bellevue-buikzwam", week:"2026-11-16", cats:["art"],
+  { id:"bellevue-buikzwam", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Kompagnie Kistemaker: Buikzwam",
     hood:{en:"Leidseplein, Centrum",nl:"Leidseplein, Centrum"}, lat:52.3641, lng:4.8804,
     when:{en:"Thu 19 Nov",nl:"do 19 nov"}, time:{en:"20:30–21:40",nl:"20:30–21:40"},
@@ -1367,7 +1376,7 @@ const EVENTS = [
            nl:"Een droogkomische solo van Karlijn Kistemaker over endometriose en vruchtbaarheid: 17 keer naar de huisarts, en 24 jaar tot de diagnose. Een reizende reprise uit 2026 van haar voorstelling uit 2024, en donderdag is de enige Amsterdamse speelavond. Nederlands gesproken."},
     url:"https://www.theaterbellevue.nl/agenda/buikzwam-z63t" },
 
-  { id:"richel-ouder-worden-tryout", week:"2026-11-16", cats:["art","music"],
+  { id:"richel-ouder-worden-tryout", week:"2026-11-16", cats:["art","music"], recur:"oneoff",
     name:"Joost Hofman & Barbara Sloesen: Ouder worden (try-out)",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3711, lng:4.8900,
     when:{en:"Wed 18 & Thu 19 Nov",nl:"wo 18 & do 19 nov"}, time:{en:"20:15",nl:"20:15"},
@@ -1377,7 +1386,7 @@ const EVENTS = [
            nl:"Try-outs van een nieuwe muziektheatervoorstelling waarin Barbara Sloesen en Joost Hofman zich afvragen hoe je ouder wordt, van een fertiliteitstraject in België tot negen maanden wachten."},
     url:"https://theaterderichel.nl/evenementen/joost-hofman-barbara-sloesen-ouder-worden/" },
 
-  { id:"richel-nilgun-yerli", week:"2026-11-16", cats:["art"],
+  { id:"richel-nilgun-yerli", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Nilgün Yerli: Weet je het zeker?",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3711, lng:4.8900,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"20:15",nl:"20:15"},
@@ -1387,7 +1396,7 @@ const EVENTS = [
            nl:"Cabaret van Nilgün Yerli over liefde en hoe de voorwaarden verschillen per leeftijd en cultuur. Nederlandstalig."},
     url:"https://theaterderichel.nl/evenementen/nilgun-yerli-weet-je-het-zeker/" },
 
-  { id:"richel-comedy-underground", week:"2026-11-16", cats:["art"],
+  { id:"richel-comedy-underground", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"The Comedy Underground",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3711, lng:4.8900,
     when:{en:"Wed 18 Nov",nl:"wo 18 nov"}, time:{en:"21:00 (doors 20:30)",nl:"21:00 (deur 20:30)"},
@@ -1397,7 +1406,7 @@ const EVENTS = [
            nl:"Een Engelstalige avond met experimentele live comedy: stand-up, clownerie, improvisatie, sketches en muziek."},
     url:"https://theaterderichel.nl/evenementen/the-comedy-underground-41/" },
 
-  { id:"badhuis-room-number-three", week:"2026-11-16", cats:["art"],
+  { id:"badhuis-room-number-three", week:"2026-11-16", cats:["art"], recur:"oneoff",
     name:"Noordhaus: Room Number Three + Private View",
     hood:{en:"Oosterparkbuurt, Oost",nl:"Oosterparkbuurt, Oost"}, lat:52.3595, lng:4.9127,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"20:00–22:00 (with interval)",nl:"20:00–22:00 (met pauze)"},
@@ -1407,7 +1416,7 @@ const EVENTS = [
            nl:"Een Engelstalige dubbelvoorstelling: een nieuw stuk over een bestuursvergadering die ontspoort, en Václav Havels Private View, over een etentje bij vrienden dat opdringerig wordt. Eén avond."},
     url:"https://www.badhuistheater.nl/events/room-number-three-private-view/" },
 
-  { id:"orkater-de-gliphoeve", week:"2026-11-16", cats:["music","art"],
+  { id:"orkater-de-gliphoeve", week:"2026-11-16", cats:["music","art"], recur:"oneoff",
     name:"Orkater: De Gliphoeve (Suriname trilogy, part 2)",
     hood:{en:"Leidseplein, Centrum",nl:"Leidseplein, Centrum"}, lat:52.3644, lng:4.8819,
     when:{en:"Thu 19 – Sat 21 Nov",nl:"do 19 – za 21 nov"}, time:{en:"19:30–21:00",nl:"19:30–21:00"},
@@ -1417,7 +1426,7 @@ const EVENTS = [
            nl:"Muziektheater in 1975, het jaar van de Surinaamse onafhankelijkheid, over Etta en haar dochter Millie. Deel twee van de trilogie van Orkater en Bijlmer Parktheater, in het Nederlands, 90 minuten."},
     url:"https://ita.nl/nl/voorstellingen/de-suriname-trilogie-de-gliphoeve" },
 
-  { id:"amstel1-schoentje-zetten", week:"2026-11-16", cats:["family"],
+  { id:"amstel1-schoentje-zetten", week:"2026-11-16", cats:["family"], recur:"oneoff",
     name:"Put out your shoe for Sinterklaas at Amstel1",
     hood:{en:"Waterlooplein, Centrum",nl:"Waterlooplein, Centrum"}, lat:52.3677, lng:4.9002,
     when:{en:"Sat 21 & Sun 22 Nov",nl:"za 21 & zo 22 nov"}, time:{en:"13:00–16:00",nl:"13:00–16:00"},
@@ -1427,7 +1436,7 @@ const EVENTS = [
            nl:"Kinderen versieren een schoen (neem er een mee of knutsel er een met glitter en stof) en zetten hem in de Lichtstraat; wie weet doet de Sint er iets in. Alle leeftijden."},
     url:"https://amstel1.nl/agenda/schoentje-zetten-21-22-november-amstel-1/" },
 
-  { id:"gelderland-sint-piet", week:"2026-11-16", cats:["family"],
+  { id:"gelderland-sint-piet", week:"2026-11-16", cats:["family"], recur:"oneoff",
     name:"Sint & Piet at Gelderlandplein",
     hood:{en:"Buitenveldert, Zuid",nl:"Buitenveldert, Zuid"}, lat:52.3337, lng:4.8795,
     when:{en:"Sat 21 & Sun 22 Nov",nl:"za 21 & zo 22 nov"}, time:{en:"12:30–16:30",nl:"12:30–16:30"},
@@ -1437,7 +1446,7 @@ const EVENTS = [
            nl:"Zaterdag is de feestelijke Sinterklaasintocht op Gelderlandplein, met een Pietenband en acrobaat-Pieten; zondag zijn Sint en Piet er weer, met lekkers voor de kinderen."},
     url:"https://www.gelderlandplein.nl/winkelcentrum/nieuws-evenementen/sint-piet-op-gelderlandplein/" },
 
-  { id:"boventy-sint-pietenband", week:"2026-11-16", cats:["family"],
+  { id:"boventy-sint-pietenband", week:"2026-11-16", cats:["family"], recur:"oneoff",
     name:"Sinterklaas and the Pietenband at Boven 't Y",
     hood:{en:"Buikslotermeer, Noord",nl:"Buikslotermeer, Noord"}, lat:52.3989, lng:4.9386,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"12:30–16:00",nl:"12:30–16:00"},
@@ -1447,7 +1456,7 @@ const EVENTS = [
            nl:"Sinterklaas brengt een feestelijk bezoek aan winkelcentrum Boven 't Y met zijn Pietenband, Fietspieten en Strooipieten. Gewoon langskomen."},
     url:"https://boventy.nl/evenementen/bezoek-sint-pietenband/" },
 
-  { id:"prikkelvrij-museumplein", week:"2026-11-16", cats:["sport"],
+  { id:"prikkelvrij-museumplein", week:"2026-11-16", cats:["sport"], recur:"regular",
     name:"Prikkelvrij schaatsen at Schaatsbaan Museumplein",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.3589, lng:4.8843,
     when:{en:"Mon 16 Nov",nl:"ma 16 nov"}, time:{en:"12:00–14:00",nl:"12:00–14:00"},
@@ -1457,7 +1466,7 @@ const EVENTS = [
            nl:"Een rustiger tijdslot van twee uur op de buitenbaan: geen muziek of omroep, gedimd licht en een beperkt aantal schaatsers. Bedoeld voor wie een prikkelarme omgeving nodig heeft, en open voor iedereen die het rustig wil houden. Gewone entreetarieven."},
     url:"https://www.schaatsbaanmuseumplein.nl/activiteiten/prikkelvrij-schaatsen/" },
 
-  { id:"midnight-runners-chill-long-run", week:"2026-11-16", cats:["sport"],
+  { id:"midnight-runners-chill-long-run", week:"2026-11-16", cats:["sport"], recur:"regular",
     name:"Midnight Runners — Chill Long Run",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.3600, lng:4.8634,
     when:{en:"Mon 16 Nov",nl:"ma 16 nov"}, time:{en:"20:00 (run starts 20:15)",nl:"20:00 (start hardlopen 20:15)"},
@@ -1467,7 +1476,7 @@ const EVENTS = [
            nl:"Een rustige avondloop van ongeveer 10 km in een tempo van zo'n 6:30/km, of de afstand die bij je past, met muziek onderweg. Verzamelen om 20:00 bij Café Parck; de loop start om 20:15. Tassen kunnen worden achtergelaten; er zijn geen kleedkamers, dus kom al in hardloopkleding."},
     url:"https://www.heylo.com/event/-P5m1Po0LMjlqOSxYyz0" },
 
-  { id:"samen-schaatsen-museumplein", week:"2026-11-16", cats:["sport","family"],
+  { id:"samen-schaatsen-museumplein", week:"2026-11-16", cats:["sport","family"], recur:"regular",
     name:"Samen Schaatsen at Schaatsbaan Museumplein",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.3589, lng:4.8843,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"16:00–18:00",nl:"16:00–18:00"},
@@ -1477,7 +1486,7 @@ const EVENTS = [
            nl:"Ervaren schaatsers worden gekoppeld aan beginners voor een sociale dinsdagsessie op de buitenbaan. Toegang en schaatshuur zijn gratis. Het vindt elke dinsdag plaats buiten de schoolvakanties; aanmelden via het formulier op de pagina van de organisator."},
     url:"https://www.schaatsbaanmuseumplein.nl/activiteiten/samen-schaatsen/" },
 
-  { id:"bingsu-run", week:"2026-11-16", cats:["sport"],
+  { id:"bingsu-run", week:"2026-11-16", cats:["sport"], recur:"oneoff",
     name:"Bingsu run — Asian Run Club Amsterdam",
     hood:{en:"Leidseplein, Centrum",nl:"Leidseplein, Centrum"}, lat:52.3638, lng:4.8850,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"19:00–20:00 (arrive 18:45)",nl:"19:00–20:00 (aanwezig 18:45)"},
@@ -1487,7 +1496,7 @@ const EVENTS = [
            nl:"Een groepsloop van 5 km in een tempo van ongeveer 6:00/km, met start en finish bij Hongdae Amsterdam. Tassen kunnen worden achtergelaten; neem verlichting mee als je die hebt. Wees 15 minuten eerder. Daarna optioneel bingsu, op eigen rekening. Aanmelden via Luma."},
     url:"https://luma.com/xwldzjqh" },
 
-  { id:"lola-queerboxing", week:"2026-11-16", cats:["sport","queer"],
+  { id:"lola-queerboxing", week:"2026-11-16", cats:["sport","queer"], recur:"regular",
     name:"Queerboxing — Basic Bitch Boxing at Lola Lieven",
     hood:{en:"Nieuw-West",nl:"Nieuw-West"}, lat:52.3478, lng:4.8384,
     when:{en:"Tue 17 Nov",nl:"di 17 nov"}, time:{en:"19:30–20:30",nl:"19:30–20:30"},
@@ -1498,7 +1507,7 @@ const EVENTS = [
     url:"https://lolalieven.nl/2026/03/31/queerboxing/" },
 
 
-  { id:"beest-open-avond", week:"2026-11-16", cats:["sport"],
+  { id:"beest-open-avond", week:"2026-11-16", cats:["sport"], recur:"oneoff",
     name:"Open Avond at Beest Boulders Amsterdam",
     hood:{en:"West",nl:"West"}, lat:52.3817, lng:4.8594,
     when:{en:"Fri 20 Nov",nl:"vr 20 nov"}, time:{en:"18:00–23:00",nl:"18:00–23:00"},
@@ -1508,7 +1517,7 @@ const EVENTS = [
            nl:"Een kennismakingsavond: na aanmelden bij de bar volg je een workshop van een uur over de basis van boulderen, en klim je daarna verder. Schoenen zijn inbegrepen. Dezelfde open avond is er ook bij Het Lab, Transformatorweg 32. Reserveer online of in de hal."},
     url:"https://beestboulders.com/open-evening/" },
 
-  { id:"amsterdamse-bos-parkrun", week:"2026-11-16", cats:["sport","family"],
+  { id:"amsterdamse-bos-parkrun", week:"2026-11-16", cats:["sport","family"], recur:"regular",
     name:"Amsterdamse Bos parkrun",
     hood:{en:"Amsterdamse Bos",nl:"Amsterdamse Bos"}, lat:52.3274, lng:4.8550,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"09:00",nl:"09:00"},
@@ -1518,7 +1527,7 @@ const EVENTS = [
            nl:"Een wekelijkse, gratis getimede 5 km voor hardlopers, joggers en wandelaars, georganiseerd door vrijwilligers. Kinderen onder de elf moeten met een volwassene meelopen; buggy's zijn welkom. De briefing is op het veld net voorbij het Klein Kinderbad. Registreer eenmalig op de parkrun-site en neem je barcode mee als je een tijd wilt. Na afloop koffie bij De Boshalte."},
     url:"https://www.parkrun.co.nl/amsterdamsebos/" },
 
-  { id:"alo-runners-club", week:"2026-11-16", cats:["sport"],
+  { id:"alo-runners-club", week:"2026-11-16", cats:["sport"], recur:"oneoff",
     name:"ALO Runners Club — 6K from PC Hooftstraat",
     hood:{en:"Museumkwartier, Zuid",nl:"Museumkwartier, Zuid"}, lat:52.3605, lng:4.8822,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"09:30–10:30",nl:"09:30–10:30"},
@@ -1528,7 +1537,7 @@ const EVENTS = [
            nl:"Een groepsloop van 6 km vanaf de ALO-winkel op de PC Hooftstraat, onder leiding van Tijn Branderhorst. Alle tempi welkom. De loop gaat door bij regen of zon; er is geen tasopslag, dus kom licht. Aanmelden via Luma."},
     url:"https://luma.com/wm2jftwp" },
 
-  { id:"trailrunclinic-bos", week:"2026-11-16", cats:["sport","active"],
+  { id:"trailrunclinic-bos", week:"2026-11-16", cats:["sport","active"], recur:"oneoff",
     name:"Trailrunclinic with Hardlopen Amsterdam",
     hood:{en:"Amsterdamse Bos",nl:"Amsterdamse Bos"}, lat:52.3290, lng:4.8539,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"11:00–c. 12:30",nl:"11:00–ca. 12:30"},
@@ -1538,7 +1547,7 @@ const EVENTS = [
            nl:"Een trailrunclinic van 90 minuten op en rond de heuvel in het Amsterdamse Bos: warming-up, kracht, techniek voor stijgen en dalen, korte intervallen en cooling-down. Groepen van 4 tot 10, onder leiding van trainer René. Verzamelen bij de lockers naast restaurant De Bosbaan."},
     url:"https://hardlopenamsterdam.nl/nl/trailrunclinic" },
 
-  { id:"bandeja-ndsm-padel", week:"2026-11-16", cats:["sport"],
+  { id:"bandeja-ndsm-padel", week:"2026-11-16", cats:["sport"], recur:"oneoff",
     name:"Bandeja Padel Tournament at NDSM Padel",
     hood:{en:"Noord",nl:"Noord"}, lat:52.4110, lng:4.8793,
     when:{en:"Sat 21 Nov",nl:"za 21 nov"}, time:{en:"17:00–22:00",nl:"17:00–22:00"},
@@ -1548,7 +1557,7 @@ const EVENTS = [
            nl:"Een sociaal padeltoernooi dat niet meetelt voor de KNLTB-ranking, met categorieën beginner, intermediate en gevorderd. Je speelt met de partner waarmee je je inschrijft; iedereen speelt een poulefase van drie wedstrijden van 30 minuten, daarna afvalrondes en troostrondes. Inschrijven als koppel via Bandeja Padel."},
     url:"https://padelspijkers.nl/en/product/tournament-ndsm-padel-amsterdam-21-november/" },
 
-  { id:"pllek-vinyasa-flow", week:"2026-11-16", cats:["sport","active"],
+  { id:"pllek-vinyasa-flow", week:"2026-11-16", cats:["sport","active"], recur:"regular",
     name:"Vinyasa Flow yoga with a view at Pllek",
     hood:{en:"NDSM, Noord",nl:"NDSM, Noord"}, lat:52.3991, lng:4.8931,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"10:30–12:00",nl:"10:30–12:00"},
@@ -4658,7 +4667,7 @@ const EVENTS = [
 
 const I18N = {
   en:{ thisweek:"This week", archive:"Archive", tip:"Know a pop-up?", about:"About",
-    all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", tipQ:"Know a pop-up we've missed — or running one yourself?", tipCta:"Know a pop-up?",
+    all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", rAll:"All", rOneoff:"One-offs", rRegular:"Regular", rAria:"Filter by one-off or regular events", tipQ:"Know a pop-up we've missed — or running one yourself?", tipCta:"Know a pop-up?",
     tagline:"what's on, off the beaten guide",
     searchPh:"Search past pop-ups, places, neighbourhoods",
     none:"Nothing in this category this week — try another, or check the archive.",
@@ -4678,7 +4687,7 @@ const I18N = {
     themeAriaTpl:(cur,next)=>`Theme: ${cur} — click to switch to ${next}`,
     listenStart:"Listen", listenStop:"Stop listening" },
   nl:{ thisweek:"Deze week", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
-    all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
+    all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", rAll:"Alles", rOneoff:"Eenmalig", rRegular:"Terugkerend", rAria:"Filter op eenmalige of terugkerende evenementen", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
     tagline:"wat er speelt, voorbij de gidsen",
     searchPh:"Zoek eerdere pop-ups, plekken, buurten",
     none:"Niets in deze categorie deze week — probeer een andere of bekijk het archief.",
@@ -4703,6 +4712,7 @@ const I18N = {
 let lang = "en";
 let activeCat = "all";
 let dayFilter = "all";
+let recurFilter = "all";
 const currentWeek = WEEKS[0];
 const catBy = Object.fromEntries(CATEGORIES.map(c => [c.id, c]));
 let map, markerLayer, markers = {};
@@ -4881,6 +4891,30 @@ function setDay(d){
   document.querySelectorAll("#daytoggle button").forEach(b => b.classList.toggle("on", b.dataset.day===d));
   renderThisWeek();
 }
+function recurPass(ev){
+  if(recurFilter==="all") return true;
+  return ev.recur === recurFilter;
+}
+function setRecur(v){
+  recurFilter = v;
+  document.querySelectorAll("#recurtoggle button").forEach(b => {
+    const on = b.dataset.recur === v;
+    b.classList.toggle("on", on);
+    b.setAttribute("aria-checked", on ? "true" : "false");
+    b.tabIndex = on ? 0 : -1;
+  });
+  renderThisWeek();
+}
+function recurtoggleKey(e){
+  const dir = {ArrowRight:1, ArrowDown:1, ArrowLeft:-1, ArrowUp:-1};
+  if(!(e.key in dir) && e.key!=="Home" && e.key!=="End") return;
+  e.preventDefault();
+  const btns = [...document.querySelectorAll("#recurtoggle button")];
+  const i = Math.max(0, btns.findIndex(b => b.dataset.recur === recurFilter));
+  const n = e.key==="Home" ? 0 : e.key==="End" ? btns.length-1 : (i + dir[e.key] + btns.length) % btns.length;
+  setRecur(btns[n].dataset.recur);
+  btns[n].focus();
+}
 
 /* ---- this week ---- */
 function cardHtml(ev){
@@ -4911,6 +4945,7 @@ function renderThisWeek(){
   document.getElementById("weekcount").textContent = weekCountText(list.length);
   if(activeCat !== "all") list = list.filter(e => e.cats.includes(activeCat));
   list = list.filter(dayPass);
+  list = list.filter(recurPass);
   renderMap(list);
   const el = document.getElementById("cards");
   if(list.length){
@@ -5026,6 +5061,8 @@ function applyI18n(){
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
+  const rg = document.getElementById("recurtoggle");
+  if(rg) rg.setAttribute("aria-label", t("rAria"));
 }
 function setLang(l){
   stopSpeech();
