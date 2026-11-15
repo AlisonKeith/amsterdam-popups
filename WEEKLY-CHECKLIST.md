@@ -43,6 +43,11 @@ event's own page; leave `url` out if the page gives none, and leave `org` out
 if no organiser is named) and `img` (the page's own event image, e.g. its
 og:image; never a logo, never guessed). These feed Google's event details.
 
+**Permanent rule:** Never name The Excellence Office (TEO) as organiser,
+publisher, author or any similar role anywhere on the site or in its
+structured data unless Alison says so herself. Never name Amsterdam Pop-ups as
+an event organiser; use the host venue (with Alison's yes) or leave it out.
+
 Then rebuild the no-JavaScript copies and commit them with the edition:
 
     node tools/build-static.js
