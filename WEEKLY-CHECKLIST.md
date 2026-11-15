@@ -53,7 +53,17 @@ Then rebuild the no-JavaScript copies and commit them with the edition:
     node tools/build-static.js
 
 This rewrites `this-week.html` (plain list for search engines and AI tools),
-`llms.txt`, and the `this-week.html` date in `sitemap.xml`.
+one page per category (`/comedy/`, `/kids-family/` … with Event structured
+data), the "This week by category" links in the footer of `index.html`,
+`llms.txt`, and `sitemap.xml`. Commit all of it with the edition.
+
+- A category with no events this week keeps its page with a "nothing this
+  week" note, marked noindex and left out of the sitemap, llms.txt and footer.
+- A new category needs a slug and a one-line intro in `CAT_PAGES` in
+  `tools/build-static.js` (the build stops and says so if it is missing).
+- Seasonal removal (e.g. Sinterklaas after 5 Dec): add the id to `NO_PAGE` in
+  `tools/build-static.js` and run the build; its page folder is deleted and it
+  drops out of the sitemap, llms.txt and footer.
 
 ## 4. Review before it ships
 
