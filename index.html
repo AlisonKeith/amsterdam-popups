@@ -439,7 +439,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
             <div>
               <div class="weektitle">
                 <h1 id="heading-thisweek" data-i18n="thisweek">This week</h1>
-                <span class="weekcount" id="weekcount"></span>
+                <span class="weekcount" id="weekcount" role="status" aria-live="polite" aria-atomic="true"></span>
               </div>
               <div class="range" id="weekrange"></div>
             </div>
@@ -463,7 +463,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
           <div class="ad-slot ad-mobile ad-top"><span class="ad-label" data-i18n="adLabel">Advertisement</span><span class="ad-hint">300×250 · responsive</span></div>
-          <div id="resultsLive" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+          <div id="resultsLive" class="sr-only"></div>
           <div class="cards" id="cards"></div>
           <div class="tipstrip">
             <span data-i18n="tipQ">Know a pop-up we've missed — or running one yourself?</span>
@@ -4880,25 +4880,29 @@ function cardHtml(ev){
     <a class="more" href="${ev.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${t("more")} ↗</a>
   </article>`;
 }
-function resultsAnnouncement(n){
-  if(lang==="nl") return n===0 ? "Geen evenementen gevonden" : n===1 ? "1 evenement getoond" : `${n} evenementen getoond`;
-  return n===0 ? "No events found" : n===1 ? "1 event shown" : `${n} events shown`;
-}
-function weekCountText(n){
-  if(lang==="nl") return n===0 ? "Nog geen evenementen deze week" : n===1 ? "1 evenement deze week" : `${n} evenementen deze week`;
-  return n===0 ? "No events this week yet" : n===1 ? "1 event this week" : `${n} events this week`;
+function weekCountText(n, scope){
+  if(lang==="nl"){
+    if(scope==="ended") return "Nog geen evenementen deze week";
+    if(scope==="today") return n===0 ? "Geen evenementen vandaag" : n===1 ? "1 evenement vandaag" : `${n} evenementen vandaag`;
+    if(scope==="weekend") return n===0 ? "Geen evenementen dit weekend" : n===1 ? "1 evenement dit weekend" : `${n} evenementen dit weekend`;
+    return n===0 ? "Geen evenementen deze week" : n===1 ? "1 evenement deze week" : `${n} evenementen deze week`;
+  }
+  if(scope==="ended") return "No events this week yet";
+  if(scope==="today") return n===0 ? "No events today" : n===1 ? "1 event today" : `${n} events today`;
+  if(scope==="weekend") return n===0 ? "No events this weekend" : n===1 ? "1 event this weekend" : `${n} events this weekend`;
+  return n===0 ? "No events this week" : n===1 ? "1 event this week" : `${n} events this week`;
 }
 function renderThisWeek(){
   const weekLive = weekStillLive(currentWeek.id);
   document.getElementById("weekrange").textContent = weekLive ? currentWeek.label[lang] : "";
   const published = EVENTS.filter(e => e.week === currentWeek.id);
-  // Pill counts the published week while that week is still current;
-  // once the week has ended it no longer presents a past edition as live.
-  document.getElementById("weekcount").textContent = weekCountText(weekLive ? published.length : 0);
   let list = weekLive ? published.filter(eventStillOn) : [];
   if(activeCat !== "all") list = list.filter(e => e.cats.includes(activeCat));
   list = list.filter(dayPass);
   list = list.filter(recurPass);
+  const scope = !weekLive ? "ended" : dayFilter==="today" ? "today" : dayFilter==="weekend" ? "weekend" : "week";
+  const count = document.getElementById("weekcount");
+  if(count) count.textContent = weekCountText(weekLive ? list.length : 0, scope);
   renderMap(list);
   const el = document.getElementById("cards");
   if(list.length){
@@ -4909,7 +4913,7 @@ function renderThisWeek(){
     el.innerHTML = `<div class="empty">${t("none")}</div>`;
   }
   const live = document.getElementById("resultsLive");
-  if(live) live.textContent = resultsAnnouncement(list.length);
+  if(live) live.textContent = weekCountText(weekLive ? list.length : 0, scope);
 }
 function focusEvent(id){
   const ev = EVENTS.find(e => e.id === id);
