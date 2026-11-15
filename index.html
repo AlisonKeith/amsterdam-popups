@@ -21,8 +21,8 @@
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<title>Amsterdam Pop-ups — comedy, theatre &amp; nightlife this week</title>
-<meta name="description" content="Weekly map-first guide to Amsterdam's pop-ups and one-off events: comedy, theatre & dance, nightlife, music, food, markets, Sinterklaas and kids events." />
+<title>Amsterdam Pop-ups — food, art, family &amp; culture this week</title>
+<meta name="description" content="Weekly map-first guide to Amsterdam's pop-ups and one-off events: food, art, family days and culture, from markets and supper clubs to comedy and music." />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="Amsterdam Pop-ups" />
 <link rel="canonical" href="https://www.amsterdampopups.com/" />
@@ -31,13 +31,13 @@
 <link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.amsterdampopups.com/" />
-<meta property="og:title" content="Amsterdam Pop-ups — comedy, theatre, nightlife &amp; more" />
-<meta property="og:description" content="A weekly, map-first guide to Amsterdam's temporary happenings: comedy, theatre & dance, nightlife, music, supper clubs, markets, Sinterklaas and kids events." />
+<meta property="og:title" content="Amsterdam Pop-ups — food, art, family &amp; culture this week" />
+<meta property="og:description" content="A weekly, map-first guide to Amsterdam's temporary happenings: food, art, family days and culture, from supper clubs and markets to comedy and live music." />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:locale:alternate" content="nl_NL" />
 <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Amsterdam Pop-ups — comedy, theatre, nightlife &amp; more" />
-<meta name="twitter:description" content="Weekly map-first guide to Amsterdam's temporary happenings: comedy, theatre & dance, nightlife, music, food, markets and Sinterklaas events." />
+<meta name="twitter:title" content="Amsterdam Pop-ups — food, art, family &amp; culture this week" />
+<meta name="twitter:description" content="Weekly map-first guide to Amsterdam's pop-ups: food, art, family days and culture, from markets and supper clubs to comedy and music." />
 <meta name="geo.region" content="NL-NH" />
 <meta name="geo.placename" content="Amsterdam" />
 <meta name="geo.position" content="52.3676;4.9041" />
@@ -5141,6 +5141,9 @@ function switchView(name){
 /* ---- language ---- */
 function applyI18n(){
   document.documentElement.lang = lang;
+  document.title = lang === "nl" ? "Amsterdam Pop-ups — eten, kunst, gezin & cultuur deze week" : "Amsterdam Pop-ups — food, art, family & culture this week";
+  const md = document.querySelector('meta[name="description"]');
+  if(md) md.setAttribute("content", lang === "nl" ? "Wekelijkse kaartgids voor pop-ups en eenmalige events in Amsterdam: eten, kunst, gezin en cultuur, van markten en supperclubs tot comedy en muziek." : "Weekly map-first guide to Amsterdam's pop-ups and one-off events: food, art, family days and culture, from markets and supper clubs to comedy and music.");
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
   const rg = document.getElementById("recurtoggle");
