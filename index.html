@@ -4868,7 +4868,25 @@ function renderChips(){
 function setCat(id){ activeCat = id; renderChips(); renderThisWeek(); }
 
 /* ---- day filter (today / weekend) ---- */
-function todayISO(){ const d=new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`; }
+function todayISO(){
+  return new Date().toLocaleDateString("en-CA", { timeZone:"Europe/Amsterdam" });
+}
+function addDaysISO(iso, n){
+  const [y,m,d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m-1, d + n));
+  return dt.toISOString().slice(0,10);
+}
+function weekStillLive(weekId){
+  return todayISO() <= addDaysISO(weekId, 6);
+}
+function lastDayISO(ev){
+  const days = ev.days || [];
+  return days.length ? days.reduce((a,b) => a > b ? a : b) : null;
+}
+function eventStillOn(ev){
+  const last = lastDayISO(ev);
+  return last !== null && last >= todayISO();
+}
 function isWeekendISO(s){ const g=new Date(s+"T12:00:00").getDay(); return g===0||g===6; }
 function dayPass(ev){
   if(dayFilter==="all") return true;
@@ -4931,9 +4949,13 @@ function weekCountText(n){
   return n===0 ? "No events this week yet" : n===1 ? "1 event this week" : `${n} events this week`;
 }
 function renderThisWeek(){
-  document.getElementById("weekrange").textContent = currentWeek.label[lang];
-  let list = EVENTS.filter(e => e.week === currentWeek.id);
-  document.getElementById("weekcount").textContent = weekCountText(list.length);
+  const weekLive = weekStillLive(currentWeek.id);
+  document.getElementById("weekrange").textContent = weekLive ? currentWeek.label[lang] : "";
+  const published = EVENTS.filter(e => e.week === currentWeek.id);
+  // Pill counts the published week while that week is still current;
+  // once the week has ended it no longer presents a past edition as live.
+  document.getElementById("weekcount").textContent = weekCountText(weekLive ? published.length : 0);
+  let list = weekLive ? published.filter(eventStillOn) : [];
   if(activeCat !== "all") list = list.filter(e => e.cats.includes(activeCat));
   list = list.filter(dayPass);
   list = list.filter(recurPass);
@@ -4975,7 +4997,7 @@ function renderArchive(){
     const list = EVENTS.filter(e => e.week === w.id && match(e));
     if(!list.length) return;
     any = true;
-    html += `<div class="weekgroup"><div class="weeklabel">${w.label[lang]}${w.id===currentWeek.id?` <small>${t("thisweek").toLowerCase()}</small>`:""}</div><div class="cards">${list.map(cardHtml).join("")}</div></div>`;
+    html += `<div class="weekgroup"><div class="weeklabel">${w.label[lang]}${w.id===currentWeek.id && weekStillLive(w.id)?` <small>${t("thisweek").toLowerCase()}</small>`:""}</div><div class="cards">${list.map(cardHtml).join("")}</div></div>`;
   });
   el.innerHTML = any ? html : `<div class="empty">${t("noResults")}</div>`;
 }
@@ -5115,7 +5137,7 @@ function initConsent(){
 
 /* ---- structured data (JSON-LD) ---- */
 function injectEventSchema(){
-  const list = EVENTS.filter(e => e.week === currentWeek.id);
+  const list = weekStillLive(currentWeek.id) ? EVENTS.filter(e => e.week === currentWeek.id && eventStillOn(e)) : [];
   const items = list.map(e => {
     const ev = {
       "@type":"Event",
