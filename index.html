@@ -100,6 +100,7 @@
   --c-dance:#6B3FA0; --c-workshops:#C4883A;
   --c-comedy:#2F9A2F;
   --c-nightlife:#3D3DC8;
+  --c-sinterklaas:#BD2846;
   --c-family:#D4A017;
   --c-sport:#2E6B9E;
   --c-queer:#E0218A;
@@ -609,6 +610,7 @@ const CATEGORIES = [
   { id:"drink",   color:"var(--c-drink)",   hex:"#2E7D74", label:{en:"Drink",           nl:"Drinken"} },
   { id:"markets", color:"var(--c-markets)", hex:"#5E7A33", label:{en:"Markets",         nl:"Markten"} },
   { id:"christmas", color:"var(--c-christmas)", hex:"#4C9C70", label:{en:"Christmas Markets", nl:"Kerstmarkten"}, tree:true },
+  { id:"sinterklaas", color:"var(--c-sinterklaas)", hex:"#BD2846", label:{en:"Sinterklaas", nl:"Sinterklaas"} },
   { id:"fashion", color:"var(--c-fashion)", hex:"#84517E", label:{en:"Fashion & Vintage", nl:"Mode & Vintage"} },
   { id:"art",     color:"var(--c-art)",     hex:"#3A5694", label:{en:"Art & Design",    nl:"Kunst & Design"} },
   { id:"shops",   color:"var(--c-shops)",   hex:"#A85734", label:{en:"Pop-up Shops",    nl:"Pop-upwinkels"} },
@@ -1443,7 +1445,7 @@ const EVENTS = [
            nl:"Muziektheater in 1975, het jaar van de Surinaamse onafhankelijkheid, over Etta en haar dochter Millie. Deel twee van de trilogie van Orkater en Bijlmer Parktheater, in het Nederlands, 90 minuten."},
     url:"https://ita.nl/nl/voorstellingen/de-suriname-trilogie-de-gliphoeve" },
 
-  { id:"amstel1-schoentje-zetten", week:"2026-11-16", cats:["family","workshops"], recur:"oneoff",
+  { id:"amstel1-schoentje-zetten", week:"2026-11-16", cats:["sinterklaas","family","workshops"], recur:"oneoff",
     name:"Put out your shoe for Sinterklaas at Amstel1",
     hood:{en:"Waterlooplein, Centrum",nl:"Waterlooplein, Centrum"}, lat:52.3677, lng:4.9002,
     when:{en:"Sat 21 & Sun 22 Nov",nl:"za 21 & zo 22 nov"}, time:{en:"13:00–16:00",nl:"13:00–16:00"},
@@ -1453,7 +1455,7 @@ const EVENTS = [
            nl:"Kinderen versieren een schoen (neem er een mee of knutsel er een met glitter en stof) en zetten hem in de Lichtstraat; wie weet doet de Sint er iets in. Alle leeftijden."},
     url:"https://amstel1.nl/agenda/schoentje-zetten-21-22-november-amstel-1/" },
 
-  { id:"gelderland-sint-piet", week:"2026-11-16", cats:["family"], recur:"oneoff",
+  { id:"gelderland-sint-piet", week:"2026-11-16", cats:["sinterklaas","family","music"], recur:"oneoff",
     name:"Sint & Piet at Gelderlandplein",
     hood:{en:"Buitenveldert, Zuid",nl:"Buitenveldert, Zuid"}, lat:52.3337, lng:4.8795,
     when:{en:"Sat 21 & Sun 22 Nov",nl:"za 21 & zo 22 nov"}, time:{en:"12:30–16:30",nl:"12:30–16:30"},
@@ -1463,7 +1465,7 @@ const EVENTS = [
            nl:"Zaterdag is de feestelijke Sinterklaasintocht op Gelderlandplein, met een Pietenband en acrobaat-Pieten; zondag zijn Sint en Piet er weer, met lekkers voor de kinderen."},
     url:"https://www.gelderlandplein.nl/winkelcentrum/nieuws-evenementen/sint-piet-op-gelderlandplein/" },
 
-  { id:"boventy-sint-pietenband", week:"2026-11-16", cats:["family"], recur:"oneoff",
+  { id:"boventy-sint-pietenband", week:"2026-11-16", cats:["sinterklaas","family","music"], recur:"oneoff",
     name:"Sinterklaas and the Pietenband at Boven 't Y",
     hood:{en:"Buikslotermeer, Noord",nl:"Buikslotermeer, Noord"}, lat:52.3989, lng:4.9386,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"12:30–16:00",nl:"12:30–16:00"},
