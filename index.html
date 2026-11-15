@@ -236,6 +236,10 @@ main{padding:18px 0 40px}
 .card-top{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px}
 .pill{font-size:11px; padding:2px 9px; border-radius:999px; font-weight:500; white-space:nowrap}
 .card-meta{font-size:12px; color:var(--faint); white-space:nowrap}
+.card-tags{display:flex; flex-wrap:wrap; gap:4px; list-style:none; margin:-2px 0 6px; padding:0}
+.card-tags li{display:inline-flex; align-items:center; gap:4px; font-size:11px; line-height:1.4; padding:1px 8px; border:1px solid var(--line); border-radius:999px; color:var(--chip-text); white-space:nowrap}
+.card-tags .dot{width:7px; height:7px; border-radius:50%; flex:none}
+.card-tags .tree{width:10px; height:10px; color:var(--c-christmas)}
 .card h3{margin:0 0 3px; font-size:15.5px; font-weight:600; color:var(--ink); font-family:"Inter",sans-serif}
 .card p{margin:0; font-size:13px; color:var(--muted); line-height:1.5}
 .facts{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px}
@@ -4622,7 +4626,7 @@ const I18N = {
     fPriv:"We only use this to follow up on your tip. See the Privacy page.",
     cookieText:"This site stays cookie-free until you allow ads. Accept to enable advertising and basic measurement; reject to keep only what's strictly necessary — you can change this anytime on the Privacy page.",
     cookieAccept:"Accept", cookieReject:"Reject", cookieSettings:"Cookie settings", cookieFab:"Cookie choices",
-    footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details",
+    footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details", alsoIn:"Also in",
     themeAuto:"Auto", themeLight:"Light", themeDark:"Dark",
     themeAriaTpl:(cur,next)=>`Theme: ${cur} — click to switch to ${next}`,
     listenStart:"Listen", listenStop:"Stop listening",
@@ -4644,7 +4648,7 @@ const I18N = {
     fPriv:"We gebruiken dit alleen om op je tip te reageren. Zie de Privacy-pagina.",
     cookieText:"Deze site gebruikt geen cookies totdat je advertenties toestaat. Accepteer om advertenties en basismeting in te schakelen; weiger om alleen het strikt noodzakelijke te houden — je kunt dit altijd aanpassen op de Privacy-pagina.",
     cookieAccept:"Accepteren", cookieReject:"Weigeren", cookieSettings:"Cookie-instellingen", cookieFab:"Cookievoorkeuren",
-    footL:"Gemaakt door locals · geen onderdeel van de gemeente Amsterdam", more:"Bekijk",
+    footL:"Gemaakt door locals · geen onderdeel van de gemeente Amsterdam", more:"Bekijk", alsoIn:"Ook in",
     themeAuto:"Automatisch", themeLight:"Licht", themeDark:"Donker",
     themeAriaTpl:(cur,next)=>`Thema: ${cur} — klik om te wisselen naar ${next}`,
     listenStart:"Voorlezen", listenStop:"Stop met voorlezen",
@@ -4972,6 +4976,11 @@ function recurtoggleKey(e){
 }
 
 /* ---- this week ---- */
+function cardTagsHtml(ev){
+  const extra = ev.cats.slice(1).map(id => catBy[id]);
+  if(!extra.length) return "";
+  return `<ul class="card-tags" aria-label="${t("alsoIn")}">${extra.map(c => `<li>${c.tree ? treeSvg() : `<span class="dot" style="background:${catSwatch(c)}" aria-hidden="true"></span>`}${c.label[lang]}</li>`).join("")}</ul>`;
+}
 function cardHtml(ev){
   const c = catBy[ev.cats[0]];
   const facts = `<div class="facts">${fact(ICO.clock, ev.when[lang]+" · "+ev.time[lang])}${mapsButton(ev)}${ev.price?fact(ICO.tag, ev.price[lang]):""}</div>`;
@@ -4980,6 +4989,7 @@ function cardHtml(ev){
       <span class="pill" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>
       <span class="card-meta">${ev.hood[lang]}</span>
     </div>
+    ${cardTagsHtml(ev)}
     <h3>${ev.name}</h3>
     <p>${ev.blurb[lang]}</p>
     ${facts}
