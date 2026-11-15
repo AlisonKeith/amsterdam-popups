@@ -44,7 +44,8 @@ const items = list.map(e => `    <li>
           <dt>When</dt><dd>${esc(e.when.en)}${e.time && e.time.en ? ", " + esc(e.time.en) : ""}</dd>
           <dt>Where</dt><dd>${esc(e.addr.en)}${e.hood && e.hood.en ? " (" + esc(e.hood.en) + ")" : ""}</dd>
           <dt>Price</dt><dd>${esc(priceText(e))}</dd>
-        </dl>
+${e.org ? `          <dt>Organiser</dt><dd>${e.org.url ? `<a href="${esc(e.org.url)}">${esc(e.org.name)}</a>` : esc(e.org.name)}</dd>
+` : ""}        </dl>
         <p>${esc(e.blurb.en)}</p>
         <p><a href="${esc(e.url)}">Details and tickets for ${esc(e.name)}<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
@@ -104,7 +105,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 
 ## This week (${week.label.en}, ${list.length} events)
 
-- [This week's events as a plain list](${SITE}/this-week.html): every event with date, time, venue, price, description and organiser link; readable without JavaScript
+- [This week's events as a plain list](${SITE}/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](${SITE}/): map, category and day filters, English/Dutch toggle, archive
 
 ## Categories

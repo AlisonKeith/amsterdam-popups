@@ -6,7 +6,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 
 ## This week (16 – 22 Nov, 94 events)
 
-- [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, description and organiser link; readable without JavaScript
+- [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
 
 ## Categories
