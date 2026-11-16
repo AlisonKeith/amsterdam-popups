@@ -4,7 +4,7 @@
 
 The guide is edited by hand and updated every week (Monday to Sunday). Each listing has a date, time, venue address, price and a link to the organiser's page. Past weeks stay in the Archive on the main site.
 
-## This week (16 – 22 Nov, 95 events)
+## This week (16 – 22 Nov, 96 events)
 
 - [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
@@ -22,8 +22,8 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [Pop-up Shops this week](https://www.amsterdampopups.com/pop-up-shops/): 1 events (Dutch: [Pop-upwinkels](https://www.amsterdampopups.com/nl/pop-upwinkels/))
 - [Music this week](https://www.amsterdampopups.com/music/): 35 events (Dutch: [Muziek](https://www.amsterdampopups.com/nl/muziek/))
 - [Nightlife this week](https://www.amsterdampopups.com/nightlife/): 3 events (Dutch: [Nachtleven](https://www.amsterdampopups.com/nl/nachtleven/))
-- [Film this week](https://www.amsterdampopups.com/film/): 12 events (Dutch: [Film](https://www.amsterdampopups.com/nl/film/))
-- [Kids & Family this week](https://www.amsterdampopups.com/kids-family/): 10 events (Dutch: [Gezin & Kids](https://www.amsterdampopups.com/nl/gezin-kids/))
+- [Film this week](https://www.amsterdampopups.com/film/): 13 events (Dutch: [Film](https://www.amsterdampopups.com/nl/film/))
+- [Kids & Family this week](https://www.amsterdampopups.com/kids-family/): 11 events (Dutch: [Gezin & Kids](https://www.amsterdampopups.com/nl/gezin-kids/))
 - [Sport this week](https://www.amsterdampopups.com/sport/): 10 events (Dutch: [Sport](https://www.amsterdampopups.com/nl/sport/))
 - [Active & Outdoor this week](https://www.amsterdampopups.com/active-outdoor/): 6 events (Dutch: [Actief & Buiten](https://www.amsterdampopups.com/nl/actief-buiten/))
 - [Theatre & Dance this week](https://www.amsterdampopups.com/theatre-dance/): 11 events (Dutch: [Theater & Dans](https://www.amsterdampopups.com/nl/theater-dans/))
