@@ -30,7 +30,7 @@ const html = fs.readFileSync(indexPath, "utf8");
 // Category ids that get no page (seasonal retirement). Example: new Set(["sinterklaas"])
 const NO_PAGE = new Set([]);
 
-// URL slug, heading and intro per category id. Every category in index.html needs an entry here.
+// URL slug, heading and intro per category id. In an intro, [text](/path/) becomes a link to that site path. Every category in index.html needs an entry here.
 const CAT_PAGES = {
   food:       {en:{slug:"food", intro:"Pop-up dinners, supper clubs, food markets, tastings and one-off kitchen takeovers across Amsterdam. Good for anyone who likes to try something new, from a quick street-food bite to a long shared table with strangers. The list is refreshed every week, so there is always something different to taste."},
                nl:{slug:"eten", intro:"Pop-updiners, supperclubs, foodmarkten, proeverijen en eenmalige keukenovernames in heel Amsterdam. Voor iedereen die graag iets nieuws probeert, van een snelle hap op straat tot een lange tafel met onbekenden. We vullen de lijst elke week opnieuw, dus er valt steeds iets anders te proeven."}},
@@ -68,8 +68,8 @@ const CAT_PAGES = {
                nl:{slug:"workshops", intro:"Workshops en eenmalige lessen waarin je zelf iets maakt, kookt, schildert of leert. Voor de meeste heb je geen ervaring nodig en ze zijn een gezellige manier om een middag of avond door te brengen, alleen of met vrienden. Plekken zijn vaak beperkt; de lijst wordt elke week vernieuwd."}},
   queer:      {en:{slug:"queer", intro:"Queer and LGBTQ+ events in Amsterdam: parties, screenings, markets, meet-ups and shared dinners. There is something for everyone in the community and their allies, from quiet social evenings and creative workshops to big nights out. The list is refreshed every week."},
                nl:{slug:"queer", intro:"Queer en lhbtiq+-events in Amsterdam: feesten, filmvertoningen, markten, meet-ups en gezamenlijke diners. Voor iedereen uit de community en hun bondgenoten, van rustige sociale avonden en creatieve workshops tot grote feestnachten. Elke week vernieuwen we de lijst, dus kijk gerust vaker."}},
-  business:   {en:{slug:"business", intro:"Industry events, founder and start-up sessions, expert panels and pitch nights where the content is the main draw. Aimed at entrepreneurs, freelancers and professionals who want to learn more about a sector or a skill. The list is refreshed every week; for events built around meeting people, see Networking."},
-               nl:{slug:"zakelijk", intro:"Branche-events, sessies voor oprichters en start-ups, panels met experts en pitchavonden waarbij de inhoud centraal staat. Voor ondernemers, zzp'ers en professionals die meer willen weten over een sector of vaardigheid. De lijst wordt elke week vernieuwd; voor events die draaien om mensen ontmoeten, kijk bij Netwerken."}},
+  business:   {en:{slug:"business", intro:"Industry events, founder and start-up sessions, expert panels and pitch nights where the content is the main draw. Aimed at entrepreneurs, freelancers and professionals who want to learn more about a sector or a skill. The list is refreshed every week; for events built around meeting people, see [Networking](/networking/)."},
+               nl:{slug:"zakelijk", intro:"Branche-events, sessies voor oprichters en start-ups, panels met experts en pitchavonden waarbij de inhoud centraal staat. Voor ondernemers, zzp'ers en professionals die meer willen weten over een sector of vaardigheid. De lijst wordt elke week vernieuwd; voor events die draaien om mensen ontmoeten, kijk bij [Netwerken](/nl/netwerken/)."}},
   networking: {en:{slug:"networking", intro:"Meet-ups, mixers and social evenings where the point is meeting new people, whether for work, because you are new in town or through a shared interest. Good for newcomers to Amsterdam, freelancers and anyone growing their circle, in a relaxed setting rather than a full programme. The list is refreshed every week."},
                nl:{slug:"netwerken", intro:"Meet-ups, borrels en sociale avonden waar het draait om nieuwe mensen leren kennen, voor je werk, omdat je net in Amsterdam woont of vanwege een gedeelde interesse. Fijn voor nieuwkomers, zzp'ers en iedereen die een groter netwerk wil, in een ontspannen sfeer zonder vol programma. De lijst wordt elke week vernieuwd."}}
 };
@@ -175,6 +175,7 @@ const list = EVENTS
   .map(x => x.e);
 if(!list.length) throw new Error(`no events for week ${week.id}`);
 
+const introHtml = s => esc(s).replace(/\[([^\]]+)\]\((\/[a-z0-9\/-]*)\)/g, '<a href="$2">$1</a>');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const priceText = (e, L) => e.price === null ? TXT[L].free : (e.price && e.price[L]) || "";
 const pageCats = CATEGORIES.filter(c => !NO_PAGE.has(c.id));
@@ -330,7 +331,7 @@ function catPage(c, L){
     robots:evs.length ? "" : "noindex, follow",
     headerExtra:` · <a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">${T.allWeek}</a>`,
     h1:T.catH1(label),
-    lead:`  <p>${esc(week.label[L])} · ${T.count(evs.length)}</p>\n  <p>${esc(CAT_PAGES[c.id][L].intro)} ${T.check}</p>`,
+    lead:`  <p>${esc(week.label[L])} · ${T.count(evs.length)}</p>\n  <p>${introHtml(CAT_PAGES[c.id][L].intro)} ${T.check}</p>`,
     events:evs, ld:jsonLd(evs, L)
   });
 }
