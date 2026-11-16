@@ -5181,8 +5181,20 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
 <script>
 /* ---- cookie settings (reopen the banner to change consent) ---- */
 function setFab(show){ const f=document.getElementById("cookiefab"); if(f) f.style.display = show ? "inline-flex" : "none"; }
-function openConsent(){ const b=document.getElementById("consent"); if(b){ b.style.display="flex"; b.querySelector("button").focus(); } setFab(false); }
-document.addEventListener("keydown", function(e){ if(e.key==="Escape"){ const b=document.getElementById("consent"); if(b&&b.style.display==="flex") consentChoice(false); } });
+// When the banner opens, keyboard focus moves onto its first control (Reject). When it closes, focus goes back to
+// the cookie button if the banner was reopened from it, or to the skip link after a first-visit choice.
+let consentReturn = null;
+function showConsent(returnTo){ const b=document.getElementById("consent"); if(!b) return; b.style.display="flex"; consentReturn=returnTo; const first=b.querySelector("button"); if(first) first.focus({preventScroll:true}); }
+function returnConsentFocus(){ const to=consentReturn; consentReturn=null; const el = to==="fab" ? document.getElementById("cookiefab") : document.querySelector(".skip-link"); if(el) el.focus({preventScroll:true}); }
+function openConsent(){ setFab(false); showConsent("fab"); }
+document.addEventListener("keydown", function(e){
+  const b=document.getElementById("consent"); if(!b || b.style.display!=="flex") return;
+  if(e.key==="Escape"){ consentChoice(false); return; }
+  // aria-modal dialog: Tab and Shift+Tab cycle through the banner's own controls while it is open
+  if(e.key==="Tab"){ const f=b.querySelectorAll("button, a[href]"); if(!f.length) return; const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && (document.activeElement===first || !b.contains(document.activeElement))){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && (document.activeElement===last || !b.contains(document.activeElement))){ e.preventDefault(); first.focus(); } }
+});
 
 /* ---- consent (Consent Mode v2) ---- */
 function getCookie(n){ try{ return (document.cookie.split("; ").find(r=>r.indexOf(n+"=")===0)||"").split("=")[1]||null; }catch(e){ return null; } }
@@ -5193,12 +5205,12 @@ function applyConsent(granted){
   if(granted && window.apLoadGA) window.apLoadGA();
   /* if(granted){ load adsbygoogle.js once here, then push each ad slot } */
 }
-function consentChoice(granted){ applyConsent(granted); setCookie("apu_consent", granted?"granted":"denied"); const b=document.getElementById("consent"); if(b) b.style.display="none"; setFab(true); }
+function consentChoice(granted){ applyConsent(granted); setCookie("apu_consent", granted?"granted":"denied"); const b=document.getElementById("consent"); const wasOpen = b && b.style.display==="flex"; if(b) b.style.display="none"; setFab(true); if(wasOpen) returnConsentFocus(); }
 function initConsent(){
   const c=getCookie("apu_consent"), b=document.getElementById("consent");
   if(c==="granted"){ applyConsent(true); if(b) b.style.display="none"; setFab(true); }
   else if(c==="denied"){ if(b) b.style.display="none"; setFab(true); }
-  else { if(b) b.style.display="flex"; setFab(false); }
+  else { setFab(false); showConsent("skip"); }
 }
 initConsent();
 </script>
