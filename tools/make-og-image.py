@@ -107,7 +107,7 @@ html, body {{
       </svg>
       <div class="text">
         <p class="wordmark">Amsterdam Pop-ups</p>
-        <p class="tagline">what's on, off the beaten guide</p>
+        <p class="tagline">Pop-ups, one-offs and hidden gems</p>
       </div>
     </div>
     <div class="bar" aria-hidden="true"></div>

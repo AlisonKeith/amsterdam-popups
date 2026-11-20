@@ -262,8 +262,8 @@ const hreflang = alt => `<link rel="alternate" hreflang="en" href="${SITE}${alt.
 
 const OG_IMAGE = `${SITE}/og-image.png`;
 const OG_ALT = {
-  en: "Amsterdam Pop-ups — what's on, off the beaten guide",
-  nl: "Amsterdam Pop-ups — wat er speelt, voorbij de gidsen"
+  en: "Amsterdam Pop-ups — Pop-ups, one-offs and hidden gems",
+  nl: "Amsterdam Pop-ups — Pop-ups, eenmalige events en verborgen pareltjes"
 };
 function socialMeta({L, title, desc, url}){
   const locale = L === "nl" ? "nl_NL" : "en_GB";
