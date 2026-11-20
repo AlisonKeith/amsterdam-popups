@@ -39,8 +39,8 @@ const CAT_PAGES = {
                nl:{slug:"drinken", intro:"Wijn- en bierproeverijen, pop-upbars, events bij brouwerijen en distilleerderijen en andere drankavonden die maar kort duren. Leuk voor nieuwsgierige proevers en vriendengroepen die eens iets anders willen dan hun vaste kroeg. De lijst wordt elke week bijgewerkt."}},
   markets:    {en:{slug:"markets", intro:"Flea markets, craft and design fairs, food markets and record or book sales that last a day or a weekend. Ideal for bargain hunters, collectors and anyone who likes to browse and meet the makers. The list is refreshed every week, so you can plan your weekend around it."},
                nl:{slug:"markten", intro:"Vlooienmarkten, ambachts- en designmarkten, foodmarkten en platen- of boekenmarkten die een dag of een weekend duren. Ideaal voor koopjesjagers, verzamelaars en iedereen die graag rondsnuffelt en de makers zelf spreekt. We vernieuwen de lijst elke week, zodat je je weekend er makkelijk omheen plant."}},
-  christmas:  {en:{slug:"christmas-markets", intro:"Christmas markets, winter fairs and festive pop-ups in Amsterdam, from big outdoor markets to small indoor makers' fairs. They suit families, friends looking for a cosy evening and anyone hunting for gifts that don't come from a chain store. This page is this week's slice; for the whole season, see [Christmas in Amsterdam, 2026–27](/christmas/)."},
-               nl:{slug:"kerstmarkten", intro:"Kerstmarkten, winterfairs en feestelijke pop-ups in Amsterdam, van grote markten buiten tot kleine makersmarkten binnen. Leuk voor gezinnen, vrienden die een gezellige avond zoeken en iedereen die cadeaus wil vinden buiten de grote ketens. Deze pagina is de selectie van deze week; voor het hele seizoen, zie [Kerst in Amsterdam, 2026–27](/nl/kerst/)."}},
+  christmas:  {en:{slug:"christmas-markets", intro:"Christmas markets, winter fairs and festive pop-ups in Amsterdam, from big outdoor markets to small indoor makers' fairs. They suit families, friends looking for a cosy evening and anyone hunting for gifts that don't come from a chain store. This page is this week's slice; for the whole season, see [Christmas events in Amsterdam](/christmas/)."},
+               nl:{slug:"kerstmarkten", intro:"Kerstmarkten, winterfairs en feestelijke pop-ups in Amsterdam, van grote markten buiten tot kleine makersmarkten binnen. Leuk voor gezinnen, vrienden die een gezellige avond zoeken en iedereen die cadeaus wil vinden buiten de grote ketens. Deze pagina is de selectie van deze week; voor het hele seizoen, zie [Kerstevenementen in Amsterdam](/nl/kerst/)."}},
   sinterklaas:{en:{slug:"sinterklaas", intro:"Sinterklaas shows, parties, workshops and family afternoons in the run-up to 5 December. Most are aimed at young children and their parents, and some are a nice introduction for anyone new to this Dutch tradition. The list is refreshed every week until the season ends."},
                nl:{slug:"sinterklaas", intro:"Sinterklaasvoorstellingen, feesten, workshops en familiemiddagen in aanloop naar 5 december. De meeste zijn bedoeld voor jonge kinderen en hun ouders, en een paar zijn ook leuk als je deze traditie voor het eerst meemaakt. Tot het einde van het seizoen vernieuwen we de lijst elke week."}},
   fashion:    {en:{slug:"fashion-vintage", intro:"Vintage sales, kilo sales, sample sales, clothing swaps and designer pop-ups that are only around for a short time. Perfect for second-hand fans, bargain hunters and anyone looking for something they won't find on the high street. New sales are added to the list every week."},
@@ -382,21 +382,21 @@ const xmasList = EVENTS
 const XMAS_ALT = {en:"/christmas/", nl:"/nl/kerst/"};
 const xmasEn = listPage({
   L:"en", alt:XMAS_ALT,
-  title:"Christmas in Amsterdam, 2026–27 · Amsterdam Pop-ups",
-  desc:`${xmasList.length} short-run Christmas markets, winter terraces, workshops and festive one-offs in Amsterdam, from late November 2026 to early January 2027, with dates, times, venues, prices and organiser links.`,
+  title:"Christmas events in Amsterdam 2026: markets, workshops and one-offs",
+  desc:"Spontaneous, one-off and short-run Christmas events in Amsterdam, late November to early January: markets, winter terraces, workshops and Light Festival walks.",
   headerExtra:` · <a href="/this-week.html">${TXT.en.allWeek}</a>`,
-  h1:"Christmas in Amsterdam, 2026–27",
-  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run ones: wooden chalets on Leidseplein, a covered makers' market in the old Markthal, a free village on Museumplein, and smaller weekends in a church, a park and at De Ceuvel. Here are the one-off and limited-run markets, winter terraces, workshops and light-festival walks running from now to early January. ${TXT.en.check}</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
+  h1:"Christmas events in Amsterdam",
+  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run ones: wooden chalets on Leidseplein, a covered makers' market in the old Markthal, a free village on Museumplein, and smaller weekends in a church, a park and at De Ceuvel. Here are the one-off and limited-run markets, winter terraces, workshops and light-festival walks running from now to early January, if you want ideas for a spontaneous evening out. ${TXT.en.check} Looking only for markets? See our <a href="/christmas-markets/">Christmas markets page</a>.</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "en"),
   footerText:"A season list of Christmas events from late November 2026 to early January 2027."
 });
 const xmasNl = listPage({
   L:"nl", alt:XMAS_ALT,
-  title:"Kerst in Amsterdam, 2026–27 · Amsterdam Pop-ups",
-  desc:`${xmasList.length} korte kerstmarkten, winterterrassen, workshops en feestelijke eenmalige events in Amsterdam, van eind november 2026 tot begin januari 2027, met data, tijden, locaties, prijzen en links naar de organisator.`,
+  title:"Kerstevenementen in Amsterdam 2026: markten, workshops en eenmalige events",
+  desc:"Spontane, eenmalige en korte kerstevenementen in Amsterdam, eind november tot begin januari: markten, winterterrassen, workshops en Light Festival-wandelingen.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
-  h1:"Kerst in Amsterdam, 2026–27",
-  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte: houten chalets op het Leidseplein, een overdekte makersmarkt in de oude Markthal, een gratis dorp op het Museumplein, en kleinere weekenden in een kerk, een park en op De Ceuvel. Hier staan de eenmalige en tijdelijke markten, winterterrassen, workshops en wandelingen bij het lichtfestival van nu tot begin januari. ${TXT.nl.check}</p>\n  <p>${xmasList.length} events, op datum.</p>`,
+  h1:"Kerstevenementen in Amsterdam",
+  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte: houten chalets op het Leidseplein, een overdekte makersmarkt in de oude Markthal, een gratis dorp op het Museumplein, en kleinere weekenden in een kerk, een park en op De Ceuvel. Hier staan de eenmalige en tijdelijke markten, winterterrassen, workshops en wandelingen bij het lichtfestival van nu tot begin januari, mooi als je zin hebt in een spontane avond. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>.</p>\n  <p>${xmasList.length} events, op datum.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "nl"),
   footerText:"Een seizoenslijst van kerstevents van eind november 2026 tot begin januari 2027."
 });
@@ -419,7 +419,7 @@ const live = pageCats.filter(c => inCat(c.id).length);
 const browseBlock = `<!-- build-static:browse:start -->
   <nav class="wrap browse" aria-labelledby="browse-h">
     <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
-    <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas in Amsterdam, 2026–27" data-txt-nl="Kerst in Amsterdam, 2026–27">Christmas in Amsterdam, 2026–27</a></p>
+    <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas events in Amsterdam" data-txt-nl="Kerstevenementen in Amsterdam">Christmas events in Amsterdam</a></p>
     <h2 id="browse-h" data-txt-en="${TXT.en.browse}" data-txt-nl="${TXT.nl.browse}">${TXT.en.browse}</h2>
     <ul>
 ${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc(c.label.en)}" data-txt-nl="${esc(c.label.nl)}">${esc(c.label.en)}</a></li>`).join("\n")}
@@ -545,7 +545,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [This week's events as a plain list](${SITE}/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](${SITE}/): map, category and day filters, English/Dutch toggle, archive
 - Dutch versions: [interactive guide](${SITE}/nl/), [plain list](${SITE}/nl/deze-week.html), and each category page below under /nl/
-- [Christmas in Amsterdam, 2026–27](${SITE}/christmas/): season-long list of short-run Christmas markets, winter terraces, workshops and light-festival walks (Dutch: [Kerst in Amsterdam](${SITE}/nl/kerst/))
+- [Christmas events in Amsterdam](${SITE}/christmas/): season-long list of short-run Christmas markets, winter terraces, workshops and light-festival walks (Dutch: [Kerstevenementen in Amsterdam](${SITE}/nl/kerst/))
 
 ## This week by category
 
