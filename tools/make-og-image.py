@@ -79,8 +79,8 @@ html, body {{
   font-family: "Archivo", sans-serif;
   font-weight: 500;
   font-stretch: 100%;
-  font-size: 32px;
-  line-height: 1.25;
+  font-size: 28px;
+  line-height: 1.3;
   color: {MUTED};
   margin: 0;
 }}
@@ -107,7 +107,7 @@ html, body {{
       </svg>
       <div class="text">
         <p class="wordmark">Amsterdam Pop-ups</p>
-        <p class="tagline">Pop-ups, one-offs and hidden gems</p>
+        <p class="tagline">Amsterdam's pop-up restaurants, shops,<br>one-off events and shows</p>
       </div>
     </div>
     <div class="bar" aria-hidden="true"></div>

@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://www.amsterdampopups.com/og-image.png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="Amsterdam Pop-ups — Pop-ups, one-offs and hidden gems" />
+<meta property="og:image:alt" content="Amsterdam Pop-ups — Amsterdam's pop-up restaurants, shops, one-off events and shows" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Things to do in Amsterdam this week · Amsterdam Pop-ups" />
 <meta name="twitter:description" content="A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links." />
@@ -171,18 +171,20 @@ a{color:inherit}
 
 /* ---- header ---- */
 header{padding:18px 0 0}
-.head-row{display:flex; align-items:center; justify-content:space-between; gap:14px}
-.brand{display:flex; align-items:center; gap:12px; min-width:0}
+.head-row{display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap}
+.brand{display:flex; align-items:flex-start; gap:12px; min-width:0; flex:1 1 14rem}
 .mark{width:42px; height:42px; border-radius:10px; overflow:hidden; flex:none}
 .wordmark{font-family:"Archivo Expanded","Inter",sans-serif; font-weight:700; font-size:20px; letter-spacing:-0.3px; line-height:1.05; color:var(--ink)}
-.tagline{font-size:11.5px; color:var(--faint); margin-top:1px}
+.nowrap{white-space:nowrap}
+.brand-text{min-width:0; flex:1}
+.tagline{font-size:11.5px; color:var(--faint); margin-top:1px; line-height:1.35; overflow-wrap:break-word; white-space:normal}
 .lang{display:flex; border:1px solid var(--line); border-radius:999px; overflow:hidden; font-size:12px; flex:none}
 .lang button{appearance:none; border:0; background:transparent; padding:5px 11px; cursor:pointer; color:var(--muted); font-family:inherit; font-size:12px}
 .lang button.on{background:var(--red); color:#fff; font-weight:500}
 .lang a{padding:5px 11px; color:var(--muted); text-decoration:none; font-size:12px}
 .lang a.on{background:var(--red); color:#fff; font-weight:500}
 .lang a:focus-visible{outline:2px solid var(--ink); outline-offset:-3px}
-.head-actions{display:flex; align-items:center; gap:8px; flex:none}
+.head-actions{display:flex; align-items:center; gap:8px; flex:none; margin-left:auto}
 .theme-toggle{appearance:none; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted); padding:5px 11px; font-family:inherit; font-size:12px; cursor:pointer}
 .theme-toggle:hover{color:var(--ink); border-color:var(--card-hover)}
 .theme-toggle svg{width:14px; height:14px; flex:none}
@@ -404,9 +406,9 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
             </g>
           </svg>
         </div>
-        <div>
-          <div class="wordmark">Amsterdam Pop-ups</div>
-          <div class="tagline" data-i18n="tagline">Pop-ups, one-offs and hidden gems</div>
+        <div class="brand-text">
+          <div class="wordmark">Amsterdam <span class="nowrap">Pop-ups</span></div>
+          <div class="tagline" data-i18n="tagline">Amsterdam's pop-up restaurants, shops, one-off events and shows</div>
         </div>
       </a>
       <div class="head-actions">
@@ -4844,9 +4846,9 @@ const EVENTS = [
 ];
 
 const I18N = {
-  en:{ thisweek:"This week", thisweekH1:"Things to do in Amsterdam this week", pageTitle:"Things to do in Amsterdam this week · Amsterdam Pop-ups", pageDesc:"A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links.", shareAlt:"Amsterdam Pop-ups — Pop-ups, one-offs and hidden gems", archive:"Archive", tip:"Know a pop-up?", about:"About",
+  en:{ thisweek:"This week", thisweekH1:"Things to do in Amsterdam this week", pageTitle:"Things to do in Amsterdam this week · Amsterdam Pop-ups", pageDesc:"A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links.", shareAlt:"Amsterdam Pop-ups — Amsterdam's pop-up restaurants, shops, one-off events and shows", archive:"Archive", tip:"Know a pop-up?", about:"About",
     all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", rAll:"All", rOneoff:"One-offs", rRegular:"Regular", rAria:"Filter by one-off or regular events", tipQ:"Know a pop-up we've missed — or running one yourself?", tipCta:"Know a pop-up?",
-    tagline:"Pop-ups, one-offs and hidden gems",
+    tagline:"Amsterdam's pop-up restaurants, shops, one-off events and shows",
     searchPh:"Search past pop-ups, places, neighbourhoods",
     none:"Nothing in this category this week — try another, or check the archive.",
     noResults:"No matches. Try a different word.",
@@ -4866,9 +4868,9 @@ const I18N = {
     listenStart:"Listen", listenStop:"Stop listening",
     mapsAria:(place)=>`Open in maps: ${place}`,
     mapsApple:"Apple Maps", mapsGoogle:"Google Maps", mapsWaze:"Waze", mapsOsm:"OpenStreetMap" },
-  nl:{ thisweek:"Deze week", thisweekH1:"Wat te doen in Amsterdam deze week", pageTitle:"Wat te doen in Amsterdam deze week · Amsterdam Pop-ups", pageDesc:"Wekelijkse gids voor pop-ups en eenmalige events in Amsterdam deze week: markten, eten, kunst, gezin, comedy en livemuziek, met een kaart, data, locaties en links naar de organisator.", shareAlt:"Amsterdam Pop-ups — Pop-ups, eenmalige events en verborgen pareltjes", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
+  nl:{ thisweek:"Deze week", thisweekH1:"Wat te doen in Amsterdam deze week", pageTitle:"Wat te doen in Amsterdam deze week · Amsterdam Pop-ups", pageDesc:"Wekelijkse gids voor pop-ups en eenmalige events in Amsterdam deze week: markten, eten, kunst, gezin, comedy en livemuziek, met een kaart, data, locaties en links naar de organisator.", shareAlt:"Amsterdam Pop-ups — Amsterdamse pop-up restaurants, winkels, eenmalige events en voorstellingen", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
     all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", rAll:"Alles", rOneoff:"Eenmalig", rRegular:"Terugkerend", rAria:"Filter op eenmalige of terugkerende evenementen", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
-    tagline:"Pop-ups, eenmalige events en verborgen pareltjes",
+    tagline:"Amsterdamse pop-up restaurants, winkels, eenmalige events en voorstellingen",
     searchPh:"Zoek eerdere pop-ups, plekken, buurten",
     none:"Niets in deze categorie deze week — probeer een andere of bekijk het archief.",
     noResults:"Geen resultaten. Probeer een ander woord.",
