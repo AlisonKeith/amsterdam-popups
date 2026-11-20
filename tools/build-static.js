@@ -383,25 +383,25 @@ const XMAS_ALT = {en:"/christmas/", nl:"/nl/kerst/"};
 const xmasEn = listPage({
   L:"en", alt:XMAS_ALT,
   title:"Christmas pop-ups and events in Amsterdam 2026",
-  desc:"Spontaneous Christmas pop-ups and one-off events in Amsterdam, late November to early January: markets, winter terraces, workshops and Light Festival walks.",
+  desc:"Spontaneous Christmas pop-ups and one-off events in Amsterdam, late November to early January: markets, winter terraces, workshops and light walks.",
   headerExtra:` · <a href="/this-week.html">${TXT.en.allWeek}</a>`,
   h1:"Christmas pop-ups and events in Amsterdam",
-  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run pop-ups: wooden chalets on Leidseplein, a covered makers' market in the old Markthal, a free village on Museumplein, and smaller weekends in a church, a park and at De Ceuvel. Here are the one-off and limited-run markets, winter terraces, workshops and light-festival walks running from now to early January, if you want ideas for a spontaneous evening out. Some of these pop ups last a weekend, others run through the season. ${TXT.en.check} Looking only for markets? See our <a href="/christmas-markets/">Christmas markets page</a>.</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
+  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run pop-ups: markets, winter terraces, workshops and light walks. Some pop ups last a weekend, others run all season. Here are the one-off and limited-run ones from now to early January, if you want ideas for a spontaneous evening out. ${TXT.en.check} Looking only for markets? See our <a href="/christmas-markets/">Christmas markets page</a>.</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "en"),
   footerText:"A season list of Christmas events from late November 2026 to early January 2027.",
-  keywords:"Christmas pop-ups Amsterdam, Christmas pop ups, Christmas popups, kerstmarkt Amsterdam, winter terraces, Light Festival Amsterdam",
+  keywords:"Christmas pop-ups Amsterdam, Christmas pop ups, Christmas popups, kerstmarkt Amsterdam, winter terraces, light walks",
   imageAlt:"Amsterdam Pop-ups — Christmas popups, markets and one-off events in Amsterdam"
 });
 const xmasNl = listPage({
   L:"nl", alt:XMAS_ALT,
   title:"Kerst pop-ups en evenementen in Amsterdam 2026",
-  desc:"Spontane kerst pop-ups en eenmalige events in Amsterdam, eind november tot begin januari: markten, winterterrassen, workshops en Light Festival-wandelingen.",
+  desc:"Spontane kerst pop-ups en eenmalige events in Amsterdam, eind november tot begin januari: markten, winterterrassen, workshops en lichtwandelingen.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
   h1:"Kerst pop-ups en evenementen in Amsterdam",
-  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: houten chalets op het Leidseplein, een overdekte makersmarkt in de oude Markthal, een gratis dorp op het Museumplein, en kleinere weekenden in een kerk, een park en op De Ceuvel. Hier staan de eenmalige en tijdelijke markten, winterterrassen, workshops en wandelingen bij het lichtfestival van nu tot begin januari, mooi als je zin hebt in een spontane avond. Sommige van deze pop ups duren een weekend, andere lopen het hele seizoen. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>.</p>\n  <p>${xmasList.length} events, op datum.</p>`,
+  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: markten, winterterrassen, workshops en lichtwandelingen. Sommige pop ups duren een weekend, andere lopen het hele seizoen. Hier staan de eenmalige en tijdelijke evenementen van nu tot begin januari, mooi als je zin hebt in een spontane avond. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>.</p>\n  <p>${xmasList.length} events, op datum.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "nl"),
   footerText:"Een seizoenslijst van kerstevents van eind november 2026 tot begin januari 2027.",
-  keywords:"Kerst pop-ups Amsterdam, kerst pop ups, Christmas popups, kerstmarkt Amsterdam, winterterrassen, Light Festival Amsterdam",
+  keywords:"Kerst pop-ups Amsterdam, kerst pop ups, Christmas popups, kerstmarkt Amsterdam, winterterrassen, lichtwandelingen",
   imageAlt:"Amsterdam Pop-ups — Christmas popups, markten en eenmalige events in Amsterdam"
 });
 writes.push([path.join("christmas", "index.html"), xmasEn], [path.join("nl", "kerst", "index.html"), xmasNl]);
