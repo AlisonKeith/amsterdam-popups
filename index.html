@@ -21,8 +21,8 @@
 })();
 </script>
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
-<title>Amsterdam Pop-ups — food, art, family &amp; culture this week</title>
-<meta name="description" content="Weekly map-first guide to Amsterdam's pop-ups and one-off events: food, art, family days and culture, from markets and supper clubs to comedy and music." />
+<title>Things to do in Amsterdam this week · Amsterdam Pop-ups</title>
+<meta name="description" content="A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links." />
 <meta name="robots" content="index, follow" />
 <meta name="author" content="Amsterdam Pop-ups" />
 <link rel="canonical" href="https://www.amsterdampopups.com/" />
@@ -31,13 +31,18 @@
 <link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.amsterdampopups.com/" />
-<meta property="og:title" content="Amsterdam Pop-ups — food, art, family &amp; culture this week" />
-<meta property="og:description" content="A weekly, map-first guide to Amsterdam's temporary happenings: food, art, family days and culture, from supper clubs and markets to comedy and live music." />
+<meta property="og:title" content="Things to do in Amsterdam this week · Amsterdam Pop-ups" />
+<meta property="og:description" content="A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links." />
 <meta property="og:locale" content="en_GB" />
 <meta property="og:locale:alternate" content="nl_NL" />
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Amsterdam Pop-ups — food, art, family &amp; culture this week" />
-<meta name="twitter:description" content="Weekly map-first guide to Amsterdam's pop-ups: food, art, family days and culture, from markets and supper clubs to comedy and music." />
+<meta property="og:image" content="https://www.amsterdampopups.com/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Amsterdam Pop-ups — what's on, off the beaten guide" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Things to do in Amsterdam this week · Amsterdam Pop-ups" />
+<meta name="twitter:description" content="A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links." />
+<meta name="twitter:image" content="https://www.amsterdampopups.com/og-image.png" />
 <meta name="geo.region" content="NL-NH" />
 <meta name="geo.placename" content="Amsterdam" />
 <meta name="geo.position" content="52.3676;4.9041" />
@@ -202,7 +207,8 @@ main{padding:18px 0 40px}
 
 /* ---- this week head ---- */
 .weekhead{display:flex; align-items:center; justify-content:space-between; gap:10px 14px; margin-bottom:12px; flex-wrap:wrap}
-.weekhead h1{font-family:"Archivo Expanded",sans-serif; font-weight:600; font-size:19px; margin:0; color:var(--ink)}
+.weekhead h1{font-family:"Archivo Expanded",sans-serif; font-weight:600; font-size:19px; margin:0; color:var(--ink); max-width:22ch; line-height:1.2}
+@media (max-width:560px){ .weekhead h1{font-size:17px} }
 .weekhead .range{font-size:12.5px; color:var(--muted); margin-top:2px}
 .weektitle{display:flex; align-items:center; flex-wrap:wrap; gap:4px 10px}
 .weekcount{font-size:12.5px; font-weight:500; line-height:1.4; padding:2px 10px; border-radius:999px; background:var(--red-tint); border:1px solid var(--red-text); color:var(--red-deep); white-space:nowrap}
@@ -230,6 +236,8 @@ main{padding:18px 0 40px}
 #map{height:380px; border-radius:14px; border:1px solid var(--line); margin:6px 0 16px; z-index:1; background:var(--map-bg)}
 .leaflet-container{font-family:"Inter",sans-serif; background:var(--map-bg)}
 .intro-text{font-size:.75rem;color:var(--faint);margin:.35rem 0 .6rem;line-height:1.5;width:100%;box-sizing:border-box}
+.plain-list-link{margin:0 0 14px;font-size:14px;line-height:1.4}
+.plain-list-link a{color:var(--red-text)}
 .pin{width:16px; height:16px; border-radius:50%; border:2px solid var(--pin-ring); box-shadow:0 0 0 1px rgba(0,0,0,0.12); position:relative; display:flex; align-items:center; justify-content:center}
 .pin-badge{position:absolute; top:-7px; right:-7px; background:var(--badge-bg); color:#fff; border-radius:999px; font-size:9px; font-weight:700; line-height:1; padding:2px 4px; min-width:14px; text-align:center; box-shadow:0 0 0 1.5px var(--pin-ring); pointer-events:none}
 .leaflet-popup-content{margin:11px 13px; font-size:13px; line-height:1.45; color:var(--ink)}
@@ -308,6 +316,8 @@ footer .browse{display:block; padding-bottom:0}
 footer .browse h2{font-size:12px; font-weight:600; margin:0 0 6px; color:var(--muted)}
 footer .browse ul{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:4px 14px}
 footer .browse a{color:var(--muted)}
+footer .browse .plain-list-link{margin:0 0 10px;font-size:13px}
+footer .browse .plain-list-link a{color:var(--red-text)}
 
 @media (max-width:560px){
   #map{height:320px}
@@ -358,13 +368,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
       "@id": "https://www.amsterdampopups.com/#website",
       "url": "https://www.amsterdampopups.com/",
       "name": "Amsterdam Pop-ups",
-      "description": "A weekly, map-first guide to Amsterdam's temporary happenings: comedy, theatre and dance, nightlife, live music, supper clubs, markets, Sinterklaas and kids events, and one-off nights that don't make the mainstream guides.",
-      "inLanguage": ["en", "nl"],
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://www.amsterdampopups.com/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
+      "description": "A weekly guide to pop-ups and one-off events in Amsterdam: markets, food, art, family days, comedy and live music.",
+      "inLanguage": ["en", "nl"]
     },
     {
       "@type": "Organization",
@@ -375,28 +380,6 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
         "@type": "ContactPoint",
         "email": "hello@amsterdampopups.com",
         "contactType": "editorial"
-      }
-    },
-    {
-      "@type": "LocalBusiness",
-      "@id": "https://www.amsterdampopups.com/#localbusiness",
-      "name": "Amsterdam Pop-ups",
-      "description": "Weekly curated guide to temporary events in Amsterdam, from comedy, theatre and nightlife to markets, Sinterklaas and family events",
-      "url": "https://www.amsterdampopups.com/",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Amsterdam",
-        "addressRegion": "Noord-Holland",
-        "addressCountry": "NL"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 52.3676,
-        "longitude": 4.9041
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Amsterdam"
       }
     }
   ]
@@ -471,7 +454,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <div class="weekhead">
             <div>
               <div class="weektitle">
-                <h1 id="heading-thisweek" data-i18n="thisweek">This week</h1>
+                <h1 id="heading-thisweek" data-i18n="thisweekH1">Things to do in Amsterdam this week</h1>
                 <span class="weekcount" id="weekcount" role="status" aria-live="polite" aria-atomic="true"></span>
               </div>
               <div class="range" id="weekrange"></div>
@@ -492,6 +475,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <div class="chips" id="chips"></div>
           <p class="intro-text" id="intro-en">Amsterdam's weekly guide to pop-up events — street food markets, comedy, theatre and dance, live music, nightlife, art openings, supper clubs, Sinterklaas visits and one-off nights across Centrum, Noord, Oost, West, De Pijp, Jordaan and beyond. Updated every week.</p>
           <p class="intro-text" id="intro-nl" style="display:none">De wekelijkse gids voor pop-upevenementen in Amsterdam — straatvoedselmarkten, comedy en cabaret, theater en dans, livemuziek, nachtleven, kunstopeningen, supperclubs, Sinterklaasfeesten en eenmalige avonden in Centrum, Noord, Oost, West, De Pijp, Jordaan en verder. Elke week bijgewerkt.</p>
+          <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
           <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
           <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
@@ -589,6 +573,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 <footer>
 <!-- build-static:browse:start -->
   <nav class="wrap browse" aria-labelledby="browse-h">
+    <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
     <h2 id="browse-h" data-txt-en="This week by category" data-txt-nl="Deze week per categorie">This week by category</h2>
     <ul>
       <li><a href="/food/" data-href-en="/food/" data-href-nl="/nl/eten/" data-txt-en="Food" data-txt-nl="Eten">Food</a></li>
@@ -4859,7 +4844,7 @@ const EVENTS = [
 ];
 
 const I18N = {
-  en:{ thisweek:"This week", archive:"Archive", tip:"Know a pop-up?", about:"About",
+  en:{ thisweek:"This week", thisweekH1:"Things to do in Amsterdam this week", pageTitle:"Things to do in Amsterdam this week · Amsterdam Pop-ups", pageDesc:"A weekly guide to pop-ups and one-off events in Amsterdam this week: markets, food, art, family days, comedy and live music, with a map, dates, venues and organiser links.", shareAlt:"Amsterdam Pop-ups — what's on, off the beaten guide", archive:"Archive", tip:"Know a pop-up?", about:"About",
     all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", rAll:"All", rOneoff:"One-offs", rRegular:"Regular", rAria:"Filter by one-off or regular events", tipQ:"Know a pop-up we've missed — or running one yourself?", tipCta:"Know a pop-up?",
     tagline:"what's on, off the beaten guide",
     searchPh:"Search past pop-ups, places, neighbourhoods",
@@ -4881,7 +4866,7 @@ const I18N = {
     listenStart:"Listen", listenStop:"Stop listening",
     mapsAria:(place)=>`Open in maps: ${place}`,
     mapsApple:"Apple Maps", mapsGoogle:"Google Maps", mapsWaze:"Waze", mapsOsm:"OpenStreetMap" },
-  nl:{ thisweek:"Deze week", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
+  nl:{ thisweek:"Deze week", thisweekH1:"Wat te doen in Amsterdam deze week", pageTitle:"Wat te doen in Amsterdam deze week · Amsterdam Pop-ups", pageDesc:"Wekelijkse gids voor pop-ups en eenmalige events in Amsterdam deze week: markten, eten, kunst, gezin, comedy en livemuziek, met een kaart, data, locaties en links naar de organisator.", shareAlt:"Amsterdam Pop-ups — wat er speelt, voorbij de gidsen", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
     all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", rAll:"Alles", rOneoff:"Eenmalig", rRegular:"Terugkerend", rAria:"Filter op eenmalige of terugkerende evenementen", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
     tagline:"wat er speelt, voorbij de gidsen",
     searchPh:"Zoek eerdere pop-ups, plekken, buurten",
@@ -5384,9 +5369,14 @@ function switchView(name){
 /* ---- language ---- */
 function applyI18n(){
   document.documentElement.lang = lang;
-  document.title = lang === "nl" ? "Amsterdam Pop-ups — eten, kunst, gezin & cultuur deze week" : "Amsterdam Pop-ups — food, art, family & culture this week";
-  const md = document.querySelector('meta[name="description"]');
-  if(md) md.setAttribute("content", lang === "nl" ? "Wekelijkse kaartgids voor pop-ups en eenmalige events in Amsterdam: eten, kunst, gezin en cultuur, van markten en supperclubs tot comedy en muziek." : "Weekly map-first guide to Amsterdam's pop-ups and one-off events: food, art, family days and culture, from markets and supper clubs to comedy and music.");
+  document.title = t("pageTitle");
+  const setMeta = (sel, attr, val) => { const el = document.querySelector(sel); if(el) el.setAttribute(attr, val); };
+  setMeta('meta[name="description"]', "content", t("pageDesc"));
+  setMeta('meta[property="og:title"]', "content", t("pageTitle"));
+  setMeta('meta[property="og:description"]', "content", t("pageDesc"));
+  setMeta('meta[name="twitter:title"]', "content", t("pageTitle"));
+  setMeta('meta[name="twitter:description"]', "content", t("pageDesc"));
+  setMeta('meta[property="og:image:alt"]', "content", t("shareAlt"));
   document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t(el.dataset.i18n); });
   document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = t(el.dataset.i18nPh); });
   // generated links (footer "browse by category"): text and target per language, from data-txt-en/-nl and data-href-en/-nl

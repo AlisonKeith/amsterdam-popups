@@ -84,7 +84,7 @@ const TXT = {
       check:"Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.",
       catH1:l => `${l} in Amsterdam this week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam this week (${w}) · Amsterdam Pop-ups`,
-      catDesc:(l, n, w) => `${n} ${l} ${n === 1 ? "event" : "events"} in Amsterdam for ${w}: pop-ups and one-offs with dates, times, venues, prices and organiser links.`,
+      catDesc:(l, n, w) => `${l} in Amsterdam this week (${w}): ${n} ${n === 1 ? "event" : "events"}, with dates, times, venues, prices and organiser links.`,
       empty:a => `Nothing in this category this week. Try another category below, or see ${a}all this week's events</a>.`},
   nl:{when:"Wanneer", where:"Waar", price:"Prijs", org:"Organisator", free:"Gratis", regular:"Terugkerend",
       details:n => `Details en tickets voor ${n}`, detailsSr:" (site van de organisator)", skip:"Naar de lijst",
@@ -94,7 +94,7 @@ const TXT = {
       check:"Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.",
       catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam deze week (${w}) · Amsterdam Pop-ups`,
-      catDesc:(l, n, w) => `${n} ${n === 1 ? "event" : "events"} in ${l} in Amsterdam, ${w}: pop-ups en eenmalige events met data, tijden, locaties, prijzen en links naar de organisator.`,
+      catDesc:(l, n, w) => `${l} in Amsterdam deze week (${w}): ${n} ${n === 1 ? "event" : "events"}, met data, tijden, locaties, prijzen en links naar de organisator.`,
       empty:a => `Deze week niets in deze categorie. Probeer een andere categorie hieronder, of bekijk ${a}alle events van deze week</a>.`}
 };
 
@@ -260,6 +260,30 @@ const hreflang = alt => `<link rel="alternate" hreflang="en" href="${SITE}${alt.
 <link rel="alternate" hreflang="nl" href="${SITE}${alt.nl}" />
 <link rel="alternate" hreflang="x-default" href="${SITE}${alt.en}" />`;
 
+const OG_IMAGE = `${SITE}/og-image.png`;
+const OG_ALT = {
+  en: "Amsterdam Pop-ups — what's on, off the beaten guide",
+  nl: "Amsterdam Pop-ups — wat er speelt, voorbij de gidsen"
+};
+function socialMeta({L, title, desc, url}){
+  const locale = L === "nl" ? "nl_NL" : "en_GB";
+  const locAlt = L === "nl" ? "en_GB" : "nl_NL";
+  return `<meta property="og:type" content="website" />
+<meta property="og:url" content="${SITE}${url}" />
+<meta property="og:title" content="${esc(title)}" />
+<meta property="og:description" content="${esc(desc)}" />
+<meta property="og:locale" content="${locale}" />
+<meta property="og:locale:alternate" content="${locAlt}" />
+<meta property="og:image" content="${OG_IMAGE}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="${esc(OG_ALT[L])}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="${esc(title)}" />
+<meta name="twitter:description" content="${esc(desc)}" />
+<meta name="twitter:image" content="${OG_IMAGE}" />`;
+}
+
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
 function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId}){
   const T = TXT[L], url = alt[L];
@@ -274,6 +298,7 @@ ${GENERATED}
 <meta name="description" content="${esc(desc)}" />
 ${robots ? `<meta name="robots" content="${robots}" />\n` : ""}<link rel="canonical" href="${SITE}${url}" />
 ${hreflang(alt)}
+${socialMeta({L, title, desc, url})}
 ${GA_HEAD}${STYLE}
 ${ld}</head>
 <body>
@@ -304,18 +329,18 @@ ${consentBlock(L)}
 const WEEK_ALT = {en:"/this-week.html", nl:"/nl/deze-week.html"};
 const thisWeek = listPage({
   L:"en", alt:WEEK_ALT,
-  title:`Amsterdam pop-ups this week, ${week.label.en} · plain list`,
-  desc:`All ${list.length} pop-ups and one-off events in Amsterdam for ${week.label.en}: food, art, family and culture, with dates, times, venues, prices and organiser links.`,
-  h1:`Amsterdam pop-ups this week: ${week.label.en}`,
-  lead:`  <p>${list.length} temporary and one-off events: food, art, family and culture, from markets and supper clubs to comedy, music and nightlife. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>`,
+  title:`Things to do in Amsterdam this week, ${week.label.en} · Amsterdam Pop-ups`,
+  desc:`All ${list.length} pop-ups and one-off events in Amsterdam this week (${week.label.en}): markets, food, art, family and culture, with dates, times, venues, prices and organiser links.`,
+  h1:`Things to do in Amsterdam this week, ${week.label.en}`,
+  lead:`  <p>${list.length} temporary and one-off events this week: markets, food, art, family and culture, from supper clubs to comedy, music and nightlife. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>`,
   events:list, ld:jsonLd(list, "en")
 });
 const dezeWeek = listPage({
   L:"nl", alt:WEEK_ALT,
-  title:`Pop-ups in Amsterdam deze week, ${week.label.nl} · lijst`,
-  desc:`Alle ${list.length} pop-ups en eenmalige events in Amsterdam voor ${week.label.nl}: eten, kunst, gezin en cultuur, met data, tijden, locaties, prijzen en links naar de organisator.`,
-  h1:`Pop-ups in Amsterdam deze week: ${week.label.nl}`,
-  lead:`  <p>${list.length} tijdelijke en eenmalige events: eten, kunst, gezin en cultuur, van markten en supperclubs tot comedy, muziek en nachtleven. ${TXT.nl.check}</p>`,
+  title:`Wat te doen in Amsterdam deze week, ${week.label.nl} · Amsterdam Pop-ups`,
+  desc:`Alle ${list.length} pop-ups en eenmalige events in Amsterdam deze week (${week.label.nl}): markten, eten, kunst, gezin en cultuur, met data, tijden, locaties, prijzen en links naar de organisator.`,
+  h1:`Wat te doen in Amsterdam deze week, ${week.label.nl}`,
+  lead:`  <p>${list.length} tijdelijke en eenmalige events deze week: markten, eten, kunst, gezin en cultuur, van supperclubs tot comedy, muziek en nachtleven. ${TXT.nl.check}</p>`,
   events:list, ld:jsonLd(list, "nl")
 });
 
@@ -358,6 +383,7 @@ for(const id of NO_PAGE){
 const live = pageCats.filter(c => inCat(c.id).length);
 const browseBlock = `<!-- build-static:browse:start -->
   <nav class="wrap browse" aria-labelledby="browse-h">
+    <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
     <h2 id="browse-h" data-txt-en="${TXT.en.browse}" data-txt-nl="${TXT.nl.browse}">${TXT.en.browse}</h2>
     <ul>
 ${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc(c.label.en)}" data-txt-nl="${esc(c.label.nl)}">${esc(c.label.en)}</a></li>`).join("\n")}
@@ -383,9 +409,8 @@ function readObj(name){
 }
 function buildNlIndex(){
   const I18N = readObj("I18N");
-  const nlTitle = (newIndex.match(/document\.title = lang === "nl" \? "([^"]+)"/) || [])[1];
-  const nlDesc = (newIndex.match(/md\.setAttribute\("content", lang === "nl" \? "([^"]+)"/) || [])[1];
-  if(!nlTitle || !nlDesc) throw new Error("Dutch title/description not found in applyI18n()");
+  const nlTitle = I18N.nl.pageTitle, nlDesc = I18N.nl.pageDesc, nlAlt = I18N.nl.shareAlt;
+  if(!nlTitle || !nlDesc || !nlAlt) throw new Error("Dutch pageTitle, pageDesc or shareAlt missing from I18N");
   let out = newIndex;
   const swap = (from, to, n = 1) => {
     const count = typeof from === "string" ? out.split(from).length - 1 : (out.match(new RegExp(from.source, "g")) || []).length;
@@ -415,6 +440,7 @@ function buildNlIndex(){
   swap(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${esc(nlDesc)}" />`);
   swap(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${esc(nlTitle)}" />`);
   swap(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${esc(nlDesc)}" />`);
+  swap(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${esc(nlAlt)}" />`);
   swap('<meta property="og:locale" content="en_GB" />\n<meta property="og:locale:alternate" content="nl_NL" />',
        '<meta property="og:locale" content="nl_NL" />\n<meta property="og:locale:alternate" content="en_GB" />');
   if(!out.includes(GA_HEAD)) throw new Error("nl/index.html lost the GA tag");
@@ -429,6 +455,41 @@ function buildNlIndex(){
        `<noscript>\n      <p>Deze gids heeft JavaScript nodig voor de kaart en filters. <a href="/nl/deze-week.html">Lees de events van deze week als gewone lijst</a>, met data, locaties, prijzen en links naar de organisator.</p>\n    </noscript>`);
   swap('<span id="listen-label">Listen</span>', `<span id="listen-label">${esc(I18N.nl.listenStart)}</span>`);
   for(const [en, nl] of nlSr()) swap(en, nl);
+  const ldStart = out.indexOf('<script type="application/ld+json">');
+  const ldEnd = out.indexOf("</script>", ldStart);
+  if(ldStart < 0 || ldEnd < 0) throw new Error("homepage JSON-LD not found for Dutch swap");
+  let enLdBlock = out.slice(ldStart, ldEnd + "</script>".length);
+  if(out[ldEnd + "</script>".length] === "\n") enLdBlock += "\n";
+  if(!enLdBlock.includes("#website") || !enLdBlock.includes("#organization")) throw new Error("homepage JSON-LD is missing WebSite or Organization");
+  const nlLdObj = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": SITE + "/nl/#website",
+        "url": SITE + "/nl/",
+        "name": "Amsterdam Pop-ups",
+        "description": "Wekelijkse gids voor pop-ups en eenmalige events in Amsterdam: markten, eten, kunst, gezin, comedy en livemuziek.",
+        "inLanguage": ["nl", "en"]
+      },
+      {
+        "@type": "Organization",
+        "@id": SITE + "/nl/#organization",
+        "name": "Amsterdam Pop-ups",
+        "url": SITE + "/nl/",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "hello@amsterdampopups.com",
+          "contactType": "editorial"
+        }
+      }
+    ]
+  };
+  const nlLd = `<script type="application/ld+json">\n${JSON.stringify(nlLdObj, null, 2)}\n</script>\n`;
+  if((out.match(/<script type="application\/ld\+json">/g) || []).length !== 1) throw new Error("expected one homepage JSON-LD block");
+  out = out.replace(enLdBlock, nlLd);
+  if(out.includes("/#localbusiness") || out.includes("SearchAction") || out.includes("LocalBusiness")) throw new Error("Dutch homepage still has SearchAction or LocalBusiness");
+  if(!out.includes(SITE + "/nl/#website") || !out.includes(SITE + "/nl/#organization")) throw new Error("Dutch homepage JSON-LD IDs were not applied");
   swap('let lang = "en";', 'let lang = "nl";');
   return out;
 }
@@ -466,6 +527,7 @@ Events can belong to several categories. "Regular" marks weekly or recurring ser
 `;
 
 // ---- sitemap.xml ----
+const lastmod = new Date().toLocaleDateString("en-CA", {timeZone: "Europe/Amsterdam"});
 const urlEntry = (loc, lastmod, freq, prio, alt) => `  <url>
     <loc>${SITE}${loc}</loc>
 ${alt ? ["en", "nl", "x-default"].map(h => `    <xhtml:link rel="alternate" hreflang="${h}" href="${SITE}${alt[h === "nl" ? "nl" : "en"]}"/>\n`).join("") : ""}${lastmod ? `    <lastmod>${lastmod}</lastmod>\n` : ""}    <changefreq>${freq}</changefreq>
@@ -474,13 +536,12 @@ ${alt ? ["en", "nl", "x-default"].map(h => `    <xhtml:link rel="alternate" href
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${[
-  urlEntry("/", week.id, "weekly", "1.0", ROOT_ALT),
-  urlEntry("/nl/", week.id, "weekly", "1.0", ROOT_ALT),
-  urlEntry("/this-week.html", week.id, "weekly", "0.8", WEEK_ALT),
-  urlEntry("/nl/deze-week.html", week.id, "weekly", "0.8", WEEK_ALT),
+  urlEntry("/", lastmod, "weekly", "1.0", ROOT_ALT),
+  urlEntry("/nl/", lastmod, "weekly", "1.0", ROOT_ALT),
+  urlEntry("/this-week.html", lastmod, "weekly", "0.8", WEEK_ALT),
+  urlEntry("/nl/deze-week.html", lastmod, "weekly", "0.8", WEEK_ALT),
   ...live.flatMap(c => { const alt = {en:catPath(c.id, "en"), nl:catPath(c.id, "nl")};
-    return [urlEntry(alt.en, week.id, "weekly", "0.7", alt), urlEntry(alt.nl, week.id, "weekly", "0.7", alt)]; }),
-  urlEntry("/privacy.html", "", "yearly", "0.3")
+    return [urlEntry(alt.en, lastmod, "weekly", "0.7", alt), urlEntry(alt.nl, lastmod, "weekly", "0.7", alt)]; })
 ].join("\n")}
 </urlset>
 `;
@@ -492,4 +553,4 @@ for(const [rel, content] of writes){
   fs.writeFileSync(f, content);
 }
 
-console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 5} URLs, lastmod ${week.id}`);
+console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 4} URLs, lastmod ${lastmod}`);
