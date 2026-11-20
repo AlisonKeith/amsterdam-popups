@@ -478,6 +478,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <p class="intro-text" id="intro-en">Amsterdam's weekly guide to pop-up events — street food markets, comedy, theatre and dance, live music, nightlife, art openings, supper clubs, Sinterklaas visits and one-off nights across Centrum, Noord, Oost, West, De Pijp, Jordaan and beyond. Updated every week.</p>
           <p class="intro-text" id="intro-nl" style="display:none">De wekelijkse gids voor pop-upevenementen in Amsterdam — straatvoedselmarkten, comedy en cabaret, theater en dans, livemuziek, nachtleven, kunstopeningen, supperclubs, Sinterklaasfeesten en eenmalige avonden in Centrum, Noord, Oost, West, De Pijp, Jordaan en verder. Elke week bijgewerkt.</p>
           <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
+    <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas in Amsterdam, 2026–27" data-txt-nl="Kerst in Amsterdam, 2026–27">Christmas in Amsterdam, 2026–27</a></p>
+          <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas in Amsterdam, 2026–27" data-txt-nl="Kerst in Amsterdam, 2026–27">Christmas in Amsterdam, 2026–27</a></p>
           <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
           <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
@@ -576,6 +578,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 <!-- build-static:browse:start -->
   <nav class="wrap browse" aria-labelledby="browse-h">
     <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
+    <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas in Amsterdam, 2026–27" data-txt-nl="Kerst in Amsterdam, 2026–27">Christmas in Amsterdam, 2026–27</a></p>
     <h2 id="browse-h" data-txt-en="This week by category" data-txt-nl="Deze week per categorie">This week by category</h2>
     <ul>
       <li><a href="/food/" data-href-en="/food/" data-href-nl="/nl/eten/" data-txt-en="Food" data-txt-nl="Eten">Food</a></li>
@@ -1081,22 +1084,22 @@ const EVENTS = [
     url:"https://festival.idfa.nl/en/",
     org:{name:"IDFA",url:"https://festival.idfa.nl/"} },
 
-  { id:"winterterras-ndsm", week:"2026-11-16", cats:["food","drink","music","family"], recur:"oneoff",
+  { id:"winterterras-ndsm", week:"2026-11-16", cats:["food","drink","music","family"], recur:"oneoff", season:"christmas",
     name:"Het Amsterdamse Winterterras",
     hood:{en:"NDSM, Noord",nl:"NDSM, Noord"}, lat:52.4012, lng:4.8956,
-    when:{en:"Fri 20 – Sun 22 Nov",nl:"vr 20 – zo 22 nov"}, time:{en:"Fri 16:00–23:00, Sat 14:00–23:00, Sun 14:00–22:00",nl:"vr 16:00–23:00, za 14:00–23:00, zo 14:00–22:00"},
-    days:["2026-11-20","2026-11-21","2026-11-22"],
+    when:{en:"Fri–Sun, 13–29 Nov (three weekends)",nl:"vr–zo, 13–29 nov (drie weekenden)"}, time:{en:"Fri 16:00–23:00, Sat 14:00–23:00, Sun 14:00–22:00",nl:"vr 16:00–23:00, za 14:00–23:00, zo 14:00–22:00"},
+    days:["2026-11-13","2026-11-14","2026-11-15","2026-11-20","2026-11-21","2026-11-22","2026-11-27","2026-11-28","2026-11-29"],
     addr:{en:"NDSM-loods, NDSM-Plein 27, Amsterdam",nl:"NDSM-loods, NDSM-Plein 27, Amsterdam"}, price:{en:"Tickets; kids under 12 free",nl:"Kaarten; kinderen tot 12 jaar gratis"},
     blurb:{en:"Weekend two of a covered winter terrace inside a dome in the NDSM shipyard hall — Amsterdam restaurants and bars under one roof, DJs and sing-alongs, plus a mini-terrace for kids.",
            nl:"Tweede weekend van een overdekt winterterras in een dome in de NDSM-loods — Amsterdamse horeca onder één dak, dj's, meezingers en een Mini-Terras voor kids."},
     url:"https://hetamsterdamsewinterterras.nl/",
     org:{name:"Het Amsterdamse Winterterras",url:"https://hetamsterdamsewinterterras.nl/"} },
 
-  { id:"le-foodwalk-winter", week:"2026-11-16", cats:["food"], recur:"oneoff",
+  { id:"le-foodwalk-winter", week:"2026-11-16", cats:["food"], recur:"oneoff", season:"christmas",
     name:"Le Foodwalk Winter",
     hood:{en:"Centrum",nl:"Centrum"}, lat:52.3761, lng:4.9004,
-    when:{en:"Fri 20 & Sat 21 Nov",nl:"vr 20 & za 21 nov"}, time:{en:"Start between 17:00 and 19:00",nl:"Start tussen 17:00 en 19:00"},
-    days:["2026-11-20","2026-11-21"],
+    when:{en:"Fridays & Saturdays, 13 Nov – 23 Jan (not 25–26 Dec or 1 Jan)",nl:"elke vr & za, 13 nov – 23 jan (niet 25–26 dec of 1 jan)"}, time:{en:"Start between 17:00 and 19:00",nl:"Start tussen 17:00 en 19:00"},
+    days:["2026-11-13","2026-11-14","2026-11-20","2026-11-21","2026-11-27","2026-11-28","2026-12-04","2026-12-05","2026-12-11","2026-12-12","2026-12-18","2026-12-19","2027-01-02","2027-01-08","2027-01-09","2027-01-15","2027-01-16","2027-01-22","2027-01-23"],
     addr:{en:"Starts at Vermeers Wijnkamer, Zeedijk 11, Amsterdam",nl:"Start bij Vermeers Wijnkamer, Zeedijk 11, Amsterdam"}, price:{en:"€37.50 + €1 fee",nl:"€37,50 + €1 fee"},
     blurb:{en:"A winter walking food tour: pick up a stamp card on the Zeedijk, then collect five bites at five restaurants on a route past the canals and winter lights. Fridays and Saturdays until 23 Jan.",
            nl:"Winterse wandelfoodtour: haal je stempelkaart op de Zeedijk en proef vijf bites bij vijf restaurants langs een route door het centrum. Elke vr & za t/m 23 jan."},
@@ -1148,11 +1151,11 @@ const EVENTS = [
     url:"https://parnassus212.nl/",
     org:{name:"Parnassus 212",url:"https://parnassus212.nl/"} },
 
-  { id:"dehallen-holiday-gift-shop", week:"2026-11-16", cats:["shops","christmas","fashion"], recur:"oneoff",
+  { id:"dehallen-holiday-gift-shop", week:"2026-11-16", cats:["shops","christmas","fashion"], recur:"oneoff", season:"christmas",
     name:"The Creative Lab — Holiday Gift Shop",
     hood:{en:"Oud-West",nl:"Oud-West"}, lat:52.3666, lng:4.8688,
-    when:{en:"Opens Fri 20 Nov (until 20 Dec)",nl:"Opent vr 20 nov (t/m 20 dec)"}, time:{en:"Tue–Sun 11:30–18:30",nl:"di–zo 11:30–18:30"},
-    days:["2026-11-20","2026-11-21","2026-11-22"],
+    when:{en:"Fri 20 Nov – Sun 20 Dec",nl:"vr 20 nov – zo 20 dec"}, time:{en:"Tue–Sun 11:30–18:30 (closed Mon)",nl:"di–zo 11:30–18:30 (ma gesloten)"},
+    days:["2026-11-20","2026-11-21","2026-11-22","2026-11-24","2026-11-25","2026-11-26","2026-11-27","2026-11-28","2026-11-29","2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-06","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-13","2026-12-15","2026-12-16","2026-12-17","2026-12-18","2026-12-19","2026-12-20"],
     addr:{en:"De Hallen (Beeldend Gesproken), Hannie Dankbaarpassage 25, Amsterdam",nl:"De Hallen (Beeldend Gesproken), Hannie Dankbaarpassage 25, Amsterdam"}, price:{en:"Free entry",nl:"Gratis entree"},
     blurb:{en:"The Creative Lab's festive pop-up shop is back in De Hallen, with a rotating line-up of independent makers, vintage sellers and jewellers changing every week until Christmas.",
            nl:"De feestelijke pop-upwinkel van The Creative Lab is terug in De Hallen, met elke week wisselende makers, vintageverkopers en sieradenontwerpers."},
@@ -1227,7 +1230,7 @@ const EVENTS = [
     url:"https://puremarkt.nl/locaties/centrale-markthallen/",
     org:{name:"Pure Markt",url:"https://puremarkt.nl/"} },
 
-  { id:"sunday-market-oostenburg", week:"2026-11-16", cats:["christmas","markets","food"], recur:"oneoff",
+  { id:"sunday-market-oostenburg", week:"2026-11-16", cats:["christmas","markets","food"], recur:"oneoff", season:"christmas",
     name:"Sunday Market Oostenburg — winter edition",
     hood:{en:"Oostenburg",nl:"Oostenburg"}, lat:52.3721, lng:4.9280,
     when:{en:"Sun 22 Nov",nl:"zo 22 nov"}, time:{en:"11:00–17:00",nl:"11:00–17:00"},
@@ -1574,11 +1577,11 @@ const EVENTS = [
     org:{name:"Frascati Theater",url:"https://www.frascatitheater.nl/"} },
 
 
-  { id:"wintermarkt-leidseplein", week:"2026-11-16", cats:["christmas","markets","food","drink"], recur:"oneoff",
+  { id:"wintermarkt-leidseplein", week:"2026-11-16", cats:["christmas","markets","food","drink"], recur:"oneoff", season:"christmas",
     name:"Winter Market Leidseplein",
     hood:{en:"Leidseplein, Centrum",nl:"Leidseplein, Centrum"}, lat:52.3633, lng:4.8835,
-    when:{en:"Mon 16 – Sun 22 Nov (daily)",nl:"ma 16 – zo 22 nov (dagelijks)"}, time:{en:"Mon–Fri 12:00–23:00; Sat & Sun 11:00–23:00",nl:"ma–vr 12:00–23:00; za & zo 11:00–23:00"},
-    days:["2026-11-16","2026-11-17","2026-11-18","2026-11-19","2026-11-20","2026-11-21","2026-11-22"],
+    when:{en:"13 Nov 2026 – 3 Jan 2027 (daily)",nl:"13 nov 2026 – 3 jan 2027 (dagelijks)"}, time:{en:"Mon–Fri 12:00–23:00; Sat & Sun 11:00–23:00",nl:"ma–vr 12:00–23:00; za & zo 11:00–23:00"},
+    days:["2026-11-13","2026-11-14","2026-11-15","2026-11-16","2026-11-17","2026-11-18","2026-11-19","2026-11-20","2026-11-21","2026-11-22","2026-11-23","2026-11-24","2026-11-25","2026-11-26","2026-11-27","2026-11-28","2026-11-29","2026-11-30","2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-06","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-13","2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18","2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01","2027-01-02","2027-01-03"],
     addr:{en:"Leidseplein & Kleine-Gartmanplantsoen, Amsterdam",nl:"Leidseplein & Kleine-Gartmanplantsoen, Amsterdam"}, price:{en:"Free entry; pay per stall",nl:"Gratis entree; betalen per kraam"},
     blurb:{en:"Wooden chalets on Leidseplein and the Kleine-Gartmanplantsoen selling Christmas decorations, gifts, cheese, oliebollen and hot snacks, with a mulled-wine tower and a big Christmas tree. Runs until 3 January.",
            nl:"Houten chalets op het Leidseplein en het Kleine-Gartmanplantsoen met kerstversiering, cadeaus, kaas, oliebollen en warme snacks, plus een glühweintoren en een grote kerstboom. Tot 3 januari."},
@@ -1806,6 +1809,163 @@ const EVENTS = [
     url:"https://luma.com/q8f6aiq7",
     org:{name:"Effective Altruism Amsterdam",url:"https://luma.com/eaamsterdam"}, img:"https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=1,anim=false,background=white,quality=75,width=800,height=420/event-social/kp/3a173693-21d9-4981-9730-953c58644568.png" },
 
+
+
+  // ---- Christmas season 2026–27 (listed on /christmas/ and /nl/kerst/; not in This week until their own week) ----
+
+  { id:"amsterdam-light-festival-15", week:"2026-11-23", cats:["art","family"], recur:"oneoff", season:"christmas",
+    name:"Amsterdam Light Festival — Edition 15",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3676, lng:4.9002,
+    when:{en:"Thu 26 Nov 2026 – Sun 17 Jan 2027",nl:"do 26 nov 2026 – zo 17 jan 2027"}, time:{en:"Lights 16:30–23:00 (31 Dec until 21:00)",nl:"Licht 16:30–23:00 (31 dec tot 21:00)"},
+    days:["2026-11-26","2026-11-27","2026-11-28","2026-11-29","2026-11-30","2026-12-01","2026-12-02","2026-12-03","2026-12-04","2026-12-05","2026-12-06","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-13","2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18","2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2026-12-31","2027-01-01","2027-01-02","2027-01-03","2027-01-04","2027-01-05","2027-01-06","2027-01-07","2027-01-08","2027-01-09","2027-01-10","2027-01-11","2027-01-12","2027-01-13","2027-01-14","2027-01-15","2027-01-16","2027-01-17"],
+    addr:{en:"Walking route through the city centre (info point at Amstel 1 / Waterlooplein 6, Amsterdam)",nl:"Wandelroute door het centrum (infopunt bij Amstel 1 / Waterlooplein 6, Amsterdam)"}, price:{en:"The 4.5 km route is in public space; paid app, guided walks and cruises sold separately",nl:"De route van 4,5 km loopt door de openbare ruimte; betaalde app, rondleidingen en cruises apart"},
+    blurb:{en:"The fifteenth Amsterdam Light Festival places new light artworks above, beside and in the canals, from late November to mid-January. Walk the 4.5 km route yourself, or book a guided walk or cruise. On 26 November, 12 and 19 December the route also has Light Nights, with pop-up performances and storytellers.",
+           nl:"Het vijftiende Amsterdam Light Festival zet nieuwe lichtkunstwerken boven, langs en in de grachten, van eind november tot half januari. Je kunt de route van 4,5 km zelf lopen, of een rondleiding of cruise boeken. Op 26 november, 12 en 19 december zijn er Light Nights, met pop-upoptredens en verhalenvertellers."},
+    url:"https://amsterdamlightfestival.com/en/edition-15",
+    org:{name:"Amsterdam Light Festival",url:"https://amsterdamlightfestival.com/"} },
+
+  { id:"alf-light-nights", week:"2026-11-23", cats:["art","family"], recur:"oneoff", season:"christmas",
+    name:"Amsterdam Light Festival — Light Nights",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3676, lng:4.9002,
+    when:{en:"26 Nov, 12 & 19 Dec",nl:"26 nov, 12 en 19 dec"}, time:{en:"From late afternoon into the evening; programme times vary",nl:"Vanaf het eind van de middag tot in de avond; tijden per onderdeel"},
+    days:["2026-11-26","2026-12-12","2026-12-19"],
+    addr:{en:"Along the Light Festival route, city centre, Amsterdam",nl:"Langs de Light Festival-route, centrum, Amsterdam"}, price:{en:"Many programme items are on the route; some tours and workshops need a ticket",nl:"Veel onderdelen zijn op de route; voor sommige tours en workshops is een ticket nodig"},
+    blurb:{en:"Three evenings when the Light Festival route gets extra life: pop-up performances, storytellers near the artworks, a kids' puzzle trail, talks and a handful of ticketed tours and workshops. The first Light Night, on 26 November, is also the opening of Edition 15.",
+           nl:"Drie avonden waarop de Light Festival-route extra tot leven komt: pop-upoptredens, verhalenvertellers bij de kunstwerken, een puzzeltocht voor kids, lezingen en een aantal tours en workshops met ticket. De eerste Light Night, op 26 november, is ook de opening van Editie 15."},
+    url:"https://amsterdamlightfestival.com/en/light-nights",
+    org:{name:"Amsterdam Light Festival",url:"https://amsterdamlightfestival.com/"} },
+
+  { id:"alf-oyster-walk", week:"2026-11-23", cats:["food"], recur:"oneoff", season:"christmas",
+    name:"Amsterdam Light Festival — Oyster Walk",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3676, lng:4.9002,
+    when:{en:"Thu, Fri & Sat, 26 Nov 2026 – 16 Jan 2027",nl:"do, vr en za, 26 nov 2026 – 16 jan 2027"}, time:{en:"Take-away walk; festival app included",nl:"Take-awaywandeling; festivalapp inbegrepen"},
+    days:["2026-11-26","2026-11-27","2026-11-28","2026-12-03","2026-12-04","2026-12-05","2026-12-10","2026-12-11","2026-12-12","2026-12-17","2026-12-18","2026-12-19","2026-12-24","2026-12-25","2026-12-26","2026-12-31","2027-01-01","2027-01-02","2027-01-07","2027-01-08","2027-01-09","2027-01-14","2027-01-15","2027-01-16"],
+    addr:{en:"4.5 km walking route past four restaurants, Amsterdam centre (details with the ticket)",nl:"Wandelroute van 4,5 km langs vier restaurants in Amsterdam-centrum (details bij het ticket)"}, price:{en:"€39.50",nl:"€39,50"},
+    blurb:{en:"A 4.5 km take-away walk along this winter's Light Festival artworks, collecting six oysters and two drinks from four restaurants on the way. The festival app, with an audio guide, is included. Thursdays, Fridays and Saturdays through the festival.",
+           nl:"Een take-awaywandeling van 4,5 km langs de lichtkunst van het Light Festival, waarbij je onderweg bij vier restaurants zes oesters en twee drankjes ophaalt. De festivalapp met audiotour is inbegrepen. Donderdag, vrijdag en zaterdag gedurende het festival."},
+    url:"https://amsterdamlightfestival.com/en/taste",
+    org:{name:"Amsterdam Light Festival",url:"https://amsterdamlightfestival.com/"} },
+
+  { id:"alf-foodsteps", week:"2026-11-23", cats:["food"], recur:"oneoff", season:"christmas",
+    name:"Amsterdam Light Festival — Foodsteps",
+    hood:{en:"Centrum",nl:"Centrum"}, lat:52.3676, lng:4.9002,
+    when:{en:"Thu, Fri & Sat, 26 Nov 2026 – 16 Jan 2027",nl:"do, vr en za, 26 nov 2026 – 16 jan 2027"}, time:{en:"Take-away walk; festival app included",nl:"Take-awaywandeling; festivalapp inbegrepen"},
+    days:["2026-11-26","2026-11-27","2026-11-28","2026-12-03","2026-12-04","2026-12-05","2026-12-10","2026-12-11","2026-12-12","2026-12-17","2026-12-18","2026-12-19","2026-12-24","2026-12-25","2026-12-26","2026-12-31","2027-01-01","2027-01-02","2027-01-07","2027-01-08","2027-01-09","2027-01-14","2027-01-15","2027-01-16"],
+    addr:{en:"4.5 km walking route past four restaurants, Amsterdam centre (details with the ticket)",nl:"Wandelroute van 4,5 km langs vier restaurants in Amsterdam-centrum (details bij het ticket)"}, price:{en:"€39.50",nl:"€39,50"},
+    blurb:{en:"The same Light Festival walking route as the Oyster Walk, but with bites instead of oysters: four restaurants, four bites and two drink pairings to take with you, plus the festival app. Thursdays, Fridays and Saturdays through the festival.",
+           nl:"Dezelfde Light Festival-wandelroute als de Oesterwandeling, maar dan met hapjes in plaats van oesters: vier restaurants, vier bites en twee drankjes om mee te nemen, plus de festivalapp. Donderdag, vrijdag en zaterdag gedurende het festival."},
+    url:"https://amsterdamlightfestival.com/en/taste",
+    org:{name:"Amsterdam Light Festival",url:"https://amsterdamlightfestival.com/"} },
+
+  { id:"groot-melkhuis-kerstmarkt", week:"2026-11-23", cats:["christmas","markets","food","family"], recur:"oneoff", season:"christmas",
+    name:"Christmas market at Groot Melkhuis",
+    hood:{en:"Vondelpark, Zuid",nl:"Vondelpark, Zuid"}, lat:52.3585, lng:4.8684,
+    when:{en:"Sun 29 Nov",nl:"zo 29 nov"}, time:{en:"11:00–16:00",nl:"11:00–16:00"},
+    days:["2026-11-29"],
+    addr:{en:"Groot Melkhuis, Vondelpark 2, Amsterdam",nl:"Groot Melkhuis, Vondelpark 2, Amsterdam"}, price:{en:"No ticket price stated",nl:"Geen ticketprijs vermeld"},
+    blurb:{en:"A one-afternoon Christmas market on the terrace of Groot Melkhuis in the Vondelpark, with stalls selling jewellery, ceramics, clothes, delicacies and gifts, plus hot chocolate and mulled wine from the café.",
+           nl:"Een kerstmarkt van één middag op het terras van Groot Melkhuis in het Vondelpark, met kramen voor sieraden, keramiek, kleding, delicatessen en cadeaus, plus warme chocolademelk en glühwein van het café."},
+    url:"https://grootmelkhuis.nl/nieuws/kerstmarkt-bij-groot-melkhuis/",
+    org:{name:"Groot Melkhuis",url:"https://grootmelkhuis.nl/"} },
+
+  { id:"youplant-christmas-wreath", week:"2026-11-23", cats:["workshops"], recur:"oneoff", season:"christmas",
+    name:"Christmas wreath workshop at Loods 6",
+    hood:{en:"KNSM-eiland, Oost",nl:"KNSM-eiland, Oost"}, lat:52.3773, lng:4.9391,
+    when:{en:"Sun 29 Nov",nl:"zo 29 nov"}, time:{en:"11:00–12:30",nl:"11:00–12:30"},
+    days:["2026-11-29"],
+    addr:{en:"Loods 6, KNSM-laan 115, Amsterdam",nl:"Loods 6, KNSM-laan 115, Amsterdam"}, price:{en:"€75 + €1.88 fee (early-bird tickets sold out)",nl:"€75 + €1,88 fee (early-birdtickets uitverkocht)"},
+    blurb:{en:"A 90-minute workshop at Loods 6 on KNSM-eiland: Youplant and floral designer Floriana of WonderFlo guide you through making a Christmas wreath from fresh greenery and seasonal materials, which are included. All materials provided.",
+           nl:"Een workshop van 90 minuten in Loods 6 op het KNSM-eiland: Youplant en floral designer Floriana van WonderFlo begeleiden je bij het maken van een kerstkrans van vers groen en seizoensmateriaal. Alle materialen zijn inbegrepen."},
+    url:"https://www.youplantamsterdam.com/event-details/christmas-wreath-workshop-in-amsterdam",
+    org:{name:"Youplant Amsterdam",url:"https://www.youplantamsterdam.com/"} },
+
+  { id:"christmas-village-museumplein", week:"2026-11-30", cats:["christmas","markets","food","drink","family"], recur:"oneoff", season:"christmas",
+    name:"Christmas Village Amsterdam",
+    hood:{en:"Museumplein, Zuid",nl:"Museumplein, Zuid"}, lat:52.3589, lng:4.8843,
+    when:{en:"3–27 Dec",nl:"3–27 dec"}, time:{en:"3–24 Dec 12:00–21:00; 25 & 26 Dec 12:00–19:00; 27 Dec 12:00–18:00",nl:"3–24 dec 12:00–21:00; 25 en 26 dec 12:00–19:00; 27 dec 12:00–18:00"},
+    days:["2026-12-03","2026-12-04","2026-12-05","2026-12-06","2026-12-07","2026-12-08","2026-12-09","2026-12-10","2026-12-11","2026-12-12","2026-12-13","2026-12-14","2026-12-15","2026-12-16","2026-12-17","2026-12-18","2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25","2026-12-26","2026-12-27"],
+    addr:{en:"Museumplein, Amsterdam",nl:"Museumplein, Amsterdam"}, price:{en:"Free entry",nl:"Gratis entree"},
+    blurb:{en:"The tenth edition of Christmas Village: more than fifty wooden chalets on Museumplein selling gifts, crafts, and winter food and drink, next to the seasonal ice rink. Open every day through 27 December, including Christmas Day and Boxing Day, with shorter hours on those last three days.",
+           nl:"De tiende editie van Christmas Village: meer dan vijftig houten chalets op het Museumplein met cadeaus, ambachtelijke spullen en winterse hapjes en drankjes, naast de schaatsbaan. Elke dag open t/m 27 december, ook op eerste en tweede kerstdag, met kortere tijden op die laatste drie dagen."},
+    url:"https://icevillage.nl/en",
+    org:{name:"Christmas Village Amsterdam",url:"https://icevillage.nl/"} },
+
+  { id:"doing-goods-xmas-market", week:"2026-12-07", cats:["christmas","markets"], recur:"oneoff", season:"christmas",
+    name:"Doing Goods Xmas Market",
+    hood:{en:"De Duif, Centrum",nl:"De Duif, Centrum"}, lat:52.3613, lng:4.8968,
+    when:{en:"Fri 11 & Sat 12 Dec",nl:"vr 11 en za 12 dec"}, time:{en:"Fri 15:00–20:00, Sat 10:00–18:00",nl:"vr 15:00–20:00, za 10:00–18:00"},
+    days:["2026-12-11","2026-12-12"],
+    addr:{en:"De Duif, Prinsengracht 756, Amsterdam",nl:"De Duif, Prinsengracht 756, Amsterdam"}, price:{en:"No ticket price stated",nl:"Geen ticketprijs vermeld"},
+    blurb:{en:"Doing Goods, the Amsterdam homewares brand, fills the church of De Duif for a weekend with about 25 selected makers selling handmade gifts and accessories. Café Restaurant Meyer is there with coffee, hot chocolate and bites.",
+           nl:"Doing Goods, het Amsterdamse woonmerk, vult voor een weekend de kerk De Duif met zo'n 25 geselecteerde merken die handgemaakte cadeaus en woonaccessoires verkopen. Café Restaurant Meyer is erbij met koffie, warme chocolademelk en hapjes."},
+    url:"https://stadsherstel.nl/cultuuragenda/doing-goods-xmas-market/",
+    org:{name:"Doing Goods",url:"https://www.doing-goods.com/nl-nl/"} },
+
+  { id:"ceuvel-duurzame-kerstmarkt", week:"2026-12-07", cats:["christmas","markets","food","drink"], recur:"oneoff", season:"christmas",
+    name:"Duurzame Kerstmarkt at De Ceuvel",
+    hood:{en:"Noord",nl:"Noord"}, lat:52.4020, lng:4.9075,
+    when:{en:"12, 13, 19 & 20 Dec",nl:"12, 13, 19 en 20 dec"}, time:{en:"13:00–19:00",nl:"13:00–19:00"},
+    days:["2026-12-12","2026-12-13","2026-12-19","2026-12-20"],
+    addr:{en:"De Ceuvel, Korte Papaverweg 2–6, Amsterdam",nl:"De Ceuvel, Korte Papaverweg 2–6, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"De Ceuvel's sustainable Christmas market is back for two weekends in December. Independent makers sell unusual gifts, with mulled wine by the fire, homemade vegan snert and a few live performances on the former shipyard site in Noord.",
+           nl:"De duurzame kerstmarkt van De Ceuvel is twee weekenden in december terug. Onafhankelijke makers verkopen bijzondere cadeaus, met glühwein bij het vuur, huisgemaakte vegan snert en een paar live optredens op het voormalige werfterrein in Noord."},
+    url:"https://deceuvel.nl/nl/event/20-12-duurzame-kerstmarkt/",
+    org:{name:"De Ceuvel",url:"https://deceuvel.nl/"} },
+
+  { id:"cabinet-feesteditie", week:"2026-12-07", cats:["christmas","markets","fashion","art"], recur:"oneoff", season:"christmas",
+    name:"CABINET festive edition",
+    hood:{en:"West",nl:"West"}, lat:52.3783, lng:4.8656,
+    when:{en:"Sat 12 & Sun 13 Dec",nl:"za 12 en zo 13 dec"}, time:{en:"From Sat 10:00 to Sun 17:00 (venue listing)",nl:"Van za 10:00 tot zo 17:00 (locatiepagina)"},
+    days:["2026-12-12","2026-12-13"],
+    addr:{en:"Centrale Markthal, Centrale Markthallen 170, Amsterdam",nl:"Centrale Markthal, Centrale Markthallen 170, Amsterdam"}, price:{en:"Tickets; price not stated on the venue page",nl:"Tickets; prijs niet vermeld op de locatiepagina"},
+    blurb:{en:"A weekend vintage and design market in the listed Centrale Markthal: design classics, furniture, fashion, art, coffee-table books, vinyl and curios, with coffee, local wines, snacks and live music between the stalls.",
+           nl:"Een weekendmarkt voor vintage en design in de monumentale Centrale Markthal: designklassiekers, meubels, mode, kunst, koffietafelboeken, vinyl en curiosa, met koffie, lokale wijnen, hapjes en livemuziek tussen de kramen."},
+    url:"https://centralemarkthal.nl/program/3678/",
+    org:{name:"CABINET / Centrale Markthal",url:"https://centralemarkthal.nl/"} },
+
+  { id:"winterparadijs-2026", week:"2026-12-14", cats:["family","food","drink","music"], recur:"oneoff", season:"christmas",
+    name:"Het Amsterdamse Winterparadijs",
+    hood:{en:"RAI, Zuid",nl:"RAI, Zuid"}, lat:52.3412, lng:4.8899,
+    when:{en:"17 Dec 2026 – 2 Jan 2027 (closed 31 Dec)",nl:"17 dec 2026 – 2 jan 2027 (31 dec gesloten)"}, time:{en:"Most days 09:00–00:00; Sundays 09:00–23:00; 1 Jan 10:00–00:00. Attractions close at 22:00",nl:"Meeste dagen 09:00–00:00; zondag 09:00–23:00; 1 jan 10:00–00:00. Attracties sluiten om 22:00"},
+    days:["2026-12-17","2026-12-18","2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23","2026-12-24","2026-12-25","2026-12-26","2026-12-27","2026-12-28","2026-12-29","2026-12-30","2027-01-01","2027-01-02"],
+    addr:{en:"RAI Amsterdam, Europaplein 24, Amsterdam",nl:"RAI Amsterdam, Europaplein 24, Amsterdam"}, price:{en:"Tickets (dynamic prices); children under 3 free; activities included",nl:"Tickets (dynamische prijzen); kinderen tot 3 jaar gratis; activiteiten inbegrepen"},
+    blurb:{en:"A ticketed indoor and outdoor winter festival at the RAI: ice rinks, a Ferris wheel, a light experience, food stalls, a music stage and an après-ski village. Closed on 31 December. Arrival is by time slot; you can stay until closing.",
+           nl:"Een winterfestival met ticket in en rond de RAI: schaatsbanen, een reuzenrad, een lichtbeleving, eetkramen, een muziekpodium en een après-skidorp. Op 31 december gesloten. Je komt binnen in een tijdslot en mag blijven tot sluitingstijd."},
+    url:"https://www.hetamsterdamsewinterparadijs.nl/",
+    org:{name:"Het Amsterdamse Winterparadijs",url:"https://www.hetamsterdamsewinterparadijs.nl/"} },
+
+  { id:"maker-market-xl-2026", week:"2026-12-14", cats:["christmas","markets","food","family","workshops"], recur:"oneoff", season:"christmas",
+    name:"The Maker Market XL",
+    hood:{en:"West",nl:"West"}, lat:52.3783, lng:4.8656,
+    when:{en:"19–23 Dec",nl:"19–23 dec"}, time:{en:"Sat 11:00–20:00; Sun–Wed 11:00–17:00",nl:"za 11:00–20:00; zo–wo 11:00–17:00"},
+    days:["2026-12-19","2026-12-20","2026-12-21","2026-12-22","2026-12-23"],
+    addr:{en:"Centrale Markthal, Centrale Markthallen 170, Amsterdam",nl:"Centrale Markthal, Centrale Markthallen 170, Amsterdam"}, price:{en:"Early bird until 30 Nov: €5 Sat & Sun, €3.50 Mon–Wed; then €6.50 and €4.50. Children 12 and under free",nl:"Early bird t/m 30 nov: €5 za en zo, €3,50 ma–wo; daarna €6,50 en €4,50. Kinderen t/m 12 jaar gratis"},
+    blurb:{en:"A five-day covered Christmas market in the 1932 Centrale Markthal, with up to 150 makers a day selling handmade gifts, plus workshops, live music, food and a children's programme. The line-up changes each day.",
+           nl:"Een overdekte kerstmarkt van vijf dagen in de Centrale Markthal uit 1932, met elke dag tot 150 makers die handgemaakte cadeaus verkopen, plus workshops, livemuziek, eten en een programma voor kinderen. De selectie wisselt per dag."},
+    url:"https://www.themakermarket.nl/markten/amsterdam-kerstmarkt-2026",
+    org:{name:"The Maker Market",url:"https://www.themakermarket.nl/"} },
+
+  { id:"kerst-kromhouthal", week:"2026-12-14", cats:["christmas","markets","food","music","family"], recur:"oneoff", season:"christmas",
+    name:"Kerst in de Kromhouthal",
+    hood:{en:"Noord",nl:"Noord"}, lat:52.3833, lng:4.9205,
+    when:{en:"Sun 20 Dec",nl:"zo 20 dec"}, time:{en:"14:00–19:00",nl:"14:00–19:00"},
+    days:["2026-12-20"],
+    addr:{en:"Kromhouthal, Gedempt Hamerkanaal 231, Amsterdam",nl:"Kromhouthal, Gedempt Hamerkanaal 231, Amsterdam"}, price:{en:"Free; reserve a ticket",nl:"Gratis; reserveer een ticket"},
+    blurb:{en:"A free neighbourhood Christmas afternoon in the Kromhouthal: the KerstbraderIJ market, a bar, the Grote Kerst BurenBingo and music from local choirs and the Symfonisch Harmonieorkest Amsterdam, organised by De VerbroederIJ.",
+           nl:"Een gratis kerstmiddag voor de buurt in de Kromhouthal: de KerstbraderIJ, een bar, de Grote Kerst BurenBingo en muziek van lokale koren en het Symfonisch Harmonieorkest Amsterdam, georganiseerd door De VerbroederIJ."},
+    url:"https://verbroederij.nl/agenda/content/20-12-2026-kerst-in-de-kromhouthal/",
+    org:{name:"De VerbroederIJ",url:"https://verbroederij.nl/"} },
+
+  { id:"funky-xmas-market-2026", week:"2026-12-14", cats:["christmas","markets","food"], recur:"oneoff", season:"christmas",
+    name:"Funky Xmas Market",
+    hood:{en:"Westergas, West",nl:"Westergas, West"}, lat:52.3868, lng:4.8692,
+    when:{en:"Sun 20 Dec",nl:"zo 20 dec"}, time:{en:"12:00–18:00",nl:"12:00–18:00"},
+    days:["2026-12-20"],
+    addr:{en:"Westergas, Pazzanistraat 33, Amsterdam",nl:"Westergas, Pazzanistraat 33, Amsterdam"}, price:{en:"Free",nl:"Gratis"},
+    blurb:{en:"The Christmas edition of Sunday Market at the Westergasfabriek: independent makers, designers and food stalls on the old gasworks site, next to Westerpark. The stall list was still being announced when we checked.",
+           nl:"De kersteditie van Sunday Market bij de Westergasfabriek: onafhankelijke makers, ontwerpers en eetkramen op het terrein van de oude gasfabriek, naast het Westerpark. De deelnemerslijst was bij onze check nog in de maak."},
+    url:"https://www.sundaymarket.nl/markt/funky-xmas-market-2026-12-20/",
+    org:{name:"Sunday Market",url:"https://www.sundaymarket.nl/"} },
 
   // ---- 14 – 23 Aug ----
 

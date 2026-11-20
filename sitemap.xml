@@ -37,6 +37,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.amsterdampopups.com/christmas/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/christmas/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/kerst/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/christmas/"/>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/kerst/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/christmas/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/kerst/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/christmas/"/>
+    <lastmod>2026-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.amsterdampopups.com/food/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/food/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/eten/"/>

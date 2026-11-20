@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Builds the no-JavaScript pages from the EVENTS data in index.html:
 //   this-week.html         plain HTML list of this week's events (with Event JSON-LD), for crawlers, AI search and readers without JavaScript
+//   christmas/index.html   season-long Christmas page (EN);  nl/kerst/index.html  Dutch pair
 //   <slug>/index.html      one plain page per category (this week's events in it, with Event JSON-LD)
 //   nl/index.html          the Dutch main page: a copy of index.html that starts in Dutch (Dutch text in the HTML,
 //                          lang="nl", NL canonical); same code, so the map, filters and expired-event hiding work as on /
@@ -38,8 +39,8 @@ const CAT_PAGES = {
                nl:{slug:"drinken", intro:"Wijn- en bierproeverijen, pop-upbars, events bij brouwerijen en distilleerderijen en andere drankavonden die maar kort duren. Leuk voor nieuwsgierige proevers en vriendengroepen die eens iets anders willen dan hun vaste kroeg. De lijst wordt elke week bijgewerkt."}},
   markets:    {en:{slug:"markets", intro:"Flea markets, craft and design fairs, food markets and record or book sales that last a day or a weekend. Ideal for bargain hunters, collectors and anyone who likes to browse and meet the makers. The list is refreshed every week, so you can plan your weekend around it."},
                nl:{slug:"markten", intro:"Vlooienmarkten, ambachts- en designmarkten, foodmarkten en platen- of boekenmarkten die een dag of een weekend duren. Ideaal voor koopjesjagers, verzamelaars en iedereen die graag rondsnuffelt en de makers zelf spreekt. We vernieuwen de lijst elke week, zodat je je weekend er makkelijk omheen plant."}},
-  christmas:  {en:{slug:"christmas-markets", intro:"Christmas markets, winter fairs and festive pop-ups in Amsterdam, from big outdoor markets to small indoor makers' fairs. They suit families, friends looking for a cosy evening and anyone hunting for gifts that don't come from a chain store. The list is refreshed every week throughout the season."},
-               nl:{slug:"kerstmarkten", intro:"Kerstmarkten, winterfairs en feestelijke pop-ups in Amsterdam, van grote markten buiten tot kleine makersmarkten binnen. Leuk voor gezinnen, vrienden die een gezellige avond zoeken en iedereen die cadeaus wil vinden buiten de grote ketens. Het hele seizoen vernieuwen we de lijst elke week."}},
+  christmas:  {en:{slug:"christmas-markets", intro:"Christmas markets, winter fairs and festive pop-ups in Amsterdam, from big outdoor markets to small indoor makers' fairs. They suit families, friends looking for a cosy evening and anyone hunting for gifts that don't come from a chain store. This page is this week's slice; for the whole season, see [Christmas in Amsterdam, 2026–27](/christmas/)."},
+               nl:{slug:"kerstmarkten", intro:"Kerstmarkten, winterfairs en feestelijke pop-ups in Amsterdam, van grote markten buiten tot kleine makersmarkten binnen. Leuk voor gezinnen, vrienden die een gezellige avond zoeken en iedereen die cadeaus wil vinden buiten de grote ketens. Deze pagina is de selectie van deze week; voor het hele seizoen, zie [Kerst in Amsterdam, 2026–27](/nl/kerst/)."}},
   sinterklaas:{en:{slug:"sinterklaas", intro:"Sinterklaas shows, parties, workshops and family afternoons in the run-up to 5 December. Most are aimed at young children and their parents, and some are a nice introduction for anyone new to this Dutch tradition. The list is refreshed every week until the season ends."},
                nl:{slug:"sinterklaas", intro:"Sinterklaasvoorstellingen, feesten, workshops en familiemiddagen in aanloop naar 5 december. De meeste zijn bedoeld voor jonge kinderen en hun ouders, en een paar zijn ook leuk als je deze traditie voor het eerst meemaakt. Tot het einde van het seizoen vernieuwen we de lijst elke week."}},
   fashion:    {en:{slug:"fashion-vintage", intro:"Vintage sales, kilo sales, sample sales, clothing swaps and designer pop-ups that are only around for a short time. Perfect for second-hand fans, bargain hunters and anyone looking for something they won't find on the high street. New sales are added to the list every week."},
@@ -285,7 +286,7 @@ function socialMeta({L, title, desc, url}){
 }
 
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
-function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId}){
+function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText}){
   const T = TXT[L], url = alt[L];
   return `<!DOCTYPE html>
 <html lang="${L}">
@@ -316,7 +317,7 @@ ${events.map(e => item(e, L, "h2")).join("\n")}
   </ol>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
 </main>
 <footer>
-${browseNav(L, currentId)}  <p>${T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
+${browseNav(L, currentId)}  <p>${footerText || T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
 </footer>
 </div>
 ${consentBlock(L)}
@@ -367,6 +368,40 @@ for(const c of pageCats){
   writes.push([path.join("nl", CAT_PAGES[c.id].nl.slug, "index.html"), catPage(c, "nl")]);
 }
 
+// ---- season-long Christmas pages ----
+// Events marked season:"christmas" whose last date has not yet passed. Sorted by first date.
+// They can sit in future week ids (and so stay off This week and the Archive until that week is published).
+const todayISO = new Date().toLocaleDateString("en-CA", {timeZone: "Europe/Amsterdam"});
+const lastDayOf = ev => (ev.days && ev.days.length) ? ev.days.reduce((a, b) => a > b ? a : b) : null;
+const firstDayOf = ev => (ev.days && ev.days[0]) || "9999";
+const xmasList = EVENTS
+  .filter(e => e.season === "christmas" && lastDayOf(e) && lastDayOf(e) >= todayISO)
+  .map((e, i) => ({e, i, first: firstDayOf(e)}))
+  .sort((a, b) => a.first.localeCompare(b.first) || a.i - b.i)
+  .map(x => x.e);
+const XMAS_ALT = {en:"/christmas/", nl:"/nl/kerst/"};
+const xmasEn = listPage({
+  L:"en", alt:XMAS_ALT,
+  title:"Christmas in Amsterdam, 2026–27 · Amsterdam Pop-ups",
+  desc:`${xmasList.length} short-run Christmas markets, winter terraces, workshops and festive one-offs in Amsterdam, from late November 2026 to early January 2027, with dates, times, venues, prices and organiser links.`,
+  headerExtra:` · <a href="/this-week.html">${TXT.en.allWeek}</a>`,
+  h1:"Christmas in Amsterdam, 2026–27",
+  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run ones: wooden chalets on Leidseplein, a covered makers' market in the old Markthal, a free village on Museumplein, and smaller weekends in a church, a park and at De Ceuvel. Here are the one-off and limited-run markets, winter terraces, workshops and light-festival walks running from now to early January. ${TXT.en.check}</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
+  events:xmasList, ld:jsonLd(xmasList, "en"),
+  footerText:"A season list of Christmas events from late November 2026 to early January 2027."
+});
+const xmasNl = listPage({
+  L:"nl", alt:XMAS_ALT,
+  title:"Kerst in Amsterdam, 2026–27 · Amsterdam Pop-ups",
+  desc:`${xmasList.length} korte kerstmarkten, winterterrassen, workshops en feestelijke eenmalige events in Amsterdam, van eind november 2026 tot begin januari 2027, met data, tijden, locaties, prijzen en links naar de organisator.`,
+  headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
+  h1:"Kerst in Amsterdam, 2026–27",
+  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte: houten chalets op het Leidseplein, een overdekte makersmarkt in de oude Markthal, een gratis dorp op het Museumplein, en kleinere weekenden in een kerk, een park en op De Ceuvel. Hier staan de eenmalige en tijdelijke markten, winterterrassen, workshops en wandelingen bij het lichtfestival van nu tot begin januari. ${TXT.nl.check}</p>\n  <p>${xmasList.length} events, op datum.</p>`,
+  events:xmasList, ld:jsonLd(xmasList, "nl"),
+  footerText:"Een seizoenslijst van kerstevents van eind november 2026 tot begin januari 2027."
+});
+writes.push([path.join("christmas", "index.html"), xmasEn], [path.join("nl", "kerst", "index.html"), xmasNl]);
+
 // Retired categories: remove their generated folders (only files that carry the GENERATED marker).
 for(const id of NO_PAGE){
   if(!CAT_PAGES[id]) continue;
@@ -384,6 +419,7 @@ const live = pageCats.filter(c => inCat(c.id).length);
 const browseBlock = `<!-- build-static:browse:start -->
   <nav class="wrap browse" aria-labelledby="browse-h">
     <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
+    <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas in Amsterdam, 2026–27" data-txt-nl="Kerst in Amsterdam, 2026–27">Christmas in Amsterdam, 2026–27</a></p>
     <h2 id="browse-h" data-txt-en="${TXT.en.browse}" data-txt-nl="${TXT.nl.browse}">${TXT.en.browse}</h2>
     <ul>
 ${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc(c.label.en)}" data-txt-nl="${esc(c.label.nl)}">${esc(c.label.en)}</a></li>`).join("\n")}
@@ -509,6 +545,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [This week's events as a plain list](${SITE}/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](${SITE}/): map, category and day filters, English/Dutch toggle, archive
 - Dutch versions: [interactive guide](${SITE}/nl/), [plain list](${SITE}/nl/deze-week.html), and each category page below under /nl/
+- [Christmas in Amsterdam, 2026–27](${SITE}/christmas/): season-long list of short-run Christmas markets, winter terraces, workshops and light-festival walks (Dutch: [Kerst in Amsterdam](${SITE}/nl/kerst/))
 
 ## This week by category
 
@@ -540,6 +577,8 @@ ${[
   urlEntry("/nl/", lastmod, "weekly", "1.0", ROOT_ALT),
   urlEntry("/this-week.html", lastmod, "weekly", "0.8", WEEK_ALT),
   urlEntry("/nl/deze-week.html", lastmod, "weekly", "0.8", WEEK_ALT),
+  urlEntry("/christmas/", lastmod, "weekly", "0.8", XMAS_ALT),
+  urlEntry("/nl/kerst/", lastmod, "weekly", "0.8", XMAS_ALT),
   ...live.flatMap(c => { const alt = {en:catPath(c.id, "en"), nl:catPath(c.id, "nl")};
     return [urlEntry(alt.en, lastmod, "weekly", "0.7", alt), urlEntry(alt.nl, lastmod, "weekly", "0.7", alt)]; })
 ].join("\n")}
@@ -553,4 +592,4 @@ for(const [rel, content] of writes){
   fs.writeFileSync(f, content);
 }
 
-console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 4} URLs, lastmod ${lastmod}`);
+console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); christmas: ${xmasList.length} events; llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 6} URLs, lastmod ${lastmod}`);

@@ -100,6 +100,114 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
  "@context": "https://schema.org",
  "@graph": [
   {
+   "@type": "FoodEvent",
+   "name": "Het Amsterdamse Winterterras",
+   "keywords": "Eten, Drinken, Muziek, Gezin & Kids",
+   "description": "Tweede weekend van een overdekt winterterras in een dome in de NDSM-loods — Amsterdamse horeca onder één dak, dj's, meezingers en een Mini-Terras voor kids.",
+   "url": "https://hetamsterdamsewinterterras.nl/",
+   "eventStatus": "https://schema.org/EventScheduled",
+   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+   "location": {
+    "@type": "Place",
+    "name": "NDSM-loods",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "NDSM-Plein 27",
+     "addressLocality": "Amsterdam",
+     "addressCountry": "NL"
+    },
+    "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": 52.4012,
+     "longitude": 4.8956
+    }
+   },
+   "startDate": "2026-11-13",
+   "endDate": "2026-11-29",
+   "organizer": {
+    "@type": "Organization",
+    "name": "Het Amsterdamse Winterterras",
+    "url": "https://hetamsterdamsewinterterras.nl/"
+   }
+  },
+  {
+   "@type": "FoodEvent",
+   "name": "Le Foodwalk Winter",
+   "keywords": "Eten",
+   "description": "Winterse wandelfoodtour: haal je stempelkaart op de Zeedijk en proef vijf bites bij vijf restaurants langs een route door het centrum. Elke vr & za t/m 23 jan.",
+   "url": "https://lefoodwalk.nl/",
+   "eventStatus": "https://schema.org/EventScheduled",
+   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+   "location": {
+    "@type": "Place",
+    "name": "Starts at Vermeers Wijnkamer",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Zeedijk 11",
+     "addressLocality": "Amsterdam",
+     "addressCountry": "NL"
+    },
+    "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": 52.3761,
+     "longitude": 4.9004
+    }
+   },
+   "startDate": "2026-11-13",
+   "endDate": "2027-01-23",
+   "organizer": {
+    "@type": "Organization",
+    "name": "Le Foodwalk",
+    "url": "https://lefoodwalk.nl/"
+   },
+   "offers": {
+    "@type": "Offer",
+    "price": "37.50",
+    "priceCurrency": "EUR",
+    "url": "https://lefoodwalk.nl/",
+    "availability": "https://schema.org/InStock",
+    "description": "€37,50 + €1 fee"
+   }
+  },
+  {
+   "@type": "SaleEvent",
+   "name": "Winter Market Leidseplein",
+   "keywords": "Kerstmarkten, Markten, Eten, Drinken",
+   "description": "Houten chalets op het Leidseplein en het Kleine-Gartmanplantsoen met kerstversiering, cadeaus, kaas, oliebollen en warme snacks, plus een glühweintoren en een grote kerstboom. Tot 3 januari.",
+   "url": "https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/",
+   "eventStatus": "https://schema.org/EventScheduled",
+   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+   "location": {
+    "@type": "Place",
+    "name": "Leidseplein & Kleine-Gartmanplantsoen",
+    "address": {
+     "@type": "PostalAddress",
+     "addressLocality": "Amsterdam",
+     "addressCountry": "NL"
+    },
+    "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": 52.3633,
+     "longitude": 4.8835
+    }
+   },
+   "startDate": "2026-11-13",
+   "endDate": "2027-01-03",
+   "organizer": {
+    "@type": "Organization",
+    "name": "IJsbaan Amsterdam",
+    "url": "https://www.ijsbaan.amsterdam/"
+   },
+   "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR",
+    "url": "https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/",
+    "availability": "https://schema.org/InStock",
+    "description": "Gratis entree; betalen per kraam"
+   }
+  },
+  {
    "@type": "ScreeningEvent",
    "name": "Film, Food & Solidarity: Pride (2014) at QueerHub Nieuw-West",
    "keywords": "Film, Queer, Eten",
@@ -165,44 +273,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
     "@type": "Organization",
     "name": "IDFA",
     "url": "https://festival.idfa.nl/"
-   }
-  },
-  {
-   "@type": "SaleEvent",
-   "name": "Winter Market Leidseplein",
-   "keywords": "Kerstmarkten, Markten, Eten, Drinken",
-   "description": "Houten chalets op het Leidseplein en het Kleine-Gartmanplantsoen met kerstversiering, cadeaus, kaas, oliebollen en warme snacks, plus een glühweintoren en een grote kerstboom. Tot 3 januari.",
-   "url": "https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/",
-   "eventStatus": "https://schema.org/EventScheduled",
-   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-   "location": {
-    "@type": "Place",
-    "name": "Leidseplein & Kleine-Gartmanplantsoen",
-    "address": {
-     "@type": "PostalAddress",
-     "addressLocality": "Amsterdam",
-     "addressCountry": "NL"
-    },
-    "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 52.3633,
-     "longitude": 4.8835
-    }
-   },
-   "startDate": "2026-11-16",
-   "endDate": "2026-11-22",
-   "organizer": {
-    "@type": "Organization",
-    "name": "IJsbaan Amsterdam",
-    "url": "https://www.ijsbaan.amsterdam/"
-   },
-   "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR",
-    "url": "https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/",
-    "availability": "https://schema.org/InStock",
-    "description": "Gratis entree; betalen per kraam"
    }
   },
   {
@@ -1854,76 +1924,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
   },
   {
    "@type": "FoodEvent",
-   "name": "Het Amsterdamse Winterterras",
-   "keywords": "Eten, Drinken, Muziek, Gezin & Kids",
-   "description": "Tweede weekend van een overdekt winterterras in een dome in de NDSM-loods — Amsterdamse horeca onder één dak, dj's, meezingers en een Mini-Terras voor kids.",
-   "url": "https://hetamsterdamsewinterterras.nl/",
-   "eventStatus": "https://schema.org/EventScheduled",
-   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-   "location": {
-    "@type": "Place",
-    "name": "NDSM-loods",
-    "address": {
-     "@type": "PostalAddress",
-     "streetAddress": "NDSM-Plein 27",
-     "addressLocality": "Amsterdam",
-     "addressCountry": "NL"
-    },
-    "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 52.4012,
-     "longitude": 4.8956
-    }
-   },
-   "startDate": "2026-11-20",
-   "endDate": "2026-11-22",
-   "organizer": {
-    "@type": "Organization",
-    "name": "Het Amsterdamse Winterterras",
-    "url": "https://hetamsterdamsewinterterras.nl/"
-   }
-  },
-  {
-   "@type": "FoodEvent",
-   "name": "Le Foodwalk Winter",
-   "keywords": "Eten",
-   "description": "Winterse wandelfoodtour: haal je stempelkaart op de Zeedijk en proef vijf bites bij vijf restaurants langs een route door het centrum. Elke vr & za t/m 23 jan.",
-   "url": "https://lefoodwalk.nl/",
-   "eventStatus": "https://schema.org/EventScheduled",
-   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-   "location": {
-    "@type": "Place",
-    "name": "Starts at Vermeers Wijnkamer",
-    "address": {
-     "@type": "PostalAddress",
-     "streetAddress": "Zeedijk 11",
-     "addressLocality": "Amsterdam",
-     "addressCountry": "NL"
-    },
-    "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 52.3761,
-     "longitude": 4.9004
-    }
-   },
-   "startDate": "2026-11-20",
-   "endDate": "2026-11-21",
-   "organizer": {
-    "@type": "Organization",
-    "name": "Le Foodwalk",
-    "url": "https://lefoodwalk.nl/"
-   },
-   "offers": {
-    "@type": "Offer",
-    "price": "37.50",
-    "priceCurrency": "EUR",
-    "url": "https://lefoodwalk.nl/",
-    "availability": "https://schema.org/InStock",
-    "description": "€37,50 + €1 fee"
-   }
-  },
-  {
-   "@type": "FoodEvent",
    "name": "Pop-up restaurant at the Van Gendt Hallen",
    "keywords": "Eten",
    "description": "Zes weekenden lang een pop-uprestaurant in de Van Gendt Hallen met een viergangen chefsmenu, als voorproefje van de toekomstige horeca.",
@@ -2099,7 +2099,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
     }
    },
    "startDate": "2026-11-20",
-   "endDate": "2026-11-22",
+   "endDate": "2026-12-20",
    "organizer": {
     "@type": "Organization",
     "name": "The Creative Lab"
@@ -4154,6 +4154,48 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
   <ol id="list">
     <li>
       <article>
+        <h2>Het Amsterdamse Winterterras</h2>
+        <p class="meta">Eten · Drinken · Muziek · Gezin &amp; Kids</p>
+        <dl>
+          <dt>Wanneer</dt><dd>vr–zo, 13–29 nov (drie weekenden), vr 16:00–23:00, za 14:00–23:00, zo 14:00–22:00</dd>
+          <dt>Waar</dt><dd>NDSM-loods, NDSM-Plein 27, Amsterdam (NDSM, Noord)</dd>
+          <dt>Prijs</dt><dd>Kaarten; kinderen tot 12 jaar gratis</dd>
+          <dt>Organisator</dt><dd><a href="https://hetamsterdamsewinterterras.nl/">Het Amsterdamse Winterterras</a></dd>
+        </dl>
+        <p>Tweede weekend van een overdekt winterterras in een dome in de NDSM-loods — Amsterdamse horeca onder één dak, dj&#39;s, meezingers en een Mini-Terras voor kids.</p>
+        <p><a href="https://hetamsterdamsewinterterras.nl/">Details en tickets voor Het Amsterdamse Winterterras<span class="sr-only"> (site van de organisator)</span></a></p>
+      </article>
+    </li>
+    <li>
+      <article>
+        <h2>Le Foodwalk Winter</h2>
+        <p class="meta">Eten</p>
+        <dl>
+          <dt>Wanneer</dt><dd>elke vr &amp; za, 13 nov – 23 jan (niet 25–26 dec of 1 jan), Start tussen 17:00 en 19:00</dd>
+          <dt>Waar</dt><dd>Start bij Vermeers Wijnkamer, Zeedijk 11, Amsterdam (Centrum)</dd>
+          <dt>Prijs</dt><dd>€37,50 + €1 fee</dd>
+          <dt>Organisator</dt><dd><a href="https://lefoodwalk.nl/">Le Foodwalk</a></dd>
+        </dl>
+        <p>Winterse wandelfoodtour: haal je stempelkaart op de Zeedijk en proef vijf bites bij vijf restaurants langs een route door het centrum. Elke vr &amp; za t/m 23 jan.</p>
+        <p><a href="https://lefoodwalk.nl/">Details en tickets voor Le Foodwalk Winter<span class="sr-only"> (site van de organisator)</span></a></p>
+      </article>
+    </li>
+    <li>
+      <article>
+        <h2>Winter Market Leidseplein</h2>
+        <p class="meta">Kerstmarkten · Markten · Eten · Drinken</p>
+        <dl>
+          <dt>Wanneer</dt><dd>13 nov 2026 – 3 jan 2027 (dagelijks), ma–vr 12:00–23:00; za &amp; zo 11:00–23:00</dd>
+          <dt>Waar</dt><dd>Leidseplein &amp; Kleine-Gartmanplantsoen, Amsterdam (Leidseplein, Centrum)</dd>
+          <dt>Prijs</dt><dd>Gratis entree; betalen per kraam</dd>
+          <dt>Organisator</dt><dd><a href="https://www.ijsbaan.amsterdam/">IJsbaan Amsterdam</a></dd>
+        </dl>
+        <p>Houten chalets op het Leidseplein en het Kleine-Gartmanplantsoen met kerstversiering, cadeaus, kaas, oliebollen en warme snacks, plus een glühweintoren en een grote kerstboom. Tot 3 januari.</p>
+        <p><a href="https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/">Details en tickets voor Winter Market Leidseplein<span class="sr-only"> (site van de organisator)</span></a></p>
+      </article>
+    </li>
+    <li>
+      <article>
         <h2>Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West</h2>
         <p class="meta">Film · Queer · Eten</p>
         <dl>
@@ -4178,20 +4220,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         </dl>
         <p>&#39;s Werelds grootste documentairefestival sluit zondag af — met de laatste vertoningen, filmmakerstalks (ma &amp; wo) en Shorts Day (do), met Het Documentaire Paviljoen als ontmoetingsplek.</p>
         <p><a href="https://festival.idfa.nl/en/">Details en tickets voor IDFA 2026 — final days<span class="sr-only"> (site van de organisator)</span></a></p>
-      </article>
-    </li>
-    <li>
-      <article>
-        <h2>Winter Market Leidseplein</h2>
-        <p class="meta">Kerstmarkten · Markten · Eten · Drinken</p>
-        <dl>
-          <dt>Wanneer</dt><dd>ma 16 – zo 22 nov (dagelijks), ma–vr 12:00–23:00; za &amp; zo 11:00–23:00</dd>
-          <dt>Waar</dt><dd>Leidseplein &amp; Kleine-Gartmanplantsoen, Amsterdam (Leidseplein, Centrum)</dd>
-          <dt>Prijs</dt><dd>Gratis entree; betalen per kraam</dd>
-          <dt>Organisator</dt><dd><a href="https://www.ijsbaan.amsterdam/">IJsbaan Amsterdam</a></dd>
-        </dl>
-        <p>Houten chalets op het Leidseplein en het Kleine-Gartmanplantsoen met kerstversiering, cadeaus, kaas, oliebollen en warme snacks, plus een glühweintoren en een grote kerstboom. Tot 3 januari.</p>
-        <p><a href="https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/">Details en tickets voor Winter Market Leidseplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
     <li>
@@ -4784,34 +4812,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
     </li>
     <li>
       <article>
-        <h2>Het Amsterdamse Winterterras</h2>
-        <p class="meta">Eten · Drinken · Muziek · Gezin &amp; Kids</p>
-        <dl>
-          <dt>Wanneer</dt><dd>vr 20 – zo 22 nov, vr 16:00–23:00, za 14:00–23:00, zo 14:00–22:00</dd>
-          <dt>Waar</dt><dd>NDSM-loods, NDSM-Plein 27, Amsterdam (NDSM, Noord)</dd>
-          <dt>Prijs</dt><dd>Kaarten; kinderen tot 12 jaar gratis</dd>
-          <dt>Organisator</dt><dd><a href="https://hetamsterdamsewinterterras.nl/">Het Amsterdamse Winterterras</a></dd>
-        </dl>
-        <p>Tweede weekend van een overdekt winterterras in een dome in de NDSM-loods — Amsterdamse horeca onder één dak, dj&#39;s, meezingers en een Mini-Terras voor kids.</p>
-        <p><a href="https://hetamsterdamsewinterterras.nl/">Details en tickets voor Het Amsterdamse Winterterras<span class="sr-only"> (site van de organisator)</span></a></p>
-      </article>
-    </li>
-    <li>
-      <article>
-        <h2>Le Foodwalk Winter</h2>
-        <p class="meta">Eten</p>
-        <dl>
-          <dt>Wanneer</dt><dd>vr 20 &amp; za 21 nov, Start tussen 17:00 en 19:00</dd>
-          <dt>Waar</dt><dd>Start bij Vermeers Wijnkamer, Zeedijk 11, Amsterdam (Centrum)</dd>
-          <dt>Prijs</dt><dd>€37,50 + €1 fee</dd>
-          <dt>Organisator</dt><dd><a href="https://lefoodwalk.nl/">Le Foodwalk</a></dd>
-        </dl>
-        <p>Winterse wandelfoodtour: haal je stempelkaart op de Zeedijk en proef vijf bites bij vijf restaurants langs een route door het centrum. Elke vr &amp; za t/m 23 jan.</p>
-        <p><a href="https://lefoodwalk.nl/">Details en tickets voor Le Foodwalk Winter<span class="sr-only"> (site van de organisator)</span></a></p>
-      </article>
-    </li>
-    <li>
-      <article>
         <h2>Pop-up restaurant at the Van Gendt Hallen</h2>
         <p class="meta">Eten</p>
         <dl>
@@ -4871,7 +4871,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <h2>The Creative Lab — Holiday Gift Shop</h2>
         <p class="meta">Pop-upwinkels · Kerstmarkten · Mode &amp; Vintage</p>
         <dl>
-          <dt>Wanneer</dt><dd>Opent vr 20 nov (t/m 20 dec), di–zo 11:30–18:30</dd>
+          <dt>Wanneer</dt><dd>vr 20 nov – zo 20 dec, di–zo 11:30–18:30 (ma gesloten)</dd>
           <dt>Waar</dt><dd>De Hallen (Beeldend Gesproken), Hannie Dankbaarpassage 25, Amsterdam (Oud-West)</dd>
           <dt>Prijs</dt><dd>Gratis entree</dd>
           <dt>Organisator</dt><dd>The Creative Lab</dd>
