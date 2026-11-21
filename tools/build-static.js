@@ -412,7 +412,7 @@ writes.push([path.join("christmas", "index.html"), xmasEn], [path.join("nl", "ke
 const ABOUT = {
   en:{
     title:"About Amsterdam Pop-ups · a weekly guide that leads with pop-ups",
-    desc:"Amsterdam Pop-ups is an independent weekly guide to last-minute ideas and days out in Amsterdam: pop-up restaurants, shops and supper clubs, plus one-off events, markets, small gigs, film and shows.",
+    desc:"Amsterdam Pop-ups is an independent weekly guide to Amsterdam that leads with pop-ups, plus last-minute ideas and days out: pop-up restaurants, shops and supper clubs, one-off events, markets, small gigs, film and shows.",
     h1:"About Amsterdam Pop-ups",
     body:`  <h2>The whole city</h2>
   <p>We look well beyond the canal ring, so Noord, Nieuw-West and Zuidoost get as much attention as Centrum and De Pijp. If it only runs for a night, a weekend or a few weeks, from a popup bakery to a one-night gig, we want to know about it.</p>
@@ -428,7 +428,7 @@ const ABOUT = {
   },
   nl:{
     title:"Over Amsterdam Pop-ups · een weekgids met pop-ups voorop",
-    desc:"Amsterdam Pop-ups is een onafhankelijke weekgids met last-minute ideeën en dagjes uit in Amsterdam: pop-uprestaurants, pop-upwinkels en supperclubs, plus eenmalige events, markten, kleine optredens, film en voorstellingen.",
+    desc:"Amsterdam Pop-ups is een onafhankelijke weekgids voor Amsterdam met pop-ups voorop, plus last-minute ideeën en dagjes uit: pop-uprestaurants, pop-upwinkels en supperclubs, eenmalige events, markten, kleine optredens, film en voorstellingen.",
     h1:"Over Amsterdam Pop-ups",
     body:`  <h2>De hele stad</h2>
   <p>We kijken ver voorbij de grachtengordel, dus Noord, Nieuw-West en Zuidoost krijgen net zoveel aandacht als Centrum en De Pijp. Duurt het maar een avond, een weekend of een paar weken, van een popup-bakkerij tot een optreden van één avond? Dan willen we het weten.</p>
