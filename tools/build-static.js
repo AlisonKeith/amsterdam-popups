@@ -788,4 +788,53 @@ for(const [rel, content] of writes){
   fs.writeFileSync(f, content);
 }
 
+// privacy.html is hand-edited, but its Google Analytics and cookie banner must stay
+// identical to the rest of the site (Consent Mode v2, no request before Accept).
+function replaceMarked(src, name, inner){
+  const start = `<!-- build-static:${name}:start -->`, end = `<!-- build-static:${name}:end -->`;
+  const a = src.indexOf(start), b = src.indexOf(end);
+  if(a < 0 || b < 0) throw new Error(`privacy.html missing ${start}`);
+  return src.slice(0, a) + start + "\n" + inner + (inner.endsWith("\n") ? "" : "\n") + end + src.slice(b + end.length);
+}
+function updatePrivacyConsent(){
+  const file = path.join(ROOT, "privacy.html");
+  let t = fs.readFileSync(file, "utf8");
+  const keys = ["cookieText", "cookieAccept", "cookieReject", "cookieFab", "privacy"];
+  const pack = L => Object.fromEntries(keys.map(k => {
+    if(typeof I18N[L][k] !== "string") throw new Error(`I18N.${L}.${k} missing`);
+    return [k, I18N[L][k]];
+  }));
+  const i18n = {en:{...pack("en"), consentAria:"Cookie consent"}, nl:{...pack("nl"), consentAria:"Cookietoestemming"}};
+  const banner = CONSENT_HTML.replace('href="privacy.html"', 'href="/privacy.html"');
+  if(!banner.includes('href="/privacy.html"')) throw new Error("privacy.html cookie banner privacy link not found");
+  const consent = `${banner}
+<script>
+const CONSENT_I18N = ${JSON.stringify(i18n)};
+function applyConsentI18n(L){
+  const T = CONSENT_I18N[L] || CONSENT_I18N.en;
+  document.querySelectorAll("#consent [data-i18n], #cookiefab [data-i18n]").forEach(function(el){
+    const v = T[el.getAttribute("data-i18n")];
+    if(v) el.textContent = v;
+  });
+  const b = document.getElementById("consent");
+  if(b) b.setAttribute("aria-label", T.consentAria);
+  const f = document.getElementById("cookiefab");
+  if(f) f.setAttribute("aria-label", T.cookieFab);
+}
+applyConsentI18n(document.documentElement.lang || "en");
+${CONSENT_JS}
+initConsent();
+</script>
+`;
+  t = replaceMarked(t, "ga", GA_HEAD);
+  t = replaceMarked(t, "consent-css", `<style>
+${CONSENT_CSS}
+</style>`);
+  t = replaceMarked(t, "consent", consent);
+  if(!t.includes("G-3QJJ6WFJVM") || !t.includes("apLoadGA") || !t.includes("initConsent")) throw new Error("privacy.html lost the consent-gated GA");
+  if(t.includes('src="https://www.googletagmanager.com/gtag/js')) throw new Error("privacy.html still loads gtag.js unconditionally");
+  fs.writeFileSync(file, t);
+}
+updatePrivacyConsent();
+
 console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); christmas: ${xmasList.length} events; llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 8} URLs, lastmod ${lastmod}`);
