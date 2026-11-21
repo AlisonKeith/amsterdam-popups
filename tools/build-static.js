@@ -419,7 +419,7 @@ const ABOUT = {
   <h2>Checked at the source</h2>
   <p>Every listing is checked on the organiser's own page: date, time, venue and price. Plans do change, though, so give the organiser's link a quick look before you head out.</p>
   <h2>Independent</h2>
-  <p>We're a small, independent guide made by locals. Nobody pays to be listed.</p>
+  <p>We're a small, independent guide made by locals.</p>
   <h2>Tell us about a pop-up</h2>
   <p>Spotted a pop up we've missed, or running one yourself? Send it through our <a href="/#tip">tip form</a>. Organisers can list their own event there too. You can also email <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a>.</p>
   <p>Start with <a href="/">this week's guide</a>, with a map and filters, or read <a href="/this-week.html">this week as a plain list</a>. How we handle your data is on our <a href="/privacy.html">Privacy page</a>.</p>`
@@ -433,7 +433,7 @@ const ABOUT = {
   <h2>Gecheckt bij de bron</h2>
   <p>Elke vermelding controleren we op de eigen pagina van de organisator: datum, tijd, locatie en prijs. Plannen veranderen soms, dus kijk even op de link van de organisator voordat je gaat.</p>
   <h2>Onafhankelijk</h2>
-  <p>We zijn een kleine, onafhankelijke gids, gemaakt door Amsterdammers. Niemand betaalt om erin te staan.</p>
+  <p>We zijn een kleine, onafhankelijke gids, gemaakt door Amsterdammers.</p>
   <h2>Tip ons</h2>
   <p>Een pop up gezien die wij missen, of organiseer je er zelf een? Stuur hem in via ons <a href="/nl/#tip">tipformulier</a>. Organisatoren kunnen daar ook hun eigen event aanmelden. Mailen kan ook: <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a>.</p>
   <p>Begin bij <a href="/nl/">de gids van deze week</a>, met kaart en filters, of lees <a href="/nl/deze-week.html">deze week als gewone lijst</a>. Hoe we met je gegevens omgaan, staat op onze <a href="/privacy.html">privacypagina</a> (Engels).</p>`
