@@ -706,15 +706,14 @@ const nyeList = EVENTS
   .sort((a, b) => a.first.localeCompare(b.first) || a.i - b.i)
   .map(x => x.e);
 const NYE_ALT = {en:"/new-years-eve/", nl:"/nl/oud-en-nieuw/"};
-const VUURWERK_HREF = "https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/vuurwerkverbod/";
 const VIERINGEN_HREF = "https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/";
 const nyeFaqEn = [
   {q:"Where can I celebrate New Year's Eve in Amsterdam beyond the big clubs?",
    a:"Look for short-run pop-ups, one-off parties at independent venues, late openings and public countdown events. This page lists checked pop ups and one-off events; times and prices can change, so follow the organiser's link before you go."},
   {q:"Are there free New Year's Eve events in Amsterdam?",
    a:"Yes. The municipality organises free public countdown events at several places in the city, and some pop-ups and neighbourhood events are free too. Others need a ticket or a reservation. Each listing states the price as given by the organiser."},
-  {q:"Is there a public fireworks show? Can I set off my own?",
-   a:`Since 1 August 2026 a national ban means you may not buy, sell, keep or set off consumer fireworks in the Netherlands, including Amsterdam, except light F1 items such as sparklers. The municipality organises professional fireworks and light shows at several places, including Museumplein; these are free to attend. See the city's <a href="${VUURWERK_HREF}">fireworks rules</a> and <a href="${VIERINGEN_HREF}">New Year celebrations page</a>.`},
+  {q:"Is there a public fireworks show in Amsterdam?",
+   a:`Yes. The municipality organises professional fireworks and light shows at several places in the city, including Museumplein, and they are free to attend. See the city's <a href="${VIERINGEN_HREF}">New Year celebrations page</a> for places and times.`},
   {q:"What does oud en nieuw mean?",
    a:"It is the Dutch name for the New Year period: oudejaarsavond on 31 December and nieuwjaarsdag on 1 January. People also search for oudjaar and NYE Amsterdam."},
   {q:"Do I need to book New Year's Eve popups in advance?",
@@ -727,8 +726,8 @@ const nyeFaqNl = [
    a:"Kijk naar korte pop-ups, eenmalige feesten bij zelfstandige podia, late openingen en openbare aftelmomenten. Op deze pagina staan nagelopen pop ups en eenmalige events; tijden en prijzen kunnen wijzigen, dus check de link van de organisator voordat je gaat."},
   {q:"Zijn er gratis events op oudejaarsavond in Amsterdam?",
    a:"Ja. De gemeente organiseert gratis openbare aftelmomenten op verschillende plekken in de stad, en sommige pop-ups en buurtfeesten zijn ook gratis. Voor andere events heb je een ticket of reservering nodig. Bij elk item staat de prijs zoals de organisator die opgeeft."},
-  {q:"Is er een vuurwerkshow? Mag ik zelf vuurwerk afsteken?",
-   a:`Sinds 1 augustus 2026 geldt een landelijk verbod: je mag in Nederland, dus ook in Amsterdam, geen consumentenvuurwerk kopen, verkopen, in huis hebben of afsteken, behalve licht F1-vuurwerk zoals sterretjes. De gemeente organiseert professionele vuurwerk- en lichtshows op verschillende plekken, onder meer op het Museumplein; die zijn gratis toegankelijk. Zie de <a href="${VUURWERK_HREF}">vuurwerkregels van de gemeente</a> en de pagina over <a href="${VIERINGEN_HREF}">vieringen rond oud en nieuw</a>.`},
+  {q:"Is er een vuurwerkshow in Amsterdam?",
+   a:`Ja. De gemeente organiseert professionele vuurwerk- en lichtshows op verschillende plekken in de stad, onder meer op het Museumplein, en die zijn gratis toegankelijk. Kijk op de pagina over <a href="${VIERINGEN_HREF}">vieringen rond oud en nieuw</a> voor plekken en tijden.`},
   {q:"Wat betekent oud en nieuw?",
    a:"Zo noem je in het Nederlands de jaarwisseling: oudejaarsavond op 31 december en nieuwjaarsdag op 1 januari. Mensen zoeken ook op oudjaar en NYE Amsterdam."},
   {q:"Moet je popups voor oudejaarsavond van tevoren boeken?",
