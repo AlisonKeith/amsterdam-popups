@@ -708,8 +708,8 @@ const nyeList = EVENTS
 const NYE_ALT = {en:"/new-years-eve/", nl:"/nl/oud-en-nieuw/"};
 const VIERINGEN_HREF = "https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/";
 const nyeFaqEn = [
-  {q:"Where can I celebrate New Year's Eve in Amsterdam beyond the big clubs?",
-   a:"Look for short-run pop-ups, one-off parties at independent venues, late openings and public countdown events. This page lists checked pop ups and one-off events; times and prices can change, so follow the organiser's link before you go."},
+  {q:"What is there to do on New Year's Eve in Amsterdam?",
+   a:"Free fireworks shows at Museumplein and in several neighbourhoods, club nights and one-off parties, special New Year's Eve dinners, and pop-ups. This page lists each one with times, prices and a map, checked on the organiser's own page. Times and prices can change, so follow the organiser's link before you go."},
   {q:"Are there free New Year's Eve events in Amsterdam?",
    a:"Yes. The municipality organises free public countdown events at several places in the city, and some pop-ups and neighbourhood events are free too. Others need a ticket or a reservation. Each listing states the price as given by the organiser."},
   {q:"Is there a public fireworks show in Amsterdam?",
@@ -720,8 +720,8 @@ const nyeFaqEn = [
    a:"We check each event on the organiser's own page before listing it, and we drop events once their last day has passed. Recheck the organiser's link for the latest time and price."}
 ];
 const nyeFaqNl = [
-  {q:"Waar vier je oud en nieuw in Amsterdam, naast de grote clubs?",
-   a:"Kijk naar korte pop-ups, eenmalige feesten bij zelfstandige podia, late openingen en openbare aftelmomenten. Op deze pagina staan nagelopen pop ups en eenmalige events; tijden en prijzen kunnen wijzigen, dus check de link van de organisator voordat je gaat."},
+  {q:"Wat is er te doen met oud en nieuw in Amsterdam?",
+   a:"Gratis vuurwerkshows op het Museumplein en in verschillende wijken, clubnachten en eenmalige feesten, speciale oudejaarsdiners en pop-ups. Op deze pagina staat alles met tijden, prijzen en een kaart, nagelopen op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat."},
   {q:"Zijn er gratis events op oudejaarsavond in Amsterdam?",
    a:"Ja. De gemeente organiseert gratis openbare aftelmomenten op verschillende plekken in de stad, en sommige pop-ups en buurtfeesten zijn ook gratis. Voor andere events heb je een ticket of reservering nodig. Bij elk item staat de prijs zoals de organisator die opgeeft."},
   {q:"Is er een vuurwerkshow in Amsterdam?",
