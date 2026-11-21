@@ -80,7 +80,7 @@ const TXT = {
   en:{when:"When", where:"Where", price:"Price", org:"Organiser", free:"Free", regular:"Regular",
       details:n => `Details and tickets for ${n}`, detailsSr:" (organiser's site)", skip:"Skip to the list",
       guide:"the interactive guide with map, filters and Dutch version", allWeek:"All this week's events",
-      browse:"This week by category", back:"Back to the full guide", privacy:"Privacy", tip:"Know a pop-up? Email",
+      browse:"This week by category", back:"Back to the full guide", privacy:"Privacy", about:"About", tip:"Know a pop-up? Email",
       generated:id => `Generated from the weekly edition (week starting ${id}).`,
       check:"Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.",
       catH1:l => `${l} in Amsterdam this week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
@@ -90,7 +90,7 @@ const TXT = {
   nl:{when:"Wanneer", where:"Waar", price:"Prijs", org:"Organisator", free:"Gratis", regular:"Terugkerend",
       details:n => `Details en tickets voor ${n}`, detailsSr:" (site van de organisator)", skip:"Naar de lijst",
       guide:"de interactieve gids met kaart, filters en Engelse versie", allWeek:"Alle events van deze week",
-      browse:"Deze week per categorie", back:"Terug naar de volledige gids", privacy:"Privacy (Engels)", tip:"Ken je een pop-up? Mail",
+      browse:"Deze week per categorie", back:"Terug naar de volledige gids", privacy:"Privacy (Engels)", about:"Over ons", tip:"Ken je een pop-up? Mail",
       generated:id => `Gemaakt op basis van de weekeditie (week vanaf ${id}).`,
       check:"Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.",
       catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
@@ -144,7 +144,7 @@ const nlSr = () => [
   ['aria-label="Amsterdam pop-ups map"', 'aria-label="Kaart van Amsterdam Pop-ups"'],
   ['>Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>',
    '>Interactieve kaart van pop-ups in Amsterdam. Gebruik de pijltjestoetsen om de kaart te verschuiven, +/- om te zoomen, en klik op een markering voor de details. De volledige lijst met events staat onder de kaart.</p>'],
-  ['aria-label="Advertisements"', 'aria-label="Advertenties"'],
+  ['<aside class="rail" aria-label="Highlights">', '<aside class="rail" aria-label="Uitgelicht">'],
   ['<label for="search" class="sr-only">Search past pop-ups</label>', '<label for="search" class="sr-only">Zoek eerdere pop-ups</label>'],
   ['aria-label="Cookie consent"', 'aria-label="Cookietoestemming"'],
   ['aria-label="Cookie choices"', `aria-label="${esc(I18N.nl.cookieFab)}"`]
@@ -317,7 +317,7 @@ ${events.map(e => item(e, L, "h2")).join("\n")}
   </ol>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
 </main>
 <footer>
-${browseNav(L, currentId)}  <p>${footerText || T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
+${browseNav(L, currentId)}  <p>${footerText || T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="${ABOUT_ALT[L]}">${T.about}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
 </footer>
 </div>
 ${consentBlock(L)}
@@ -325,6 +325,8 @@ ${consentBlock(L)}
 </html>
 `;
 }
+
+const ABOUT_ALT = {en:"/about/", nl:"/nl/over/"};
 
 // ---- this-week.html ----
 const WEEK_ALT = {en:"/this-week.html", nl:"/nl/deze-week.html"};
@@ -405,6 +407,82 @@ const xmasNl = listPage({
   imageAlt:"Amsterdam Pop-ups — Christmas popups, markten en eenmalige events in Amsterdam"
 });
 writes.push([path.join("christmas", "index.html"), xmasEn], [path.join("nl", "kerst", "index.html"), xmasNl]);
+
+// ---- About pages: /about/ and /nl/over/ (text in the HTML; the first paragraph is I18N.aboutBody from index.html) ----
+const ABOUT = {
+  en:{
+    title:"About Amsterdam Pop-ups · a weekly guide that leads with pop-ups",
+    desc:"Amsterdam Pop-ups is an independent weekly guide to Amsterdam that leads with pop-ups: pop-up restaurants, shops and supper clubs, plus one-off events, markets, small gigs, film and shows.",
+    h1:"About Amsterdam Pop-ups",
+    body:`  <h2>The whole city</h2>
+  <p>We look well beyond the canal ring, so Noord, Nieuw-West and Zuidoost get as much attention as Centrum and De Pijp. If it only runs for a night, a weekend or a few weeks, from a popup bakery to a one-night gig, we want to know about it.</p>
+  <h2>Checked at the source</h2>
+  <p>Every listing is checked on the organiser's own page: date, time, venue and price. Plans do change, though, so give the organiser's link a quick look before you head out.</p>
+  <h2>Independent</h2>
+  <p>We're a small, independent guide made by locals. Nobody pays to be listed.</p>
+  <h2>Tell us about a pop-up</h2>
+  <p>Spotted a pop up we've missed, or running one yourself? Send it through our <a href="/#tip">tip form</a>. Organisers can list their own event there too. You can also email <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a>.</p>
+  <p>Start with <a href="/">this week's guide</a>, with a map and filters, or read <a href="/this-week.html">this week as a plain list</a>. How we handle your data is on our <a href="/privacy.html">Privacy page</a>.</p>`
+  },
+  nl:{
+    title:"Over Amsterdam Pop-ups · een weekgids met pop-ups voorop",
+    desc:"Amsterdam Pop-ups is een onafhankelijke weekgids voor Amsterdam met pop-ups voorop: pop-uprestaurants, pop-upwinkels en supperclubs, plus eenmalige events, markten, kleine optredens, film en voorstellingen.",
+    h1:"Over Amsterdam Pop-ups",
+    body:`  <h2>De hele stad</h2>
+  <p>We kijken ver voorbij de grachtengordel, dus Noord, Nieuw-West en Zuidoost krijgen net zoveel aandacht als Centrum en De Pijp. Duurt het maar een avond, een weekend of een paar weken, van een popup-bakkerij tot een optreden van één avond? Dan willen we het weten.</p>
+  <h2>Gecheckt bij de bron</h2>
+  <p>Elke vermelding controleren we op de eigen pagina van de organisator: datum, tijd, locatie en prijs. Plannen veranderen soms, dus kijk even op de link van de organisator voordat je gaat.</p>
+  <h2>Onafhankelijk</h2>
+  <p>We zijn een kleine, onafhankelijke gids, gemaakt door Amsterdammers. Niemand betaalt om erin te staan.</p>
+  <h2>Tip ons</h2>
+  <p>Een pop up gezien die wij missen, of organiseer je er zelf een? Stuur hem in via ons <a href="/nl/#tip">tipformulier</a>. Organisatoren kunnen daar ook hun eigen event aanmelden. Mailen kan ook: <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a>.</p>
+  <p>Begin bij <a href="/nl/">de gids van deze week</a>, met kaart en filters, of lees <a href="/nl/deze-week.html">deze week als gewone lijst</a>. Hoe we met je gegevens omgaan, staat op onze <a href="/privacy.html">privacypagina</a> (Engels).</p>`
+  }
+};
+function aboutPage(L){
+  const A = ABOUT[L], T = TXT[L], url = ABOUT_ALT[L];
+  if(typeof I18N[L].aboutBody !== "string" || !I18N[L].aboutBody) throw new Error(`I18N.${L}.aboutBody missing`);
+  const ld = {"@context":"https://schema.org","@type":"AboutPage","name":A.h1,"url":SITE + url,"inLanguage":L,
+    "about":{"@type":"Organization","name":"Amsterdam Pop-ups","url":SITE + (L === "nl" ? "/nl/" : "/")}};
+  return `<!DOCTYPE html>
+<html lang="${L}">
+<head>
+${GENERATED}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<title>${esc(A.title)}</title>
+<meta name="description" content="${esc(A.desc)}" />
+<link rel="canonical" href="${SITE}${url}" />
+${hreflang(ABOUT_ALT)}
+${socialMeta({L, title:A.title, desc:A.desc, url})}
+${GA_HEAD}${STYLE}
+<script type="application/ld+json">
+${JSON.stringify(ld, null, 1)}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#about">${L === "nl" ? "Naar de inhoud" : "Skip to main content"}</a>
+<div class="wrap">
+<header>
+  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}</p>
+  <nav class="langs" aria-label="${L === "nl" ? "Taal" : "Language"}"><a href="${ABOUT_ALT.en}" hreflang="en" lang="en"${L === "en" ? ' aria-current="page"' : ""}>English</a> · <a href="${ABOUT_ALT.nl}" hreflang="nl" lang="nl"${L === "nl" ? ' aria-current="page"' : ""}>Nederlands</a></nav>
+</header>
+<main id="about">
+  <h1>${esc(A.h1)}</h1>
+  <p>${esc(I18N[L].aboutBody)}</p>
+${A.body}
+</main>
+<footer>
+  <p><a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
+</footer>
+</div>
+${consentBlock(L)}
+</body>
+</html>
+`;
+}
+writes.push([path.join("about", "index.html"), aboutPage("en")], [path.join("nl", "over", "index.html"), aboutPage("nl")]);
 
 // Retired categories: remove their generated folders (only files that carry the GENERATED marker).
 for(const id of NO_PAGE){
@@ -564,6 +642,7 @@ Events can belong to several categories. "Regular" marks weekly or recurring ser
 ## Contact
 
 - Tips and corrections: hello@amsterdampopups.com
+- [About](${SITE}/about/) (Dutch: [Over ons](${SITE}/nl/over/))
 - [Privacy](${SITE}/privacy.html)
 `;
 
@@ -583,6 +662,8 @@ ${[
   urlEntry("/nl/deze-week.html", lastmod, "weekly", "0.8", WEEK_ALT),
   urlEntry("/christmas/", lastmod, "weekly", "0.8", XMAS_ALT),
   urlEntry("/nl/kerst/", lastmod, "weekly", "0.8", XMAS_ALT),
+  urlEntry("/about/", lastmod, "monthly", "0.5", ABOUT_ALT),
+  urlEntry("/nl/over/", lastmod, "monthly", "0.5", ABOUT_ALT),
   ...live.flatMap(c => { const alt = {en:catPath(c.id, "en"), nl:catPath(c.id, "nl")};
     return [urlEntry(alt.en, lastmod, "weekly", "0.7", alt), urlEntry(alt.nl, lastmod, "weekly", "0.7", alt)]; })
 ].join("\n")}
@@ -596,4 +677,4 @@ for(const [rel, content] of writes){
   fs.writeFileSync(f, content);
 }
 
-console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); christmas: ${xmasList.length} events; llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 6} URLs, lastmod ${lastmod}`);
+console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); christmas: ${xmasList.length} events; llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 8} URLs, lastmod ${lastmod}`);

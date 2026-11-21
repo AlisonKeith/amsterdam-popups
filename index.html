@@ -113,6 +113,7 @@
   --c-comedy:#2F9A2F;
   --c-nightlife:#3D3DC8;
   --c-sinterklaas:#BD2846;
+  --hp-xmas-bg:#1F5E3E; --hp-xmas-accent:#4C9C70;
   --c-family:#D4A017;
   --c-sport:#2E6B9E;
   --c-queer:#E0218A;
@@ -338,6 +339,23 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
 .ad-slot{border:1px dashed var(--ad-border); border-radius:12px; background:var(--ad-bg); display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:4px; padding:16px}
 .ad-slot .ad-label{font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--ad-label)}
 .ad-slot .ad-hint{font-size:12px; color:var(--muted)}
+/* House promos: our own banners in the ad slots until AdSense is live (see renderHousePromos in the app script).
+   The .ad-slot wrapper keeps its size (min-height 250px), so swapping to AdSense later causes no layout shift. */
+.ad-slot.house-promo-slot{border:0; background:none; padding:0; align-items:stretch}
+.house-promo{position:relative; flex:1 1 auto; width:100%; display:flex; flex-direction:column; justify-content:flex-end; gap:5px; box-sizing:border-box; min-height:250px; height:100%; padding:20px 20px 18px; border-radius:12px; border:1px solid transparent; text-decoration:none; text-align:left; overflow:hidden}
+.house-promo .hp-kicker{font-size:11.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:600}
+.house-promo .hp-head{font-family:"Archivo Expanded",sans-serif; font-weight:600; font-size:20px; line-height:1.2; max-width:17ch}
+.house-promo .hp-sub{font-size:13.5px; line-height:1.45; max-width:32ch}
+.house-promo .hp-cta{margin-top:6px; font-size:14px; font-weight:600; text-decoration:underline; text-underline-offset:3px}
+.house-promo:hover .hp-cta{text-decoration-thickness:2px}
+.house-promo:focus-visible{outline:3px solid var(--red-text); outline-offset:3px}
+.house-promo .hp-art{position:absolute; top:16px; right:16px; width:60px; height:60px}
+.hp-christmas{background:var(--hp-xmas-bg); color:#FFFFFF; border-left:6px solid var(--hp-xmas-accent)}
+.hp-sinterklaas{background:var(--c-sinterklaas); color:#FFFFFF; border-left:6px solid #F2C14E}
+.hp-tip{background:var(--red-tint); border-color:var(--red-tint-border); color:var(--red-deep)}
+
+.hp-week{background:var(--card); border-color:var(--line-card); color:var(--ink)}
+.hp-week .hp-kicker,.hp-week .hp-cta{color:var(--red-text)}
 .ad-infeed{min-height:250px; margin:11px 0}
 .ad-top{min-height:250px; margin:4px 0 14px}
 .ad-rail{min-height:250px}
@@ -431,7 +449,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     <button class="tab on" data-view="thisweek" onclick="switchView('thisweek')"><span data-i18n="thisweek">This week</span></button>
     <button class="tab" data-view="archive" onclick="switchView('archive')"><span data-i18n="archive">Archive</span></button>
     <button class="tab" data-view="tip" onclick="switchView('tip')"><span data-i18n="tip">Know a pop-up?</span></button>
-    <button class="tab" data-view="about" onclick="switchView('about')"><span data-i18n="about">About</span></button>
+    <a class="tab" href="/about/" data-href-en="/about/" data-href-nl="/nl/over/"><span data-i18n="about">About</span></a>
     <a class="tab" href="privacy.html"><span data-i18n="privacy">Privacy</span></a>
   </div>
 </nav>
@@ -481,8 +499,10 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas pop-ups and events in Amsterdam" data-txt-nl="Kerst pop-ups en evenementen in Amsterdam">Christmas pop-ups and events in Amsterdam</a></p>
           <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
           <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
-          <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there). -->
-          <div class="ad-slot ad-mobile ad-top"><span class="ad-label" data-i18n="adLabel">Advertisement</span><span class="ad-hint">300×250 · responsive</span></div>
+          <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there).
+               HOUSE PROMO until AdSense is live: renderHousePromos() fills every .ad-slot[data-promo] with one of our own banners
+               (the Christmas banner below is the no-JavaScript default). Keep the wrapper and its classes for AdSense. -->
+          <div class="ad-slot ad-mobile ad-top house-promo-slot" data-promo="0"><a class="house-promo hp-christmas" href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/"><span class="hp-kicker" data-i18n="hpXmasK">Christmas season</span><span class="hp-head" data-i18n="hpXmasH">Christmas pop-ups and events in Amsterdam</span><span class="hp-sub" data-i18n="hpXmasS">Markets, winter terraces, workshops and light walks, until early January.</span><span class="hp-cta"><span data-i18n="hpXmasC">See the Christmas list</span> <span aria-hidden="true">→</span></span></a></div>
           <div id="resultsLive" class="sr-only"></div>
           <div class="cards" id="cards"></div>
           <div class="tipstrip">
@@ -494,9 +514,11 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
              On deploy, after consent, replace each placeholder with a responsive AdSense unit, e.g.:
              <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX"
                   data-ad-format="auto" data-full-width-responsive="true"></ins> -->
-        <aside class="rail" aria-label="Advertisements">
-          <div class="ad-slot ad-rail"><span class="ad-label" data-i18n="adLabel">Advertisement</span><span class="ad-hint">300×250</span></div>
-          <div class="ad-slot ad-rail"><span class="ad-label" data-i18n="adLabel">Advertisement</span><span class="ad-hint">300×250</span></div>
+        <!-- HOUSE PROMOS until AdSense is live: our own banners, not ads, so the rail is not labelled "Advertisements".
+             When AdSense goes in, set aria-label back to "Advertisements" (and its Dutch swap in tools/build-static.js). -->
+        <aside class="rail" aria-label="Highlights">
+          <div class="ad-slot ad-rail house-promo-slot" data-promo="0"><a class="house-promo hp-christmas" href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/"><span class="hp-kicker" data-i18n="hpXmasK">Christmas season</span><span class="hp-head" data-i18n="hpXmasH">Christmas pop-ups and events in Amsterdam</span><span class="hp-sub" data-i18n="hpXmasS">Markets, winter terraces, workshops and light walks, until early January.</span><span class="hp-cta"><span data-i18n="hpXmasC">See the Christmas list</span> <span aria-hidden="true">→</span></span></a></div>
+          <div class="ad-slot ad-rail house-promo-slot" data-promo="1"><a class="house-promo hp-tip" href="#tip" onclick="switchView('tip');return false"><span class="hp-kicker" data-i18n="hpTipK">Tip us</span><span class="hp-head" data-i18n="hpTipH">Know a pop-up?</span><span class="hp-sub" data-i18n="hpTipS">Spotted one we've missed, or running one yourself? Tell us and we'll check it out.</span><span class="hp-cta"><span data-i18n="hpTipC">Send a tip</span> <span aria-hidden="true">→</span></span></a></div>
         </aside>
       </div>
     </section>
@@ -544,11 +566,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
       </form>
     </section>
 
-    <!-- ABOUT -->
-    <section id="view-about" class="view prose" aria-labelledby="heading-about">
-      <h1 id="heading-about" data-i18n="about">About</h1>
-      <p data-i18n="aboutBody"></p>
-    </section>
+    <!-- ABOUT: a real static page, /about/ and /nl/over/ (built by tools/build-static.js; its first paragraph is I18N aboutBody). -->
 
   </div>
 </main>
@@ -606,9 +624,11 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
   <div class="wrap">
     <span data-i18n="footL">Made by locals · not affiliated with the City of Amsterdam</span>
     <span>
+      <a href="/about/" data-href-en="/about/" data-href-nl="/nl/over/" data-i18n="about">About</a>
+      &nbsp;·&nbsp;
       <a href="privacy.html" data-i18n="privacy">Privacy</a>
       &nbsp;·&nbsp;
-      <a href="#" onclick="switchView('tip');return false" data-i18n="tipCta">Know a pop-up?</a>
+      <a href="#tip" onclick="switchView('tip');return false" data-i18n="tipCta">Know a pop-up?</a>
     </span>
   </div>
 </footer>
@@ -5038,7 +5058,11 @@ const I18N = {
     fName:"Your name (optional)", fWhat:"The pop-up — what and where", fWhen:"When",
     fLink:"Link (Instagram, site, tickets)", fEmail:"Your email (optional)", fSend:"Send tip",
     fThanks:"Thanks — tip received. We'll take a look.",
-    aboutBody:"Amsterdam Pop-ups is a weekly, map-first guide to the city's temporary happenings — supper clubs, artist-run spaces, markets, residencies and one-off nights that rarely make the usual guides. Built for locals and visitors alike. This week is live on the map; everything before it lives in the archive. Spotted something we've missed? Tip us.",
+    aboutBody:"Amsterdam Pop-ups is a weekly guide to the city that leads with pop-ups: pop-up restaurants, shops and supper clubs, plus one-off events, markets, small gigs, film and shows. A new edition goes live every Monday.",
+    hpXmasK:"Christmas season", hpXmasH:"Christmas pop-ups and events in Amsterdam", hpXmasS:"Markets, winter terraces, workshops and light walks, until early January.", hpXmasC:"See the Christmas list",
+    hpSintK:"Until 5 December", hpSintH:"Sinterklaas in Amsterdam this week", hpSintS:"Sint visits, family days and workshops across the city.", hpSintC:"See what's on",
+    hpTipK:"Tip us", hpTipH:"Know a pop-up?", hpTipS:"Spotted one we've missed, or running one yourself? Tell us and we'll check it out.", hpTipC:"Send a tip",
+    hpWeekK:"Quick read", hpWeekH:"This week in one list", hpWeekS:"Every event with time, place and price, on one simple page.", hpWeekC:"Open the list",
     privacy:"Privacy", adLabel:"Advertisement",
     fPriv:"We only use this to follow up on your tip. See the Privacy page.",
     cookieText:"This site stays cookie-free until you allow ads. Accept to enable advertising and basic measurement; reject to keep only what's strictly necessary — you can change this anytime on the Privacy page.",
@@ -5060,7 +5084,11 @@ const I18N = {
     fName:"Je naam (optioneel)", fWhat:"De pop-up — wat en waar", fWhen:"Wanneer",
     fLink:"Link (Instagram, site, tickets)", fEmail:"Je e-mail (optioneel)", fSend:"Stuur tip",
     fThanks:"Bedankt — tip ontvangen. We kijken ernaar.",
-    aboutBody:"Amsterdam Pop-ups is een wekelijkse, kaartgerichte gids voor tijdelijke happenings in de stad — supperclubs, kunstenaarsruimtes, markten, residenties en eenmalige avonden die de gewone gidsen vaak missen. Voor locals én bezoekers. Deze week staat live op de kaart; alles daarvoor vind je in het archief. Iets gezien dat we gemist hebben? Tip ons.",
+    aboutBody:"Amsterdam Pop-ups is een wekelijkse gids voor de stad met pop-ups voorop: pop-uprestaurants, pop-upwinkels en supperclubs, plus eenmalige events, markten, kleine optredens, film en voorstellingen. Elke maandag staat er een nieuwe editie online.",
+    hpXmasK:"Kerstseizoen", hpXmasH:"Kerst pop-ups en evenementen in Amsterdam", hpXmasS:"Markten, winterterrassen, workshops en lichtwandelingen, tot begin januari.", hpXmasC:"Bekijk de kerstlijst",
+    hpSintK:"Tot en met 5 december", hpSintH:"Sinterklaas in Amsterdam deze week", hpSintS:"Sintbezoekjes, familiedagen en workshops in de hele stad.", hpSintC:"Bekijk wat er is",
+    hpTipK:"Tip ons", hpTipH:"Ken je een pop-up?", hpTipS:"Eentje gezien die wij missen, of organiseer je er zelf een? Laat het ons weten, dan checken we het.", hpTipC:"Stuur een tip",
+    hpWeekK:"Snel lezen", hpWeekH:"Deze week in één lijst", hpWeekS:"Alle events met tijd, plek en prijs, op één simpele pagina.", hpWeekC:"Open de lijst",
     privacy:"Privacy", adLabel:"Advertentie",
     fPriv:"We gebruiken dit alleen om op je tip te reageren. Zie de Privacy-pagina.",
     cookieText:"Deze site gebruikt geen cookies totdat je advertenties toestaat. Accepteer om advertenties en basismeting in te schakelen; weiger om alleen het strikt noodzakelijke te houden — je kunt dit altijd aanpassen op de Privacy-pagina.",
@@ -5575,7 +5603,7 @@ function setLang(l){
   document.getElementById("lang-nl").classList.toggle("on", l==="nl");
   document.getElementById("intro-en").style.display = l==="en" ? "" : "none";
   document.getElementById("intro-nl").style.display = l==="nl" ? "" : "none";
-  applyI18n(); renderChips(); renderThisWeek(); renderArchive();
+  applyI18n(); renderHousePromos(); renderChips(); renderThisWeek(); renderArchive();
   updateThemeButton(); updateListenButton(false);
 }
 
@@ -5601,9 +5629,45 @@ function submitTip(e){
   return false;
 }
 
-/* ---- ads (placeholders; on deploy, after consent, swap for real AdSense units) ---- */
+/* ---- ad slots: house promos until AdSense is live ----
+   While data-ad-client is still the ca-pub-XXXX placeholder, every ad slot shows one of our OWN banners
+   (.house-promo inside .ad-slot.house-promo-slot). They are our content, not ads, so never labelled "Advertisement".
+   When AdSense goes live (after consent), put the <ins class="adsbygoogle"> unit inside the same .ad-slot wrappers
+   instead of calling housePromoHtml(); the wrappers keep their 250px height, so nothing shifts.
+   Which banner shows where (dates are Europe/Amsterdam, via todayISO()):
+     PROMO_ORDER = Sinterklaas (through 5 Dec 2026), Christmas (through 6 Jan 2027), Tip us, This week as a list,
+     minus any banner for the page you are on. Slot data-promo="0" gets the first, data-promo="1" the second:
+     mobile: top under the map = 0, in-feed = 1;  desktop rail: both (0 and 1). */
+const PROMO_END = { sinterklaas:"2026-12-05", christmas:"2027-01-06" };
+const PROMOS = {
+  sinterklaas:{ k:"hpSint", href:{en:"/sinterklaas/", nl:"/nl/sinterklaas/"}, art:'<svg class="hp-art" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M16 58V30C16 17 24 9 32 4c8 5 16 13 16 26v28z" fill="#FFFFFF"/><path d="M29 16h6v8h8v6h-8v14h-6V30h-8v-6h8z" fill="#F2C14E"/><rect x="16" y="50" width="32" height="8" fill="#F2C14E"/></svg>' },
+  christmas:{ k:"hpXmas", href:{en:"/christmas/", nl:"/nl/kerst/"}, art:'<svg class="hp-art" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 8l14 18h-7l11 14h-7l12 14H9l12-14h-7l11-14h-7z" fill="#8FDCA6"/><rect x="28" y="54" width="8" height="8" fill="#F2C14E"/><circle cx="32" cy="7" r="4" fill="#F2C14E"/></svg>' },
+  tip:{ k:"hpTip", view:"tip", art:'<svg class="hp-art" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M32 6c-11 0-20 9-20 20 0 15 20 32 20 32s20-17 20-32c0-11-9-20-20-20z" fill="currentColor"/><path d="M32 16v20M22 26h20" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/></svg>' },
+  week:{ k:"hpWeek", href:{en:"/this-week.html", nl:"/nl/deze-week.html"}, art:'<svg class="hp-art" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g fill="currentColor"><circle cx="12" cy="16" r="4"/><circle cx="12" cy="32" r="4"/><circle cx="12" cy="48" r="4"/><rect x="22" y="13" width="34" height="6" rx="3"/><rect x="22" y="29" width="34" height="6" rx="3"/><rect x="22" y="45" width="34" height="6" rx="3"/></g></svg>' }
+};
+function promoOrder(){
+  const d = todayISO(), here = location.pathname;
+  const keys = [];
+  if(d <= PROMO_END.sinterklaas) keys.push("sinterklaas");
+  if(d <= PROMO_END.christmas) keys.push("christmas");
+  keys.push("tip", "week");
+  // never promote the page the visitor is already on
+  return keys.filter(k => !PROMOS[k].href || (here !== PROMOS[k].href.en && here !== PROMOS[k].href.nl));
+}
+function housePromoHtml(key){
+  const p = PROMOS[key], k = p.k;
+  const link = p.view ? `href="#${p.view}" onclick="switchView('${p.view}');return false"` : `href="${p.href[lang]}"`;
+  return `<a class="house-promo hp-${key}" ${link}><span class="hp-kicker">${t(k+"K")}</span><span class="hp-head">${t(k+"H")}</span><span class="hp-sub">${t(k+"S")}</span><span class="hp-cta">${t(k+"C")} <span aria-hidden="true">→</span></span>${p.art}</a>`;
+}
 function adSlot(kind){
-  return `<div class="ad-slot ad-mobile ad-${kind}"><span class="ad-label">${t("adLabel")}</span><span class="ad-hint">300×250 · responsive</span></div>`;
+  const pos = kind === "infeed" ? 1 : 0;
+  return `<div class="ad-slot ad-mobile ad-${kind} house-promo-slot" data-promo="${pos}">${housePromoHtml(promoOrder()[pos])}</div>`;
+}
+function renderHousePromos(){
+  const order = promoOrder();
+  document.querySelectorAll(".ad-slot.house-promo-slot[data-promo]").forEach(el => {
+    el.innerHTML = housePromoHtml(order[Number(el.dataset.promo)] || order[0]);
+  });
 }
 
 /* ---- cookie settings (reopen the banner to change consent) ---- */
@@ -5714,9 +5778,12 @@ initMap();
 if(map) map.on("popupclose", () => closeMapChooser(false));
 ensureMapChooser();
 applyI18n();
+renderHousePromos();
 renderChips();
 renderThisWeek();
 injectEventSchema();
+// /#tip (used by the About page and the house promos) opens the tip form
+if(location.hash === "#tip") switchView("tip");
 initConsent();
 initListenButton();
 window.addEventListener("resize", () => { if(map) map.invalidateSize(); });

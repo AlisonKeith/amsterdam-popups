@@ -62,4 +62,5 @@ Events can belong to several categories. "Regular" marks weekly or recurring ser
 ## Contact
 
 - Tips and corrections: hello@amsterdampopups.com
+- [About](https://www.amsterdampopups.com/about/) (Dutch: [Over ons](https://www.amsterdampopups.com/nl/over/))
 - [Privacy](https://www.amsterdampopups.com/privacy.html)
