@@ -734,7 +734,7 @@ const nyeFaqNl = [
 const nyeEn = listPage({
   L:"en", alt:NYE_ALT,
   title:"New Year's Eve pop-ups and events in Amsterdam 2026",
-  desc:"Pop-ups, pop ups and one-off events for New Year's Eve in Amsterdam: things to do on NYE 2026 and New Year's Day, from late-night popups to public countdown events, beyond the big clubs.",
+  desc:"New Year's Eve in Amsterdam 2026: pop-ups, one-off parties, club nights, special dinners and free fireworks shows, with times, prices, a map and organiser links.",
   headerExtra:` · <a href="/this-week.html">${TXT.en.allWeek}</a>`,
   h1:"New Year's Eve pop-ups and events in Amsterdam",
   lead:`  <p>Looking for something different on New Year's Eve in Amsterdam? Beyond the big free countdown at Museumplein, here are the pop-ups, one-off parties and special dinners we've checked on each organiser's own page, plus a few things to do on New Year's Day. Times and prices can change, so check the organiser's link before you go. Looking for Christmas? See our <a href="/christmas/">Christmas pop-ups page</a>.</p>\n  <p>Listed by date.</p>`,
@@ -747,7 +747,7 @@ const nyeEn = listPage({
 const nyeNl = listPage({
   L:"nl", alt:NYE_ALT,
   title:"Oud en nieuw pop-ups en evenementen in Amsterdam 2026",
-  desc:"Pop-ups, pop ups en eenmalige events voor oud en nieuw in Amsterdam: wat te doen op oudejaarsavond en nieuwjaarsdag, van late popups tot openbare aftelmomenten, naast de grote clubs.",
+  desc:"Oud en nieuw in Amsterdam 2026: pop-ups, eenmalige feesten, clubnachten, speciale diners en gratis vuurwerkshows, met tijden, prijzen, kaart en links naar de organisator.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
   h1:"Pop-ups en evenementen voor oud en nieuw in Amsterdam",
   lead:`  <p>Zin in iets anders met oud en nieuw in Amsterdam? Naast het grote gratis aftelmoment op het Museumplein vind je hier de pop-ups, eenmalige feesten en speciale diners die we op de eigen pagina van elke organisator hebben nagelopen, plus een paar uitjes voor nieuwjaarsdag. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat. Op zoek naar kerst? Zie onze <a href="/nl/kerst/">pagina met kerst pop-ups</a>.</p>\n  <p>Op datum.</p>`,
