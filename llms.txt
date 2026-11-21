@@ -4,7 +4,7 @@
 
 The guide is edited by hand and updated every week (Monday to Sunday). Each listing has a date, time, venue address, price and a link to the organiser's page. Past weeks stay in the Archive on the main site.
 
-## This week (16 – 22 Nov, 106 events)
+## This week (16 – 22 Nov, 105 events)
 
 - [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
@@ -17,19 +17,19 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [Drink this week](https://www.amsterdampopups.com/drink/): 10 events (Dutch: [Drinken](https://www.amsterdampopups.com/nl/drinken/))
 - [Markets this week](https://www.amsterdampopups.com/markets/): 8 events (Dutch: [Markten](https://www.amsterdampopups.com/nl/markten/))
 - [Christmas Markets this week](https://www.amsterdampopups.com/christmas-markets/): 3 events (Dutch: [Kerstmarkten](https://www.amsterdampopups.com/nl/kerstmarkten/))
-- [Sinterklaas this week](https://www.amsterdampopups.com/sinterklaas/): 4 events (Dutch: [Sinterklaas](https://www.amsterdampopups.com/nl/sinterklaas/))
+- [Sinterklaas this week](https://www.amsterdampopups.com/sinterklaas/): 3 events (Dutch: [Sinterklaas](https://www.amsterdampopups.com/nl/sinterklaas/))
 - [Fashion & Vintage this week](https://www.amsterdampopups.com/fashion-vintage/): 9 events (Dutch: [Mode & Vintage](https://www.amsterdampopups.com/nl/mode-vintage/))
 - [Art & Design this week](https://www.amsterdampopups.com/art-design/): 16 events (Dutch: [Kunst & Design](https://www.amsterdampopups.com/nl/kunst-design/))
 - [Pop-up Shops this week](https://www.amsterdampopups.com/pop-up-shops/): 2 events (Dutch: [Pop-upwinkels](https://www.amsterdampopups.com/nl/pop-upwinkels/))
 - [Music this week](https://www.amsterdampopups.com/music/): 35 events (Dutch: [Muziek](https://www.amsterdampopups.com/nl/muziek/))
 - [Nightlife this week](https://www.amsterdampopups.com/nightlife/): 3 events (Dutch: [Nachtleven](https://www.amsterdampopups.com/nl/nachtleven/))
 - [Film this week](https://www.amsterdampopups.com/film/): 16 events (Dutch: [Film](https://www.amsterdampopups.com/nl/film/))
-- [Kids & Family this week](https://www.amsterdampopups.com/kids-family/): 12 events (Dutch: [Gezin & Kids](https://www.amsterdampopups.com/nl/gezin-kids/))
+- [Kids & Family this week](https://www.amsterdampopups.com/kids-family/): 11 events (Dutch: [Gezin & Kids](https://www.amsterdampopups.com/nl/gezin-kids/))
 - [Sport this week](https://www.amsterdampopups.com/sport/): 10 events (Dutch: [Sport](https://www.amsterdampopups.com/nl/sport/))
 - [Active & Outdoor this week](https://www.amsterdampopups.com/active-outdoor/): 6 events (Dutch: [Actief & Buiten](https://www.amsterdampopups.com/nl/actief-buiten/))
 - [Theatre & Dance this week](https://www.amsterdampopups.com/theatre-dance/): 11 events (Dutch: [Theater & Dans](https://www.amsterdampopups.com/nl/theater-dans/))
 - [Comedy this week](https://www.amsterdampopups.com/comedy/): 6 events (Dutch: [Comedy/Cabaret](https://www.amsterdampopups.com/nl/comedy-cabaret/))
-- [Workshops this week](https://www.amsterdampopups.com/workshops/): 10 events (Dutch: [Workshops](https://www.amsterdampopups.com/nl/workshops/))
+- [Workshops this week](https://www.amsterdampopups.com/workshops/): 9 events (Dutch: [Workshops](https://www.amsterdampopups.com/nl/workshops/))
 - [Queer this week](https://www.amsterdampopups.com/queer/): 5 events (Dutch: [Queer](https://www.amsterdampopups.com/nl/queer/))
 - [Business this week](https://www.amsterdampopups.com/business/): 1 events (Dutch: [Zakelijk](https://www.amsterdampopups.com/nl/zakelijk/))
 - [Networking this week](https://www.amsterdampopups.com/networking/): 1 events (Dutch: [Netwerken](https://www.amsterdampopups.com/nl/netwerken/))
