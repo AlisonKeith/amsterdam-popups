@@ -5833,8 +5833,9 @@ renderHousePromos();
 renderChips();
 renderThisWeek();
 injectEventSchema();
-// /#tip (used by the About page and the house promos) opens the tip form
-if(location.hash === "#tip") switchView("tip");
+// /#tip (used by the About page and the house promos) opens the tip form;
+// /#archive opens the archive (used by the site header on generated pages).
+if(location.hash === "#tip" || location.hash === "#archive") switchView(location.hash.slice(1));
 initConsent();
 initListenButton();
 window.addEventListener("resize", () => { if(map) map.invalidateSize(); });

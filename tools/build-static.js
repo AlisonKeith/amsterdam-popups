@@ -229,21 +229,42 @@ ${e.org ? `          <dt>${T.org}</dt><dd>${e.org.url ? `<a href="${esc(e.org.ur
     </li>`; };
 
 const STYLE = `<style>
-:root{--red:#DA1219;--ink:#1A1A1A;--page:#FBFAF8;--muted:#5F5B55;--line:#E6E2DB;--card:#FFFFFF;--card-hover:#d8d2c8;--prose-text:#3c3933}
+@font-face{font-family:"Archivo Expanded";font-style:normal;font-weight:100 900;font-display:swap;src:url("/fonts/archivo-expanded.woff2") format("woff2")}
+:root{--red:#DA1219;--ink:#1A1A1A;--page:#FBFAF8;--muted:#5F5B55;--faint:#6B6A65;--ink-soft:#141414;--line:#E6E2DB;--card:#FFFFFF;--card-hover:#d8d2c8;--prose-text:#3c3933}
 *{box-sizing:border-box}
 body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6}
 .wrap{max-width:720px;margin:0 auto;padding:0 18px}
 a{color:var(--red)} a:focus-visible,button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.skip-link{position:absolute;left:-9999px}.skip-link:focus{left:8px;top:8px;background:#fff;padding:6px 10px}
+.skip-link{position:absolute;left:-9999px;top:8px;z-index:9999;background:var(--red);color:#fff;padding:8px 16px;border-radius:4px;font-size:14px;text-decoration:none}
+.skip-link:focus{left:8px}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-h1{font-size:1.5rem;margin:18px 0 6px} h2{font-size:1.1rem;margin:0 0 4px}
+header{padding:18px 0 0}
+.head-row{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:flex-start;gap:12px;min-width:0;flex:1 1 14rem;text-decoration:none;color:inherit}
+.mark{width:42px;height:42px;border-radius:10px;overflow:hidden;flex:none}
+.wordmark{font-family:"Archivo Expanded","Inter",sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.3px;line-height:1.05;color:var(--ink)}
+.nowrap{white-space:nowrap}
+.brand-text{min-width:0;flex:1}
+.tagline{font-size:11.5px;color:var(--faint);margin-top:1px;line-height:1.35;overflow-wrap:break-word;white-space:normal}
+.lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;font-size:12px;flex:none}
+.lang a,.lang button{appearance:none;border:0;background:transparent;padding:5px 11px;cursor:pointer;color:var(--muted);text-decoration:none;font-family:inherit;font-size:12px}
+.lang a.on,.lang button.on{background:var(--red);color:#fff;font-weight:500}
+.lang a:focus-visible,.lang button:focus-visible{outline:2px solid var(--ink);outline-offset:-3px}
+.head-actions{display:flex;align-items:center;gap:8px;flex:none;margin-left:auto}
+.flagstrip{display:flex;height:3px;margin-top:14px}
+.flagstrip i{display:block}.flagstrip .r{flex:1;background:var(--red)}.flagstrip .b{width:66px;background:var(--ink-soft)}
+nav.tabs{position:sticky;top:0;z-index:1200;background:var(--page);border-bottom:1px solid var(--line);margin-top:14px}
+nav.tabs .wrap{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none}
+.tab{appearance:none;border:0;background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--muted);text-decoration:none;padding:13px 0;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:500}
+main{padding:18px 0 8px}
+h1{font-size:1.5rem;margin:0 0 6px} h2{font-size:1.1rem;margin:0 0 4px}
 ol{list-style:none;padding:0;margin:0} li{border-top:1px solid var(--line);padding:16px 0}
 .meta{color:var(--muted);font-size:.9rem;margin:0 0 6px}
 dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8px;font-size:.95rem} dt{font-weight:600} dd{margin:0}
-p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-top:12px;font-size:.9rem;color:var(--muted)}
+p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 0 24px;font-size:.9rem;color:var(--muted)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
-.langs{font-size:.9rem;margin:0 0 8px} .langs a[aria-current]{color:var(--ink);font-weight:600;text-decoration:none}
 ${CONSENT_CSS}
 </style>`;
 
@@ -316,6 +337,64 @@ const FROM_TODAY_JS = `function applyFromToday(today){
 }
 applyFromToday();`;
 
+const ABOUT_ALT = {en:"/about/", nl:"/nl/over/"};
+
+// Shared site header (logo, wordmark, tagline, language switch, flag strip and nav tabs)
+// used on every generated plain page, so they match the interactive guide.
+const MARK_SVG = `<div class="mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="42" height="42">
+            <rect x="0" y="0" width="40" height="40" fill="#DA1219"/>
+            <rect x="13" y="0" width="14" height="40" fill="#111111"/>
+            <g stroke="#fff" stroke-width="3.2" stroke-linecap="square">
+              <line x1="14.8" y1="4" x2="25.2" y2="14"/><line x1="25.2" y1="4" x2="14.8" y2="14"/>
+              <line x1="14.8" y1="15" x2="25.2" y2="25"/><line x1="25.2" y1="15" x2="14.8" y2="25"/>
+              <line x1="14.8" y1="26" x2="25.2" y2="36"/><line x1="25.2" y1="26" x2="14.8" y2="36"/>
+            </g>
+          </svg>
+        </div>`;
+
+function siteChrome(L, {alt, current, skipHref, skipText}){
+  const home = L === "nl" ? "/nl/" : "/";
+  const I = I18N[L];
+  const tab = (id, href, label) => {
+    const on = current === id;
+    return `    <a class="tab${on ? " on" : ""}" href="${href}"${on ? ' aria-current="page"' : ""}>${esc(label)}</a>`;
+  };
+  const tabs = [
+    tab("thisweek", home, I.thisweek),
+    tab("archive", home + "#archive", I.archive),
+    tab("tip", home + "#tip", I.tip),
+    tab("about", ABOUT_ALT[L], I.about),
+    tab("privacy", "/privacy.html", I.privacy)
+  ].join("\n");
+  return `<a class="skip-link" href="${skipHref}">${esc(skipText)}</a>
+<header>
+  <div class="wrap">
+    <div class="head-row">
+      <a class="brand" href="${home}">
+        ${MARK_SVG}
+        <div class="brand-text">
+          <div class="wordmark">Amsterdam <span class="nowrap">Pop-ups</span></div>
+          <div class="tagline">${esc(I.tagline)}</div>
+        </div>
+      </a>
+      <div class="head-actions">
+        <nav class="lang" aria-label="${L === "nl" ? "Taal" : "Language"}">
+          <a href="${alt.en}" hreflang="en" lang="en"${L === "en" ? ' class="on" aria-current="page"' : ""}>EN<span class="sr-only"> – English</span></a>
+          <a href="${alt.nl}" hreflang="nl" lang="nl"${L === "nl" ? ' class="on" aria-current="page"' : ""}>NL<span class="sr-only"> – Nederlands</span></a>
+        </nav>
+      </div>
+    </div>
+    <div class="flagstrip" aria-hidden="true"><i class="r"></i><i class="b"></i><i class="r"></i></div>
+  </div>
+</header>
+<nav class="tabs" aria-label="${L === "nl" ? "Navigatie" : "Site"}">
+  <div class="wrap">
+${tabs}
+  </div>
+</nav>`;
+}
+
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
 function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText, keywords, imageAlt}){
   const T = TXT[L], url = alt[L];
@@ -334,15 +413,12 @@ ${socialMeta({L, title, desc, url, imageAlt})}
 ${GA_HEAD}${STYLE}
 ${ld}</head>
 <body>
-<a class="skip-link" href="#list">${T.skip}</a>
-<div class="wrap">
-<header>
-  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}${headerExtra || ""}</p>
-  <nav class="langs" aria-label="${L === "nl" ? "Taal" : "Language"}"><a href="${alt.en}" hreflang="en" lang="en"${L === "en" ? ' aria-current="page"' : ""}>English</a> · <a href="${alt.nl}" hreflang="nl" lang="nl"${L === "nl" ? ' aria-current="page"' : ""}>Nederlands</a></nav>
-</header>
+${siteChrome(L, {alt, skipHref:"#list", skipText:T.skip})}
 <main>
+<div class="wrap">
   <h1>${esc(h1)}</h1>
-${lead}
+${headerExtra ? `  <p>${headerExtra.replace(/^\s*·\s*/, "")}</p>
+` : ""}${lead}
 ${events.length ? `  <p id="from-today" hidden role="status">${esc(T.fromToday)}</p>
   <ol id="list">
 ${events.map(e => item(e, L, "h2")).join("\n")}
@@ -350,18 +426,18 @@ ${events.map(e => item(e, L, "h2")).join("\n")}
   <script>
 ${FROM_TODAY_JS}
   </script>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
+</div>
 </main>
 <footer>
+<div class="wrap">
 ${browseNav(L, currentId)}  <p>${footerText || T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="${ABOUT_ALT[L]}">${T.about}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
-</footer>
 </div>
+</footer>
 ${consentBlock(L)}
 </body>
 </html>
 `;
 }
-
-const ABOUT_ALT = {en:"/about/", nl:"/nl/over/"};
 
 // ---- this-week.html ----
 const WEEK_ALT = {en:"/this-week.html", nl:"/nl/deze-week.html"};
@@ -499,21 +575,19 @@ ${JSON.stringify(ld, null, 1)}
 </script>
 </head>
 <body>
-<a class="skip-link" href="#about">${L === "nl" ? "Naar de inhoud" : "Skip to main content"}</a>
-<div class="wrap">
-<header>
-  <p><a href="${L === "nl" ? "/nl/" : "/"}">Amsterdam Pop-ups</a>: ${T.guide}</p>
-  <nav class="langs" aria-label="${L === "nl" ? "Taal" : "Language"}"><a href="${ABOUT_ALT.en}" hreflang="en" lang="en"${L === "en" ? ' aria-current="page"' : ""}>English</a> · <a href="${ABOUT_ALT.nl}" hreflang="nl" lang="nl"${L === "nl" ? ' aria-current="page"' : ""}>Nederlands</a></nav>
-</header>
+${siteChrome(L, {alt:ABOUT_ALT, current:"about", skipHref:"#about", skipText: L === "nl" ? "Naar de inhoud" : "Skip to main content"})}
 <main id="about">
+<div class="wrap">
   <h1>${esc(A.h1)}</h1>
   <p>${esc(I18N[L].aboutBody)}</p>
 ${A.body}
+</div>
 </main>
 <footer>
+<div class="wrap">
   <p><a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
-</footer>
 </div>
+</footer>
 ${consentBlock(L)}
 </body>
 </html>
