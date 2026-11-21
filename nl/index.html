@@ -267,6 +267,9 @@ main{padding:18px 0 40px}
 .card-tags .tree{width:10px; height:10px; color:var(--c-christmas)}
 .card h3{margin:0 0 3px; font-size:15.5px; font-weight:600; color:var(--ink); font-family:"Inter",sans-serif}
 .card p{margin:0; font-size:13px; color:var(--muted); line-height:1.5}
+.schedule{list-style:none; margin:8px 0 0; padding:0; font-size:12.5px; color:var(--muted); line-height:1.45}
+.schedule li{padding:4px 0; border-top:1px solid var(--line)}
+.schedule li:first-child{border-top:0; padding-top:0}
 .facts{display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:10px}
 .fact{display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--faint)}
 .ico{width:13px; height:13px; flex:none; opacity:.85}
@@ -703,11 +706,21 @@ const EVENTS = [
   { id:"cinema-culinair-tolhuis-1116", week:"2026-11-16", cats:["film","food"], recur:"regular",
     name:"Cinema Culinair: film & dinner or brunch at Tolhuis",
     hood:{en:"Noord",nl:"Noord"}, lat:52.3831, lng:4.9049,
-    when:{en:"Tue 17 – Sun 22 Nov",nl:"di 17 – zo 22 nov"}, time:{en:"dinners: doors 18:00, film 19:00 (Tue Chef, Wed Estômago, Fri Burnt). Brunches: doors 11:30, film 12:30 (Sat Charlie and the Chocolate Factory, Sun The Grand Budapest Hotel). Thu, Sat and Sun dinners sold out (waitlist)",nl:"diners: inloop 18:00, film 19:00 (di Chef, wo Estômago, vr Burnt). Brunches: inloop 11:30, film 12:30 (za Charlie and the Chocolate Factory, zo The Grand Budapest Hotel). Diners do, za en zo uitverkocht (wachtlijst)"},
+    when:{en:"Tue 17 – Sun 22 Nov",nl:"di 17 – zo 22 nov"}, time:{en:"Tue 17 – Sun 22 Nov",nl:"di 17 – zo 22 nov"},
     days:["2026-11-17","2026-11-18","2026-11-19","2026-11-20","2026-11-21","2026-11-22"],
     addr:{en:"Tolhuis, Buiksloterweg 7, Amsterdam",nl:"Tolhuis, Buiksloterweg 7, Amsterdam"}, price:{en:"€69.95–€89.95 p.p. (brunch €69.95, film & dinner from €89.95); ticket shop totals up to €91.50",nl:"€69,95–€89,95 p.p. (brunch €69,95, film & diner vanaf €89,95); totaal in de ticketshop tot €91,50"},
     blurb:{en:"A food film on the big screen, with the dishes from each scene served at your table at the exact moment they appear. Long tables in the historic Tolhuis on the IJ; vegetarian menu available.",
            nl:"Een foodfilm op het grote doek, waarbij de gerechten uit de film precies op het juiste moment aan tafel komen. Lange tafels in het historische Tolhuis aan het IJ; vegetarisch menu mogelijk."},
+    schedule:[
+      {en:"Tue 17 Nov, doors 18:00, film 19:00: Chef", nl:"di 17 nov, inloop 18:00, film 19:00: Chef"},
+      {en:"Wed 18 Nov, doors 18:00, film 19:00: Estômago", nl:"wo 18 nov, inloop 18:00, film 19:00: Estômago"},
+      {en:"Thu 19 Nov: dinner sold out (waitlist)", nl:"do 19 nov: diner uitverkocht (wachtlijst)"},
+      {en:"Fri 20 Nov, doors 18:00, film 19:00: Burnt", nl:"vr 20 nov, inloop 18:00, film 19:00: Burnt"},
+      {en:"Sat 21 Nov, doors 11:30, film 12:30: Charlie and the Chocolate Factory", nl:"za 21 nov, inloop 11:30, film 12:30: Charlie and the Chocolate Factory"},
+      {en:"Sat 21 Nov: dinner sold out (waitlist)", nl:"za 21 nov: diner uitverkocht (wachtlijst)"},
+      {en:"Sun 22 Nov, doors 11:30, film 12:30: The Grand Budapest Hotel", nl:"zo 22 nov, inloop 11:30, film 12:30: The Grand Budapest Hotel"},
+      {en:"Sun 22 Nov: dinner sold out (waitlist)", nl:"zo 22 nov: diner uitverkocht (wachtlijst)"}
+    ],
     url:"https://cinemaculinair.nl/agenda/",
     org:{name:"Cinema Culinair",url:"https://cinemaculinair.nl/"} },
 
@@ -891,11 +904,19 @@ const EVENTS = [
   { id:"harmony", week:"2026-11-16", cats:["music"], recur:"oneoff",
     name:"Harmony",
     hood:{en:"Westergas",nl:"Westergas"}, lat:52.3868, lng:4.8692,
-    when:{en:"Tue 17 – Sun 22 Nov",nl:"di 17 – zo 22 nov"}, time:{en:"Tue 20:00–21:30; Wed–Fri 20:00–22:30; Sat & Sun 10:30–13:00, 15:30–18:00 and 20:30–23:00",nl:"di 20:00–21:30; wo–vr 20:00–22:30; za & zo 10:30–13:00, 15:30–18:00 en 20:30–23:00"},
+    when:{en:"Tue 17 – Sun 22 Nov",nl:"di 17 – zo 22 nov"}, time:{en:"Tue 17 – Sun 22 Nov",nl:"di 17 – zo 22 nov"},
     days:["2026-11-17","2026-11-18","2026-11-19","2026-11-20","2026-11-21","2026-11-22"],
     addr:{en:"Gashouder, Westergas, Klönneplein 1, Amsterdam",nl:"Gashouder, Westergas, Klönneplein 1, Amsterdam"}, price:{en:"€73.50 per ceremony",nl:"€73,50 per ceremonie"},
-    blurb:{en:"Separately ticketed listening ceremonies of live music, light and image in the round Gashouder. Line-up: Tue 17 Nov, 20:00–21:30 Opening Ceremony; Wed 18 Nov, 20:00–22:30 Sven Väth presents Inner Horizon, with Roman Flügel (ambient live); Thu 19 Nov, 20:00–22:30 Niklas Paschburg, with Laura Masotto; Fri 20 Nov, 20:00–22:30 Jon Hopkins with Maddie Ashman and Leo Abrahams, plus Barker (ambient live); Sat 21 Nov, 10:30–13:00 Yehezkel Raz, with Jakub Dubik; 15:30–18:00 Ben Lukas Boysen, with Koki Nakano; 20:30–23:00 Lisa Morgenstern with Bulgarian Voices Berlin; Sun 22 Nov, 10:30–13:00 Simeon ten Holt's Canto Ostinato by Jeroen van Veen and Friends on six grand pianos; 15:30–18:00 Jeroen van Veen plays Einaudi and Glass, with Joachim Eijlander; 20:30–23:00 Shida Shahabi, with Shards.",
-           nl:"Losse luisterceremonies met live muziek, licht en beeld in de ronde Gashouder. Programma: di 17 nov, 20:00–21:30 openingsceremonie; wo 18 nov, 20:00–22:30 Sven Väth presenteert Inner Horizon, met Roman Flügel (ambient live); do 19 nov, 20:00–22:30 Niklas Paschburg, met Laura Masotto; vr 20 nov, 20:00–22:30 Jon Hopkins met Maddie Ashman en Leo Abrahams, plus Barker (ambient live); za 21 nov, 10:30–13:00 Yehezkel Raz, met Jakub Dubik; 15:30–18:00 Ben Lukas Boysen, met Koki Nakano; 20:30–23:00 Lisa Morgenstern met Bulgarian Voices Berlin; zo 22 nov, 10:30–13:00 Canto Ostinato van Simeon ten Holt door Jeroen van Veen and Friends op zes vleugels; 15:30–18:00 Jeroen van Veen speelt Einaudi en Glass, met Joachim Eijlander; 20:30–23:00 Shida Shahabi, met Shards."},
+    blurb:{en:"Listening ceremonies of live music, light and image, performed in the round inside the Gashouder.",
+           nl:"Luisterceremonies met live muziek, licht en beeld, in het rond uitgevoerd in de Gashouder."},
+    schedule:[
+      {en:"Tue 17 Nov, 20:00–21:30: Opening Ceremony", nl:"di 17 nov, 20:00–21:30: Openingsceremonie"},
+      {en:"Wed 18 Nov, 20:00–22:30: Sven Väth, Inner Horizon", nl:"wo 18 nov, 20:00–22:30: Sven Väth, Inner Horizon"},
+      {en:"Thu 19 Nov, 20:00–22:30: Niklas Paschburg", nl:"do 19 nov, 20:00–22:30: Niklas Paschburg"},
+      {en:"Fri 20 Nov, 20:00–22:30: Jon Hopkins", nl:"vr 20 nov, 20:00–22:30: Jon Hopkins"},
+      {en:"Sat 21 Nov: Yehezkel Raz, Ben Lukas Boysen, Lisa Morgenstern", nl:"za 21 nov: Yehezkel Raz, Ben Lukas Boysen, Lisa Morgenstern"},
+      {en:"Sun 22 Nov: Simeon ten Holt's Canto Ostinato, Jeroen van Veen, Shida Shahabi", nl:"zo 22 nov: Canto Ostinato van Simeon ten Holt, Jeroen van Veen, Shida Shahabi"}
+    ],
     url:"https://harmony.now/",
     org:{name:"HARMONY",url:"https://harmony.now/"}, img:"https://harmony.now/content/uploads/2026/04/share-image.jpg" },
 
@@ -5778,14 +5799,14 @@ function renderMap(list){
       const items = group.map(e => {
         const ec = catBy[e.cats[0]];
         const ep = `<span class="pop-cat" style="background:${tintBg(ec.hex)};color:${darkText(ec.hex)}">${catLabelHtml(ec)}</span>`;
-        return `${ep} <b>${e.name}</b><br>${e.when[lang]} · ${e.time[lang]}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+        return `${ep} <b>${e.name}</b><br>${eventWhenLine(e)}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
       }).join("<hr style='margin:6px 0;border-color:#eee'>");
       popupHtml = `${mapsButton(ev)}<br>${ev.hood[lang]}<br><br>${items}`;
     } else if(count === 1) {
-      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
     } else {
       // Stacked markers below first — bind same popup as first
-      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${ev.when[lang]} · ${ev.time[lang]}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
     }
     m.bindPopup(popupHtml);
     markers[ev.id] = m;
@@ -5870,9 +5891,20 @@ function cardTagsHtml(ev){
   if(!extra.length) return "";
   return `<ul class="card-tags" aria-label="${t("alsoIn")}">${extra.map(c => `<li>${c.tree ? treeSvg() : `<span class="dot" style="background:${catSwatch(c)}" aria-hidden="true"></span>`}${c.label[lang]}</li>`).join("")}</ul>`;
 }
+function eventWhenLine(ev){
+  const w = ev.when[lang];
+  const tm = ev.time && ev.time[lang];
+  if((ev.schedule && ev.schedule.length) || !tm || tm === w) return w;
+  return w + " · " + tm;
+}
+function scheduleHtml(ev){
+  if(!ev.schedule || !ev.schedule.length) return "";
+  const label = lang === "nl" ? "Programma" : "Programme";
+  return `<ul class="schedule" aria-label="${label}">${ev.schedule.map(s => `<li>${s[lang]}</li>`).join("")}</ul>`;
+}
 function cardHtml(ev){
   const c = catBy[ev.cats[0]];
-  const facts = `<div class="facts">${fact(ICO.clock, ev.when[lang]+" · "+ev.time[lang])}${mapsButton(ev)}${ev.price?fact(ICO.tag, ev.price[lang]):""}</div>`;
+  const facts = `<div class="facts">${fact(ICO.clock, eventWhenLine(ev))}${mapsButton(ev)}${ev.price?fact(ICO.tag, ev.price[lang]):""}</div>`;
   return `<article class="card" data-id="${ev.id}" onclick="focusEvent('${ev.id}')">
     <div class="card-top">
       <span class="pill" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>
@@ -5881,6 +5913,7 @@ function cardHtml(ev){
     ${cardTagsHtml(ev)}
     <h3>${ev.name}</h3>
     <p>${ev.blurb[lang]}</p>
+    ${scheduleHtml(ev)}
     ${facts}
     <a class="more" href="${ev.url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${t("more")} ↗</a>
   </article>`;
@@ -5939,7 +5972,7 @@ function renderArchive(){
   const el = document.getElementById("archive");
   const match = ev => {
     if(!q) return true;
-    const hay = [ev.name, ev.hood.en, ev.hood.nl, ev.addr.en, ev.addr.nl, ev.blurb.en, ev.blurb.nl,
+    const hay = [ev.name, ev.hood.en, ev.hood.nl, ev.addr.en, ev.addr.nl, ev.blurb.en, ev.blurb.nl, ...(ev.schedule||[]).flatMap(s => [s.en, s.nl]),
       ...ev.cats.flatMap(id => [catBy[id].label.en, catBy[id].label.nl])].join(" ").toLowerCase();
     return hay.includes(q);
   };

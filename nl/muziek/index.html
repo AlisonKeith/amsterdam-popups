@@ -102,6 +102,9 @@ ol{list-style:none;padding:0;margin:0} li{border-top:1px solid var(--line);paddi
 .meta{color:var(--muted);font-size:.9rem;margin:0 0 6px}
 dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8px;font-size:.95rem} dt{font-weight:600} dd{margin:0}
 p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 0 24px;font-size:.9rem;color:var(--muted)}
+.schedule{list-style:none;margin:8px 0 10px;padding:0;font-size:.92rem;color:var(--muted);line-height:1.45}
+.schedule li{border-top:1px solid var(--line);padding:4px 0;margin:0}
+.schedule li:first-child{border-top:0;padding-top:0}
 .faq{margin:28px 0 8px;padding-top:16px;border-top:1px solid var(--line)}
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
@@ -171,7 +174,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
    "@type": "MusicEvent",
    "name": "Harmony",
    "keywords": "Muziek",
-   "description": "Losse luisterceremonies met live muziek, licht en beeld in de ronde Gashouder. Programma: di 17 nov, 20:00–21:30 openingsceremonie; wo 18 nov, 20:00–22:30 Sven Väth presenteert Inner Horizon, met Roman Flügel (ambient live); do 19 nov, 20:00–22:30 Niklas Paschburg, met Laura Masotto; vr 20 nov, 20:00–22:30 Jon Hopkins met Maddie Ashman en Leo Abrahams, plus Barker (ambient live); za 21 nov, 10:30–13:00 Yehezkel Raz, met Jakub Dubik; 15:30–18:00 Ben Lukas Boysen, met Koki Nakano; 20:30–23:00 Lisa Morgenstern met Bulgarian Voices Berlin; zo 22 nov, 10:30–13:00 Canto Ostinato van Simeon ten Holt door Jeroen van Veen and Friends op zes vleugels; 15:30–18:00 Jeroen van Veen speelt Einaudi en Glass, met Joachim Eijlander; 20:30–23:00 Shida Shahabi, met Shards.",
+   "description": "Luisterceremonies met live muziek, licht en beeld, in het rond uitgevoerd in de Gashouder.",
    "url": "https://harmony.now/",
    "eventStatus": "https://schema.org/EventScheduled",
    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -190,8 +193,8 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
      "longitude": 4.8692
     }
    },
-   "startDate": "2026-11-17T20:00:00+01:00",
-   "endDate": "2026-11-22T21:30:00+01:00",
+   "startDate": "2026-11-17",
+   "endDate": "2026-11-22",
    "organizer": {
     "@type": "Organization",
     "name": "HARMONY",
@@ -1280,12 +1283,20 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <h2>Harmony</h2>
         <p class="meta">Muziek</p>
         <dl>
-          <dt>Wanneer</dt><dd>di 17 – zo 22 nov, di 20:00–21:30; wo–vr 20:00–22:30; za &amp; zo 10:30–13:00, 15:30–18:00 en 20:30–23:00</dd>
+          <dt>Wanneer</dt><dd>di 17 – zo 22 nov</dd>
           <dt>Waar</dt><dd>Gashouder, Westergas, Klönneplein 1, Amsterdam (Westergas)</dd>
           <dt>Prijs</dt><dd>€73,50 per ceremonie</dd>
           <dt>Organisator</dt><dd><a href="https://harmony.now/">HARMONY</a></dd>
         </dl>
-        <p>Losse luisterceremonies met live muziek, licht en beeld in de ronde Gashouder. Programma: di 17 nov, 20:00–21:30 openingsceremonie; wo 18 nov, 20:00–22:30 Sven Väth presenteert Inner Horizon, met Roman Flügel (ambient live); do 19 nov, 20:00–22:30 Niklas Paschburg, met Laura Masotto; vr 20 nov, 20:00–22:30 Jon Hopkins met Maddie Ashman en Leo Abrahams, plus Barker (ambient live); za 21 nov, 10:30–13:00 Yehezkel Raz, met Jakub Dubik; 15:30–18:00 Ben Lukas Boysen, met Koki Nakano; 20:30–23:00 Lisa Morgenstern met Bulgarian Voices Berlin; zo 22 nov, 10:30–13:00 Canto Ostinato van Simeon ten Holt door Jeroen van Veen and Friends op zes vleugels; 15:30–18:00 Jeroen van Veen speelt Einaudi en Glass, met Joachim Eijlander; 20:30–23:00 Shida Shahabi, met Shards.</p>
+        <p>Luisterceremonies met live muziek, licht en beeld, in het rond uitgevoerd in de Gashouder.</p>
+        <ul class="schedule" aria-label="Programma">
+          <li>di 17 nov, 20:00–21:30: Openingsceremonie</li>
+          <li>wo 18 nov, 20:00–22:30: Sven Väth, Inner Horizon</li>
+          <li>do 19 nov, 20:00–22:30: Niklas Paschburg</li>
+          <li>vr 20 nov, 20:00–22:30: Jon Hopkins</li>
+          <li>za 21 nov: Yehezkel Raz, Ben Lukas Boysen, Lisa Morgenstern</li>
+          <li>zo 22 nov: Canto Ostinato van Simeon ten Holt, Jeroen van Veen, Shida Shahabi</li>
+        </ul>
         <p><a href="https://harmony.now/">Details en tickets voor Harmony<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>

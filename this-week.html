@@ -102,6 +102,9 @@ ol{list-style:none;padding:0;margin:0} li{border-top:1px solid var(--line);paddi
 .meta{color:var(--muted);font-size:.9rem;margin:0 0 6px}
 dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8px;font-size:.95rem} dt{font-weight:600} dd{margin:0}
 p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 0 24px;font-size:.9rem;color:var(--muted)}
+.schedule{list-style:none;margin:8px 0 10px;padding:0;font-size:.92rem;color:var(--muted);line-height:1.45}
+.schedule li{border-top:1px solid var(--line);padding:4px 0;margin:0}
+.schedule li:first-child{border-top:0;padding-top:0}
 .faq{margin:28px 0 8px;padding-top:16px;border-top:1px solid var(--line)}
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
@@ -469,7 +472,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
    "@type": "MusicEvent",
    "name": "Harmony",
    "keywords": "Music",
-   "description": "Separately ticketed listening ceremonies of live music, light and image in the round Gashouder. Line-up: Tue 17 Nov, 20:00–21:30 Opening Ceremony; Wed 18 Nov, 20:00–22:30 Sven Väth presents Inner Horizon, with Roman Flügel (ambient live); Thu 19 Nov, 20:00–22:30 Niklas Paschburg, with Laura Masotto; Fri 20 Nov, 20:00–22:30 Jon Hopkins with Maddie Ashman and Leo Abrahams, plus Barker (ambient live); Sat 21 Nov, 10:30–13:00 Yehezkel Raz, with Jakub Dubik; 15:30–18:00 Ben Lukas Boysen, with Koki Nakano; 20:30–23:00 Lisa Morgenstern with Bulgarian Voices Berlin; Sun 22 Nov, 10:30–13:00 Simeon ten Holt's Canto Ostinato by Jeroen van Veen and Friends on six grand pianos; 15:30–18:00 Jeroen van Veen plays Einaudi and Glass, with Joachim Eijlander; 20:30–23:00 Shida Shahabi, with Shards.",
+   "description": "Listening ceremonies of live music, light and image, performed in the round inside the Gashouder.",
    "url": "https://harmony.now/",
    "eventStatus": "https://schema.org/EventScheduled",
    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
@@ -488,8 +491,8 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
      "longitude": 4.8692
     }
    },
-   "startDate": "2026-11-17T20:00:00+01:00",
-   "endDate": "2026-11-22T21:30:00+01:00",
+   "startDate": "2026-11-17",
+   "endDate": "2026-11-22",
    "organizer": {
     "@type": "Organization",
     "name": "HARMONY",
@@ -4314,12 +4317,22 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <h2>Cinema Culinair: film &amp; dinner or brunch at Tolhuis</h2>
         <p class="meta">Film · Food · Regular</p>
         <dl>
-          <dt>When</dt><dd>Tue 17 – Sun 22 Nov, dinners: doors 18:00, film 19:00 (Tue Chef, Wed Estômago, Fri Burnt). Brunches: doors 11:30, film 12:30 (Sat Charlie and the Chocolate Factory, Sun The Grand Budapest Hotel). Thu, Sat and Sun dinners sold out (waitlist)</dd>
+          <dt>When</dt><dd>Tue 17 – Sun 22 Nov</dd>
           <dt>Where</dt><dd>Tolhuis, Buiksloterweg 7, Amsterdam (Noord)</dd>
           <dt>Price</dt><dd>€69.95–€89.95 p.p. (brunch €69.95, film &amp; dinner from €89.95); ticket shop totals up to €91.50</dd>
           <dt>Organiser</dt><dd><a href="https://cinemaculinair.nl/">Cinema Culinair</a></dd>
         </dl>
         <p>A food film on the big screen, with the dishes from each scene served at your table at the exact moment they appear. Long tables in the historic Tolhuis on the IJ; vegetarian menu available.</p>
+        <ul class="schedule" aria-label="Programme">
+          <li>Tue 17 Nov, doors 18:00, film 19:00: Chef</li>
+          <li>Wed 18 Nov, doors 18:00, film 19:00: Estômago</li>
+          <li>Thu 19 Nov: dinner sold out (waitlist)</li>
+          <li>Fri 20 Nov, doors 18:00, film 19:00: Burnt</li>
+          <li>Sat 21 Nov, doors 11:30, film 12:30: Charlie and the Chocolate Factory</li>
+          <li>Sat 21 Nov: dinner sold out (waitlist)</li>
+          <li>Sun 22 Nov, doors 11:30, film 12:30: The Grand Budapest Hotel</li>
+          <li>Sun 22 Nov: dinner sold out (waitlist)</li>
+        </ul>
         <p><a href="https://cinemaculinair.nl/agenda/">Details and tickets for Cinema Culinair: film &amp; dinner or brunch at Tolhuis<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
@@ -4342,12 +4355,20 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <h2>Harmony</h2>
         <p class="meta">Music</p>
         <dl>
-          <dt>When</dt><dd>Tue 17 – Sun 22 Nov, Tue 20:00–21:30; Wed–Fri 20:00–22:30; Sat &amp; Sun 10:30–13:00, 15:30–18:00 and 20:30–23:00</dd>
+          <dt>When</dt><dd>Tue 17 – Sun 22 Nov</dd>
           <dt>Where</dt><dd>Gashouder, Westergas, Klönneplein 1, Amsterdam (Westergas)</dd>
           <dt>Price</dt><dd>€73.50 per ceremony</dd>
           <dt>Organiser</dt><dd><a href="https://harmony.now/">HARMONY</a></dd>
         </dl>
-        <p>Separately ticketed listening ceremonies of live music, light and image in the round Gashouder. Line-up: Tue 17 Nov, 20:00–21:30 Opening Ceremony; Wed 18 Nov, 20:00–22:30 Sven Väth presents Inner Horizon, with Roman Flügel (ambient live); Thu 19 Nov, 20:00–22:30 Niklas Paschburg, with Laura Masotto; Fri 20 Nov, 20:00–22:30 Jon Hopkins with Maddie Ashman and Leo Abrahams, plus Barker (ambient live); Sat 21 Nov, 10:30–13:00 Yehezkel Raz, with Jakub Dubik; 15:30–18:00 Ben Lukas Boysen, with Koki Nakano; 20:30–23:00 Lisa Morgenstern with Bulgarian Voices Berlin; Sun 22 Nov, 10:30–13:00 Simeon ten Holt&#39;s Canto Ostinato by Jeroen van Veen and Friends on six grand pianos; 15:30–18:00 Jeroen van Veen plays Einaudi and Glass, with Joachim Eijlander; 20:30–23:00 Shida Shahabi, with Shards.</p>
+        <p>Listening ceremonies of live music, light and image, performed in the round inside the Gashouder.</p>
+        <ul class="schedule" aria-label="Programme">
+          <li>Tue 17 Nov, 20:00–21:30: Opening Ceremony</li>
+          <li>Wed 18 Nov, 20:00–22:30: Sven Väth, Inner Horizon</li>
+          <li>Thu 19 Nov, 20:00–22:30: Niklas Paschburg</li>
+          <li>Fri 20 Nov, 20:00–22:30: Jon Hopkins</li>
+          <li>Sat 21 Nov: Yehezkel Raz, Ben Lukas Boysen, Lisa Morgenstern</li>
+          <li>Sun 22 Nov: Simeon ten Holt&#39;s Canto Ostinato, Jeroen van Veen, Shida Shahabi</li>
+        </ul>
         <p><a href="https://harmony.now/">Details and tickets for Harmony<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>

@@ -280,13 +280,16 @@ const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <l
         <${h}>${esc(e.name)}</${h}>
         <p class="meta">${e.cats.map(c => esc(catBy[c] ? catBy[c].label[L] : c)).join(" · ")}${e.recur === "regular" ? " · " + T.regular : ""}</p>
         <dl>
-          <dt>${T.when}</dt><dd>${esc(e.when[L])}${e.time && e.time[L] ? ", " + esc(e.time[L]) : ""}</dd>
+          <dt>${T.when}</dt><dd>${esc(e.when[L])}${(!e.schedule || !e.schedule.length) && e.time && e.time[L] && e.time[L] !== e.when[L] ? ", " + esc(e.time[L]) : ""}</dd>
           <dt>${T.where}</dt><dd>${esc(e.addr[L])}${e.hood && e.hood[L] ? " (" + esc(e.hood[L]) + ")" : ""}</dd>
           <dt>${T.price}</dt><dd>${esc(priceText(e, L))}</dd>
 ${e.org ? `          <dt>${T.org}</dt><dd>${e.org.url ? `<a href="${esc(e.org.url)}">${esc(e.org.name)}</a>` : esc(e.org.name)}</dd>
 ` : ""}        </dl>
         <p>${esc(e.blurb[L])}</p>
-        <p><a href="${esc(e.url)}">${esc(T.details(e.name))}<span class="sr-only">${T.detailsSr}</span></a></p>
+${e.schedule && e.schedule.length ? `        <ul class="schedule" aria-label="${L === "nl" ? "Programma" : "Programme"}">
+${e.schedule.map(s => `          <li>${esc(s[L])}</li>`).join("\n")}
+        </ul>
+` : ""}        <p><a href="${esc(e.url)}">${esc(T.details(e.name))}<span class="sr-only">${T.detailsSr}</span></a></p>
       </article>
     </li>`; };
 
@@ -325,6 +328,9 @@ ol{list-style:none;padding:0;margin:0} li{border-top:1px solid var(--line);paddi
 .meta{color:var(--muted);font-size:.9rem;margin:0 0 6px}
 dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 12px;margin:0 0 8px;font-size:.95rem} dt{font-weight:600} dd{margin:0}
 p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 0 24px;font-size:.9rem;color:var(--muted)}
+.schedule{list-style:none;margin:8px 0 10px;padding:0;font-size:.92rem;color:var(--muted);line-height:1.45}
+.schedule li{border-top:1px solid var(--line);padding:4px 0;margin:0}
+.schedule li:first-child{border-top:0;padding-top:0}
 .faq{margin:28px 0 8px;padding-top:16px;border-top:1px solid var(--line)}
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
