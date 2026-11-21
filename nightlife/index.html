@@ -234,8 +234,9 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
   <h1>Nightlife in Amsterdam this week</h1>
   <p>16 – 22 Nov · 3 events</p>
   <p>Club nights, parties, late-night events and one-off DJ sets around Amsterdam. Aimed at adults who want to go out, from a relaxed evening with friends to dancing until the early hours. The list is refreshed every week; check the organiser&#39;s page for age limits and door policy. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
+  <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li>
+    <li data-end="2026-11-21">
       <article>
         <h2>12FU presents: Allarme + All Male Videoshop + Prom Vagabonds</h2>
         <p class="meta">Music · Nightlife</p>
@@ -249,7 +250,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://occii.org/events/12fu-allarme/">Details and tickets for 12FU presents: Allarme + All Male Videoshop + Prom Vagabonds<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-21">
       <article>
         <h2>IDFA Dance Night</h2>
         <p class="meta">Nightlife · Music · Film</p>
@@ -263,7 +264,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://festival.idfa.nl/en/composition/de7ad047-9e31-4e58-aa1f-3d37ec3680c3/idfa-dance-night/">Details and tickets for IDFA Dance Night<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-21">
       <article>
         <h2>Bon biní na mi soño — Juny Martina</h2>
         <p class="meta">Music · Art &amp; Design · Film · Theatre &amp; Dance · Nightlife</p>
@@ -278,6 +279,31 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
       </article>
     </li>
   </ol>
+  <script>
+function applyFromToday(today){
+  today = today || new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"});
+  var list = document.getElementById("list");
+  var status = document.getElementById("from-today");
+  if(!list || list.tagName !== "OL") return;
+  var items = list.children, i, end, upcoming = 0;
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(!end || end >= today) upcoming++;
+  }
+  if(!upcoming || upcoming === items.length){
+    for(i = 0; i < items.length; i++) items[i].removeAttribute("hidden");
+    if(status) status.setAttribute("hidden", "");
+    return;
+  }
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(end && end < today) items[i].setAttribute("hidden", "");
+    else items[i].removeAttribute("hidden");
+  }
+  if(status) status.removeAttribute("hidden");
+}
+applyFromToday();
+  </script>
 </main>
 <footer>
   <nav class="browse" aria-labelledby="browse-h">

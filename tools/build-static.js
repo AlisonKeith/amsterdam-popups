@@ -86,7 +86,8 @@ const TXT = {
       catH1:l => `${l} in Amsterdam this week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam this week (${w}) · Amsterdam Pop-ups`,
       catDesc:(l, n, w) => `${l} in Amsterdam this week (${w}): ${n} ${n === 1 ? "event" : "events"}, with dates, times, venues, prices and organiser links.`,
-      empty:a => `Nothing in this category this week. Try another category below, or see ${a}all this week's events</a>.`},
+      empty:a => `Nothing in this category this week. Try another category below, or see ${a}all this week's events</a>.`,
+      fromToday:"Showing today onwards"},
   nl:{when:"Wanneer", where:"Waar", price:"Prijs", org:"Organisator", free:"Gratis", regular:"Terugkerend",
       details:n => `Details en tickets voor ${n}`, detailsSr:" (site van de organisator)", skip:"Naar de lijst",
       guide:"de interactieve gids met kaart, filters en Engelse versie", allWeek:"Alle events van deze week",
@@ -96,7 +97,8 @@ const TXT = {
       catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
       catTitle:(l, w) => `${l} in Amsterdam deze week (${w}) · Amsterdam Pop-ups`,
       catDesc:(l, n, w) => `${l} in Amsterdam deze week (${w}): ${n} ${n === 1 ? "event" : "events"}, met data, tijden, locaties, prijzen en links naar de organisator.`,
-      empty:a => `Deze week niets in deze categorie. Probeer een andere categorie hieronder, of bekijk ${a}alle events van deze week</a>.`}
+      empty:a => `Deze week niets in deze categorie. Probeer een andere categorie hieronder, of bekijk ${a}alle events van deze week</a>.`,
+      fromToday:"Vanaf vandaag"}
 };
 
 // Pull a top-level `const NAME = [ ... ];` literal out of index.html and evaluate it.
@@ -182,6 +184,8 @@ const priceText = (e, L) => e.price === null ? TXT[L].free : (e.price && e.price
 const pageCats = CATEGORIES.filter(c => !NO_PAGE.has(c.id));
 const catPath = (id, L) => (L === "nl" ? "/nl/" : "/") + CAT_PAGES[id][L].slug + "/";
 const inCat = id => list.filter(e => e.cats.includes(id));
+const lastDayOf = ev => (ev.days && ev.days.length) ? ev.days.reduce((a, b) => a > b ? a : b) : null;
+const firstDayOf = ev => (ev.days && ev.days[0]) || "9999";
 
 // Same fields as injectEventSchema() in index.html; organiser and image only when the data names them.
 function schemaEvent(e, L){
@@ -209,7 +213,7 @@ const jsonLd = (events, L) => events.length
   ? `<script type="application/ld+json">\n${JSON.stringify({"@context":"https://schema.org","@graph":events.map(e => schemaEvent(e, L))}, null, 1).replace(/</g, "\\u003c")}\n</script>\n`
   : "";
 
-const item = (e, L, h) => { const T = TXT[L]; return `    <li>
+const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <li${end ? ` data-end="${end}"` : ""}>
       <article>
         <${h}>${esc(e.name)}</${h}>
         <p class="meta">${e.cats.map(c => esc(catBy[c] ? catBy[c].label[L] : c)).join(" · ")}${e.recur === "regular" ? " · " + T.regular : ""}</p>
@@ -285,6 +289,33 @@ function socialMeta({L, title, desc, url, imageAlt}){
 <meta name="twitter:image" content="${OG_IMAGE}" />`;
 }
 
+// Progressive enhancement for plain list pages: with JS, hide events whose last date has
+// already passed (Europe/Amsterdam). If every event is already past (e.g. between editions),
+// leave the full list visible. Without JS the full list and Event JSON-LD stay intact.
+const FROM_TODAY_JS = `function applyFromToday(today){
+  today = today || new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"});
+  var list = document.getElementById("list");
+  var status = document.getElementById("from-today");
+  if(!list || list.tagName !== "OL") return;
+  var items = list.children, i, end, upcoming = 0;
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(!end || end >= today) upcoming++;
+  }
+  if(!upcoming || upcoming === items.length){
+    for(i = 0; i < items.length; i++) items[i].removeAttribute("hidden");
+    if(status) status.setAttribute("hidden", "");
+    return;
+  }
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(end && end < today) items[i].setAttribute("hidden", "");
+    else items[i].removeAttribute("hidden");
+  }
+  if(status) status.removeAttribute("hidden");
+}
+applyFromToday();`;
+
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
 function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText, keywords, imageAlt}){
   const T = TXT[L], url = alt[L];
@@ -312,9 +343,13 @@ ${ld}</head>
 <main>
   <h1>${esc(h1)}</h1>
 ${lead}
-${events.length ? `  <ol id="list">
+${events.length ? `  <p id="from-today" hidden role="status">${esc(T.fromToday)}</p>
+  <ol id="list">
 ${events.map(e => item(e, L, "h2")).join("\n")}
-  </ol>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
+  </ol>
+  <script>
+${FROM_TODAY_JS}
+  </script>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
 </main>
 <footer>
 ${browseNav(L, currentId)}  <p>${footerText || T.generated(esc(week.id))} <a href="${L === "nl" ? "/nl/" : "/"}">${T.back}</a> · <a href="${ABOUT_ALT[L]}">${T.about}</a> · <a href="/privacy.html">${T.privacy}</a> · ${T.tip} <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>
@@ -374,8 +409,6 @@ for(const c of pageCats){
 // Events marked season:"christmas" whose last date has not yet passed. Sorted by first date.
 // They can sit in future week ids (and so stay off This week and the Archive until that week is published).
 const todayISO = new Date().toLocaleDateString("en-CA", {timeZone: "Europe/Amsterdam"});
-const lastDayOf = ev => (ev.days && ev.days.length) ? ev.days.reduce((a, b) => a > b ? a : b) : null;
-const firstDayOf = ev => (ev.days && ev.days[0]) || "9999";
 const xmasList = EVENTS
   .filter(e => e.season === "christmas" && lastDayOf(e) && lastDayOf(e) >= todayISO)
   .map((e, i) => ({e, i, first: firstDayOf(e)}))

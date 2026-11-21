@@ -356,8 +356,9 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
   <h1>Actief &amp; Buiten in Amsterdam deze week</h1>
   <p>16 – 22 nov · 6 events</p>
   <p>Wandelingen met gids, groepsruns, fietstochten, buitenlessen en andere manieren om te bewegen in de parken en straten van Amsterdam. Voor iedereen die liever actief bezig is dan stilzit, en veel ervan zijn ook geschikt voor beginners. De lijst wordt elke week vernieuwd. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
+  <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li>
+    <li data-end="2026-11-16">
       <article>
         <h2>Prikkelvrij schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Terugkerend</p>
@@ -371,7 +372,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/prikkelvrij-schaatsen/">Details en tickets voor Prikkelvrij schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-16">
       <article>
         <h2>Midnight Runners — Chill Long Run</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Terugkerend</p>
@@ -385,7 +386,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://www.heylo.com/event/-P5m1Po0LMjlqOSxYyz0">Details en tickets voor Midnight Runners — Chill Long Run<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-17">
       <article>
         <h2>Samen Schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Gezin &amp; Kids · Terugkerend</p>
@@ -399,7 +400,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/samen-schaatsen/">Details en tickets voor Samen Schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-17">
       <article>
         <h2>Bingsu run — Asian Run Club Amsterdam</h2>
         <p class="meta">Sport · Actief &amp; Buiten</p>
@@ -413,7 +414,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://luma.com/xwldzjqh">Details en tickets voor Bingsu run — Asian Run Club Amsterdam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-21">
       <article>
         <h2>ALO Runners Club — 6K from PC Hooftstraat</h2>
         <p class="meta">Sport · Actief &amp; Buiten</p>
@@ -427,7 +428,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://luma.com/wm2jftwp">Details en tickets voor ALO Runners Club — 6K from PC Hooftstraat<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-21">
       <article>
         <h2>Trailrunclinic with Hardlopen Amsterdam</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Workshops</p>
@@ -442,6 +443,31 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
       </article>
     </li>
   </ol>
+  <script>
+function applyFromToday(today){
+  today = today || new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"});
+  var list = document.getElementById("list");
+  var status = document.getElementById("from-today");
+  if(!list || list.tagName !== "OL") return;
+  var items = list.children, i, end, upcoming = 0;
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(!end || end >= today) upcoming++;
+  }
+  if(!upcoming || upcoming === items.length){
+    for(i = 0; i < items.length; i++) items[i].removeAttribute("hidden");
+    if(status) status.setAttribute("hidden", "");
+    return;
+  }
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(end && end < today) items[i].setAttribute("hidden", "");
+    else items[i].removeAttribute("hidden");
+  }
+  if(status) status.removeAttribute("hidden");
+}
+applyFromToday();
+  </script>
 </main>
 <footer>
   <nav class="browse" aria-labelledby="browse-h">

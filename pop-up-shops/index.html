@@ -194,8 +194,9 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
   <h1>Pop-up Shops in Amsterdam this week</h1>
   <p>16 – 22 Nov · 2 events</p>
   <p>Temporary shops, multi-brand pop-up stores and short-lived concept spaces selling a mix of goods. Good for discovering small labels and independent makers before they find a permanent home, or for picking up a gift with a story. We update the list every week as shops open and close. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
+  <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li>
+    <li data-end="2026-12-20">
       <article>
         <h2>The Creative Lab — Holiday Gift Shop</h2>
         <p class="meta">Pop-up Shops · Christmas Markets · Fashion &amp; Vintage</p>
@@ -209,7 +210,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://www.dehallen-amsterdam.nl/agenda/the-creative-lab---holiday-gift-shop">Details and tickets for The Creative Lab — Holiday Gift Shop<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-23">
       <article>
         <h2>Beaumont Amsterdam — first pop-up store</h2>
         <p class="meta">Fashion &amp; Vintage · Pop-up Shops</p>
@@ -224,6 +225,31 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
       </article>
     </li>
   </ol>
+  <script>
+function applyFromToday(today){
+  today = today || new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"});
+  var list = document.getElementById("list");
+  var status = document.getElementById("from-today");
+  if(!list || list.tagName !== "OL") return;
+  var items = list.children, i, end, upcoming = 0;
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(!end || end >= today) upcoming++;
+  }
+  if(!upcoming || upcoming === items.length){
+    for(i = 0; i < items.length; i++) items[i].removeAttribute("hidden");
+    if(status) status.setAttribute("hidden", "");
+    return;
+  }
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(end && end < today) items[i].setAttribute("hidden", "");
+    else items[i].removeAttribute("hidden");
+  }
+  if(status) status.removeAttribute("hidden");
+}
+applyFromToday();
+  </script>
 </main>
 <footer>
   <nav class="browse" aria-labelledby="browse-h">

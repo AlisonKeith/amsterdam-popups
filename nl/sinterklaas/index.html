@@ -280,8 +280,9 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
   <h1>Sinterklaas in Amsterdam deze week</h1>
   <p>16 – 22 nov · 4 events</p>
   <p>Sinterklaasvoorstellingen, feesten, workshops en familiemiddagen in aanloop naar 5 december. De meeste zijn bedoeld voor jonge kinderen en hun ouders, en een paar zijn ook leuk als je deze traditie voor het eerst meemaakt. Tot het einde van het seizoen vernieuwen we de lijst elke week. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
+  <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li>
+    <li data-end="2026-11-22">
       <article>
         <h2>Put out your shoe for Sinterklaas at Amstel1</h2>
         <p class="meta">Sinterklaas · Gezin &amp; Kids · Workshops</p>
@@ -295,7 +296,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://amstel1.nl/agenda/schoentje-zetten-21-22-november-amstel-1/">Details en tickets voor Put out your shoe for Sinterklaas at Amstel1<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-22">
       <article>
         <h2>Sint &amp; Piet at Gelderlandplein</h2>
         <p class="meta">Sinterklaas · Gezin &amp; Kids · Muziek</p>
@@ -309,7 +310,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://www.gelderlandplein.nl/winkelcentrum/nieuws-evenementen/sint-piet-op-gelderlandplein/">Details en tickets voor Sint &amp; Piet at Gelderlandplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-22">
       <article>
         <h2>Feest op zondag: Sinterklaas at Wereldmuseum</h2>
         <p class="meta">Sinterklaas · Gezin &amp; Kids · Workshops · Terugkerend</p>
@@ -323,7 +324,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
         <p><a href="https://amsterdam.wereldmuseum.nl/nl/zien-en-doen/activiteiten/sinterklaas">Details en tickets voor Feest op zondag: Sinterklaas at Wereldmuseum<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li>
+    <li data-end="2026-11-22">
       <article>
         <h2>Sinterklaas and the Pietenband at Boven &#39;t Y</h2>
         <p class="meta">Sinterklaas · Gezin &amp; Kids · Muziek</p>
@@ -338,6 +339,31 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:24px 0;padding-
       </article>
     </li>
   </ol>
+  <script>
+function applyFromToday(today){
+  today = today || new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"});
+  var list = document.getElementById("list");
+  var status = document.getElementById("from-today");
+  if(!list || list.tagName !== "OL") return;
+  var items = list.children, i, end, upcoming = 0;
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(!end || end >= today) upcoming++;
+  }
+  if(!upcoming || upcoming === items.length){
+    for(i = 0; i < items.length; i++) items[i].removeAttribute("hidden");
+    if(status) status.setAttribute("hidden", "");
+    return;
+  }
+  for(i = 0; i < items.length; i++){
+    end = items[i].getAttribute("data-end");
+    if(end && end < today) items[i].setAttribute("hidden", "");
+    else items[i].removeAttribute("hidden");
+  }
+  if(status) status.removeAttribute("hidden");
+}
+applyFromToday();
+  </script>
 </main>
 <footer>
   <nav class="browse" aria-labelledby="browse-h">
