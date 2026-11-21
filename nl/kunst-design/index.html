@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -880,7 +892,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Tijdelijke tentoonstellingen, open ateliers, kunstbeurzen, galerie-openingen en designpop-ups door de hele stad. Of je nu verzamelt, zelf maakt of gewoon graag kijkt: zo zie je nieuw werk van dichtbij en ontmoet je de mensen erachter. De lijst wordt elke week vernieuwd. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li data-end="2026-11-18">
+    <li id="e-capital-c-omen-opening" data-end="2026-11-18">
       <article>
         <h2>Opening: Omen — Gabriel Lester at Capital C</h2>
         <p class="meta">Kunst &amp; Design</p>
@@ -894,7 +906,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/opening-omen-gabriel-lester/">Details en tickets voor Opening: Omen — Gabriel Lester at Capital C<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-rijksakademie-open-studios" data-end="2026-11-22">
       <article>
         <h2>Rijksakademie Open Studios 2026</h2>
         <p class="meta">Kunst &amp; Design</p>
@@ -908,7 +920,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://rijksakademie.nl/en/open-studios/2026">Details en tickets voor Rijksakademie Open Studios 2026<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-aaw-gallery-night" data-end="2026-11-19">
       <article>
         <h2>Amsterdam Art Week — Festive Gallery Night</h2>
         <p class="meta">Kunst &amp; Design</p>
@@ -922,7 +934,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/festive-gallery-night/">Details en tickets voor Amsterdam Art Week — Festive Gallery Night<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-straat-by-night" data-end="2026-11-19">
       <article>
         <h2>STRAAT by NIGHT: ART IS NOT A CRIME</h2>
         <p class="meta">Kunst &amp; Design · Drinken</p>
@@ -936,7 +948,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.straatmuseum.com/en/activities/straat-by-night">Details en tickets voor STRAAT by NIGHT: ART IS NOT A CRIME<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-frascati-under-construction-nov" data-end="2026-11-21">
       <article>
         <h2>Under Construction November &#39;26: three new makers</h2>
         <p class="meta">Theater &amp; Dans · Kunst &amp; Design</p>
@@ -950,7 +962,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.frascatitheater.nl/nl/agenda/under-construction-november-26-12tz">Details en tickets voor Under Construction November &#39;26: three new makers<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-posthoornkerk-vintage-fair" data-end="2026-11-22">
       <article>
         <h2>Vintage, Brocante, Antiques, Art &amp; Design Fair</h2>
         <p class="meta">Markten · Mode &amp; Vintage · Kunst &amp; Design</p>
@@ -964,7 +976,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://stadsherstel.nl/cultuuragenda/vintage-brocante-antiek-kunst-design-2/">Details en tickets voor Vintage, Brocante, Antiques, Art &amp; Design Fair<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-parnassus212-valentine-abstraction" data-end="2026-11-22">
       <article>
         <h2>Valentine: Working Title (Abstraction)</h2>
         <p class="meta">Kunst &amp; Design</p>
@@ -978,7 +990,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://parnassus212.nl/">Details en tickets voor Valentine: Working Title (Abstraction)<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-hartwig-dustan-talk" data-end="2026-11-20">
       <article>
         <h2>Dédramatison la Vi Quotidièn — talk on the films of Guillaume Dustan</h2>
         <p class="meta">Film · Kunst &amp; Design</p>
@@ -992,7 +1004,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/dedramatisation-la-vi-quotdien-the-films-and-work-of-guillaume-dustan">Details en tickets voor Dédramatison la Vi Quotidièn — talk on the films of Guillaume Dustan<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-crazyjuuls-live-nude-painting" data-end="2026-11-20">
       <article>
         <h2>Live Nude Painting Session by Crazyjuuls</h2>
         <p class="meta">Workshops · Kunst &amp; Design</p>
@@ -1006,7 +1018,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://tg-spaces.com/events/painting-workshop">Details en tickets voor Live Nude Painting Session by Crazyjuuls<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-hazenstraat-gallery-brunch" data-end="2026-11-21">
       <article>
         <h2>Brunch at the Hazenstraat Galleries</h2>
         <p class="meta">Kunst &amp; Design · Eten</p>
@@ -1020,7 +1032,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/brunch-at-the-hazenstraat-galleries/">Details en tickets voor Brunch at the Hazenstraat Galleries<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-raam-bird-calls" data-end="2026-11-21">
       <article>
         <h2>World Championship Bird Calls &amp; Songs</h2>
         <p class="meta">Kunst &amp; Design</p>
@@ -1034,7 +1046,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.raamartspace.com/events/wereldkampioenschap-vogelgeluiden-herkennen">Details en tickets voor World Championship Bird Calls &amp; Songs<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-galerie-poche-fabric-of-play-opening" data-end="2026-11-21">
       <article>
         <h2>Opening: Fabric of Play — ZOUBIDA (Sophia Kacimi) at Galerie Poche</h2>
         <p class="meta">Kunst &amp; Design</p>
@@ -1048,7 +1060,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://galeriepoche.nl/events">Details en tickets voor Opening: Fabric of Play — ZOUBIDA (Sophia Kacimi) at Galerie Poche<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-felix-bon-bini-na-mi-sono" data-end="2026-11-21">
       <article>
         <h2>Bon biní na mi soño — Juny Martina</h2>
         <p class="meta">Muziek · Kunst &amp; Design · Film · Theater &amp; Dans · Nachtleven</p>
@@ -1062,7 +1074,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://felixmeritis.nl/programma/bon-bini-na-mi-sono/">Details en tickets voor Bon biní na mi soño — Juny Martina<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-cbk-zuidoost-family-day" data-end="2026-11-22">
       <article>
         <h2>Family Day + closing of Cahaya Maluku at CBK Zuidoost</h2>
         <p class="meta">Gezin &amp; Kids · Kunst &amp; Design · Workshops</p>
@@ -1076,7 +1088,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/familiedag/">Details en tickets voor Family Day + closing of Cahaya Maluku at CBK Zuidoost<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-treehouse-kids-tour-glerum" data-end="2026-11-22">
       <article>
         <h2>Kids tour with artist Quintus Glerum at Treehouse NDSM</h2>
         <p class="meta">Gezin &amp; Kids · Kunst &amp; Design · Workshops</p>
@@ -1090,7 +1102,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/live-radio-show-artist-talk-quintus-glerumtreehouse-ndsm/">Details en tickets voor Kids tour with artist Quintus Glerum at Treehouse NDSM<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-stadsarchief-ten-kon-dray" data-end="2026-11-22">
       <article>
         <h2>Ten Kon Dray: De tijden zijn veranderd</h2>
         <p class="meta">Kunst &amp; Design · Muziek · Film</p>
@@ -1104,7 +1116,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.amsterdam.nl/stadsarchief/agenda/ten-dray-tijden-veranderd/">Details en tickets voor Ten Kon Dray: De tijden zijn veranderd<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-stadsarchief-tekenworkshop-stadsportret" data-end="2026-11-22">
       <article>
         <h2>Drawing workshop: Het stadsportret</h2>
         <p class="meta">Workshops · Kunst &amp; Design</p>
@@ -1118,7 +1130,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.amsterdam.nl/stadsarchief/agenda/meesterwerk-amsterdam/tekenworkshops/">Details en tickets voor Drawing workshop: Het stadsportret<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-kids-buy-art-gwen-park" data-end="2026-11-22">
       <article>
         <h2>Kids Buy Art — Family Sunday at Gwen Park</h2>
         <p class="meta">Gezin &amp; Kids · Kunst &amp; Design</p>

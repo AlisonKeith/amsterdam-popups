@@ -275,7 +275,7 @@ ${faqs.map(f => `    <h3>${esc(f.q)}</h3>\n    <p>${f.a}</p>`).join("\n")}
   </section>\n`;
 }
 
-const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <li${end ? ` data-end="${end}"` : ""}>
+const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <li id="e-${esc(e.id)}"${end ? ` data-end="${end}"` : ""}>
       <article>
         <${h}>${esc(e.name)}</${h}>
         <p class="meta">${e.cats.map(c => esc(catBy[c] ? catBy[c].label[L] : c)).join(" · ")}${e.recur === "regular" ? " · " + T.regular : ""}</p>
@@ -329,6 +329,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 ${CONSENT_CSS}
@@ -462,7 +474,106 @@ ${tabs}
 }
 
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
-function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText, keywords, imageAlt, faq}){
+function mapSection(L, events){
+  const mappable = events.filter(e => typeof e.lat === "number" && typeof e.lng === "number");
+  if(!mappable.length) return "";
+  const heading = L === "nl" ? "Kaart van de events" : "Map of the events";
+  const label = L === "nl" ? "Kaart met de locaties van de events op deze pagina" : "Map of the event locations on this page";
+  const data = JSON.stringify(mappable.map(e => ({
+    id:e.id, name:e.name, lat:e.lat, lng:e.lng,
+    when:e.when[L], time:(e.time && e.time[L]) || "", addr:e.addr[L]
+  }))).replace(/</g, "\\u003c");
+  return `  <section class="season-map" aria-labelledby="map-h">
+    <h2 id="map-h">${esc(heading)}</h2>
+    <div id="map" role="region" aria-label="${esc(label)}"></div>
+    <script type="application/json" id="map-events">${data}</script>
+  </section>
+  <script>
+${SEASON_MAP_JS}
+  </script>
+`;
+}
+
+// Same Leaflet + CARTO tiles as the home map (OSM fallback on tile error). Lazy-loaded
+// when the map nears the viewport. Tiles are requested without waiting for cookie consent,
+// which matches the home page.
+const SEASON_MAP_JS = `(function(){
+  var el = document.getElementById("map");
+  if(!el) return;
+  var loaded = false;
+  function load(){
+    if(loaded) return;
+    loaded = true;
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    var s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    s.onload = initSeasonMap;
+    document.body.appendChild(s);
+  }
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      if(entries.some(function(e){ return e.isIntersecting; })){ io.disconnect(); load(); }
+    }, {rootMargin:"200px"});
+    io.observe(el);
+  } else { load(); }
+})();
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}[c];
+  });
+}
+function initSeasonMap(){
+  var el = document.getElementById("map");
+  var dataEl = document.getElementById("map-events");
+  if(!el || !dataEl || typeof L === "undefined") return;
+  var events;
+  try { events = JSON.parse(dataEl.textContent || "[]"); } catch (err){ return; }
+  events = events.filter(function(e){ return typeof e.lat === "number" && typeof e.lng === "number"; });
+  if(!events.length) return;
+  var CARTO_KEY = "cb1_59ke_1_cd5111510aa2bc631ba544ae";
+  var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var variant = dark ? "dark_all" : "light_all";
+  var map = L.map("map", {scrollWheelZoom:false, keyboard:true}).setView([52.3676, 4.9041], 12.5);
+  var usingFallback = false;
+  var carto = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + variant + "/{z}/{x}/{y}{r}.png?key=" + CARTO_KEY, {
+    subdomains:"abcd", maxZoom:19, crossOrigin:true,
+    attribution:"&copy; OpenStreetMap &copy; CARTO"
+  }).addTo(map);
+  carto.on("tileerror", function(){
+    if(usingFallback) return;
+    usingFallback = true;
+    map.removeLayer(carto);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom:19, crossOrigin:true, attribution:"&copy; OpenStreetMap contributors"
+    }).addTo(map);
+  });
+  var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
+  var groups = {};
+  events.forEach(function(ev){
+    var key = ev.lat + "," + ev.lng;
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(ev);
+  });
+  Object.keys(groups).forEach(function(key){
+    var group = groups[key];
+    var ev = group[0];
+    var html = group.map(function(e){
+      var when = escapeHtml(e.when) + (e.time ? " \\u00b7 " + escapeHtml(e.time) : "");
+      return "<b><a href=\\"#e-" + escapeHtml(e.id) + "\\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+    }).join("<hr>");
+    L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(map);
+  });
+  var pts = events.map(function(e){ return [e.lat, e.lng]; });
+  if(pts.length) map.fitBounds(pts, {padding:[40,40], maxZoom:14});
+  setTimeout(function(){ map.invalidateSize(); }, 0);
+}
+`;
+
+function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText, keywords, imageAlt, faq, showMap}){
+
   const T = TXT[L], url = alt[L];
   return `<!DOCTYPE html>
 <html lang="${L}">
@@ -485,7 +596,7 @@ ${siteChrome(L, {alt, skipHref:"#list", skipText:T.skip})}
   <h1>${esc(h1)}</h1>
 ${headerExtra ? `  <p>${headerExtra.replace(/^\s*·\s*/, "")}</p>
 ` : ""}${lead}
-${events.length ? `  <p id="from-today" hidden role="status">${esc(T.fromToday)}</p>
+${showMap ? mapSection(L, events) : ""}${events.length ? `  <p id="from-today" hidden role="status">${esc(T.fromToday)}</p>
   <ol id="list">
 ${events.map(e => item(e, L, "h2")).join("\n")}
   </ol>
@@ -537,7 +648,8 @@ function catPage(c, L){
     headerExtra:` · <a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">${T.allWeek}</a>`,
     h1:T.catH1(label),
     lead:`  <p>${esc(week.label[L])} · ${T.count(evs.length)}</p>\n  <p>${introHtml(CAT_PAGES[c.id][L].intro)} ${T.check}</p>`,
-    events:evs, ld:jsonLd(evs, L)
+    events:evs, ld:jsonLd(evs, L),
+    showMap:c.id === "sinterklaas"
   });
 }
 
@@ -567,7 +679,8 @@ const xmasEn = listPage({
   events:xmasList, ld:jsonLd(xmasList, "en"),
   footerText:"A season list of Christmas events from late November 2026 to early January 2027.",
   keywords:"Christmas pop-ups Amsterdam, Christmas pop ups, Christmas popups, kerstmarkt Amsterdam, winter terraces, light walks",
-  imageAlt:"Amsterdam Pop-ups — Christmas popups, markets and one-off events in Amsterdam"
+  imageAlt:"Amsterdam Pop-ups — Christmas popups, markets and one-off events in Amsterdam",
+  showMap:true
 });
 const xmasNl = listPage({
   L:"nl", alt:XMAS_ALT,
@@ -579,7 +692,8 @@ const xmasNl = listPage({
   events:xmasList, ld:jsonLd(xmasList, "nl"),
   footerText:"Een seizoenslijst van kerstevents van eind november 2026 tot begin januari 2027.",
   keywords:"Kerst pop-ups Amsterdam, kerst pop ups, Christmas popups, kerstmarkt Amsterdam, winterterrassen, lichtwandelingen",
-  imageAlt:"Amsterdam Pop-ups — Christmas popups, markten en eenmalige events in Amsterdam"
+  imageAlt:"Amsterdam Pop-ups — Christmas popups, markten en eenmalige events in Amsterdam",
+  showMap:true
 });
 writes.push([path.join("christmas", "index.html"), xmasEn], [path.join("nl", "kerst", "index.html"), xmasNl]);
 
@@ -632,7 +746,8 @@ const nyeEn = listPage({
   events:nyeList, ld:jsonLd(nyeList, "en"), faq:nyeFaqEn,
   footerText:"A season list of New Year's Eve and New Year's Day events in Amsterdam.",
   keywords:"New Year's Eve pop-ups Amsterdam, NYE Amsterdam 2026, things to do New Year's Eve Amsterdam, oud en nieuw Amsterdam, oudejaarsavond Amsterdam, pop ups, popups",
-  imageAlt:"Amsterdam Pop-ups — New Year's Eve popups and one-off events in Amsterdam"
+  imageAlt:"Amsterdam Pop-ups — New Year's Eve popups and one-off events in Amsterdam",
+  showMap:true
 });
 const nyeNl = listPage({
   L:"nl", alt:NYE_ALT,
@@ -644,7 +759,8 @@ const nyeNl = listPage({
   events:nyeList, ld:jsonLd(nyeList, "nl"), faq:nyeFaqNl,
   footerText:"Een seizoenslijst van events voor oudejaarsavond en nieuwjaarsdag in Amsterdam.",
   keywords:"oud en nieuw Amsterdam, oudejaarsavond Amsterdam uitgaan, oudjaar, NYE Amsterdam, pop-ups, pop ups, popups",
-  imageAlt:"Amsterdam Pop-ups — popups en eenmalige events voor oud en nieuw in Amsterdam"
+  imageAlt:"Amsterdam Pop-ups — popups en eenmalige events voor oud en nieuw in Amsterdam",
+  showMap:true
 });
 writes.push([path.join("new-years-eve", "index.html"), nyeEn], [path.join("nl", "oud-en-nieuw", "index.html"), nyeNl]);
 

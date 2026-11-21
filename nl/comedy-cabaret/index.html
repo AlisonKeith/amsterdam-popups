@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -416,7 +428,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Stand-up, improvisatie, cabaret en andere comedyavonden, van open mics tot avondvullende shows. Bij veel vermeldingen staat of de show in het Nederlands of Engels is, zodat je makkelijk iets kiest wat je kunt volgen. De lijst wordt elke week vernieuwd. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li data-end="2026-11-21">
+    <li id="e-kameleon-frascati" data-end="2026-11-21">
       <article>
         <h2>Sadettin Kırmızıyüz: Kameleon</h2>
         <p class="meta">Comedy/Cabaret</p>
@@ -430,7 +442,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.frascatitheater.nl/nl/agenda/kameleon-5c6h">Details en tickets voor Sadettin Kırmızıyüz: Kameleon<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-richel-comedy-underground" data-end="2026-11-18">
       <article>
         <h2>The Comedy Underground</h2>
         <p class="meta">Comedy/Cabaret · Muziek</p>
@@ -444,7 +456,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/the-comedy-underground-41/">Details en tickets voor The Comedy Underground<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-bellevue-buikzwam" data-end="2026-11-19">
       <article>
         <h2>Kompagnie Kistemaker: Buikzwam</h2>
         <p class="meta">Comedy/Cabaret</p>
@@ -458,7 +470,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.theaterbellevue.nl/agenda/buikzwam-z63t">Details en tickets voor Kompagnie Kistemaker: Buikzwam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-boom-josh-thomas" data-end="2026-11-20">
       <article>
         <h2>Josh Thomas: Jiggle, Jiggle</h2>
         <p class="meta">Comedy/Cabaret</p>
@@ -472,7 +484,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://boomchicago.nl/shows/josh-thomas/">Details en tickets voor Josh Thomas: Jiggle, Jiggle<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-richel-nilgun-yerli" data-end="2026-11-20">
       <article>
         <h2>Nilgün Yerli: Weet je het zeker?</h2>
         <p class="meta">Comedy/Cabaret · Theater &amp; Dans</p>
@@ -486,7 +498,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/nilgun-yerli-weet-je-het-zeker/">Details en tickets voor Nilgün Yerli: Weet je het zeker?<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-mezrab-alt-comedy" data-end="2026-11-21">
       <article>
         <h2>The ALT Mezrab Comedy Night</h2>
         <p class="meta">Comedy/Cabaret</p>

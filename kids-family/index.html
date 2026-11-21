@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -735,7 +747,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Workshops, shows, markets and days out for children and the grown-ups who bring them. Events range from toddler-friendly afternoons to activities for older kids, and the organiser&#39;s page usually says which ages they suit. The list is refreshed every week, so it is easy to plan the weekend. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li data-end="2026-11-29">
+    <li id="e-winterterras-ndsm" data-end="2026-11-29">
       <article>
         <h2>Het Amsterdamse Winterterras</h2>
         <p class="meta">Food · Drink · Music · Kids &amp; Family</p>
@@ -749,7 +761,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hetamsterdamsewinterterras.nl/">Details and tickets for Het Amsterdamse Winterterras<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-samen-schaatsen-museumplein" data-end="2026-11-17">
       <article>
         <h2>Samen Schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Active &amp; Outdoor · Kids &amp; Family · Regular</p>
@@ -763,7 +775,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/samen-schaatsen/">Details and tickets for Samen Schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-cinekid-opblaasbioscoop-leidsebuurt" data-end="2026-11-18">
       <article>
         <h2>Cinekid Opblaasbioscoop in the Leidsebuurt</h2>
         <p class="meta">Film · Kids &amp; Family</p>
@@ -777,7 +789,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://go-kids.nl/amsterdam/agenda/cinekid-opblaasbioscoop-in-de-leidsebuurt">Details and tickets for Cinekid Opblaasbioscoop in the Leidsebuurt<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-dikkie-dik-athenaeum-zuidoost" data-end="2026-11-21">
       <article>
         <h2>Dikkie Dik visits Athenaeum Zuidoost</h2>
         <p class="meta">Kids &amp; Family</p>
@@ -791,7 +803,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://athenaeumscheltema.nl/agenda/dikkie-dik-op-bezoek">Details and tickets for Dikkie Dik visits Athenaeum Zuidoost<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-dehallen-speel-deel-ruil" data-end="2026-11-22">
       <article>
         <h2>Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap</h2>
         <p class="meta">Kids &amp; Family · Markets · Workshops · Fashion &amp; Vintage</p>
@@ -805,7 +817,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://motherhood.amsterdam/speel-deel/amsterdam-november-swap-2026">Details and tickets for Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-amstel1-schoentje-zetten" data-end="2026-11-22">
       <article>
         <h2>Put out your shoe for Sinterklaas at Amstel1</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Workshops</p>
@@ -819,7 +831,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amstel1.nl/agenda/schoentje-zetten-21-22-november-amstel-1/">Details and tickets for Put out your shoe for Sinterklaas at Amstel1<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-gelderland-sint-piet" data-end="2026-11-22">
       <article>
         <h2>Sint &amp; Piet at Gelderlandplein</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Music</p>
@@ -833,7 +845,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.gelderlandplein.nl/winkelcentrum/nieuws-evenementen/sint-piet-op-gelderlandplein/">Details and tickets for Sint &amp; Piet at Gelderlandplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-cbk-zuidoost-family-day" data-end="2026-11-22">
       <article>
         <h2>Family Day + closing of Cahaya Maluku at CBK Zuidoost</h2>
         <p class="meta">Kids &amp; Family · Art &amp; Design · Workshops</p>
@@ -847,7 +859,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/familiedag/">Details and tickets for Family Day + closing of Cahaya Maluku at CBK Zuidoost<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-treehouse-kids-tour-glerum" data-end="2026-11-22">
       <article>
         <h2>Kids tour with artist Quintus Glerum at Treehouse NDSM</h2>
         <p class="meta">Kids &amp; Family · Art &amp; Design · Workshops</p>
@@ -861,7 +873,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/live-radio-show-artist-talk-quintus-glerumtreehouse-ndsm/">Details and tickets for Kids tour with artist Quintus Glerum at Treehouse NDSM<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-wereldmuseum-feest-sinterklaas" data-end="2026-11-22">
       <article>
         <h2>Feest op zondag: Sinterklaas at Wereldmuseum</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Workshops · Regular</p>
@@ -875,7 +887,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdam.wereldmuseum.nl/nl/zien-en-doen/activiteiten/sinterklaas">Details and tickets for Feest op zondag: Sinterklaas at Wereldmuseum<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-kids-buy-art-gwen-park" data-end="2026-11-22">
       <article>
         <h2>Kids Buy Art — Family Sunday at Gwen Park</h2>
         <p class="meta">Kids &amp; Family · Art &amp; Design</p>
@@ -889,7 +901,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/family-sunday-tour-kids-buy-art/">Details and tickets for Kids Buy Art — Family Sunday at Gwen Park<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-oorkaan-vijf" data-end="2026-11-22">
       <article>
         <h2>Vijf! (5+) — Oorkaan Ensemble</h2>
         <p class="meta">Kids &amp; Family · Music</p>
@@ -903,7 +915,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.muziekgebouw.nl/nl/agenda/vijf-5-qvhx">Details and tickets for Vijf! (5+) — Oorkaan Ensemble<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-boventy-sint-pietenband" data-end="2026-11-22">
       <article>
         <h2>Sinterklaas and the Pietenband at Boven &#39;t Y</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Music</p>
@@ -917,7 +929,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://boventy.nl/evenementen/bezoek-sint-pietenband/">Details and tickets for Sinterklaas and the Pietenband at Boven &#39;t Y<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-28">
+    <li id="e-sint-op-solder-tour" data-end="2026-11-28">
       <article>
         <h2>Ontdek Sint op Solder: theatrical Sinterklaas tour</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family</p>

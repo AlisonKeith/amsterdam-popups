@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -492,7 +504,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Flea markets, craft and design fairs, food markets and record or book sales that last a day or a weekend. Ideal for bargain hunters, collectors and anyone who likes to browse and meet the makers. The list is refreshed every week, so you can plan your weekend around it. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li data-end="2027-01-03">
+    <li id="e-wintermarkt-leidseplein" data-end="2027-01-03">
       <article>
         <h2>Winter Market Leidseplein</h2>
         <p class="meta">Christmas Markets · Markets · Food · Drink</p>
@@ -506,7 +518,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/">Details and tickets for Winter Market Leidseplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-posthoornkerk-vintage-fair" data-end="2026-11-22">
       <article>
         <h2>Vintage, Brocante, Antiques, Art &amp; Design Fair</h2>
         <p class="meta">Markets · Fashion &amp; Vintage · Art &amp; Design</p>
@@ -520,7 +532,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://stadsherstel.nl/cultuuragenda/vintage-brocante-antiek-kunst-design-2/">Details and tickets for Vintage, Brocante, Antiques, Art &amp; Design Fair<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-vrijdagmarkt-minervaplein" data-end="2026-11-20">
       <article>
         <h2>Friday market on Minervaplein</h2>
         <p class="meta">Markets · Food · Regular</p>
@@ -534,7 +546,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.iamsterdam.com/uit/agenda/winkelen/markten/minervamarkt">Details and tickets for Friday market on Minervaplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-dehallen-speel-deel-ruil" data-end="2026-11-22">
       <article>
         <h2>Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap</h2>
         <p class="meta">Kids &amp; Family · Markets · Workshops · Fashion &amp; Vintage</p>
@@ -548,7 +560,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://motherhood.amsterdam/speel-deel/amsterdam-november-swap-2026">Details and tickets for Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-zuidermrkt-21-nov" data-end="2026-11-21">
       <article>
         <h2>Zuidermrkt</h2>
         <p class="meta">Markets · Food · Regular</p>
@@ -562,7 +574,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.zuidermrkt.nl/">Details and tickets for Zuidermrkt<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-pure-markt-markthal" data-end="2026-11-22">
       <article>
         <h2>Pure Markt — Centrale Markthal edition</h2>
         <p class="meta">Markets · Food · Drink</p>
@@ -576,7 +588,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://puremarkt.nl/locaties/centrale-markthallen/">Details and tickets for Pure Markt — Centrale Markthal edition<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-sunday-market-oostenburg" data-end="2026-11-22">
       <article>
         <h2>Sunday Market Oostenburg — winter edition</h2>
         <p class="meta">Christmas Markets · Markets · Food</p>
@@ -590,7 +602,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.sundaymarket.nl/markt/sunday-market-oostenburg-2026-11-22/">Details and tickets for Sunday Market Oostenburg — winter edition<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-qru-rommelmarkt-last" data-end="2026-11-22">
       <article>
         <h2>QRU flea market: last one of 2026</h2>
         <p class="meta">Markets · Fashion &amp; Vintage · Music · Regular</p>

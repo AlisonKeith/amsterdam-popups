@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -909,7 +921,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Pop-up dinners, supper clubs, food markets, tastings and one-off kitchen takeovers across Amsterdam. Good for anyone who likes to try something new, from a quick street-food bite to a long shared table with strangers. The list is refreshed every week, so there is always something different to taste. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li data-end="2026-11-29">
+    <li id="e-winterterras-ndsm" data-end="2026-11-29">
       <article>
         <h2>Het Amsterdamse Winterterras</h2>
         <p class="meta">Food · Drink · Music · Kids &amp; Family</p>
@@ -923,7 +935,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hetamsterdamsewinterterras.nl/">Details and tickets for Het Amsterdamse Winterterras<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-23">
+    <li id="e-le-foodwalk-winter" data-end="2027-01-23">
       <article>
         <h2>Le Foodwalk Winter</h2>
         <p class="meta">Food</p>
@@ -937,7 +949,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://lefoodwalk.nl/">Details and tickets for Le Foodwalk Winter<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-03">
+    <li id="e-wintermarkt-leidseplein" data-end="2027-01-03">
       <article>
         <h2>Winter Market Leidseplein</h2>
         <p class="meta">Christmas Markets · Markets · Food · Drink</p>
@@ -951,7 +963,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/">Details and tickets for Winter Market Leidseplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-16">
+    <li id="e-queerhub-pride-film" data-end="2026-11-16">
       <article>
         <h2>Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West</h2>
         <p class="meta">Film · Queer · Food</p>
@@ -965,7 +977,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.pinknieuwwest.org/activiteit/film-food-solidarity-pride-16-november/">Details and tickets for Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-cinema-culinair-tolhuis-1116" data-end="2026-11-22">
       <article>
         <h2>Cinema Culinair: film &amp; dinner or brunch at Tolhuis</h2>
         <p class="meta">Film · Food · Regular</p>
@@ -979,7 +991,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://cinemaculinair.nl/agenda/">Details and tickets for Cinema Culinair: film &amp; dinner or brunch at Tolhuis<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-mezrab-samizdat" data-end="2026-11-17">
       <article>
         <h2>Samizdat: Stories from the Underground</h2>
         <p class="meta">Theatre &amp; Dance · Food</p>
@@ -993,7 +1005,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://mezrab.nl/events/samizdat-stories-from-the-underground-2-2026-11-17/">Details and tickets for Samizdat: Stories from the Underground<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-vietti-de-willem" data-end="2026-11-17">
       <article>
         <h2>Vietti x De Willem — Barolo &amp; truffle dinner</h2>
         <p class="meta">Food · Drink</p>
@@ -1007,7 +1019,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://de-willem.nl/agenda/vietti-x-de-willem-barolo-en-truffel-op-17-november/">Details and tickets for Vietti x De Willem — Barolo &amp; truffle dinner<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-hartwig-family-table-chiboub" data-end="2026-11-17">
       <article>
         <h2>Proxy Family Table — Roots, Leaves, Fruits (Yasmine Chiboub)</h2>
         <p class="meta">Food</p>
@@ -1021,7 +1033,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/proxy-family-table">Details and tickets for Proxy Family Table — Roots, Leaves, Fruits (Yasmine Chiboub)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-kimchi-stretch-fold" data-end="2026-11-18">
       <article>
         <h2>Craft Club: Kimchi Making</h2>
         <p class="meta">Workshops · Food</p>
@@ -1035,7 +1047,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.stretchandfold.nl/events/the-art-of-kimchi-october-zpcn3">Details and tickets for Craft Club: Kimchi Making<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-hoxton-lloyd-beaujolais" data-end="2026-11-22">
       <article>
         <h2>Beaujolais Breman at The Hoxton Lloyd</h2>
         <p class="meta">Drink · Food</p>
@@ -1049,7 +1061,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://thehoxton.com/nl/amsterdam-lloyd/whats-on/beaujolais-breman/">Details and tickets for Beaujolais Breman at The Hoxton Lloyd<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-motief-van-gendt-hallen" data-end="2026-11-21">
       <article>
         <h2>Pop-up restaurant at the Van Gendt Hallen</h2>
         <p class="meta">Food</p>
@@ -1063,7 +1075,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://oostenburg.nl/actueel/pop-up-restaurant-opent-zes-weekenden-in-de-van-gendt-hallen/">Details and tickets for Pop-up restaurant at the Van Gendt Hallen<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-beaujolais-stretch-fold" data-end="2026-11-20">
       <article>
         <h2>Beaujolais Nouveau &amp; Beats</h2>
         <p class="meta">Drink · Food · Music</p>
@@ -1077,7 +1089,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.stretchandfold.nl/events/beaujolais-nouveau-beats-2026">Details and tickets for Beaujolais Nouveau &amp; Beats<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-vrijdagmarkt-minervaplein" data-end="2026-11-20">
       <article>
         <h2>Friday market on Minervaplein</h2>
         <p class="meta">Markets · Food · Regular</p>
@@ -1091,7 +1103,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.iamsterdam.com/uit/agenda/winkelen/markten/minervamarkt">Details and tickets for Friday market on Minervaplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-hazenstraat-gallery-brunch" data-end="2026-11-21">
       <article>
         <h2>Brunch at the Hazenstraat Galleries</h2>
         <p class="meta">Art &amp; Design · Food</p>
@@ -1105,7 +1117,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/brunch-at-the-hazenstraat-galleries/">Details and tickets for Brunch at the Hazenstraat Galleries<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-yvette-van-boven-signing-scheltema" data-end="2026-11-21">
       <article>
         <h2>Yvette van Boven signs Greens &amp; Beans</h2>
         <p class="meta">Food</p>
@@ -1119,7 +1131,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://athenaeumscheltema.nl/agenda-scheltema/signeersessie-yvette-van-boven-greens-beans">Details and tickets for Yvette van Boven signs Greens &amp; Beans<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-broth-stretch-fold" data-end="2026-11-21">
       <article>
         <h2>BROTH: Korean Kitchen Takeover</h2>
         <p class="meta">Food</p>
@@ -1133,7 +1145,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.stretchandfold.nl/events/broth-korean-kitchen-takeover">Details and tickets for BROTH: Korean Kitchen Takeover<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-zuidermrkt-21-nov" data-end="2026-11-21">
       <article>
         <h2>Zuidermrkt</h2>
         <p class="meta">Markets · Food · Regular</p>
@@ -1147,7 +1159,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.zuidermrkt.nl/">Details and tickets for Zuidermrkt<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-pure-markt-markthal" data-end="2026-11-22">
       <article>
         <h2>Pure Markt — Centrale Markthal edition</h2>
         <p class="meta">Markets · Food · Drink</p>
@@ -1161,7 +1173,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://puremarkt.nl/locaties/centrale-markthallen/">Details and tickets for Pure Markt — Centrale Markthal edition<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-sunday-market-oostenburg" data-end="2026-11-22">
       <article>
         <h2>Sunday Market Oostenburg — winter edition</h2>
         <p class="meta">Christmas Markets · Markets · Food</p>

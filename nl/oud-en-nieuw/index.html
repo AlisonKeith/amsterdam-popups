@@ -107,6 +107,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -263,9 +275,90 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p><a href="/nl/deze-week.html">Alle events van deze week</a></p>
   <p>Oud en nieuw in Amsterdam is minder één groot aftelmoment dan een reeks korte pop-ups: late feesten bij zelfstandige podia, eenmalige diners en soms een uitje op nieuwjaarsdag. Sommige pop ups duren een paar uur rond middernacht, andere lopen door tot 1 januari. Hier staan de eenmalige en kortdurende events die we hebben nagelopen, als je spontaan iets zoekt voor oudejaarsavond of nieuwjaarsdag. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat. Op zoek naar kerst? Zie onze <a href="/nl/kerst/">pagina met kerst pop-ups</a>.</p>
   <p>Op datum.</p>
+  <section class="season-map" aria-labelledby="map-h">
+    <h2 id="map-h">Kaart van de events</h2>
+    <div id="map" role="region" aria-label="Kaart met de locaties van de events op deze pagina"></div>
+    <script type="application/json" id="map-events">[{"id":"nela-nye-drinks-dance-2026","name":"Nela New Year's Eve Drinks & Dance","lat":52.3376363,"lng":4.8773376,"when":"do 31 dec","time":"23:30–00:30","addr":"Nela, Valley South Tower, Beethovenstraat 515, 1083 HK Amsterdam"}]</script>
+  </section>
+  <script>
+(function(){
+  var el = document.getElementById("map");
+  if(!el) return;
+  var loaded = false;
+  function load(){
+    if(loaded) return;
+    loaded = true;
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    var s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    s.onload = initSeasonMap;
+    document.body.appendChild(s);
+  }
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      if(entries.some(function(e){ return e.isIntersecting; })){ io.disconnect(); load(); }
+    }, {rootMargin:"200px"});
+    io.observe(el);
+  } else { load(); }
+})();
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+  });
+}
+function initSeasonMap(){
+  var el = document.getElementById("map");
+  var dataEl = document.getElementById("map-events");
+  if(!el || !dataEl || typeof L === "undefined") return;
+  var events;
+  try { events = JSON.parse(dataEl.textContent || "[]"); } catch (err){ return; }
+  events = events.filter(function(e){ return typeof e.lat === "number" && typeof e.lng === "number"; });
+  if(!events.length) return;
+  var CARTO_KEY = "cb1_59ke_1_cd5111510aa2bc631ba544ae";
+  var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var variant = dark ? "dark_all" : "light_all";
+  var map = L.map("map", {scrollWheelZoom:false, keyboard:true}).setView([52.3676, 4.9041], 12.5);
+  var usingFallback = false;
+  var carto = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + variant + "/{z}/{x}/{y}{r}.png?key=" + CARTO_KEY, {
+    subdomains:"abcd", maxZoom:19, crossOrigin:true,
+    attribution:"&copy; OpenStreetMap &copy; CARTO"
+  }).addTo(map);
+  carto.on("tileerror", function(){
+    if(usingFallback) return;
+    usingFallback = true;
+    map.removeLayer(carto);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom:19, crossOrigin:true, attribution:"&copy; OpenStreetMap contributors"
+    }).addTo(map);
+  });
+  var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
+  var groups = {};
+  events.forEach(function(ev){
+    var key = ev.lat + "," + ev.lng;
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(ev);
+  });
+  Object.keys(groups).forEach(function(key){
+    var group = groups[key];
+    var ev = group[0];
+    var html = group.map(function(e){
+      var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
+      return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+    }).join("<hr>");
+    L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(map);
+  });
+  var pts = events.map(function(e){ return [e.lat, e.lng]; });
+  if(pts.length) map.fitBounds(pts, {padding:[40,40], maxZoom:14});
+  setTimeout(function(){ map.invalidateSize(); }, 0);
+}
+
+  </script>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li data-end="2026-12-31">
+    <li id="e-nela-nye-drinks-dance-2026" data-end="2026-12-31">
       <article>
         <h2>Nela New Year&#39;s Eve Drinks &amp; Dance</h2>
         <p class="meta">Nachtleven · Drinken</p>

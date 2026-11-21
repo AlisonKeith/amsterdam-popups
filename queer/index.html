@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -374,7 +386,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Queer and LGBTQ+ events in Amsterdam: parties, screenings, markets, meet-ups and shared dinners. There is something for everyone in the community and their allies, from quiet social evenings and creative workshops to big nights out. The list is refreshed every week. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li data-end="2026-11-16">
+    <li id="e-queerhub-pride-film" data-end="2026-11-16">
       <article>
         <h2>Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West</h2>
         <p class="meta">Film · Queer · Food</p>
@@ -388,7 +400,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.pinknieuwwest.org/activiteit/film-food-solidarity-pride-16-november/">Details and tickets for Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-lola-queerboxing" data-end="2026-11-17">
       <article>
         <h2>Queerboxing — Basic Bitch Boxing at Lola Lieven</h2>
         <p class="meta">Sport · Queer · Regular</p>
@@ -402,7 +414,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://lolalieven.nl/2026/03/31/queerboxing/">Details and tickets for Queerboxing — Basic Bitch Boxing at Lola Lieven<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-richel-omelas" data-end="2026-11-18">
       <article>
         <h2>Collectief FAKT — Omelas</h2>
         <p class="meta">Theatre &amp; Dance · Queer</p>
@@ -416,7 +428,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/collectief-fakt-omelas/">Details and tickets for Collectief FAKT — Omelas<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-pdz-kino-drag-cow" data-end="2026-11-19">
       <article>
         <h2>Pakhuis Kino: De-domestication &amp; i am not (your) human</h2>
         <p class="meta">Film · Queer</p>
@@ -430,7 +442,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://dezwijger.nl/programma/filmscreening-de-domestication-i-am-not-your-human">Details and tickets for Pakhuis Kino: De-domestication &amp; i am not (your) human<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-cavia-lesvia" data-end="2026-11-20">
       <article>
         <h2>Lesvia + Mr. Dimitris and Mrs. Dimitroula</h2>
         <p class="meta">Film · Queer</p>

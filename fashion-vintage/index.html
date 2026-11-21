@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -544,7 +556,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Vintage sales, kilo sales, sample sales, clothing swaps and designer pop-ups that are only around for a short time. Perfect for second-hand fans, bargain hunters and anyone looking for something they won&#39;t find on the high street. New sales are added to the list every week. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li data-end="2026-11-21">
+    <li id="e-arma-apartment-pauw" data-end="2026-11-21">
       <article>
         <h2>ARMA Apartment pop-up at PAUW</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -558,7 +570,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://armastore.com/en-eu/pages/the-arma-apartment-pop-up">Details and tickets for ARMA Apartment pop-up at PAUW<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-occii-clothes-swap" data-end="2026-11-18">
       <article>
         <h2>Clothes Swap — All Community Access Boutique</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -572,7 +584,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://occii.org/events/clothes-swap-all-community-access-boutique-2/">Details and tickets for Clothes Swap — All Community Access Boutique<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-posthoornkerk-vintage-fair" data-end="2026-11-22">
       <article>
         <h2>Vintage, Brocante, Antiques, Art &amp; Design Fair</h2>
         <p class="meta">Markets · Fashion &amp; Vintage · Art &amp; Design</p>
@@ -586,7 +598,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://stadsherstel.nl/cultuuragenda/vintage-brocante-antiek-kunst-design-2/">Details and tickets for Vintage, Brocante, Antiques, Art &amp; Design Fair<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-20">
+    <li id="e-dehallen-holiday-gift-shop" data-end="2026-12-20">
       <article>
         <h2>The Creative Lab — Holiday Gift Shop</h2>
         <p class="meta">Pop-up Shops · Christmas Markets · Fashion &amp; Vintage</p>
@@ -600,7 +612,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.dehallen-amsterdam.nl/agenda/the-creative-lab---holiday-gift-shop">Details and tickets for The Creative Lab — Holiday Gift Shop<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-the-hand-john-lobb-sciamat" data-end="2026-11-21">
       <article>
         <h2>John Lobb By Request + Sciamat at The Hand</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -614,7 +626,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://meetthehand.com/pages/john-lobb-event-amsterdam">Details and tickets for John Lobb By Request + Sciamat at The Hand<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-23">
+    <li id="e-beaumont-popup-1121" data-end="2026-11-23">
       <article>
         <h2>Beaumont Amsterdam — first pop-up store</h2>
         <p class="meta">Fashion &amp; Vintage · Pop-up Shops</p>
@@ -628,7 +640,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.linkedin.com/posts/beaumont-amsterdam_were-excited-to-announce-that-beaumont-amsterdam-activity-7524191088916545536-UzYR">Details and tickets for Beaumont Amsterdam — first pop-up store<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-dehallen-speel-deel-ruil" data-end="2026-11-22">
       <article>
         <h2>Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap</h2>
         <p class="meta">Kids &amp; Family · Markets · Workshops · Fashion &amp; Vintage</p>
@@ -642,7 +654,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://motherhood.amsterdam/speel-deel/amsterdam-november-swap-2026">Details and tickets for Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-swap-club-millesime" data-end="2026-11-22">
       <article>
         <h2>Vintage Clothing Swap — The Swap Club x Millesime</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -656,7 +668,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/fyduzib8">Details and tickets for Vintage Clothing Swap — The Swap Club x Millesime<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-qru-rommelmarkt-last" data-end="2026-11-22">
       <article>
         <h2>QRU flea market: last one of 2026</h2>
         <p class="meta">Markets · Fashion &amp; Vintage · Music · Regular</p>

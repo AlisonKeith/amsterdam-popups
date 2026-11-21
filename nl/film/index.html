@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -833,7 +845,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Bijzondere filmvertoningen, filmavonden, pop-upbioscopen en kleine festivals. Een goede keuze als je verder kijkt dan het gewone filmaanbod, met klassiekers, documentaires, korte films en vertoningen met een nagesprek. We vernieuwen de lijst elke week, dus er is meestal iets nieuws te zien. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li data-end="2026-11-16">
+    <li id="e-queerhub-pride-film" data-end="2026-11-16">
       <article>
         <h2>Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West</h2>
         <p class="meta">Film · Queer · Eten</p>
@@ -847,7 +859,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.pinknieuwwest.org/activiteit/film-food-solidarity-pride-16-november/">Details en tickets voor Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-idfa-final-days" data-end="2026-11-22">
       <article>
         <h2>IDFA 2026 — final days</h2>
         <p class="meta">Film</p>
@@ -861,7 +873,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://festival.idfa.nl/en/">Details en tickets voor IDFA 2026 — final days<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-cinema-culinair-tolhuis-1116" data-end="2026-11-22">
       <article>
         <h2>Cinema Culinair: film &amp; dinner or brunch at Tolhuis</h2>
         <p class="meta">Film · Eten · Terugkerend</p>
@@ -875,7 +887,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://cinemaculinair.nl/agenda/">Details en tickets voor Cinema Culinair: film &amp; dinner or brunch at Tolhuis<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-lab111-lecture-time-after-time" data-end="2026-11-17">
       <article>
         <h2>Film Lecture: Time After Time — Basje Boer on repetition in film</h2>
         <p class="meta">Film</p>
@@ -889,7 +901,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.lab111.nl/movie/film-lezing-time-after-time-over-herhaling-in-films-en-andere-verhalen/">Details en tickets voor Film Lecture: Time After Time — Basje Boer on repetition in film<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-uitkijk-in-the-mood-for-love" data-end="2026-11-17">
       <article>
         <h2>In the Mood for Love (4K restoration)</h2>
         <p class="meta">Film</p>
@@ -903,7 +915,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.uitkijk.nl/film/in-the-mood-for-love">Details en tickets voor In the Mood for Love (4K restoration)<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-cinekid-opblaasbioscoop-leidsebuurt" data-end="2026-11-18">
       <article>
         <h2>Cinekid Opblaasbioscoop in the Leidsebuurt</h2>
         <p class="meta">Film · Gezin &amp; Kids</p>
@@ -917,7 +929,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://go-kids.nl/amsterdam/agenda/cinekid-opblaasbioscoop-in-de-leidsebuurt">Details en tickets voor Cinekid Opblaasbioscoop in the Leidsebuurt<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-cavia-europa-von-trier" data-end="2026-11-18">
       <article>
         <h2>Europa trilogy: Europa (Lars von Trier, 1991)</h2>
         <p class="meta">Film</p>
@@ -931,7 +943,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://filmhuiscavia.nl/programma/november-2026">Details en tickets voor Europa trilogy: Europa (Lars von Trier, 1991)<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-uitkijk-vertigo-mythologica" data-end="2026-11-18">
       <article>
         <h2>Cinema Mythologica: Vertigo (1958)</h2>
         <p class="meta">Film</p>
@@ -945,7 +957,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.uitkijk.nl/film/cinema-mythologica-vertigo-1958">Details en tickets voor Cinema Mythologica: Vertigo (1958)<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-pdz-kino-drag-cow" data-end="2026-11-19">
       <article>
         <h2>Pakhuis Kino: De-domestication &amp; i am not (your) human</h2>
         <p class="meta">Film · Queer</p>
@@ -959,7 +971,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://dezwijger.nl/programma/filmscreening-de-domestication-i-am-not-your-human">Details en tickets voor Pakhuis Kino: De-domestication &amp; i am not (your) human<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-cavia-right-now-wrong-then" data-end="2026-11-19">
       <article>
         <h2>Right Now, Wrong Then (Hong Sang-soo, 2015)</h2>
         <p class="meta">Film</p>
@@ -973,7 +985,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://filmhuiscavia.nl/programma/november-2026">Details en tickets voor Right Now, Wrong Then (Hong Sang-soo, 2015)<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-cavia-lesvia" data-end="2026-11-20">
       <article>
         <h2>Lesvia + Mr. Dimitris and Mrs. Dimitroula</h2>
         <p class="meta">Film · Queer</p>
@@ -987,7 +999,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://filmhuiscavia.nl/programma/november-2026#lesvia">Details en tickets voor Lesvia + Mr. Dimitris and Mrs. Dimitroula<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-hartwig-dustan-talk" data-end="2026-11-20">
       <article>
         <h2>Dédramatison la Vi Quotidièn — talk on the films of Guillaume Dustan</h2>
         <p class="meta">Film · Kunst &amp; Design</p>
@@ -1001,7 +1013,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/dedramatisation-la-vi-quotdien-the-films-and-work-of-guillaume-dustan">Details en tickets voor Dédramatison la Vi Quotidièn — talk on the films of Guillaume Dustan<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-idfa-dance-night" data-end="2026-11-21">
       <article>
         <h2>IDFA Dance Night</h2>
         <p class="meta">Nachtleven · Muziek · Film</p>
@@ -1015,7 +1027,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://festival.idfa.nl/en/composition/de7ad047-9e31-4e58-aa1f-3d37ec3680c3/idfa-dance-night/">Details en tickets voor IDFA Dance Night<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-hoff-soumsoum-uitkijk" data-end="2026-11-21">
       <article>
         <h2>HoFF: Soumsoum, The Night of the Stars (Mahamat-Saleh Haroun)</h2>
         <p class="meta">Film</p>
@@ -1029,7 +1041,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.uitkijk.nl/film/ho-ff-soumsoum-the-night-of-the-stars-2026">Details en tickets voor HoFF: Soumsoum, The Night of the Stars (Mahamat-Saleh Haroun)<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-felix-bon-bini-na-mi-sono" data-end="2026-11-21">
       <article>
         <h2>Bon biní na mi soño — Juny Martina</h2>
         <p class="meta">Muziek · Kunst &amp; Design · Film · Theater &amp; Dans · Nachtleven</p>
@@ -1043,7 +1055,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://felixmeritis.nl/programma/bon-bini-na-mi-sono/">Details en tickets voor Bon biní na mi soño — Juny Martina<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-stadsarchief-ten-kon-dray" data-end="2026-11-22">
       <article>
         <h2>Ten Kon Dray: De tijden zijn veranderd</h2>
         <p class="meta">Kunst &amp; Design · Muziek · Film</p>
@@ -1057,7 +1069,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.amsterdam.nl/stadsarchief/agenda/ten-dray-tijden-veranderd/">Details en tickets voor Ten Kon Dray: De tijden zijn veranderd<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-lab111-hoff-paradise" data-end="2026-11-22">
       <article>
         <h2>HoFF: Paradise (Jérémy Comte, 2026)</h2>
         <p class="meta">Film</p>

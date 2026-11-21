@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -577,7 +589,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Funruns, wedstrijden, toernooien, open trainingen en andere sportevents om aan mee te doen of naar te kijken. Sommige zijn voor beginners en recreanten, andere voor wie al vaker traint. Elke week vernieuwen we de lijst, dus er is altijd een nieuwe manier om te bewegen of een wedstrijd om aan te moedigen. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li data-end="2026-11-16">
+    <li id="e-prikkelvrij-museumplein" data-end="2026-11-16">
       <article>
         <h2>Prikkelvrij schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Terugkerend</p>
@@ -591,7 +603,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/prikkelvrij-schaatsen/">Details en tickets voor Prikkelvrij schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-16">
+    <li id="e-midnight-runners-chill-long-run" data-end="2026-11-16">
       <article>
         <h2>Midnight Runners — Chill Long Run</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Terugkerend</p>
@@ -605,7 +617,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.heylo.com/event/-P5m1Po0LMjlqOSxYyz0">Details en tickets voor Midnight Runners — Chill Long Run<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-samen-schaatsen-museumplein" data-end="2026-11-17">
       <article>
         <h2>Samen Schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Gezin &amp; Kids · Terugkerend</p>
@@ -619,7 +631,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/samen-schaatsen/">Details en tickets voor Samen Schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-bingsu-run" data-end="2026-11-17">
       <article>
         <h2>Bingsu run — Asian Run Club Amsterdam</h2>
         <p class="meta">Sport · Actief &amp; Buiten</p>
@@ -633,7 +645,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/xwldzjqh">Details en tickets voor Bingsu run — Asian Run Club Amsterdam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-lola-queerboxing" data-end="2026-11-17">
       <article>
         <h2>Queerboxing — Basic Bitch Boxing at Lola Lieven</h2>
         <p class="meta">Sport · Queer · Terugkerend</p>
@@ -647,7 +659,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://lolalieven.nl/2026/03/31/queerboxing/">Details en tickets voor Queerboxing — Basic Bitch Boxing at Lola Lieven<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-beest-open-avond" data-end="2026-11-20">
       <article>
         <h2>Open Avond at Beest Boulders Amsterdam</h2>
         <p class="meta">Sport · Workshops</p>
@@ -661,7 +673,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://beestboulders.com/open-evening/">Details en tickets voor Open Avond at Beest Boulders Amsterdam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-alo-runners-club" data-end="2026-11-21">
       <article>
         <h2>ALO Runners Club — 6K from PC Hooftstraat</h2>
         <p class="meta">Sport · Actief &amp; Buiten</p>
@@ -675,7 +687,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/wm2jftwp">Details en tickets voor ALO Runners Club — 6K from PC Hooftstraat<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-trailrunclinic-bos" data-end="2026-11-21">
       <article>
         <h2>Trailrunclinic with Hardlopen Amsterdam</h2>
         <p class="meta">Sport · Actief &amp; Buiten · Workshops</p>
@@ -689,7 +701,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hardlopenamsterdam.nl/nl/trailrunclinic">Details en tickets voor Trailrunclinic with Hardlopen Amsterdam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-bandeja-ndsm-padel" data-end="2026-11-21">
       <article>
         <h2>Bandeja Padel Tournament at NDSM Padel</h2>
         <p class="meta">Sport</p>
@@ -703,7 +715,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://padelspijkers.nl/en/product/tournament-ndsm-padel-amsterdam-21-november/">Details en tickets voor Bandeja Padel Tournament at NDSM Padel<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-eaa-bouldering-universum" data-end="2026-11-21">
       <article>
         <h2>EAA Bouldering at USC Universum</h2>
         <p class="meta">Sport</p>

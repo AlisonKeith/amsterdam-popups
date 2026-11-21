@@ -107,6 +107,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -859,9 +871,90 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p><a href="/nl/deze-week.html">Alle events van deze week</a></p>
   <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: markten, winterterrassen, workshops en lichtwandelingen. Sommige pop ups duren een weekend, andere lopen het hele seizoen. Hier staan de eenmalige en tijdelijke evenementen van nu tot begin januari, mooi als je zin hebt in een spontane avond. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat. Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>. Voor oud en nieuw, zie onze <a href="/nl/oud-en-nieuw/">pagina met pop-ups voor oud en nieuw</a>.</p>
   <p>19 evenementen, op datum.</p>
+  <section class="season-map" aria-labelledby="map-h">
+    <h2 id="map-h">Kaart van de events</h2>
+    <div id="map" role="region" aria-label="Kaart met de locaties van de events op deze pagina"></div>
+    <script type="application/json" id="map-events">[{"id":"winterterras-ndsm","name":"Het Amsterdamse Winterterras","lat":52.4012,"lng":4.8956,"when":"vr–zo, 13–29 nov (drie weekenden)","time":"vr 16:00–23:00, za 14:00–23:00, zo 14:00–22:00","addr":"NDSM-loods, NDSM-Plein 27, Amsterdam"},{"id":"le-foodwalk-winter","name":"Le Foodwalk Winter","lat":52.3761,"lng":4.9004,"when":"elke vr & za, 13 nov – 23 jan (niet 25–26 dec of 1 jan)","time":"Start tussen 17:00 en 19:00","addr":"Start bij Vermeers Wijnkamer, Zeedijk 11, Amsterdam"},{"id":"wintermarkt-leidseplein","name":"Winter Market Leidseplein","lat":52.3633,"lng":4.8835,"when":"13 nov 2026 – 3 jan 2027 (dagelijks)","time":"ma–vr 12:00–23:00; za & zo 11:00–23:00","addr":"Leidseplein & Kleine-Gartmanplantsoen, Amsterdam"},{"id":"dehallen-holiday-gift-shop","name":"The Creative Lab — Holiday Gift Shop","lat":52.3666,"lng":4.8688,"when":"vr 20 nov – zo 20 dec","time":"di–zo 11:30–18:30 (ma gesloten)","addr":"De Hallen (Beeldend Gesproken), Hannie Dankbaarpassage 25, Amsterdam"},{"id":"sunday-market-oostenburg","name":"Sunday Market Oostenburg — winter edition","lat":52.3721,"lng":4.928,"when":"zo 22 nov","time":"11:00–17:00","addr":"Oostenburgermiddenstraat, Amsterdam"},{"id":"amsterdam-light-festival-15","name":"Amsterdam Light Festival — Edition 15","lat":52.3676,"lng":4.9002,"when":"do 26 nov 2026 – zo 17 jan 2027","time":"Licht 16:30–23:00 (31 dec tot 21:00)","addr":"Wandelroute door het centrum (infopunt bij Amstel 1 / Waterlooplein 6, Amsterdam)"},{"id":"alf-light-nights","name":"Amsterdam Light Festival — Light Nights","lat":52.3676,"lng":4.9002,"when":"26 nov, 12 en 19 dec","time":"Vanaf het eind van de middag tot in de avond; tijden per onderdeel","addr":"Langs de Light Festival-route, centrum, Amsterdam"},{"id":"alf-oyster-walk","name":"Amsterdam Light Festival — Oyster Walk","lat":52.3676,"lng":4.9002,"when":"do, vr en za, 26 nov 2026 – 16 jan 2027","time":"Take-awaywandeling; festivalapp inbegrepen","addr":"Wandelroute van 4,5 km langs vier restaurants in Amsterdam-centrum (details bij het ticket)"},{"id":"alf-foodsteps","name":"Amsterdam Light Festival — Foodsteps","lat":52.3676,"lng":4.9002,"when":"do, vr en za, 26 nov 2026 – 16 jan 2027","time":"Take-awaywandeling; festivalapp inbegrepen","addr":"Wandelroute van 4,5 km langs vier restaurants in Amsterdam-centrum (details bij het ticket)"},{"id":"groot-melkhuis-kerstmarkt","name":"Christmas market at Groot Melkhuis","lat":52.3585,"lng":4.8684,"when":"zo 29 nov","time":"11:00–16:00","addr":"Groot Melkhuis, Vondelpark 2, Amsterdam"},{"id":"youplant-christmas-wreath","name":"Christmas wreath workshop at Loods 6","lat":52.3773,"lng":4.9391,"when":"zo 29 nov","time":"11:00–12:30","addr":"Loods 6, KNSM-laan 115, Amsterdam"},{"id":"christmas-village-museumplein","name":"Christmas Village Amsterdam","lat":52.3589,"lng":4.8843,"when":"3–27 dec","time":"3–24 dec 12:00–21:00; 25 en 26 dec 12:00–19:00; 27 dec 12:00–18:00","addr":"Museumplein, Amsterdam"},{"id":"doing-goods-xmas-market","name":"Doing Goods Xmas Market","lat":52.3613,"lng":4.8968,"when":"vr 11 en za 12 dec","time":"vr 15:00–20:00, za 10:00–18:00","addr":"De Duif, Prinsengracht 756, Amsterdam"},{"id":"ceuvel-duurzame-kerstmarkt","name":"Duurzame Kerstmarkt at De Ceuvel","lat":52.402,"lng":4.9075,"when":"12, 13, 19 en 20 dec","time":"13:00–19:00","addr":"De Ceuvel, Korte Papaverweg 2–6, Amsterdam"},{"id":"cabinet-feesteditie","name":"CABINET festive edition","lat":52.3783,"lng":4.8656,"when":"za 12 en zo 13 dec","time":"Van za 10:00 tot zo 17:00 (locatiepagina)","addr":"Centrale Markthal, Centrale Markthallen 170, Amsterdam"},{"id":"winterparadijs-2026","name":"Het Amsterdamse Winterparadijs","lat":52.3412,"lng":4.8899,"when":"17 dec 2026 – 2 jan 2027 (31 dec gesloten)","time":"Meeste dagen 09:00–00:00; zondag 09:00–23:00; 1 jan 10:00–00:00. Attracties sluiten om 22:00","addr":"RAI Amsterdam, Europaplein 24, Amsterdam"},{"id":"maker-market-xl-2026","name":"The Maker Market XL","lat":52.3783,"lng":4.8656,"when":"19–23 dec","time":"za 11:00–20:00; zo–wo 11:00–17:00","addr":"Centrale Markthal, Centrale Markthallen 170, Amsterdam"},{"id":"kerst-kromhouthal","name":"Kerst in de Kromhouthal","lat":52.3833,"lng":4.9205,"when":"zo 20 dec","time":"14:00–19:00","addr":"Kromhouthal, Gedempt Hamerkanaal 231, Amsterdam"},{"id":"funky-xmas-market-2026","name":"Funky Xmas Market","lat":52.3868,"lng":4.8692,"when":"zo 20 dec","time":"12:00–18:00","addr":"Westergas, Pazzanistraat 33, Amsterdam"}]</script>
+  </section>
+  <script>
+(function(){
+  var el = document.getElementById("map");
+  if(!el) return;
+  var loaded = false;
+  function load(){
+    if(loaded) return;
+    loaded = true;
+    var css = document.createElement("link");
+    css.rel = "stylesheet";
+    css.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+    document.head.appendChild(css);
+    var s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+    s.onload = initSeasonMap;
+    document.body.appendChild(s);
+  }
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      if(entries.some(function(e){ return e.isIntersecting; })){ io.disconnect(); load(); }
+    }, {rootMargin:"200px"});
+    io.observe(el);
+  } else { load(); }
+})();
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+  });
+}
+function initSeasonMap(){
+  var el = document.getElementById("map");
+  var dataEl = document.getElementById("map-events");
+  if(!el || !dataEl || typeof L === "undefined") return;
+  var events;
+  try { events = JSON.parse(dataEl.textContent || "[]"); } catch (err){ return; }
+  events = events.filter(function(e){ return typeof e.lat === "number" && typeof e.lng === "number"; });
+  if(!events.length) return;
+  var CARTO_KEY = "cb1_59ke_1_cd5111510aa2bc631ba544ae";
+  var dark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var variant = dark ? "dark_all" : "light_all";
+  var map = L.map("map", {scrollWheelZoom:false, keyboard:true}).setView([52.3676, 4.9041], 12.5);
+  var usingFallback = false;
+  var carto = L.tileLayer("https://{s}.basemaps.cartocdn.com/" + variant + "/{z}/{x}/{y}{r}.png?key=" + CARTO_KEY, {
+    subdomains:"abcd", maxZoom:19, crossOrigin:true,
+    attribution:"&copy; OpenStreetMap &copy; CARTO"
+  }).addTo(map);
+  carto.on("tileerror", function(){
+    if(usingFallback) return;
+    usingFallback = true;
+    map.removeLayer(carto);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom:19, crossOrigin:true, attribution:"&copy; OpenStreetMap contributors"
+    }).addTo(map);
+  });
+  var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
+  var groups = {};
+  events.forEach(function(ev){
+    var key = ev.lat + "," + ev.lng;
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(ev);
+  });
+  Object.keys(groups).forEach(function(key){
+    var group = groups[key];
+    var ev = group[0];
+    var html = group.map(function(e){
+      var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
+      return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+    }).join("<hr>");
+    L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(map);
+  });
+  var pts = events.map(function(e){ return [e.lat, e.lng]; });
+  if(pts.length) map.fitBounds(pts, {padding:[40,40], maxZoom:14});
+  setTimeout(function(){ map.invalidateSize(); }, 0);
+}
+
+  </script>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li data-end="2026-11-29">
+    <li id="e-winterterras-ndsm" data-end="2026-11-29">
       <article>
         <h2>Het Amsterdamse Winterterras</h2>
         <p class="meta">Eten · Drinken · Muziek · Gezin &amp; Kids</p>
@@ -875,7 +968,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hetamsterdamsewinterterras.nl/">Details en tickets voor Het Amsterdamse Winterterras<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-23">
+    <li id="e-le-foodwalk-winter" data-end="2027-01-23">
       <article>
         <h2>Le Foodwalk Winter</h2>
         <p class="meta">Eten</p>
@@ -889,7 +982,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://lefoodwalk.nl/">Details en tickets voor Le Foodwalk Winter<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-03">
+    <li id="e-wintermarkt-leidseplein" data-end="2027-01-03">
       <article>
         <h2>Winter Market Leidseplein</h2>
         <p class="meta">Kerstmarkten · Markten · Eten · Drinken</p>
@@ -903,7 +996,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/">Details en tickets voor Winter Market Leidseplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-20">
+    <li id="e-dehallen-holiday-gift-shop" data-end="2026-12-20">
       <article>
         <h2>The Creative Lab — Holiday Gift Shop</h2>
         <p class="meta">Pop-upwinkels · Kerstmarkten · Mode &amp; Vintage</p>
@@ -917,7 +1010,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.dehallen-amsterdam.nl/agenda/the-creative-lab---holiday-gift-shop">Details en tickets voor The Creative Lab — Holiday Gift Shop<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-sunday-market-oostenburg" data-end="2026-11-22">
       <article>
         <h2>Sunday Market Oostenburg — winter edition</h2>
         <p class="meta">Kerstmarkten · Markten · Eten</p>
@@ -931,7 +1024,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.sundaymarket.nl/markt/sunday-market-oostenburg-2026-11-22/">Details en tickets voor Sunday Market Oostenburg — winter edition<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-17">
+    <li id="e-amsterdam-light-festival-15" data-end="2027-01-17">
       <article>
         <h2>Amsterdam Light Festival — Edition 15</h2>
         <p class="meta">Kunst &amp; Design · Gezin &amp; Kids</p>
@@ -945,7 +1038,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamlightfestival.com/en/edition-15">Details en tickets voor Amsterdam Light Festival — Edition 15<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-19">
+    <li id="e-alf-light-nights" data-end="2026-12-19">
       <article>
         <h2>Amsterdam Light Festival — Light Nights</h2>
         <p class="meta">Kunst &amp; Design · Gezin &amp; Kids</p>
@@ -959,7 +1052,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamlightfestival.com/en/light-nights">Details en tickets voor Amsterdam Light Festival — Light Nights<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-16">
+    <li id="e-alf-oyster-walk" data-end="2027-01-16">
       <article>
         <h2>Amsterdam Light Festival — Oyster Walk</h2>
         <p class="meta">Eten</p>
@@ -973,7 +1066,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamlightfestival.com/en/taste">Details en tickets voor Amsterdam Light Festival — Oyster Walk<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-16">
+    <li id="e-alf-foodsteps" data-end="2027-01-16">
       <article>
         <h2>Amsterdam Light Festival — Foodsteps</h2>
         <p class="meta">Eten</p>
@@ -987,7 +1080,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamlightfestival.com/en/taste">Details en tickets voor Amsterdam Light Festival — Foodsteps<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-29">
+    <li id="e-groot-melkhuis-kerstmarkt" data-end="2026-11-29">
       <article>
         <h2>Christmas market at Groot Melkhuis</h2>
         <p class="meta">Kerstmarkten · Markten · Eten · Gezin &amp; Kids</p>
@@ -1001,7 +1094,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://grootmelkhuis.nl/nieuws/kerstmarkt-bij-groot-melkhuis/">Details en tickets voor Christmas market at Groot Melkhuis<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-29">
+    <li id="e-youplant-christmas-wreath" data-end="2026-11-29">
       <article>
         <h2>Christmas wreath workshop at Loods 6</h2>
         <p class="meta">Workshops</p>
@@ -1015,7 +1108,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.youplantamsterdam.com/event-details/christmas-wreath-workshop-in-amsterdam">Details en tickets voor Christmas wreath workshop at Loods 6<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-27">
+    <li id="e-christmas-village-museumplein" data-end="2026-12-27">
       <article>
         <h2>Christmas Village Amsterdam</h2>
         <p class="meta">Kerstmarkten · Markten · Eten · Drinken · Gezin &amp; Kids</p>
@@ -1029,7 +1122,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://icevillage.nl/en">Details en tickets voor Christmas Village Amsterdam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-12">
+    <li id="e-doing-goods-xmas-market" data-end="2026-12-12">
       <article>
         <h2>Doing Goods Xmas Market</h2>
         <p class="meta">Kerstmarkten · Markten</p>
@@ -1043,7 +1136,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://stadsherstel.nl/cultuuragenda/doing-goods-xmas-market/">Details en tickets voor Doing Goods Xmas Market<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-20">
+    <li id="e-ceuvel-duurzame-kerstmarkt" data-end="2026-12-20">
       <article>
         <h2>Duurzame Kerstmarkt at De Ceuvel</h2>
         <p class="meta">Kerstmarkten · Markten · Eten · Drinken</p>
@@ -1057,7 +1150,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://deceuvel.nl/nl/event/20-12-duurzame-kerstmarkt/">Details en tickets voor Duurzame Kerstmarkt at De Ceuvel<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-13">
+    <li id="e-cabinet-feesteditie" data-end="2026-12-13">
       <article>
         <h2>CABINET festive edition</h2>
         <p class="meta">Kerstmarkten · Markten · Mode &amp; Vintage · Kunst &amp; Design</p>
@@ -1071,7 +1164,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://centralemarkthal.nl/program/3678/">Details en tickets voor CABINET festive edition<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-02">
+    <li id="e-winterparadijs-2026" data-end="2027-01-02">
       <article>
         <h2>Het Amsterdamse Winterparadijs</h2>
         <p class="meta">Gezin &amp; Kids · Eten · Drinken · Muziek</p>
@@ -1085,7 +1178,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.hetamsterdamsewinterparadijs.nl/">Details en tickets voor Het Amsterdamse Winterparadijs<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-23">
+    <li id="e-maker-market-xl-2026" data-end="2026-12-23">
       <article>
         <h2>The Maker Market XL</h2>
         <p class="meta">Kerstmarkten · Markten · Eten · Gezin &amp; Kids · Workshops</p>
@@ -1099,7 +1192,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.themakermarket.nl/markten/amsterdam-kerstmarkt-2026">Details en tickets voor The Maker Market XL<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-20">
+    <li id="e-kerst-kromhouthal" data-end="2026-12-20">
       <article>
         <h2>Kerst in de Kromhouthal</h2>
         <p class="meta">Kerstmarkten · Markten · Eten · Muziek · Gezin &amp; Kids</p>
@@ -1113,7 +1206,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://verbroederij.nl/agenda/content/20-12-2026-kerst-in-de-kromhouthal/">Details en tickets voor Kerst in de Kromhouthal<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-20">
+    <li id="e-funky-xmas-market-2026" data-end="2026-12-20">
       <article>
         <h2>Funky Xmas Market</h2>
         <p class="meta">Kerstmarkten · Markten · Eten</p>

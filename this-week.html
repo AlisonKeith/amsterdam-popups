@@ -106,6 +106,18 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .faq h2{margin:0 0 8px}
 .faq h3{font-size:1.05rem;margin:18px 0 4px}
 .faq p{margin:0 0 8px;color:var(--prose-text)}
+.season-map{margin:8px 0 24px}
+.season-map h2{font-size:1.05rem;margin:0 0 10px}
+#map{height:340px;width:100%;border:1px solid var(--line);border-radius:10px;background:#e8e4dc;z-index:0}
+.leaflet-container{font-family:inherit;background:#e8e4dc}
+.leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
+.leaflet-popup-content b{font-size:13.5px}
+.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
+.leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
+.leaflet-control-attribution a{color:var(--red)!important}
+.leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -4199,7 +4211,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>102 temporary and one-off events this week: markets, food, art, family and culture, from supper clubs to comedy, music and nightlife. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
-    <li data-end="2026-11-29">
+    <li id="e-winterterras-ndsm" data-end="2026-11-29">
       <article>
         <h2>Het Amsterdamse Winterterras</h2>
         <p class="meta">Food · Drink · Music · Kids &amp; Family</p>
@@ -4213,7 +4225,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hetamsterdamsewinterterras.nl/">Details and tickets for Het Amsterdamse Winterterras<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-23">
+    <li id="e-le-foodwalk-winter" data-end="2027-01-23">
       <article>
         <h2>Le Foodwalk Winter</h2>
         <p class="meta">Food</p>
@@ -4227,7 +4239,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://lefoodwalk.nl/">Details and tickets for Le Foodwalk Winter<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2027-01-03">
+    <li id="e-wintermarkt-leidseplein" data-end="2027-01-03">
       <article>
         <h2>Winter Market Leidseplein</h2>
         <p class="meta">Christmas Markets · Markets · Food · Drink</p>
@@ -4241,7 +4253,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.ijsbaan.amsterdam/evenementen/ijsbaan-leidseplein-amsterdam/">Details and tickets for Winter Market Leidseplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-16">
+    <li id="e-queerhub-pride-film" data-end="2026-11-16">
       <article>
         <h2>Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West</h2>
         <p class="meta">Film · Queer · Food</p>
@@ -4255,7 +4267,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.pinknieuwwest.org/activiteit/film-food-solidarity-pride-16-november/">Details and tickets for Film, Food &amp; Solidarity: Pride (2014) at QueerHub Nieuw-West<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-idfa-final-days" data-end="2026-11-22">
       <article>
         <h2>IDFA 2026 — final days</h2>
         <p class="meta">Film</p>
@@ -4269,7 +4281,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://festival.idfa.nl/en/">Details and tickets for IDFA 2026 — final days<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-16">
+    <li id="e-prikkelvrij-museumplein" data-end="2026-11-16">
       <article>
         <h2>Prikkelvrij schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Active &amp; Outdoor · Regular</p>
@@ -4283,7 +4295,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/prikkelvrij-schaatsen/">Details and tickets for Prikkelvrij schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-16">
+    <li id="e-midnight-runners-chill-long-run" data-end="2026-11-16">
       <article>
         <h2>Midnight Runners — Chill Long Run</h2>
         <p class="meta">Sport · Active &amp; Outdoor · Regular</p>
@@ -4297,7 +4309,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.heylo.com/event/-P5m1Po0LMjlqOSxYyz0">Details and tickets for Midnight Runners — Chill Long Run<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-cinema-culinair-tolhuis-1116" data-end="2026-11-22">
       <article>
         <h2>Cinema Culinair: film &amp; dinner or brunch at Tolhuis</h2>
         <p class="meta">Film · Food · Regular</p>
@@ -4311,7 +4323,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://cinemaculinair.nl/agenda/">Details and tickets for Cinema Culinair: film &amp; dinner or brunch at Tolhuis<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-mezrab-samizdat" data-end="2026-11-17">
       <article>
         <h2>Samizdat: Stories from the Underground</h2>
         <p class="meta">Theatre &amp; Dance · Food</p>
@@ -4325,7 +4337,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://mezrab.nl/events/samizdat-stories-from-the-underground-2-2026-11-17/">Details and tickets for Samizdat: Stories from the Underground<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-harmony" data-end="2026-11-22">
       <article>
         <h2>Harmony</h2>
         <p class="meta">Music</p>
@@ -4339,7 +4351,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://harmony.now/">Details and tickets for Harmony<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-biotopia-bellevue" data-end="2026-11-18">
       <article>
         <h2>Biotopia — SHIFFT</h2>
         <p class="meta">Theatre &amp; Dance</p>
@@ -4353,7 +4365,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.theaterbellevue.nl/agenda/biotopia-rh8v">Details and tickets for Biotopia — SHIFFT<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-vietti-de-willem" data-end="2026-11-17">
       <article>
         <h2>Vietti x De Willem — Barolo &amp; truffle dinner</h2>
         <p class="meta">Food · Drink</p>
@@ -4367,7 +4379,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://de-willem.nl/agenda/vietti-x-de-willem-barolo-en-truffel-op-17-november/">Details and tickets for Vietti x De Willem — Barolo &amp; truffle dinner<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-hartwig-family-table-chiboub" data-end="2026-11-17">
       <article>
         <h2>Proxy Family Table — Roots, Leaves, Fruits (Yasmine Chiboub)</h2>
         <p class="meta">Food</p>
@@ -4381,7 +4393,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/proxy-family-table">Details and tickets for Proxy Family Table — Roots, Leaves, Fruits (Yasmine Chiboub)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-lab111-lecture-time-after-time" data-end="2026-11-17">
       <article>
         <h2>Film Lecture: Time After Time — Basje Boer on repetition in film</h2>
         <p class="meta">Film</p>
@@ -4395,7 +4407,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.lab111.nl/movie/film-lezing-time-after-time-over-herhaling-in-films-en-andere-verhalen/">Details and tickets for Film Lecture: Time After Time — Basje Boer on repetition in film<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-uitkijk-in-the-mood-for-love" data-end="2026-11-17">
       <article>
         <h2>In the Mood for Love (4K restoration)</h2>
         <p class="meta">Film</p>
@@ -4409,7 +4421,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.uitkijk.nl/film/in-the-mood-for-love">Details and tickets for In the Mood for Love (4K restoration)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-arma-apartment-pauw" data-end="2026-11-21">
       <article>
         <h2>ARMA Apartment pop-up at PAUW</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -4423,7 +4435,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://armastore.com/en-eu/pages/the-arma-apartment-pop-up">Details and tickets for ARMA Apartment pop-up at PAUW<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-kameleon-frascati" data-end="2026-11-21">
       <article>
         <h2>Sadettin Kırmızıyüz: Kameleon</h2>
         <p class="meta">Comedy</p>
@@ -4437,7 +4449,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.frascatitheater.nl/nl/agenda/kameleon-5c6h">Details and tickets for Sadettin Kırmızıyüz: Kameleon<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-samen-schaatsen-museumplein" data-end="2026-11-17">
       <article>
         <h2>Samen Schaatsen at Schaatsbaan Museumplein</h2>
         <p class="meta">Sport · Active &amp; Outdoor · Kids &amp; Family · Regular</p>
@@ -4451,7 +4463,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.schaatsbaanmuseumplein.nl/activiteiten/samen-schaatsen/">Details and tickets for Samen Schaatsen at Schaatsbaan Museumplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-bingsu-run" data-end="2026-11-17">
       <article>
         <h2>Bingsu run — Asian Run Club Amsterdam</h2>
         <p class="meta">Sport · Active &amp; Outdoor</p>
@@ -4465,7 +4477,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/xwldzjqh">Details and tickets for Bingsu run — Asian Run Club Amsterdam<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-17">
+    <li id="e-lola-queerboxing" data-end="2026-11-17">
       <article>
         <h2>Queerboxing — Basic Bitch Boxing at Lola Lieven</h2>
         <p class="meta">Sport · Queer · Regular</p>
@@ -4479,7 +4491,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://lolalieven.nl/2026/03/31/queerboxing/">Details and tickets for Queerboxing — Basic Bitch Boxing at Lola Lieven<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-cinekid-opblaasbioscoop-leidsebuurt" data-end="2026-11-18">
       <article>
         <h2>Cinekid Opblaasbioscoop in the Leidsebuurt</h2>
         <p class="meta">Film · Kids &amp; Family</p>
@@ -4493,7 +4505,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://go-kids.nl/amsterdam/agenda/cinekid-opblaasbioscoop-in-de-leidsebuurt">Details and tickets for Cinekid Opblaasbioscoop in the Leidsebuurt<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-capital-c-omen-opening" data-end="2026-11-18">
       <article>
         <h2>Opening: Omen — Gabriel Lester at Capital C</h2>
         <p class="meta">Art &amp; Design</p>
@@ -4507,7 +4519,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/opening-omen-gabriel-lester/">Details and tickets for Opening: Omen — Gabriel Lester at Capital C<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-richel-omelas" data-end="2026-11-18">
       <article>
         <h2>Collectief FAKT — Omelas</h2>
         <p class="meta">Theatre &amp; Dance · Queer</p>
@@ -4521,7 +4533,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/collectief-fakt-omelas/">Details and tickets for Collectief FAKT — Omelas<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-occii-clothes-swap" data-end="2026-11-18">
       <article>
         <h2>Clothes Swap — All Community Access Boutique</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -4535,7 +4547,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://occii.org/events/clothes-swap-all-community-access-boutique-2/">Details and tickets for Clothes Swap — All Community Access Boutique<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-expats-connect-idock" data-end="2026-11-18">
       <article>
         <h2>Expats Connect: Career Switch + Networking</h2>
         <p class="meta">Networking · Business · Drink</p>
@@ -4549,7 +4561,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.eventbrite.nl/e/expats-connect-career-switch-networking-tickets-2003608291335">Details and tickets for Expats Connect: Career Switch + Networking<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-kimchi-stretch-fold" data-end="2026-11-18">
       <article>
         <h2>Craft Club: Kimchi Making</h2>
         <p class="meta">Workshops · Food</p>
@@ -4563,7 +4575,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.stretchandfold.nl/events/the-art-of-kimchi-october-zpcn3">Details and tickets for Craft Club: Kimchi Making<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-cavia-europa-von-trier" data-end="2026-11-18">
       <article>
         <h2>Europa trilogy: Europa (Lars von Trier, 1991)</h2>
         <p class="meta">Film</p>
@@ -4577,7 +4589,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://filmhuiscavia.nl/programma/november-2026">Details and tickets for Europa trilogy: Europa (Lars von Trier, 1991)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-uitkijk-vertigo-mythologica" data-end="2026-11-18">
       <article>
         <h2>Cinema Mythologica: Vertigo (1958)</h2>
         <p class="meta">Film</p>
@@ -4591,7 +4603,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.uitkijk.nl/film/cinema-mythologica-vertigo-1958">Details and tickets for Cinema Mythologica: Vertigo (1958)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-richel-ouder-worden-tryout" data-end="2026-11-19">
       <article>
         <h2>Joost Hofman &amp; Barbara Sloesen: Ouder worden (try-out)</h2>
         <p class="meta">Theatre &amp; Dance · Music</p>
@@ -4605,7 +4617,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/joost-hofman-barbara-sloesen-ouder-worden/">Details and tickets for Joost Hofman &amp; Barbara Sloesen: Ouder worden (try-out)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-18">
+    <li id="e-richel-comedy-underground" data-end="2026-11-18">
       <article>
         <h2>The Comedy Underground</h2>
         <p class="meta">Comedy · Music</p>
@@ -4619,7 +4631,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/the-comedy-underground-41/">Details and tickets for The Comedy Underground<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-rijksakademie-open-studios" data-end="2026-11-22">
       <article>
         <h2>Rijksakademie Open Studios 2026</h2>
         <p class="meta">Art &amp; Design</p>
@@ -4633,7 +4645,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://rijksakademie.nl/en/open-studios/2026">Details and tickets for Rijksakademie Open Studios 2026<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-aaw-gallery-night" data-end="2026-11-19">
       <article>
         <h2>Amsterdam Art Week — Festive Gallery Night</h2>
         <p class="meta">Art &amp; Design</p>
@@ -4647,7 +4659,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/festive-gallery-night/">Details and tickets for Amsterdam Art Week — Festive Gallery Night<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-mezrab-alaa-zouiten" data-end="2026-11-19">
       <article>
         <h2>Alaa Zouiten Trio — Flamenco meets Moorish-Andalusian music</h2>
         <p class="meta">Music</p>
@@ -4661,7 +4673,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://mezrab.nl/events/alaa-zouiten-aficionado/">Details and tickets for Alaa Zouiten Trio — Flamenco meets Moorish-Andalusian music<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-pdz-kino-drag-cow" data-end="2026-11-19">
       <article>
         <h2>Pakhuis Kino: De-domestication &amp; i am not (your) human</h2>
         <p class="meta">Film · Queer</p>
@@ -4675,7 +4687,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://dezwijger.nl/programma/filmscreening-de-domestication-i-am-not-your-human">Details and tickets for Pakhuis Kino: De-domestication &amp; i am not (your) human<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-hartwig-proxy-choir-gilbert-1119" data-end="2026-11-19">
       <article>
         <h2>Proxy Choir: voice workshop with Jodi Gilbert</h2>
         <p class="meta">Music · Workshops</p>
@@ -4689,7 +4701,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/proxy-choir">Details and tickets for Proxy Choir: voice workshop with Jodi Gilbert<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-cavia-right-now-wrong-then" data-end="2026-11-19">
       <article>
         <h2>Right Now, Wrong Then (Hong Sang-soo, 2015)</h2>
         <p class="meta">Film</p>
@@ -4703,7 +4715,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://filmhuiscavia.nl/programma/november-2026">Details and tickets for Right Now, Wrong Then (Hong Sang-soo, 2015)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-hoxton-lloyd-beaujolais" data-end="2026-11-22">
       <article>
         <h2>Beaujolais Breman at The Hoxton Lloyd</h2>
         <p class="meta">Drink · Food</p>
@@ -4717,7 +4729,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://thehoxton.com/nl/amsterdam-lloyd/whats-on/beaujolais-breman/">Details and tickets for Beaujolais Breman at The Hoxton Lloyd<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-straat-by-night" data-end="2026-11-19">
       <article>
         <h2>STRAAT by NIGHT: ART IS NOT A CRIME</h2>
         <p class="meta">Art &amp; Design · Drink</p>
@@ -4731,7 +4743,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.straatmuseum.com/en/activities/straat-by-night">Details and tickets for STRAAT by NIGHT: ART IS NOT A CRIME<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-frascati-under-construction-nov" data-end="2026-11-21">
       <article>
         <h2>Under Construction November &#39;26: three new makers</h2>
         <p class="meta">Theatre &amp; Dance · Art &amp; Design</p>
@@ -4745,7 +4757,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.frascatitheater.nl/nl/agenda/under-construction-november-26-12tz">Details and tickets for Under Construction November &#39;26: three new makers<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-19">
+    <li id="e-bellevue-buikzwam" data-end="2026-11-19">
       <article>
         <h2>Kompagnie Kistemaker: Buikzwam</h2>
         <p class="meta">Comedy</p>
@@ -4759,7 +4771,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.theaterbellevue.nl/agenda/buikzwam-z63t">Details and tickets for Kompagnie Kistemaker: Buikzwam<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-orkater-de-gliphoeve" data-end="2026-11-21">
       <article>
         <h2>Orkater: De Gliphoeve (Suriname trilogy, part 2)</h2>
         <p class="meta">Theatre &amp; Dance · Music</p>
@@ -4773,7 +4785,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://ita.nl/nl/voorstellingen/de-suriname-trilogie-de-gliphoeve">Details and tickets for Orkater: De Gliphoeve (Suriname trilogy, part 2)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-occii-hackedepiciotto" data-end="2026-11-20">
       <article>
         <h2>Hackedepicciotto + Glice</h2>
         <p class="meta">Music</p>
@@ -4787,7 +4799,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://occii.org/events/hackedepiciotto-glice/">Details and tickets for Hackedepicciotto + Glice<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-cavia-lesvia" data-end="2026-11-20">
       <article>
         <h2>Lesvia + Mr. Dimitris and Mrs. Dimitroula</h2>
         <p class="meta">Film · Queer</p>
@@ -4801,7 +4813,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://filmhuiscavia.nl/programma/november-2026#lesvia">Details and tickets for Lesvia + Mr. Dimitris and Mrs. Dimitroula<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-bimhuis-marike-van-dijk" data-end="2026-11-20">
       <article>
         <h2>Marike van Dijk: Thús (BIMHUIS commission 2026)</h2>
         <p class="meta">Music</p>
@@ -4815,7 +4827,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.bimhuis.nl/agenda/marike-van-dijk-thus/">Details and tickets for Marike van Dijk: Thús (BIMHUIS commission 2026)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-motief-van-gendt-hallen" data-end="2026-11-21">
       <article>
         <h2>Pop-up restaurant at the Van Gendt Hallen</h2>
         <p class="meta">Food</p>
@@ -4829,7 +4841,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://oostenburg.nl/actueel/pop-up-restaurant-opent-zes-weekenden-in-de-van-gendt-hallen/">Details and tickets for Pop-up restaurant at the Van Gendt Hallen<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-beaujolais-stretch-fold" data-end="2026-11-20">
       <article>
         <h2>Beaujolais Nouveau &amp; Beats</h2>
         <p class="meta">Drink · Food · Music</p>
@@ -4843,7 +4855,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.stretchandfold.nl/events/beaujolais-nouveau-beats-2026">Details and tickets for Beaujolais Nouveau &amp; Beats<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-posthoornkerk-vintage-fair" data-end="2026-11-22">
       <article>
         <h2>Vintage, Brocante, Antiques, Art &amp; Design Fair</h2>
         <p class="meta">Markets · Fashion &amp; Vintage · Art &amp; Design</p>
@@ -4857,7 +4869,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://stadsherstel.nl/cultuuragenda/vintage-brocante-antiek-kunst-design-2/">Details and tickets for Vintage, Brocante, Antiques, Art &amp; Design Fair<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-parnassus212-valentine-abstraction" data-end="2026-11-22">
       <article>
         <h2>Valentine: Working Title (Abstraction)</h2>
         <p class="meta">Art &amp; Design</p>
@@ -4871,7 +4883,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://parnassus212.nl/">Details and tickets for Valentine: Working Title (Abstraction)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-12-20">
+    <li id="e-dehallen-holiday-gift-shop" data-end="2026-12-20">
       <article>
         <h2>The Creative Lab — Holiday Gift Shop</h2>
         <p class="meta">Pop-up Shops · Christmas Markets · Fashion &amp; Vintage</p>
@@ -4885,7 +4897,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.dehallen-amsterdam.nl/agenda/the-creative-lab---holiday-gift-shop">Details and tickets for The Creative Lab — Holiday Gift Shop<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-hartwig-dustan-talk" data-end="2026-11-20">
       <article>
         <h2>Dédramatison la Vi Quotidièn — talk on the films of Guillaume Dustan</h2>
         <p class="meta">Film · Art &amp; Design</p>
@@ -4899,7 +4911,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/dedramatisation-la-vi-quotdien-the-films-and-work-of-guillaume-dustan">Details and tickets for Dédramatison la Vi Quotidièn — talk on the films of Guillaume Dustan<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-crazyjuuls-live-nude-painting" data-end="2026-11-20">
       <article>
         <h2>Live Nude Painting Session by Crazyjuuls</h2>
         <p class="meta">Workshops · Art &amp; Design</p>
@@ -4913,7 +4925,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://tg-spaces.com/events/painting-workshop">Details and tickets for Live Nude Painting Session by Crazyjuuls<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-meervaart-adrenaline-ruggeds" data-end="2026-11-20">
       <article>
         <h2>The Ruggeds: Adrenaline</h2>
         <p class="meta">Theatre &amp; Dance</p>
@@ -4927,7 +4939,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://meervaart.nl/agenda/adrenaline">Details and tickets for The Ruggeds: Adrenaline<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-meervaart-studio-djitt" data-end="2026-11-20">
       <article>
         <h2>Meervaart Studio Live Sessions: Djitt &amp; live band</h2>
         <p class="meta">Music</p>
@@ -4941,7 +4953,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://meervaart.nl/agenda/meervaart-studio-live-sessions-djitt">Details and tickets for Meervaart Studio Live Sessions: Djitt &amp; live band<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-boom-josh-thomas" data-end="2026-11-20">
       <article>
         <h2>Josh Thomas: Jiggle, Jiggle</h2>
         <p class="meta">Comedy</p>
@@ -4955,7 +4967,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://boomchicago.nl/shows/josh-thomas/">Details and tickets for Josh Thomas: Jiggle, Jiggle<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-vrijdagmarkt-minervaplein" data-end="2026-11-20">
       <article>
         <h2>Friday market on Minervaplein</h2>
         <p class="meta">Markets · Food · Regular</p>
@@ -4969,7 +4981,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.iamsterdam.com/uit/agenda/winkelen/markten/minervamarkt">Details and tickets for Friday market on Minervaplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-the-hand-john-lobb-sciamat" data-end="2026-11-21">
       <article>
         <h2>John Lobb By Request + Sciamat at The Hand</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -4983,7 +4995,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://meetthehand.com/pages/john-lobb-event-amsterdam">Details and tickets for John Lobb By Request + Sciamat at The Hand<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-richel-nilgun-yerli" data-end="2026-11-20">
       <article>
         <h2>Nilgün Yerli: Weet je het zeker?</h2>
         <p class="meta">Comedy · Theatre &amp; Dance</p>
@@ -4997,7 +5009,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://theaterderichel.nl/evenementen/nilgun-yerli-weet-je-het-zeker/">Details and tickets for Nilgün Yerli: Weet je het zeker?<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-20">
+    <li id="e-beest-open-avond" data-end="2026-11-20">
       <article>
         <h2>Open Avond at Beest Boulders Amsterdam</h2>
         <p class="meta">Sport · Workshops</p>
@@ -5011,7 +5023,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://beestboulders.com/open-evening/">Details and tickets for Open Avond at Beest Boulders Amsterdam<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-hazenstraat-gallery-brunch" data-end="2026-11-21">
       <article>
         <h2>Brunch at the Hazenstraat Galleries</h2>
         <p class="meta">Art &amp; Design · Food</p>
@@ -5025,7 +5037,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/brunch-at-the-hazenstraat-galleries/">Details and tickets for Brunch at the Hazenstraat Galleries<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-occii-12fu-allarme" data-end="2026-11-21">
       <article>
         <h2>12FU presents: Allarme + All Male Videoshop + Prom Vagabonds</h2>
         <p class="meta">Music · Nightlife</p>
@@ -5039,7 +5051,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://occii.org/events/12fu-allarme/">Details and tickets for 12FU presents: Allarme + All Male Videoshop + Prom Vagabonds<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-mezrab-alt-comedy" data-end="2026-11-21">
       <article>
         <h2>The ALT Mezrab Comedy Night</h2>
         <p class="meta">Comedy</p>
@@ -5053,7 +5065,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://mezrab.nl/events/the-alt-mezrab-comedy-night-30/">Details and tickets for The ALT Mezrab Comedy Night<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-bimhuis-cissoko-brotto" data-end="2026-11-21">
       <article>
         <h2>Ablaye Cissoko &amp; Cyrille Brotto</h2>
         <p class="meta">Music</p>
@@ -5067,7 +5079,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.bimhuis.nl/agenda/ablaye-cissoko-cyrille-brotto/">Details and tickets for Ablaye Cissoko &amp; Cyrille Brotto<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-23">
+    <li id="e-beaumont-popup-1121" data-end="2026-11-23">
       <article>
         <h2>Beaumont Amsterdam — first pop-up store</h2>
         <p class="meta">Fashion &amp; Vintage · Pop-up Shops</p>
@@ -5081,7 +5093,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.linkedin.com/posts/beaumont-amsterdam_were-excited-to-announce-that-beaumont-amsterdam-activity-7524191088916545536-UzYR">Details and tickets for Beaumont Amsterdam — first pop-up store<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-yvette-van-boven-signing-scheltema" data-end="2026-11-21">
       <article>
         <h2>Yvette van Boven signs Greens &amp; Beans</h2>
         <p class="meta">Food</p>
@@ -5095,7 +5107,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://athenaeumscheltema.nl/agenda-scheltema/signeersessie-yvette-van-boven-greens-beans">Details and tickets for Yvette van Boven signs Greens &amp; Beans<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-dikkie-dik-athenaeum-zuidoost" data-end="2026-11-21">
       <article>
         <h2>Dikkie Dik visits Athenaeum Zuidoost</h2>
         <p class="meta">Kids &amp; Family</p>
@@ -5109,7 +5121,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://athenaeumscheltema.nl/agenda/dikkie-dik-op-bezoek">Details and tickets for Dikkie Dik visits Athenaeum Zuidoost<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-vleck-20-anniversary" data-end="2026-11-21">
       <article>
         <h2>Vleck Wijnen 20th anniversary wine festival</h2>
         <p class="meta">Drink</p>
@@ -5123,7 +5135,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://vleck.nl/speciale-proeverij/">Details and tickets for Vleck Wijnen 20th anniversary wine festival<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-broth-stretch-fold" data-end="2026-11-21">
       <article>
         <h2>BROTH: Korean Kitchen Takeover</h2>
         <p class="meta">Food</p>
@@ -5137,7 +5149,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.stretchandfold.nl/events/broth-korean-kitchen-takeover">Details and tickets for BROTH: Korean Kitchen Takeover<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-raam-bird-calls" data-end="2026-11-21">
       <article>
         <h2>World Championship Bird Calls &amp; Songs</h2>
         <p class="meta">Art &amp; Design</p>
@@ -5151,7 +5163,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.raamartspace.com/events/wereldkampioenschap-vogelgeluiden-herkennen">Details and tickets for World Championship Bird Calls &amp; Songs<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-popprijs-finale" data-end="2026-11-21">
       <article>
         <h2>Finale Amsterdamse Popprijs 2026</h2>
         <p class="meta">Music</p>
@@ -5165,7 +5177,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.melkweg.nl/nl/agenda/finale-amsterdamse-popprijs-2026-21-11-2026/">Details and tickets for Finale Amsterdamse Popprijs 2026<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-idfa-dance-night" data-end="2026-11-21">
       <article>
         <h2>IDFA Dance Night</h2>
         <p class="meta">Nightlife · Music · Film</p>
@@ -5179,7 +5191,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://festival.idfa.nl/en/composition/de7ad047-9e31-4e58-aa1f-3d37ec3680c3/idfa-dance-night/">Details and tickets for IDFA Dance Night<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-dehallen-speel-deel-ruil" data-end="2026-11-22">
       <article>
         <h2>Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap</h2>
         <p class="meta">Kids &amp; Family · Markets · Workshops · Fashion &amp; Vintage</p>
@@ -5193,7 +5205,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://motherhood.amsterdam/speel-deel/amsterdam-november-swap-2026">Details and tickets for Play, Share, Swap &amp; Recycle: toy and kids&#39; clothes swap<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-hartwig-cellar-series-ity" data-end="2026-11-21">
       <article>
         <h2>Cellar Series 8 — Imaginarium: ity (record launch)</h2>
         <p class="meta">Music</p>
@@ -5207,7 +5219,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hartwigproxy.nl/programme/imaginarium">Details and tickets for Cellar Series 8 — Imaginarium: ity (record launch)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-galerie-poche-fabric-of-play-opening" data-end="2026-11-21">
       <article>
         <h2>Opening: Fabric of Play — ZOUBIDA (Sophia Kacimi) at Galerie Poche</h2>
         <p class="meta">Art &amp; Design</p>
@@ -5221,7 +5233,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://galeriepoche.nl/events">Details and tickets for Opening: Fabric of Play — ZOUBIDA (Sophia Kacimi) at Galerie Poche<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-hoff-soumsoum-uitkijk" data-end="2026-11-21">
       <article>
         <h2>HoFF: Soumsoum, The Night of the Stars (Mahamat-Saleh Haroun)</h2>
         <p class="meta">Film</p>
@@ -5235,7 +5247,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.uitkijk.nl/film/ho-ff-soumsoum-the-night-of-the-stars-2026">Details and tickets for HoFF: Soumsoum, The Night of the Stars (Mahamat-Saleh Haroun)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-zuidermrkt-21-nov" data-end="2026-11-21">
       <article>
         <h2>Zuidermrkt</h2>
         <p class="meta">Markets · Food · Regular</p>
@@ -5249,7 +5261,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.zuidermrkt.nl/">Details and tickets for Zuidermrkt<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-felix-bon-bini-na-mi-sono" data-end="2026-11-21">
       <article>
         <h2>Bon biní na mi soño — Juny Martina</h2>
         <p class="meta">Music · Art &amp; Design · Film · Theatre &amp; Dance · Nightlife</p>
@@ -5263,7 +5275,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://felixmeritis.nl/programma/bon-bini-na-mi-sono/">Details and tickets for Bon biní na mi soño — Juny Martina<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-badhuis-room-number-three" data-end="2026-11-21">
       <article>
         <h2>Noordhaus: Room Number Three + Private View</h2>
         <p class="meta">Theatre &amp; Dance</p>
@@ -5277,7 +5289,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.badhuistheater.nl/events/room-number-three-private-view/">Details and tickets for Noordhaus: Room Number Three + Private View<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-amstel1-schoentje-zetten" data-end="2026-11-22">
       <article>
         <h2>Put out your shoe for Sinterklaas at Amstel1</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Workshops</p>
@@ -5291,7 +5303,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amstel1.nl/agenda/schoentje-zetten-21-22-november-amstel-1/">Details and tickets for Put out your shoe for Sinterklaas at Amstel1<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-gelderland-sint-piet" data-end="2026-11-22">
       <article>
         <h2>Sint &amp; Piet at Gelderlandplein</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Music</p>
@@ -5305,7 +5317,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.gelderlandplein.nl/winkelcentrum/nieuws-evenementen/sint-piet-op-gelderlandplein/">Details and tickets for Sint &amp; Piet at Gelderlandplein<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-alo-runners-club" data-end="2026-11-21">
       <article>
         <h2>ALO Runners Club — 6K from PC Hooftstraat</h2>
         <p class="meta">Sport · Active &amp; Outdoor</p>
@@ -5319,7 +5331,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/wm2jftwp">Details and tickets for ALO Runners Club — 6K from PC Hooftstraat<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-trailrunclinic-bos" data-end="2026-11-21">
       <article>
         <h2>Trailrunclinic with Hardlopen Amsterdam</h2>
         <p class="meta">Sport · Active &amp; Outdoor · Workshops</p>
@@ -5333,7 +5345,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://hardlopenamsterdam.nl/nl/trailrunclinic">Details and tickets for Trailrunclinic with Hardlopen Amsterdam<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-bandeja-ndsm-padel" data-end="2026-11-21">
       <article>
         <h2>Bandeja Padel Tournament at NDSM Padel</h2>
         <p class="meta">Sport</p>
@@ -5347,7 +5359,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://padelspijkers.nl/en/product/tournament-ndsm-padel-amsterdam-21-november/">Details and tickets for Bandeja Padel Tournament at NDSM Padel<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-21">
+    <li id="e-eaa-bouldering-universum" data-end="2026-11-21">
       <article>
         <h2>EAA Bouldering at USC Universum</h2>
         <p class="meta">Sport</p>
@@ -5361,7 +5373,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/q8f6aiq7">Details and tickets for EAA Bouldering at USC Universum<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-cbk-zuidoost-family-day" data-end="2026-11-22">
       <article>
         <h2>Family Day + closing of Cahaya Maluku at CBK Zuidoost</h2>
         <p class="meta">Kids &amp; Family · Art &amp; Design · Workshops</p>
@@ -5375,7 +5387,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/familiedag/">Details and tickets for Family Day + closing of Cahaya Maluku at CBK Zuidoost<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-treehouse-kids-tour-glerum" data-end="2026-11-22">
       <article>
         <h2>Kids tour with artist Quintus Glerum at Treehouse NDSM</h2>
         <p class="meta">Kids &amp; Family · Art &amp; Design · Workshops</p>
@@ -5389,7 +5401,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/live-radio-show-artist-talk-quintus-glerumtreehouse-ndsm/">Details and tickets for Kids tour with artist Quintus Glerum at Treehouse NDSM<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-mezrab-orchestre-partout" data-end="2026-11-22">
       <article>
         <h2>Orchestre Partout Jam</h2>
         <p class="meta">Music</p>
@@ -5403,7 +5415,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://mezrab.nl/events/orchestre-partout-jam-6/">Details and tickets for Orchestre Partout Jam<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-bimhuis-yad-oud" data-end="2026-11-22">
       <article>
         <h2>YAD Oud &amp; Amsterdams Andalusisch Orkest</h2>
         <p class="meta">Music</p>
@@ -5417,7 +5429,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.bimhuis.nl/agenda/yad-oud-amsterdams-andalusisch-orkest/">Details and tickets for YAD Oud &amp; Amsterdams Andalusisch Orkest<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-kalhor-westerkerk" data-end="2026-11-22">
       <article>
         <h2>Kayhan Kalhor &amp; Ensemble at the Westerkerk</h2>
         <p class="meta">Music</p>
@@ -5431,7 +5443,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.eventbrite.com.au/e/tickets-kayhan-kalhor-ensemble-live-in-amsterdam-2003405766578">Details and tickets for Kayhan Kalhor &amp; Ensemble at the Westerkerk<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-stadsarchief-ten-kon-dray" data-end="2026-11-22">
       <article>
         <h2>Ten Kon Dray: De tijden zijn veranderd</h2>
         <p class="meta">Art &amp; Design · Music · Film</p>
@@ -5445,7 +5457,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.amsterdam.nl/stadsarchief/agenda/ten-dray-tijden-veranderd/">Details and tickets for Ten Kon Dray: De tijden zijn veranderd<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-stadsarchief-tekenworkshop-stadsportret" data-end="2026-11-22">
       <article>
         <h2>Drawing workshop: Het stadsportret</h2>
         <p class="meta">Workshops · Art &amp; Design</p>
@@ -5459,7 +5471,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.amsterdam.nl/stadsarchief/agenda/meesterwerk-amsterdam/tekenworkshops/">Details and tickets for Drawing workshop: Het stadsportret<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-wereldmuseum-feest-sinterklaas" data-end="2026-11-22">
       <article>
         <h2>Feest op zondag: Sinterklaas at Wereldmuseum</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Workshops · Regular</p>
@@ -5473,7 +5485,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdam.wereldmuseum.nl/nl/zien-en-doen/activiteiten/sinterklaas">Details and tickets for Feest op zondag: Sinterklaas at Wereldmuseum<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-super-sonic-jazz-sun" data-end="2026-11-22">
       <article>
         <h2>Super-Sonic Jazz Festival — Sunday</h2>
         <p class="meta">Music</p>
@@ -5487,7 +5499,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.paradiso.nl/en/program/super-sonic-jazz-festival-sunday/2907947">Details and tickets for Super-Sonic Jazz Festival — Sunday<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-pure-markt-markthal" data-end="2026-11-22">
       <article>
         <h2>Pure Markt — Centrale Markthal edition</h2>
         <p class="meta">Markets · Food · Drink</p>
@@ -5501,7 +5513,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://puremarkt.nl/locaties/centrale-markthallen/">Details and tickets for Pure Markt — Centrale Markthal edition<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-sunday-market-oostenburg" data-end="2026-11-22">
       <article>
         <h2>Sunday Market Oostenburg — winter edition</h2>
         <p class="meta">Christmas Markets · Markets · Food</p>
@@ -5515,7 +5527,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.sundaymarket.nl/markt/sunday-market-oostenburg-2026-11-22/">Details and tickets for Sunday Market Oostenburg — winter edition<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-swap-club-millesime" data-end="2026-11-22">
       <article>
         <h2>Vintage Clothing Swap — The Swap Club x Millesime</h2>
         <p class="meta">Fashion &amp; Vintage</p>
@@ -5529,7 +5541,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://luma.com/fyduzib8">Details and tickets for Vintage Clothing Swap — The Swap Club x Millesime<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-kids-buy-art-gwen-park" data-end="2026-11-22">
       <article>
         <h2>Kids Buy Art — Family Sunday at Gwen Park</h2>
         <p class="meta">Kids &amp; Family · Art &amp; Design</p>
@@ -5543,7 +5555,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://amsterdamart.com/en/programme/family-sunday-tour-kids-buy-art/">Details and tickets for Kids Buy Art — Family Sunday at Gwen Park<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-oorkaan-vijf" data-end="2026-11-22">
       <article>
         <h2>Vijf! (5+) — Oorkaan Ensemble</h2>
         <p class="meta">Kids &amp; Family · Music</p>
@@ -5557,7 +5569,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.muziekgebouw.nl/nl/agenda/vijf-5-qvhx">Details and tickets for Vijf! (5+) — Oorkaan Ensemble<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-qru-rommelmarkt-last" data-end="2026-11-22">
       <article>
         <h2>QRU flea market: last one of 2026</h2>
         <p class="meta">Markets · Fashion &amp; Vintage · Music · Regular</p>
@@ -5571,7 +5583,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://qru.amsterdam/events/rommelmarkt-zondag-22-november-de-laatste-van-het-jaar/">Details and tickets for QRU flea market: last one of 2026<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-lab111-hoff-paradise" data-end="2026-11-22">
       <article>
         <h2>HoFF: Paradise (Jérémy Comte, 2026)</h2>
         <p class="meta">Film</p>
@@ -5585,7 +5597,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.lab111.nl/movie/hoff-paradise-2026/">Details and tickets for HoFF: Paradise (Jérémy Comte, 2026)<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-atay-stories-pastilla" data-end="2026-11-22">
       <article>
         <h2>Atay Stories: Morocco told through tea</h2>
         <p class="meta">Drink · Theatre &amp; Dance · Music</p>
@@ -5599,7 +5611,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://www.frascatitheater.nl/nl/agenda/atay-stories-x5vt">Details and tickets for Atay Stories: Morocco told through tea<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-22">
+    <li id="e-boventy-sint-pietenband" data-end="2026-11-22">
       <article>
         <h2>Sinterklaas and the Pietenband at Boven &#39;t Y</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family · Music</p>
@@ -5613,7 +5625,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         <p><a href="https://boventy.nl/evenementen/bezoek-sint-pietenband/">Details and tickets for Sinterklaas and the Pietenband at Boven &#39;t Y<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
-    <li data-end="2026-11-28">
+    <li id="e-sint-op-solder-tour" data-end="2026-11-28">
       <article>
         <h2>Ontdek Sint op Solder: theatrical Sinterklaas tour</h2>
         <p class="meta">Sinterklaas · Kids &amp; Family</p>
