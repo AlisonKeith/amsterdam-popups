@@ -983,7 +983,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [Interactive guide](${SITE}/): map, category and day filters, English/Dutch toggle, archive
 - Dutch versions: [interactive guide](${SITE}/nl/), [plain list](${SITE}/nl/deze-week.html), and each category page below under /nl/
 - [Christmas pop-ups and events in Amsterdam](${SITE}/christmas/): season-long list of short-run Christmas markets, winter terraces, workshops and light-festival walks (Dutch: [Kerst pop-ups en evenementen in Amsterdam](${SITE}/nl/kerst/))
-- [New Year's Eve pop-ups and events in Amsterdam](${SITE}/new-years-eve/): season-long list of short-run New Year's Eve and New Year's Day pop-ups and one-off events (Dutch: [Pop-ups en evenementen voor oud en nieuw in Amsterdam](${SITE}/nl/oud-en-nieuw/))
+- [New Year's Eve pop-ups and events in Amsterdam](${SITE}/new-years-eve/): New Year's Eve and New Year's Day pop-ups, one-off parties, club nights, special dinners and free fireworks shows (Dutch: [Oud en nieuw pop-ups en evenementen in Amsterdam](${SITE}/nl/oud-en-nieuw/))
 
 ## This week by category
 
