@@ -123,6 +123,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .leaflet-container{font-family:inherit;background:#e8e4dc}
 .leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
 .leaflet-popup-content b{font-size:13.5px}
+.pop-item{cursor:pointer}
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
 .leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
 .leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
@@ -467,7 +468,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <section class="season-map" aria-labelledby="map-h">
     <h2 id="map-h">Kaart van de events</h2>
     <div id="map" role="region" aria-label="Kaart met de locaties van de events op deze pagina"></div>
-    <script type="application/json" id="map-events">[{"id":"amstel1-schoentje-zetten","name":"Put out your shoe for Sinterklaas at Amstel1","lat":52.3677,"lng":4.9002,"when":"za 21 & zo 22 nov","time":"13:00–16:00","addr":"De Lichtstraat, Amstel1, Waterlooplein 4C, Amsterdam"},{"id":"gelderland-sint-piet","name":"Sint & Piet at Gelderlandplein","lat":52.3337,"lng":4.8795,"when":"za 21 & zo 22 nov","time":"12:30–16:30","addr":"Winkelcentrum Gelderlandplein, Van Leijenberghlaan 43, Amsterdam"},{"id":"wereldmuseum-feest-sinterklaas","name":"Feest op zondag: Sinterklaas at Wereldmuseum","lat":52.3627,"lng":4.9224,"when":"zo 22 nov (ook 29 nov en 6 dec)","time":"12:00–16:00 (inloop tot 15:30)","addr":"Feestwinkel, Wereldmuseum Amsterdam, Linnaeusstraat 2, Amsterdam"},{"id":"boventy-sint-pietenband","name":"Sinterklaas and the Pietenband at Boven 't Y","lat":52.3989,"lng":4.9386,"when":"zo 22 nov","time":"12:30–16:00","addr":"Winkelcentrum Boven 't Y, Buikslotermeerplein 229, Amsterdam"},{"id":"sint-op-solder-tour","name":"Ontdek Sint op Solder: theatrical Sinterklaas tour","lat":52.3747,"lng":4.8999,"when":"wo 25 & za 28 nov","time":"wo 15:30; za 11:00 & 13:00 (ca. 1,5 uur)","addr":"Museum Ons' Lieve Heer op Solder, Oudezijds Voorburgwal 38, Amsterdam"}]</script>
+    <script type="application/json" id="map-events">[{"id":"amstel1-schoentje-zetten","name":"Put out your shoe for Sinterklaas at Amstel1","lat":52.3677,"lng":4.9002,"url":"https://amstel1.nl/agenda/schoentje-zetten-21-22-november-amstel-1/","when":"za 21 & zo 22 nov","time":"13:00–16:00","addr":"De Lichtstraat, Amstel1, Waterlooplein 4C, Amsterdam"},{"id":"gelderland-sint-piet","name":"Sint & Piet at Gelderlandplein","lat":52.3337,"lng":4.8795,"url":"https://www.gelderlandplein.nl/winkelcentrum/nieuws-evenementen/sint-piet-op-gelderlandplein/","when":"za 21 & zo 22 nov","time":"12:30–16:30","addr":"Winkelcentrum Gelderlandplein, Van Leijenberghlaan 43, Amsterdam"},{"id":"wereldmuseum-feest-sinterklaas","name":"Feest op zondag: Sinterklaas at Wereldmuseum","lat":52.3627,"lng":4.9224,"url":"https://amsterdam.wereldmuseum.nl/nl/zien-en-doen/activiteiten/sinterklaas","when":"zo 22 nov (ook 29 nov en 6 dec)","time":"12:00–16:00 (inloop tot 15:30)","addr":"Feestwinkel, Wereldmuseum Amsterdam, Linnaeusstraat 2, Amsterdam"},{"id":"boventy-sint-pietenband","name":"Sinterklaas and the Pietenband at Boven 't Y","lat":52.3989,"lng":4.9386,"url":"https://boventy.nl/evenementen/bezoek-sint-pietenband/","when":"zo 22 nov","time":"12:30–16:00","addr":"Winkelcentrum Boven 't Y, Buikslotermeerplein 229, Amsterdam"},{"id":"sint-op-solder-tour","name":"Ontdek Sint op Solder: theatrical Sinterklaas tour","lat":52.3747,"lng":4.8999,"url":"https://opsolder.nl/ontdek-sint-op-solder-2026/","when":"wo 25 & za 28 nov","time":"wo 15:30; za 11:00 & 13:00 (ca. 1,5 uur)","addr":"Museum Ons' Lieve Heer op Solder, Oudezijds Voorburgwal 38, Amsterdam"}]</script>
   </section>
   <script>
 (function(){
@@ -525,6 +526,11 @@ function initSeasonMap(){
   });
   var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
   var layer = L.layerGroup().addTo(map);
+  document.addEventListener("click", function(e){
+    var it = e.target.closest(".leaflet-popup .pop-item");
+    if(!it || e.target.closest("a,button")) return;
+    window.open(it.getAttribute("data-href"), "_blank", "noopener");
+  });
   function draw(list){
     layer.clearLayers();
     var groups = {};
@@ -538,7 +544,7 @@ function initSeasonMap(){
       var ev = group[0];
       var html = group.map(function(e){
         var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
-        return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+        return "<div class=\"pop-item\" data-href=\"" + escapeHtml(e.url) + "\"><b><a href=\"" + escapeHtml(e.url) + "\" target=\"_blank\" rel=\"noopener\">" + escapeHtml(e.name) + " \u2197</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "") + "</div>";
       }).join("<hr>");
       L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(layer);
     });

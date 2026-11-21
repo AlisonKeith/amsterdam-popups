@@ -349,6 +349,7 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .leaflet-container{font-family:inherit;background:#e8e4dc}
 .leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
 .leaflet-popup-content b{font-size:13.5px}
+.pop-item{cursor:pointer}
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
 .leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
 .leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
@@ -571,7 +572,7 @@ function mapSection(L, events){
   const label = L === "nl" ? "Kaart met de locaties van de events op deze pagina" : "Map of the event locations on this page";
   const data = JSON.stringify(mappable.map(e => {
     const row = {
-      id:e.id, name:e.name, lat:e.lat, lng:e.lng,
+      id:e.id, name:e.name, lat:e.lat, lng:e.lng, url:e.url,
       when:e.when[L], time:(e.time && e.time[L]) || "", addr:e.addr[L]
     };
     if(Array.isArray(e.nyeTags) && e.nyeTags.length) row.nyeTags = e.nyeTags;
@@ -646,6 +647,11 @@ function initSeasonMap(){
   });
   var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
   var layer = L.layerGroup().addTo(map);
+  document.addEventListener("click", function(e){
+    var it = e.target.closest(".leaflet-popup .pop-item");
+    if(!it || e.target.closest("a,button")) return;
+    window.open(it.getAttribute("data-href"), "_blank", "noopener");
+  });
   function draw(list){
     layer.clearLayers();
     var groups = {};
@@ -659,7 +665,7 @@ function initSeasonMap(){
       var ev = group[0];
       var html = group.map(function(e){
         var when = escapeHtml(e.when) + (e.time ? " \\u00b7 " + escapeHtml(e.time) : "");
-        return "<b><a href=\\"#e-" + escapeHtml(e.id) + "\\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+        return "<div class=\\"pop-item\\" data-href=\\"" + escapeHtml(e.url) + "\\"><b><a href=\\"" + escapeHtml(e.url) + "\\" target=\\"_blank\\" rel=\\"noopener\\">" + escapeHtml(e.name) + " \\u2197</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "") + "</div>";
       }).join("<hr>");
       L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(layer);
     });

@@ -260,6 +260,7 @@ main{padding:18px 0 40px}
 .leaflet-control-attribution a{color:var(--red-text)!important}
 .pop-cat{font-size:11px; font-weight:500; padding:2px 7px; border-radius:999px; display:inline-flex; align-items:center; gap:4px; margin-bottom:5px}
 .pop-link{color:var(--red-text); font-weight:500; text-decoration:none}
+.pop-item{cursor:pointer}
 
 /* ---- cards ---- */
 .cards{display:flex; flex-direction:column; gap:11px}
@@ -5788,6 +5789,12 @@ function mapChooserKey(e){
     closeMapChooser(true);
   }
 }
+/* whole map card opens the organiser page; links and buttons inside keep their own action */
+document.addEventListener("click", e => {
+  const it = e.target.closest(".leaflet-popup .pop-item");
+  if(!it || e.target.closest("a,button")) return;
+  window.open(it.dataset.href, "_blank", "noopener");
+});
 function renderMap(list){
   markerLayer.clearLayers(); markers = {};
   const pts = [];
@@ -5815,14 +5822,14 @@ function renderMap(list){
       const items = group.map(e => {
         const ec = catBy[e.cats[0]];
         const ep = `<span class="pop-cat" style="background:${tintBg(ec.hex)};color:${darkText(ec.hex)}">${catLabelHtml(ec)}</span>`;
-        return `${ep} <b>${e.name}</b><br>${eventWhenLine(e)}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+        return `<div class="pop-item" data-href="${e.url}">${ep} <b>${e.name}</b><br>${eventWhenLine(e)}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
       }).join("<hr style='margin:6px 0;border-color:#eee'>");
       popupHtml = `${mapsButton(ev)}<br>${ev.hood[lang]}<br><br>${items}`;
     } else if(count === 1) {
-      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
     } else {
       // Stacked markers below first — bind same popup as first
-      popupHtml = `${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a>`;
+      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
     }
     m.bindPopup(popupHtml);
     markers[ev.id] = m;
