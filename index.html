@@ -201,9 +201,17 @@ header{padding:18px 0 0}
 /* ---- nav ---- */
 nav.tabs{position:sticky; top:0; z-index:1200; background:var(--page); border-bottom:1px solid var(--line); margin-top:14px}
 nav.tabs .wrap{display:flex; gap:22px; overflow-x:auto; scrollbar-width:none}
-.tab{appearance:none; border:0; background:transparent; cursor:pointer; font-family:inherit; font-size:14px; color:var(--muted); text-decoration:none; padding:13px 0; border-bottom:2px solid transparent; margin-bottom:-1px; display:flex; align-items:center; gap:6px}
+.tab{appearance:none; border:0; background:transparent; cursor:pointer; font-family:inherit; font-size:14px; color:var(--muted); text-decoration:none; padding:13px 0; border-bottom:2px solid transparent; margin-bottom:-1px; display:flex; align-items:center; gap:6px; white-space:nowrap}
 .tab.on{color:var(--red-text); border-bottom-color:var(--red-text); font-weight:500}
 .tab i{font-style:normal}
+.nav-drop{position:relative; flex:none}
+.nav-drop>summary{list-style:none}
+.nav-drop>summary::-webkit-details-marker{display:none}
+.nav-drop>summary::after{content:""; width:5px; height:5px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg); margin-top:-3px}
+.nav-drop[open]>summary{color:var(--red-text); border-bottom-color:var(--red-text); font-weight:500}
+.nav-drop-list{position:absolute; top:100%; left:0; z-index:1300; margin:0; padding:6px 0; list-style:none; min-width:12.5rem; background:var(--page); border:1px solid var(--line)}
+.nav-drop-list a{display:block; padding:8px 14px; color:var(--ink); text-decoration:none; white-space:nowrap; font-size:14px}
+.nav-drop-list a:hover,.nav-drop-list a[aria-current="page"]{color:var(--red-text)}
 
 main{padding:18px 0 40px}
 .view{display:none} .view.on{display:block}
@@ -452,6 +460,14 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     <button class="tab on" data-view="thisweek" onclick="switchView('thisweek')"><span data-i18n="thisweek">This week</span></button>
     <button class="tab" data-view="archive" onclick="switchView('archive')"><span data-i18n="archive">Archive</span></button>
     <button class="tab" data-view="tip" onclick="switchView('tip')"><span data-i18n="tip">Know a pop-up?</span></button>
+    <details class="nav-drop">
+      <summary class="tab" aria-expanded="false"><span data-i18n="holidays">Holidays</span></summary>
+      <ul class="nav-drop-list">
+        <li><a href="/sinterklaas/" data-href-en="/sinterklaas/" data-href-nl="/nl/sinterklaas/" data-txt-en="Sinterklaas" data-txt-nl="Sinterklaas">Sinterklaas</a></li>
+        <li><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas" data-txt-nl="Kerst">Christmas</a></li>
+        <li><a href="/new-years-eve/" data-href-en="/new-years-eve/" data-href-nl="/nl/oud-en-nieuw/" data-txt-en="New Year's Eve" data-txt-nl="Oud en nieuw">New Year's Eve</a></li>
+      </ul>
+    </details>
     <a class="tab" href="/about/" data-href-en="/about/" data-href-nl="/nl/over/"><span data-i18n="about">About</span></a>
     <a class="tab" href="privacy.html"><span data-i18n="privacy">Privacy</span></a>
   </div>
@@ -5507,7 +5523,7 @@ const EVENTS = [
 ];
 
 const I18N = {
-  en:{ thisweek:"This week", thisweekH1:"Things to do in Amsterdam this week", pageTitle:"Things to do in Amsterdam this week · Amsterdam Pop-ups", pageDesc:"A weekly guide to pop-ups and one-off events in Amsterdam this week, plus last-minute ideas for days out: markets, food, art, family days, comedy and live music, with a map and organiser links.", shareAlt:"Amsterdam Pop-ups — Amsterdam's pop-up restaurants, shops, one-off events and shows", archive:"Archive", tip:"Know a pop-up?", about:"About",
+  en:{ thisweek:"This week", thisweekH1:"Things to do in Amsterdam this week", pageTitle:"Things to do in Amsterdam this week · Amsterdam Pop-ups", pageDesc:"A weekly guide to pop-ups and one-off events in Amsterdam this week, plus last-minute ideas for days out: markets, food, art, family days, comedy and live music, with a map and organiser links.", shareAlt:"Amsterdam Pop-ups — Amsterdam's pop-up restaurants, shops, one-off events and shows", archive:"Archive", tip:"Know a pop-up?", about:"About", holidays:"Holidays",
     all:"All", dAll:"All week", dWeekend:"Weekend", dToday:"Today", rAll:"All", rOneoff:"One-offs", rRegular:"Regular", rAria:"Filter by one-off or regular events", tipQ:"Know a pop-up we've missed — or running one yourself?", tipCta:"Know a pop-up?",
     tagline:"Amsterdam's pop-up restaurants, shops, one-off events and shows",
     searchPh:"Search past pop-ups, places, neighbourhoods",
@@ -5533,7 +5549,7 @@ const I18N = {
     listenStart:"Listen", listenStop:"Stop listening",
     mapsAria:(place)=>`Open in maps: ${place}`,
     mapsApple:"Apple Maps", mapsGoogle:"Google Maps", mapsWaze:"Waze", mapsOsm:"OpenStreetMap" },
-  nl:{ thisweek:"Deze week", thisweekH1:"Wat te doen in Amsterdam deze week", pageTitle:"Wat te doen in Amsterdam deze week · Amsterdam Pop-ups", pageDesc:"Wekelijkse gids voor pop-ups en eenmalige events in Amsterdam deze week, plus last-minute ideeën voor een dagje uit: markten, eten, kunst, gezin, comedy en livemuziek, met kaart en links naar de organisator.", shareAlt:"Amsterdam Pop-ups — Amsterdamse pop-up restaurants, winkels, eenmalige events en voorstellingen", archive:"Archief", tip:"Ken je een pop-up?", about:"Over",
+  nl:{ thisweek:"Deze week", thisweekH1:"Wat te doen in Amsterdam deze week", pageTitle:"Wat te doen in Amsterdam deze week · Amsterdam Pop-ups", pageDesc:"Wekelijkse gids voor pop-ups en eenmalige events in Amsterdam deze week, plus last-minute ideeën voor een dagje uit: markten, eten, kunst, gezin, comedy en livemuziek, met kaart en links naar de organisator.", shareAlt:"Amsterdam Pop-ups — Amsterdamse pop-up restaurants, winkels, eenmalige events en voorstellingen", archive:"Archief", tip:"Ken je een pop-up?", about:"Over", holidays:"Feestdagen",
     all:"Alles", dAll:"Hele week", dWeekend:"Weekend", dToday:"Vandaag", rAll:"Alles", rOneoff:"Eenmalig", rRegular:"Terugkerend", rAria:"Filter op eenmalige of terugkerende evenementen", tipQ:"Ken je een pop-up die we missen — of organiseer je er zelf een?", tipCta:"Ken je een pop-up?",
     tagline:"Amsterdamse pop-up restaurants, winkels, eenmalige events en voorstellingen",
     searchPh:"Zoek eerdere pop-ups, plekken, buurten",
@@ -6034,6 +6050,50 @@ function initListenButton(){
   if("speechSynthesis" in window) btn.hidden = false;
   document.addEventListener("visibilitychange", () => { if(document.hidden) stopSpeech(); });
 }
+function initNavDrop(){
+  const drops = document.querySelectorAll("details.nav-drop");
+  if(!drops.length) return;
+  function sync(d){
+    const s = d.querySelector("summary");
+    if(s) s.setAttribute("aria-expanded", d.open ? "true" : "false");
+    const list = d.querySelector(".nav-drop-list");
+    if(!list) return;
+    if(!d.open){
+      list.style.position = "";
+      list.style.top = "";
+      list.style.left = "";
+      list.style.right = "";
+      return;
+    }
+    const sr = s.getBoundingClientRect();
+    list.style.position = "fixed";
+    list.style.top = Math.round(sr.bottom) + "px";
+    list.style.left = Math.round(sr.left) + "px";
+    list.style.right = "auto";
+    const r = list.getBoundingClientRect();
+    if(r.right > window.innerWidth - 8){
+      list.style.left = Math.max(8, Math.round(window.innerWidth - 8 - r.width)) + "px";
+    }
+  }
+  drops.forEach(d => {
+    sync(d);
+    d.addEventListener("toggle", () => sync(d));
+  });
+  window.addEventListener("scroll", () => drops.forEach(sync), {passive:true});
+  window.addEventListener("resize", () => drops.forEach(sync));
+  document.addEventListener("keydown", e => {
+    if(e.key !== "Escape") return;
+    drops.forEach(d => {
+      if(!d.open) return;
+      d.open = false;
+      const s = d.querySelector("summary");
+      if(s) s.focus();
+    });
+  });
+  document.addEventListener("click", e => {
+    drops.forEach(d => { if(d.open && !d.contains(e.target)) d.open = false; });
+  });
+}
 
 /* ---- views ---- */
 function switchView(name){
@@ -6259,6 +6319,7 @@ injectEventSchema();
 if(location.hash === "#tip" || location.hash === "#archive") switchView(location.hash.slice(1));
 initConsent();
 initListenButton();
+initNavDrop();
 window.addEventListener("resize", () => { if(map) map.invalidateSize(); });
 setTimeout(() => { if(map) map.invalidateSize(); }, 60);
 </script>

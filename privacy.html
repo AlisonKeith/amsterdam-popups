@@ -79,6 +79,14 @@ nav.tabs{position:sticky;top:0;z-index:1200;background:var(--page);border-bottom
 nav.tabs .wrap{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none}
 .tab{appearance:none;border:0;background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--muted);text-decoration:none;padding:13px 0;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:500}
+.nav-drop{position:relative;flex:none}
+.nav-drop>summary{list-style:none}
+.nav-drop>summary::-webkit-details-marker{display:none}
+.nav-drop>summary::after{content:"";width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-top:-3px}
+.nav-drop[open]>summary{color:var(--red);border-bottom-color:var(--red);font-weight:500}
+.nav-drop-list{position:absolute;top:100%;left:0;z-index:1300;margin:0;padding:6px 0;list-style:none;min-width:12.5rem;background:var(--page);border:1px solid var(--line)}
+.nav-drop-list a{display:block;padding:8px 14px;color:var(--ink);text-decoration:none;white-space:nowrap;font-size:14px}
+.nav-drop-list a:hover,.nav-drop-list a[aria-current="page"]{color:var(--red)}
 .back{display:inline-flex;align-items:center;gap:5px;margin:0 0 4px;font-size:13px;color:var(--red);text-decoration:none;font-weight:500}
 main{padding:18px 0 50px}
 h1{font-family:"Archivo Expanded",sans-serif;font-weight:600;font-size:23px;margin:10px 0 4px}
@@ -143,6 +151,14 @@ footer .wrap{padding:16px 18px;font-size:12px;color:var(--faint)}
     <a class="tab" id="tab-thisweek" href="/">This week</a>
     <a class="tab" id="tab-archive" href="/#archive">Archive</a>
     <a class="tab" id="tab-tip" href="/#tip">Know a pop-up?</a>
+    <details class="nav-drop" id="nav-holidays">
+      <summary class="tab" id="tab-holidays" aria-expanded="false">Holidays</summary>
+      <ul class="nav-drop-list">
+        <li><a id="tab-hol-sint" href="/sinterklaas/">Sinterklaas</a></li>
+        <li><a id="tab-hol-xmas" href="/christmas/">Christmas</a></li>
+        <li><a id="tab-hol-nye" href="/new-years-eve/">New Year's Eve</a></li>
+      </ul>
+    </details>
     <a class="tab" id="tab-about" href="/about/">About</a>
     <a class="tab on" id="tab-privacy" href="/privacy.html" aria-current="page">Privacy</a>
   </div>
@@ -231,9 +247,11 @@ const BACK = { en:"Back to Amsterdam Pop-ups", nl:"Terug naar Amsterdam Pop-ups"
 const FOOT = { en:"Amsterdam Pop-ups · independent local guide", nl:"Amsterdam Pop-ups · onafhankelijke lokale gids" };
 const CHROME = {
   en:{skip:"Skip to main content", tagline:"Amsterdam's pop-up restaurants, shops, one-off events and shows", nav:"Site", lang:"Language", home:"/",
-      thisweek:["/","This week"], archive:["/#archive","Archive"], tip:["/#tip","Know a pop-up?"], about:["/about/","About"]},
+      thisweek:["/","This week"], archive:["/#archive","Archive"], tip:["/#tip","Know a pop-up?"], about:["/about/","About"],
+      holidays:"Holidays", hols:[["tab-hol-sint","/sinterklaas/","Sinterklaas"],["tab-hol-xmas","/christmas/","Christmas"],["tab-hol-nye","/new-years-eve/","New Year's Eve"]]},
   nl:{skip:"Naar de inhoud", tagline:"Amsterdamse pop-up restaurants, winkels, eenmalige events en voorstellingen", nav:"Navigatie", lang:"Taal", home:"/nl/",
-      thisweek:["/nl/","Deze week"], archive:["/nl/#archive","Archief"], tip:["/nl/#tip","Ken je een pop-up?"], about:["/nl/over/","Over"]}
+      thisweek:["/nl/","Deze week"], archive:["/nl/#archive","Archief"], tip:["/nl/#tip","Ken je een pop-up?"], about:["/nl/over/","Over"],
+      holidays:"Feestdagen", hols:[["tab-hol-sint","/nl/sinterklaas/","Sinterklaas"],["tab-hol-xmas","/nl/kerst/","Kerst"],["tab-hol-nye","/nl/oud-en-nieuw/","Oud en nieuw"]]}
 };
 let lang = "en";
 function setLang(l){
@@ -255,6 +273,13 @@ function setLang(l){
     a.setAttribute("href", C[id][0]);
     a.textContent = C[id][1];
   }
+  document.getElementById("tab-holidays").textContent = C.holidays;
+  document.getElementById("tab-holidays").setAttribute("aria-expanded", document.getElementById("nav-holidays").open ? "true" : "false");
+  for(const [id, href, label] of C.hols){
+    const a = document.getElementById(id);
+    a.setAttribute("href", href);
+    a.textContent = label;
+  }
   document.getElementById("policy").innerHTML = POLICY[l];
   document.getElementById("back").textContent = BACK[l];
   document.querySelector(".back").setAttribute("href", C.home);
@@ -262,6 +287,51 @@ function setLang(l){
   if(window.applyConsentI18n) applyConsentI18n(l);
 }
 setLang("en");
+function initNavDrop(){
+  const drops = document.querySelectorAll("details.nav-drop");
+  if(!drops.length) return;
+  function sync(d){
+    const s = d.querySelector("summary");
+    if(s) s.setAttribute("aria-expanded", d.open ? "true" : "false");
+    const list = d.querySelector(".nav-drop-list");
+    if(!list) return;
+    if(!d.open){
+      list.style.position = "";
+      list.style.top = "";
+      list.style.left = "";
+      list.style.right = "";
+      return;
+    }
+    const sr = s.getBoundingClientRect();
+    list.style.position = "fixed";
+    list.style.top = Math.round(sr.bottom) + "px";
+    list.style.left = Math.round(sr.left) + "px";
+    list.style.right = "auto";
+    const r = list.getBoundingClientRect();
+    if(r.right > window.innerWidth - 8){
+      list.style.left = Math.max(8, Math.round(window.innerWidth - 8 - r.width)) + "px";
+    }
+  }
+  drops.forEach(d => {
+    sync(d);
+    d.addEventListener("toggle", () => sync(d));
+  });
+  window.addEventListener("scroll", () => drops.forEach(sync), {passive:true});
+  window.addEventListener("resize", () => drops.forEach(sync));
+  document.addEventListener("keydown", e => {
+    if(e.key !== "Escape") return;
+    drops.forEach(d => {
+      if(!d.open) return;
+      d.open = false;
+      const s = d.querySelector("summary");
+      if(s) s.focus();
+    });
+  });
+  document.addEventListener("click", e => {
+    drops.forEach(d => { if(d.open && !d.contains(e.target)) d.open = false; });
+  });
+}
+initNavDrop();
 </script>
 <!-- build-static:consent:start -->
 <div id="consent" class="consent" role="dialog" aria-label="Cookie consent" aria-modal="true" style="display:none">

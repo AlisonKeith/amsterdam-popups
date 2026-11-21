@@ -322,6 +322,14 @@ nav.tabs{position:sticky;top:0;z-index:1200;background:var(--page);border-bottom
 nav.tabs .wrap{display:flex;gap:22px;overflow-x:auto;scrollbar-width:none}
 .tab{appearance:none;border:0;background:transparent;cursor:pointer;font-family:inherit;font-size:14px;color:var(--muted);text-decoration:none;padding:13px 0;border-bottom:2px solid transparent;margin-bottom:-1px;display:flex;align-items:center;gap:6px;white-space:nowrap}
 .tab.on{color:var(--red);border-bottom-color:var(--red);font-weight:500}
+.nav-drop{position:relative;flex:none}
+.nav-drop>summary{list-style:none}
+.nav-drop>summary::-webkit-details-marker{display:none}
+.nav-drop>summary::after{content:"";width:5px;height:5px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin-top:-3px}
+.nav-drop[open]>summary{color:var(--red);border-bottom-color:var(--red);font-weight:500}
+.nav-drop-list{position:absolute;top:100%;left:0;z-index:1300;margin:0;padding:6px 0;list-style:none;min-width:12.5rem;background:var(--page);border:1px solid var(--line)}
+.nav-drop-list a{display:block;padding:8px 14px;color:var(--ink);text-decoration:none;white-space:nowrap;font-size:14px}
+.nav-drop-list a:hover,.nav-drop-list a[aria-current="page"]{color:var(--red)}
 main{padding:18px 0 8px}
 h1{font-size:1.5rem;margin:0 0 6px} h2{font-size:1.1rem;margin:0 0 4px}
 ol{list-style:none;padding:0;margin:0} li{border-top:1px solid var(--line);padding:16px 0}
@@ -437,6 +445,70 @@ const MARK_SVG = `<div class="mark" aria-hidden="true">
           </svg>
         </div>`;
 
+const HOLIDAY_LINKS = {
+  en:[
+    ["sinterklaas", "/sinterklaas/", "Sinterklaas"],
+    ["christmas", "/christmas/", "Christmas"],
+    ["nye", "/new-years-eve/", "New Year's Eve"]
+  ],
+  nl:[
+    ["sinterklaas", "/nl/sinterklaas/", "Sinterklaas"],
+    ["christmas", "/nl/kerst/", "Kerst"],
+    ["nye", "/nl/oud-en-nieuw/", "Oud en nieuw"]
+  ]
+};
+const HOLIDAY_CURRENT = {
+  "/sinterklaas/":"sinterklaas", "/nl/sinterklaas/":"sinterklaas",
+  "/christmas/":"christmas", "/nl/kerst/":"christmas",
+  "/new-years-eve/":"nye", "/nl/oud-en-nieuw/":"nye"
+};
+const NAV_DROP_JS = `(function(){
+  var drops = document.querySelectorAll("details.nav-drop");
+  if(!drops.length) return;
+  function sync(d){
+    var s = d.querySelector("summary");
+    if(s) s.setAttribute("aria-expanded", d.open ? "true" : "false");
+    var list = d.querySelector(".nav-drop-list");
+    if(!list) return;
+    if(!d.open){
+      list.style.position = "";
+      list.style.top = "";
+      list.style.left = "";
+      list.style.right = "";
+      return;
+    }
+    var sr = s.getBoundingClientRect();
+    list.style.position = "fixed";
+    list.style.top = Math.round(sr.bottom) + "px";
+    list.style.left = Math.round(sr.left) + "px";
+    list.style.right = "auto";
+    var r = list.getBoundingClientRect();
+    if(r.right > window.innerWidth - 8){
+      list.style.left = Math.max(8, Math.round(window.innerWidth - 8 - r.width)) + "px";
+    }
+  }
+  drops.forEach(function(d){
+    sync(d);
+    d.addEventListener("toggle", function(){ sync(d); });
+  });
+  window.addEventListener("scroll", function(){ drops.forEach(sync); }, {passive:true});
+  window.addEventListener("resize", function(){ drops.forEach(sync); });
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Escape") return;
+    drops.forEach(function(d){
+      if(!d.open) return;
+      d.open = false;
+      var s = d.querySelector("summary");
+      if(s) s.focus();
+    });
+  });
+  document.addEventListener("click", function(e){
+    drops.forEach(function(d){
+      if(d.open && !d.contains(e.target)) d.open = false;
+    });
+  });
+})();`;
+
 function siteChrome(L, {alt, current, skipHref, skipText}){
   const home = L === "nl" ? "/nl/" : "/";
   const I = I18N[L];
@@ -444,10 +516,19 @@ function siteChrome(L, {alt, current, skipHref, skipText}){
     const on = current === id;
     return `    <a class="tab${on ? " on" : ""}" href="${href}"${on ? ' aria-current="page"' : ""}>${esc(label)}</a>`;
   };
+  const holidayId = HOLIDAY_CURRENT[alt && alt[L]] || (current === "sinterklaas" ? "sinterklaas" : "");
+  const holidaysOn = !!holidayId;
+  const holidaysTab = `    <details class="nav-drop">
+      <summary class="tab${holidaysOn ? " on" : ""}" aria-expanded="false">${esc(I.holidays)}</summary>
+      <ul class="nav-drop-list">
+${HOLIDAY_LINKS[L].map(([id, href, label]) => `        <li><a href="${href}"${holidayId === id ? ' aria-current="page"' : ""}>${esc(label)}</a></li>`).join("\n")}
+      </ul>
+    </details>`;
   const tabs = [
     tab("thisweek", home, I.thisweek),
     tab("archive", home + "#archive", I.archive),
     tab("tip", home + "#tip", I.tip),
+    holidaysTab,
     tab("about", ABOUT_ALT[L], I.about),
     tab("privacy", "/privacy.html", I.privacy)
   ].join("\n");
@@ -476,7 +557,10 @@ function siteChrome(L, {alt, current, skipHref, skipText}){
   <div class="wrap">
 ${tabs}
   </div>
-</nav>`;
+</nav>
+<script>
+${NAV_DROP_JS}
+</script>`;
 }
 
 // One plain list page (this week, or a category). alt = {en, nl} paths of the two language versions.
