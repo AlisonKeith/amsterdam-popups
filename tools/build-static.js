@@ -94,9 +94,9 @@ const TXT = {
       browse:"Deze week per categorie", back:"Terug naar de volledige gids", privacy:"Privacy (Engels)", about:"Over ons", tip:"Ken je een pop-up? Mail",
       generated:id => `Gemaakt op basis van de weekeditie (week vanaf ${id}).`,
       check:"Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.",
-      catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "event" : "events"}`,
+      catH1:l => `${l} in Amsterdam deze week`, count:n => `${n} ${n === 1 ? "evenement" : "evenementen"}`,
       catTitle:(l, w) => `${l} in Amsterdam deze week (${w}) · Amsterdam Pop-ups`,
-      catDesc:(l, n, w) => `${l} in Amsterdam deze week (${w}): ${n} ${n === 1 ? "event" : "events"}, met data, tijden, locaties, prijzen en links naar de organisator.`,
+      catDesc:(l, n, w) => `${l} in Amsterdam deze week (${w}): ${n} ${n === 1 ? "evenement" : "evenementen"}, met data, tijden, locaties, prijzen en links naar de organisator.`,
       empty:a => `Deze week niets in deze categorie. Probeer een andere categorie hieronder, of bekijk ${a}alle events van deze week</a>.`,
       fromToday:"Vanaf vandaag"}
 };
@@ -452,9 +452,9 @@ const thisWeek = listPage({
 const dezeWeek = listPage({
   L:"nl", alt:WEEK_ALT,
   title:`Wat te doen in Amsterdam deze week, ${week.label.nl} · Amsterdam Pop-ups`,
-  desc:`Alle ${list.length} pop-ups en eenmalige events in Amsterdam deze week (${week.label.nl}): markten, eten, kunst, gezin en cultuur, met data, tijden, locaties, prijzen en links naar de organisator.`,
+  desc:`Alle ${list.length} pop-ups en eenmalige evenementen in Amsterdam deze week (${week.label.nl}): markten, eten, kunst, gezin en cultuur, met data, tijden, locaties, prijzen en links naar de organisator.`,
   h1:`Wat te doen in Amsterdam deze week, ${week.label.nl}`,
-  lead:`  <p>${list.length} tijdelijke en eenmalige events deze week: markten, eten, kunst, gezin en cultuur, van supperclubs tot comedy, muziek en nachtleven. ${TXT.nl.check}</p>`,
+  lead:`  <p>${list.length} tijdelijke en eenmalige evenementen deze week: markten, eten, kunst, gezin en cultuur, van supperclubs tot comedy, muziek en nachtleven. ${TXT.nl.check}</p>`,
   events:list, ld:jsonLd(list, "nl")
 });
 
@@ -509,7 +509,7 @@ const xmasNl = listPage({
   desc:"Spontane kerst pop-ups en eenmalige events in Amsterdam, eind november tot begin januari: markten, winterterrassen, workshops en lichtwandelingen.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
   h1:"Kerst pop-ups en evenementen in Amsterdam",
-  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: markten, winterterrassen, workshops en lichtwandelingen. Sommige pop ups duren een weekend, andere lopen het hele seizoen. Hier staan de eenmalige en tijdelijke evenementen van nu tot begin januari, mooi als je zin hebt in een spontane avond. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>.</p>\n  <p>${xmasList.length} events, op datum.</p>`,
+  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: markten, winterterrassen, workshops en lichtwandelingen. Sommige pop ups duren een weekend, andere lopen het hele seizoen. Hier staan de eenmalige en tijdelijke evenementen van nu tot begin januari, mooi als je zin hebt in een spontane avond. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>.</p>\n  <p>${TXT.nl.count(xmasList.length)}, op datum.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "nl"),
   footerText:"Een seizoenslijst van kerstevents van eind november 2026 tot begin januari 2027.",
   keywords:"Kerst pop-ups Amsterdam, kerst pop ups, Christmas popups, kerstmarkt Amsterdam, winterterrassen, lichtwandelingen",
@@ -729,7 +729,7 @@ const cats = CATEGORIES.map(c => `- ${c.label.en} (NL: ${c.label.nl})`).join("\n
 const catLinks = live.map(c => `- [${c.label.en} this week](${SITE}${catPath(c.id, "en")}): ${inCat(c.id).length} events (Dutch: [${c.label.nl}](${SITE}${catPath(c.id, "nl")}))`).join("\n");
 const llms = `# Amsterdam Pop-ups
 
-> A weekly, map-first guide to temporary, pop-up and one-off events in Amsterdam: food, art, family and culture. Every event is checked on the organiser's own page before it is listed. English and Dutch.
+> A weekly guide to Amsterdam that leads with pop-ups (pop-up restaurants, shops and supper clubs), plus temporary and one-off events, markets, small gigs, film and shows, with last-minute ideas and days out: food, art, family and culture. Every event is checked on the organiser's own page before it is listed. English and Dutch.
 
 The guide is edited by hand and updated every week (Monday to Sunday). Each listing has a date, time, venue address, price and a link to the organiser's page. Past weeks stay in the Archive on the main site.
 
