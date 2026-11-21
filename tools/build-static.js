@@ -275,7 +275,7 @@ ${faqs.map(f => `    <h3>${esc(f.q)}</h3>\n    <p>${f.a}</p>`).join("\n")}
   </section>\n`;
 }
 
-const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <li id="e-${esc(e.id)}"${end ? ` data-end="${end}"` : ""}>
+const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <li id="e-${esc(e.id)}"${end ? ` data-end="${end}"` : ""}${e.nyeTags && e.nyeTags.length ? ` data-nye-tags="${e.nyeTags.map(esc).join(" ")}"` : ""}>
       <article>
         <${h}>${esc(e.name)}</${h}>
         <p class="meta">${e.cats.map(c => esc(catBy[c] ? catBy[c].label[L] : c)).join(" · ")}${e.recur === "regular" ? " · " + T.regular : ""}</p>
@@ -479,10 +479,14 @@ function mapSection(L, events){
   if(!mappable.length) return "";
   const heading = L === "nl" ? "Kaart van de events" : "Map of the events";
   const label = L === "nl" ? "Kaart met de locaties van de events op deze pagina" : "Map of the event locations on this page";
-  const data = JSON.stringify(mappable.map(e => ({
-    id:e.id, name:e.name, lat:e.lat, lng:e.lng,
-    when:e.when[L], time:(e.time && e.time[L]) || "", addr:e.addr[L]
-  }))).replace(/</g, "\\u003c");
+  const data = JSON.stringify(mappable.map(e => {
+    const row = {
+      id:e.id, name:e.name, lat:e.lat, lng:e.lng,
+      when:e.when[L], time:(e.time && e.time[L]) || "", addr:e.addr[L]
+    };
+    if(Array.isArray(e.nyeTags) && e.nyeTags.length) row.nyeTags = e.nyeTags;
+    return row;
+  })).replace(/</g, "\\u003c");
   return `  <section class="season-map" aria-labelledby="map-h">
     <h2 id="map-h">${esc(heading)}</h2>
     <div id="map" role="region" aria-label="${esc(label)}"></div>
@@ -551,28 +555,147 @@ function initSeasonMap(){
     }).addTo(map);
   });
   var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
-  var groups = {};
-  events.forEach(function(ev){
-    var key = ev.lat + "," + ev.lng;
-    if(!groups[key]) groups[key] = [];
-    groups[key].push(ev);
-  });
-  Object.keys(groups).forEach(function(key){
-    var group = groups[key];
-    var ev = group[0];
-    var html = group.map(function(e){
-      var when = escapeHtml(e.when) + (e.time ? " \\u00b7 " + escapeHtml(e.time) : "");
-      return "<b><a href=\\"#e-" + escapeHtml(e.id) + "\\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
-    }).join("<hr>");
-    L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(map);
-  });
-  var pts = events.map(function(e){ return [e.lat, e.lng]; });
-  if(pts.length) map.fitBounds(pts, {padding:[40,40], maxZoom:14});
-  setTimeout(function(){ map.invalidateSize(); }, 0);
+  var layer = L.layerGroup().addTo(map);
+  function draw(list){
+    layer.clearLayers();
+    var groups = {};
+    list.forEach(function(ev){
+      var key = ev.lat + "," + ev.lng;
+      if(!groups[key]) groups[key] = [];
+      groups[key].push(ev);
+    });
+    Object.keys(groups).forEach(function(key){
+      var group = groups[key];
+      var ev = group[0];
+      var html = group.map(function(e){
+        var when = escapeHtml(e.when) + (e.time ? " \\u00b7 " + escapeHtml(e.time) : "");
+        return "<b><a href=\\"#e-" + escapeHtml(e.id) + "\\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+      }).join("<hr>");
+      L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(layer);
+    });
+    if(list.length){
+      map.fitBounds(list.map(function(e){ return [e.lat, e.lng]; }), {padding:[40,40], maxZoom:14});
+    }
+    setTimeout(function(){ map.invalidateSize(); }, 0);
+  }
+  function filterEvents(tag){
+    if(!tag || tag === "all") return events;
+    return events.filter(function(e){
+      return (e.nyeTags || []).indexOf(tag) !== -1;
+    });
+  }
+  window.applySeasonMapFilter = function(tag){
+    draw(filterEvents(tag));
+  };
+  draw(filterEvents(window.__pendingSeasonMapFilter || "all"));
 }
+
 `;
 
-function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText, keywords, imageAlt, faq, showMap}){
+
+const NYE_CHIP_STYLE = `<style>
+:root{--chip-text:#3a3733}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:2px 0 16px}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:13px;color:var(--chip-text);cursor:pointer;white-space:nowrap;font-family:inherit}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:500}
+.chip .chip-n{font-variant-numeric:tabular-nums;opacity:.75}
+.chip.on .chip-n{opacity:.9}
+</style>`;
+
+const NYE_FILTER_TAGS = [
+  {id:"dinner-only", en:"Dinner only", nl:"Alleen diner"},
+  {id:"dinner-club", en:"Dinner + club", nl:"Diner + club"},
+  {id:"club-only", en:"Club only", nl:"Alleen club"},
+  {id:"free-fireworks", en:"Free fireworks", nl:"Gratis vuurwerk"},
+  {id:"new-years-day", en:"New Year's Day", nl:"Nieuwjaarsdag"},
+  {id:"family", en:"Family friendly", nl:"Voor het hele gezin"},
+  {id:"all-inclusive", en:"All-inclusive drinks", nl:"All-inclusive drankjes"},
+  {id:"concerts", en:"Concerts and shows", nl:"Concerten en voorstellingen"}
+];
+
+function nyeFilterBar(L, events){
+  const allLabel = L === "nl" ? "Alles" : "All";
+  const aria = L === "nl" ? "Filter evenementen" : "Filter events";
+  const evWord = n => L === "nl" ? (n === 1 ? "evenement" : "evenementen") : (n === 1 ? "event" : "events");
+  const countOf = id => events.filter(e => Array.isArray(e.nyeTags) && e.nyeTags.includes(id)).length;
+  const chip = (id, label, n, on) => {
+    const pressed = on ? "true" : "false";
+    const cls = on ? "chip on" : "chip";
+    const al = `${label}, ${n} ${evWord(n)}`;
+    return `    <button type="button" class="${cls}" data-nye-tag="${id}" aria-pressed="${pressed}" aria-label="${esc(al)}">${esc(label)} <span class="chip-n">${n}</span></button>`;
+  };
+  const buttons = [
+    chip("all", allLabel, events.length, true),
+    ...NYE_FILTER_TAGS.map(t => chip(t.id, t[L], countOf(t.id), false))
+  ].join("\n");
+  return `  <div class="chips" id="nye-chips" hidden role="group" aria-label="${esc(aria)}">
+${buttons}
+  </div>
+  <p id="nye-filter-status" class="sr-only" role="status"></p>
+`;
+}
+
+const NYE_FILTER_JS = `(function(){
+  var chips = document.getElementById("nye-chips");
+  if(!chips) return;
+  chips.removeAttribute("hidden");
+  var list = document.getElementById("list");
+  var status = document.getElementById("nye-filter-status");
+  var lang = (document.documentElement.lang || "en").slice(0,2);
+  function today(){ return new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"}); }
+  function isPast(li){
+    var end = li.getAttribute("data-end");
+    return !!(end && end < today());
+  }
+  function evWord(n){
+    if(lang === "nl") return n === 1 ? "evenement" : "evenementen";
+    return n === 1 ? "event" : "events";
+  }
+  function apply(tag){
+    chips.querySelectorAll(".chip").forEach(function(b){
+      var on = b.getAttribute("data-nye-tag") === tag;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    var shown = 0;
+    if(list){
+      Array.prototype.forEach.call(list.children, function(li){
+        if(isPast(li)){ li.setAttribute("hidden", ""); return; }
+        var tags = (li.getAttribute("data-nye-tags") || "").split(/\\s+/).filter(Boolean);
+        var match = tag === "all" || tags.indexOf(tag) !== -1;
+        if(match){ li.removeAttribute("hidden"); shown++; }
+        else li.setAttribute("hidden", "");
+      });
+    }
+    if(status){
+      status.textContent = lang === "nl"
+        ? (shown + " " + evWord(shown) + " getoond")
+        : (shown + " " + evWord(shown) + " shown");
+    }
+    if(typeof window.applySeasonMapFilter === "function"){
+      window.applySeasonMapFilter(tag);
+    } else {
+      window.__pendingSeasonMapFilter = tag;
+    }
+  }
+  chips.addEventListener("click", function(ev){
+    var b = ev.target.closest ? ev.target.closest(".chip") : null;
+    if(!b || !chips.contains(b)) return;
+    var tag = b.getAttribute("data-nye-tag");
+    if(tag) apply(tag);
+  });
+  chips.addEventListener("keydown", function(ev){
+    if(ev.key !== "Enter" && ev.key !== " ") return;
+    var b = ev.target.closest ? ev.target.closest(".chip") : null;
+    if(!b || !chips.contains(b)) return;
+    ev.preventDefault();
+    var tag = b.getAttribute("data-nye-tag");
+    if(tag) apply(tag);
+  });
+})();
+`;
+
+function listPage({L, alt, title, desc, robots, headerExtra, h1, lead, events, ld, currentId, footerText, keywords, imageAlt, faq, showMap, nyeFilters}){
 
   const T = TXT[L], url = alt[L];
   return `<!DOCTYPE html>
@@ -587,7 +710,7 @@ ${GENERATED}
 ${keywords ? `<meta name="keywords" content="${esc(keywords)}" />\n` : ""}${robots ? `<meta name="robots" content="${robots}" />\n` : ""}<link rel="canonical" href="${SITE}${url}" />
 ${hreflang(alt)}
 ${socialMeta({L, title, desc, url, imageAlt})}
-${GA_HEAD}${STYLE}
+${GA_HEAD}${STYLE}${nyeFilters ? NYE_CHIP_STYLE : ""}
 ${ld}${faq ? faqLd(faq) : ""}</head>
 <body>
 ${siteChrome(L, {alt, skipHref:"#list", skipText:T.skip})}
@@ -596,13 +719,13 @@ ${siteChrome(L, {alt, skipHref:"#list", skipText:T.skip})}
   <h1>${esc(h1)}</h1>
 ${headerExtra ? `  <p>${headerExtra.replace(/^\s*·\s*/, "")}</p>
 ` : ""}${lead}
-${showMap ? mapSection(L, events) : ""}${events.length ? `  <p id="from-today" hidden role="status">${esc(T.fromToday)}</p>
+${nyeFilters ? nyeFilterBar(L, events) : ""}${showMap ? mapSection(L, events) : ""}${events.length ? `  <p id="from-today" hidden role="status">${esc(T.fromToday)}</p>
   <ol id="list">
 ${events.map(e => item(e, L, "h2")).join("\n")}
   </ol>
   <script>
 ${FROM_TODAY_JS}
-  </script>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
+${nyeFilters ? NYE_FILTER_JS : ""}  </script>` : `  <p id="list">${T.empty(`<a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">`)}</p>`}
 ${faq ? faqSection(L, faq) : ""}</div>
 </main>
 <footer>
@@ -742,7 +865,8 @@ const nyeEn = listPage({
   footerText:"A season list of New Year's Eve and New Year's Day events in Amsterdam.",
   keywords:"New Year's Eve pop-ups Amsterdam, NYE Amsterdam 2026, things to do New Year's Eve Amsterdam, pop ups, popups",
   imageAlt:"Amsterdam Pop-ups — New Year's Eve popups and one-off events in Amsterdam",
-  showMap:true
+  showMap:true,
+  nyeFilters:true
 });
 const nyeNl = listPage({
   L:"nl", alt:NYE_ALT,
@@ -755,7 +879,8 @@ const nyeNl = listPage({
   footerText:"Een seizoenslijst van events voor oudejaarsavond en nieuwjaarsdag in Amsterdam.",
   keywords:"oud en nieuw Amsterdam, oudejaarsavond Amsterdam uitgaan, oudjaar, NYE Amsterdam, pop-ups, pop ups, popups",
   imageAlt:"Amsterdam Pop-ups — popups en eenmalige events voor oud en nieuw in Amsterdam",
-  showMap:true
+  showMap:true,
+  nyeFilters:true
 });
 writes.push([path.join("new-years-eve", "index.html"), nyeEn], [path.join("nl", "oud-en-nieuw", "index.html"), nyeNl]);
 

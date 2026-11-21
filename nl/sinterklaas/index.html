@@ -457,25 +457,41 @@ function initSeasonMap(){
     }).addTo(map);
   });
   var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
-  var groups = {};
-  events.forEach(function(ev){
-    var key = ev.lat + "," + ev.lng;
-    if(!groups[key]) groups[key] = [];
-    groups[key].push(ev);
-  });
-  Object.keys(groups).forEach(function(key){
-    var group = groups[key];
-    var ev = group[0];
-    var html = group.map(function(e){
-      var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
-      return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
-    }).join("<hr>");
-    L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(map);
-  });
-  var pts = events.map(function(e){ return [e.lat, e.lng]; });
-  if(pts.length) map.fitBounds(pts, {padding:[40,40], maxZoom:14});
-  setTimeout(function(){ map.invalidateSize(); }, 0);
+  var layer = L.layerGroup().addTo(map);
+  function draw(list){
+    layer.clearLayers();
+    var groups = {};
+    list.forEach(function(ev){
+      var key = ev.lat + "," + ev.lng;
+      if(!groups[key]) groups[key] = [];
+      groups[key].push(ev);
+    });
+    Object.keys(groups).forEach(function(key){
+      var group = groups[key];
+      var ev = group[0];
+      var html = group.map(function(e){
+        var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
+        return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+      }).join("<hr>");
+      L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(layer);
+    });
+    if(list.length){
+      map.fitBounds(list.map(function(e){ return [e.lat, e.lng]; }), {padding:[40,40], maxZoom:14});
+    }
+    setTimeout(function(){ map.invalidateSize(); }, 0);
+  }
+  function filterEvents(tag){
+    if(!tag || tag === "all") return events;
+    return events.filter(function(e){
+      return (e.nyeTags || []).indexOf(tag) !== -1;
+    });
+  }
+  window.applySeasonMapFilter = function(tag){
+    draw(filterEvents(tag));
+  };
+  draw(filterEvents(window.__pendingSeasonMapFilter || "all"));
 }
+
 
   </script>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>

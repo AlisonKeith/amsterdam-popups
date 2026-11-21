@@ -132,6 +132,13 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .cookie-fab{position:fixed; left:16px; bottom:16px; z-index:1400; display:inline-flex; align-items:center; gap:7px; padding:8px 13px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--muted); font-family:inherit; font-size:12.5px; cursor:pointer; box-shadow:0 3px 14px rgba(0,0,0,.18)}
 .cookie-fab:hover{color:var(--ink); border-color:var(--card-hover)}
 @media (max-width:560px){ .cookie-fab span{display:none} .cookie-fab{padding:10px; left:12px; bottom:12px} }
+</style><style>
+:root{--chip-text:#3a3733}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:2px 0 16px}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:13px;color:var(--chip-text);cursor:pointer;white-space:nowrap;font-family:inherit}
+.chip.on{background:var(--red);border-color:var(--red);color:#fff;font-weight:500}
+.chip .chip-n{font-variant-numeric:tabular-nums;opacity:.75}
+.chip.on .chip-n{opacity:.9}
 </style>
 <script type="application/ld+json">
 {
@@ -1880,10 +1887,22 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p><a href="/nl/deze-week.html">Alle events van deze week</a></p>
   <p>Zin in iets anders met oud en nieuw in Amsterdam? Naast het grote gratis aftelmoment op het Museumplein vind je hier de pop-ups, eenmalige feesten en speciale diners die we op de eigen pagina van elke organisator hebben nagelopen, plus een paar uitjes voor nieuwjaarsdag. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat. Op zoek naar kerst? Zie onze <a href="/nl/kerst/">pagina met kerst pop-ups</a>.</p>
   <p>Op datum.</p>
+  <div class="chips" id="nye-chips" hidden role="group" aria-label="Filter evenementen">
+    <button type="button" class="chip on" data-nye-tag="all" aria-pressed="true" aria-label="Alles, 43 evenementen">Alles <span class="chip-n">43</span></button>
+    <button type="button" class="chip" data-nye-tag="dinner-only" aria-pressed="false" aria-label="Alleen diner, 3 evenementen">Alleen diner <span class="chip-n">3</span></button>
+    <button type="button" class="chip" data-nye-tag="dinner-club" aria-pressed="false" aria-label="Diner + club, 9 evenementen">Diner + club <span class="chip-n">9</span></button>
+    <button type="button" class="chip" data-nye-tag="club-only" aria-pressed="false" aria-label="Alleen club, 23 evenementen">Alleen club <span class="chip-n">23</span></button>
+    <button type="button" class="chip" data-nye-tag="free-fireworks" aria-pressed="false" aria-label="Gratis vuurwerk, 6 evenementen">Gratis vuurwerk <span class="chip-n">6</span></button>
+    <button type="button" class="chip" data-nye-tag="new-years-day" aria-pressed="false" aria-label="Nieuwjaarsdag, 6 evenementen">Nieuwjaarsdag <span class="chip-n">6</span></button>
+    <button type="button" class="chip" data-nye-tag="family" aria-pressed="false" aria-label="Voor het hele gezin, 9 evenementen">Voor het hele gezin <span class="chip-n">9</span></button>
+    <button type="button" class="chip" data-nye-tag="all-inclusive" aria-pressed="false" aria-label="All-inclusive drankjes, 3 evenementen">All-inclusive drankjes <span class="chip-n">3</span></button>
+    <button type="button" class="chip" data-nye-tag="concerts" aria-pressed="false" aria-label="Concerten en voorstellingen, 3 evenementen">Concerten en voorstellingen <span class="chip-n">3</span></button>
+  </div>
+  <p id="nye-filter-status" class="sr-only" role="status"></p>
   <section class="season-map" aria-labelledby="map-h">
     <h2 id="map-h">Kaart van de events</h2>
     <div id="map" role="region" aria-label="Kaart met de locaties van de events op deze pagina"></div>
-    <script type="application/json" id="map-events">[{"id":"nela-nye-drinks-dance-2026","name":"Nela New Year's Eve Drinks & Dance","lat":52.3376363,"lng":4.8773376,"when":"do 31 dec","time":"23:30–00:30","addr":"Nela, Valley South Tower, Beethovenstraat 515, 1083 HK Amsterdam"},{"id":"pllek-nye-2026","name":"Pllek New Year's Eve","lat":52.401,"lng":4.893,"when":"do 31 dec","time":"diner 18:30, 19:00 of 19:30; feest vanaf 22:00","addr":"Pllek, TT Neveritaweg 59, Amsterdam"},{"id":"goede-voornemen-nye-2026","name":"Het Goede Voornemen","lat":52.3835,"lng":4.9015,"when":"do 31 dec","time":"21:00–06:00","addr":"Tolhuistuin, IJpromenade 2, Amsterdam"},{"id":"further-nye-radion-2026","name":"DJ Bone presents FURTHER NYE","lat":52.341,"lng":4.825,"when":"do 31 dec","time":"22:00–07:00","addr":"RADION, Louwesweg 1, Amsterdam"},{"id":"we-love-80s-nye-2026","name":"We Love 80s New Year's Eve","lat":52.3622,"lng":4.8838,"when":"do 31 dec","time":"deuren 22:00","addr":"Paradiso, Grote Zaal, Weteringschans 6-8, Amsterdam"},{"id":"electric-fireworks-museumplein-2026","name":"Electric Fireworks at Museumplein","lat":52.3573,"lng":4.8815,"when":"do 31 dec","time":"junior 18:30/19:00–19:10; avond 22:00–00:30","addr":"Museumplein, Amsterdam"},{"id":"fireworks-sloterplas-2026","name":"New Year's fireworks at Sloterplas","lat":52.3591,"lng":4.8073,"when":"do 31 dec","time":"00:00–00:10","addr":"Sloterplas, bij De Meervaart, Amsterdam"},{"id":"fireworks-ijburg-2026","name":"New Year's fireworks at IJburg","lat":52.358673,"lng":4.997883,"when":"do 31 dec","time":"vanaf 00:00, ongeveer 10 minuten","addr":"Bert Haanstrakade, IJburg, Amsterdam"},{"id":"fireworks-mandelapark-2026","name":"New Year's fireworks at Nelson Mandelapark","lat":52.311362,"lng":4.963095,"when":"do 31 dec","time":"vanaf 00:00, ongeveer 10 minuten","addr":"Nelson Mandelapark, Amsterdam"},{"id":"fireworks-buikslotermeerplein-2026","name":"New Year's fireworks at Buikslotermeerplein","lat":52.3989,"lng":4.9386,"when":"do 31 dec","time":"vanaf 00:00, ongeveer 10 minuten","addr":"Buikslotermeerplein, voor de bioscoop, Amsterdam"},{"id":"fireworks-weesp-2026","name":"New Year's fireworks in Weesp","lat":52.3122067,"lng":5.0440484,"when":"do 31 dec","time":"00:00–00:15","addr":"Ponton in de Vecht bij de Stationsstraat, Weesp"},{"id":"beatclub-stardust-nye-2026","name":"Amsterdam BeatClub Stardust NYE","lat":52.3622,"lng":4.8838,"when":"do 31 dec","time":"21:00–04:00","addr":"Paradiso, Bovenzaal, Weteringschans 6-8, Amsterdam"},{"id":"encore-nye-melkweg-2026","name":"Encore New Year's Eve","lat":52.3645,"lng":4.8815,"when":"do 31 dec","time":"22:00–06:00","addr":"Melkweg, Lijnbaansgracht 234A, Amsterdam"},{"id":"sieraad-olivier-weiter-nye-2026","name":"Olivier Weiter b2b Miss Melera","lat":52.366,"lng":4.8555,"when":"do 31 dec","time":"22:00–05:00","addr":"Het Sieraad, Postjesweg 1, Amsterdam"},{"id":"vunzige-deuntjes-nye-2026","name":"Vunzige Deuntjes NYE","lat":52.387014,"lng":4.869915,"when":"do 31 dec","time":"22:00–05:00","addr":"WestWeelde, Klönneplein 4, Amsterdam"},{"id":"q-factory-nye-festival-2026","name":"Q-Factory Indoor NYE Festival","lat":52.357666,"lng":4.930499,"when":"do 31 dec","time":"vanaf 22:00","addr":"Q-Factory, Atlantisplein 1, Amsterdam"},{"id":"escape-nye-2026","name":"Escape NYE","lat":52.366419,"lng":4.896319,"when":"do 31 dec","time":"21:00–06:00","addr":"Escape, Rembrandtplein 11, Amsterdam"},{"id":"teletech-nye-afas-2026","name":"Teletech NYE","lat":52.312261,"lng":4.944217,"when":"do 31 dec","time":"deuren 20:00, einde rond 07:00","addr":"AFAS Live, Johan Cruijff Boulevard 590, Amsterdam"},{"id":"palet-lofi-nye-2026","name":"Palet x Lofi NYE","lat":52.391255,"lng":4.824222,"when":"do 31 dec","time":"21:00–06:00","addr":"Lofi, Basisweg 63, Amsterdam"},{"id":"olieboulen-nye-mooie-boules-2026","name":"Olieboulen NYE","lat":52.397482,"lng":4.877668,"when":"do 31 dec","time":"20:00–03:00","addr":"Mooie Boules West, Danzigerkade 8, Amsterdam"},{"id":"canvas-nye-volkshotel-2026","name":"Canvas NYE","lat":52.356,"lng":4.9095,"when":"do 31 dec","time":"diner 18:00–22:30; feest 22:30–04:00","addr":"Canvas, Volkshotel, Wibautstraat 150, Amsterdam"},{"id":"pasar-makan-nye-jakarta-2026","name":"Pasar Makan NYE","lat":52.37948,"lng":4.922596,"when":"do 31 dec","time":"18:00–02:00; alleen feest vanaf 22:00","addr":"Hotel Jakarta, Javakade 766, Amsterdam"},{"id":"van-de-werf-nye-2026","name":"Oud en Nieuw Van de Werf","lat":52.401431,"lng":4.891961,"when":"do 31 dec","time":"19:00–03:00","addr":"Van de Werf, NDSM-kade 2, Amsterdam"},{"id":"wereldkerstcircus-carre-31-dec-2026","name":"40th World Christmas Circus","lat":52.362378,"lng":4.903881,"when":"do 31 dec","time":"12:00 en 16:00","addr":"Koninklijk Theater Carré, Amstel 115-125, Amsterdam"},{"id":"nomad-aan-het-ij-nye-2026","name":"Nomad aan het IJ New Year's Eve","lat":52.3846,"lng":4.894699,"when":"do 31 dec","time":"deuren 19:30, diner 20:00, einde 01:00","addr":"Nomad aan het IJ, IJdok 87, Amsterdam"},{"id":"bridges-nye-dinner-2026","name":"New Year's Eve dinner at Bridges","lat":52.370928,"lng":4.895255,"when":"do 31 dec","time":"vanaf 18:30","addr":"Bridges, Sofitel Legend The Grand, Oudezijds Voorburgwal 197, Amsterdam"},{"id":"zoku-rooftop-nye-2026","name":"Zoku Rooftop NYE","lat":52.3639,"lng":4.9068,"when":"do 31 dec","time":"21:00–01:30","addr":"Zoku, Weesperstraat 105, Amsterdam"},{"id":"tower-of-love-loft-nye-2026","name":"Tower of Love NYE","lat":52.383622,"lng":4.902248,"when":"do 31 dec","time":"22:00–05:00","addr":"The Loft, A'DAM Toren, Overhoeksplein 1, Amsterdam"},{"id":"happy-feelings-nye-2026","name":"Happy Feelings NYE","lat":52.395628,"lng":4.875378,"when":"do 31 dec","time":"22:00–06:00","addr":"The Other Side, Rigakade 10, Amsterdam"},{"id":"crowne-plaza-nye-2026","name":"NYE Party at Crowne Plaza Amsterdam-South","lat":52.335606,"lng":4.874761,"when":"do 31 dec","time":"diner vanaf 18:00; feest 21:00–01:00","addr":"Crowne Plaza Amsterdam-South (De Japanner), George Gershwinlaan 101, Amsterdam"},{"id":"shelter-nye-2026","name":"Shelter NYE","lat":52.3835,"lng":4.901,"when":"do 31 dec","time":"23:00–06:00","addr":"Shelter, Overhoeksplein 3, onder de A'DAM Toren, Amsterdam"},{"id":"baila-dembow-ijland-nye-2026","name":"Baila Dembow","lat":52.411129,"lng":4.877232,"when":"do 31 dec","time":"23:00–05:00","addr":"IJLAND, Tt. Vasumweg 171, Amsterdam"},{"id":"luminair-nye-2026","name":"LuminAir NYE at The Bar Above Amsterdam","lat":52.376792,"lng":4.904873,"when":"do 31 dec","time":"20:00–03:00","addr":"The Bar Above Amsterdam, DoubleTree, Oosterdoksstraat 4, Amsterdam"},{"id":"jimmy-woo-nye-2026","name":"Jimmy Woo WOO №27","lat":52.3648,"lng":4.8824,"when":"do 31 dec","time":"vanaf 21:00","addr":"Jimmy Woo, Korte Leidsedwarsstraat 18, Amsterdam"},{"id":"chez-van-rijn-nye-2026","name":"Chez van Rijn NYE dinner","lat":52.36642,"lng":4.896701,"when":"do 31 dec","time":"twee sittings; de tweede loopt tot na middernacht","addr":"Chez van Rijn, Rembrandtplein 17, Amsterdam"},{"id":"cafe-de-kroon-nye-2026","name":"Café de Kroon NYE","lat":52.36642,"lng":4.896701,"when":"do 31 dec","time":"aankomst 19:00–19:30; keuken tot 22:30; clubavond vanaf 23:00","addr":"Café de Kroon, Rembrandtplein 17-I, Amsterdam"},{"id":"flore-nye-dinner-2026","name":"Flore NYE dinner","lat":52.36766,"lng":4.894309,"when":"do 31 dec","time":"16:45–20:45","addr":"Flore, De L'Europe, Nieuwe Doelenstraat 2-14, Amsterdam"},{"id":"teletech-nyd-afas-2027","name":"Teletech New Year's Day","lat":52.312261,"lng":4.944217,"when":"vr 1 jan","time":"deuren 16:00, einde rond 01:00","addr":"AFAS Live, Johan Cruijff Boulevard 590, Amsterdam"},{"id":"wereldkerstcircus-carre-1-jan-2027","name":"40th World Christmas Circus","lat":52.362378,"lng":4.903881,"when":"vr 1 jan","time":"13:00 en 17:00","addr":"Koninklijk Theater Carré, Amstel 115-125, Amsterdam"},{"id":"thuishaven-nieuwjaarsdans-2027","name":"Thuishaven Nieuwjaarsdans","lat":52.396762,"lng":4.856394,"when":"vr 1 jan","time":"14:00–23:00, laatste binnenkomst 22:00","addr":"Thuishaven, Contactweg 68, Amsterdam"},{"id":"bibi-shelter-1-jan-2027","name":"BiBi at Shelter","lat":52.3835,"lng":4.901,"when":"vr 1 jan","time":"23:00–06:00","addr":"Shelter, Overhoeksplein 3, onder de A'DAM Toren, Amsterdam"},{"id":"rose-ringed-ijland-2027","name":"Rose Ringed 6hrs: first dance of the year","lat":52.411129,"lng":4.877232,"when":"vr 1 jan","time":"16:00–23:59","addr":"IJLAND, Tt. Vasumweg 171, Amsterdam"},{"id":"nbe-nieuwjaarsconcert-2027","name":"NBE New Year's Concert","lat":52.3564,"lng":4.8795,"when":"vr 1 jan","time":"13:30 en 16:30","addr":"Concertgebouw, Concertgebouwplein 10, Amsterdam"}]</script>
+    <script type="application/json" id="map-events">[{"id":"nela-nye-drinks-dance-2026","name":"Nela New Year's Eve Drinks & Dance","lat":52.3376363,"lng":4.8773376,"when":"do 31 dec","time":"23:30–00:30","addr":"Nela, Valley South Tower, Beethovenstraat 515, 1083 HK Amsterdam","nyeTags":["club-only"]},{"id":"pllek-nye-2026","name":"Pllek New Year's Eve","lat":52.401,"lng":4.893,"when":"do 31 dec","time":"diner 18:30, 19:00 of 19:30; feest vanaf 22:00","addr":"Pllek, TT Neveritaweg 59, Amsterdam","nyeTags":["dinner-club"]},{"id":"goede-voornemen-nye-2026","name":"Het Goede Voornemen","lat":52.3835,"lng":4.9015,"when":"do 31 dec","time":"21:00–06:00","addr":"Tolhuistuin, IJpromenade 2, Amsterdam","nyeTags":["club-only"]},{"id":"further-nye-radion-2026","name":"DJ Bone presents FURTHER NYE","lat":52.341,"lng":4.825,"when":"do 31 dec","time":"22:00–07:00","addr":"RADION, Louwesweg 1, Amsterdam","nyeTags":["club-only"]},{"id":"we-love-80s-nye-2026","name":"We Love 80s New Year's Eve","lat":52.3622,"lng":4.8838,"when":"do 31 dec","time":"deuren 22:00","addr":"Paradiso, Grote Zaal, Weteringschans 6-8, Amsterdam","nyeTags":["club-only"]},{"id":"electric-fireworks-museumplein-2026","name":"Electric Fireworks at Museumplein","lat":52.3573,"lng":4.8815,"when":"do 31 dec","time":"junior 18:30/19:00–19:10; avond 22:00–00:30","addr":"Museumplein, Amsterdam","nyeTags":["free-fireworks","family"]},{"id":"fireworks-sloterplas-2026","name":"New Year's fireworks at Sloterplas","lat":52.3591,"lng":4.8073,"when":"do 31 dec","time":"00:00–00:10","addr":"Sloterplas, bij De Meervaart, Amsterdam","nyeTags":["free-fireworks","family"]},{"id":"fireworks-ijburg-2026","name":"New Year's fireworks at IJburg","lat":52.358673,"lng":4.997883,"when":"do 31 dec","time":"vanaf 00:00, ongeveer 10 minuten","addr":"Bert Haanstrakade, IJburg, Amsterdam","nyeTags":["free-fireworks","family"]},{"id":"fireworks-mandelapark-2026","name":"New Year's fireworks at Nelson Mandelapark","lat":52.311362,"lng":4.963095,"when":"do 31 dec","time":"vanaf 00:00, ongeveer 10 minuten","addr":"Nelson Mandelapark, Amsterdam","nyeTags":["free-fireworks","family"]},{"id":"fireworks-buikslotermeerplein-2026","name":"New Year's fireworks at Buikslotermeerplein","lat":52.3989,"lng":4.9386,"when":"do 31 dec","time":"vanaf 00:00, ongeveer 10 minuten","addr":"Buikslotermeerplein, voor de bioscoop, Amsterdam","nyeTags":["free-fireworks","family"]},{"id":"fireworks-weesp-2026","name":"New Year's fireworks in Weesp","lat":52.3122067,"lng":5.0440484,"when":"do 31 dec","time":"00:00–00:15","addr":"Ponton in de Vecht bij de Stationsstraat, Weesp","nyeTags":["free-fireworks","family"]},{"id":"beatclub-stardust-nye-2026","name":"Amsterdam BeatClub Stardust NYE","lat":52.3622,"lng":4.8838,"when":"do 31 dec","time":"21:00–04:00","addr":"Paradiso, Bovenzaal, Weteringschans 6-8, Amsterdam","nyeTags":["club-only"]},{"id":"encore-nye-melkweg-2026","name":"Encore New Year's Eve","lat":52.3645,"lng":4.8815,"when":"do 31 dec","time":"22:00–06:00","addr":"Melkweg, Lijnbaansgracht 234A, Amsterdam","nyeTags":["club-only"]},{"id":"sieraad-olivier-weiter-nye-2026","name":"Olivier Weiter b2b Miss Melera","lat":52.366,"lng":4.8555,"when":"do 31 dec","time":"22:00–05:00","addr":"Het Sieraad, Postjesweg 1, Amsterdam","nyeTags":["club-only"]},{"id":"vunzige-deuntjes-nye-2026","name":"Vunzige Deuntjes NYE","lat":52.387014,"lng":4.869915,"when":"do 31 dec","time":"22:00–05:00","addr":"WestWeelde, Klönneplein 4, Amsterdam","nyeTags":["club-only"]},{"id":"q-factory-nye-festival-2026","name":"Q-Factory Indoor NYE Festival","lat":52.357666,"lng":4.930499,"when":"do 31 dec","time":"vanaf 22:00","addr":"Q-Factory, Atlantisplein 1, Amsterdam","nyeTags":["club-only"]},{"id":"escape-nye-2026","name":"Escape NYE","lat":52.366419,"lng":4.896319,"when":"do 31 dec","time":"21:00–06:00","addr":"Escape, Rembrandtplein 11, Amsterdam","nyeTags":["dinner-club","club-only"]},{"id":"teletech-nye-afas-2026","name":"Teletech NYE","lat":52.312261,"lng":4.944217,"when":"do 31 dec","time":"deuren 20:00, einde rond 07:00","addr":"AFAS Live, Johan Cruijff Boulevard 590, Amsterdam","nyeTags":["club-only"]},{"id":"palet-lofi-nye-2026","name":"Palet x Lofi NYE","lat":52.391255,"lng":4.824222,"when":"do 31 dec","time":"21:00–06:00","addr":"Lofi, Basisweg 63, Amsterdam","nyeTags":["club-only"]},{"id":"olieboulen-nye-mooie-boules-2026","name":"Olieboulen NYE","lat":52.397482,"lng":4.877668,"when":"do 31 dec","time":"20:00–03:00","addr":"Mooie Boules West, Danzigerkade 8, Amsterdam","nyeTags":["club-only","all-inclusive"]},{"id":"canvas-nye-volkshotel-2026","name":"Canvas NYE","lat":52.356,"lng":4.9095,"when":"do 31 dec","time":"diner 18:00–22:30; feest 22:30–04:00","addr":"Canvas, Volkshotel, Wibautstraat 150, Amsterdam","nyeTags":["dinner-club"]},{"id":"pasar-makan-nye-jakarta-2026","name":"Pasar Makan NYE","lat":52.37948,"lng":4.922596,"when":"do 31 dec","time":"18:00–02:00; alleen feest vanaf 22:00","addr":"Hotel Jakarta, Javakade 766, Amsterdam","nyeTags":["dinner-club"]},{"id":"van-de-werf-nye-2026","name":"Oud en Nieuw Van de Werf","lat":52.401431,"lng":4.891961,"when":"do 31 dec","time":"19:00–03:00","addr":"Van de Werf, NDSM-kade 2, Amsterdam","nyeTags":["dinner-club","all-inclusive"]},{"id":"wereldkerstcircus-carre-31-dec-2026","name":"40th World Christmas Circus","lat":52.362378,"lng":4.903881,"when":"do 31 dec","time":"12:00 en 16:00","addr":"Koninklijk Theater Carré, Amstel 115-125, Amsterdam","nyeTags":["family","concerts"]},{"id":"nomad-aan-het-ij-nye-2026","name":"Nomad aan het IJ New Year's Eve","lat":52.3846,"lng":4.894699,"when":"do 31 dec","time":"deuren 19:30, diner 20:00, einde 01:00","addr":"Nomad aan het IJ, IJdok 87, Amsterdam","nyeTags":["dinner-club"]},{"id":"bridges-nye-dinner-2026","name":"New Year's Eve dinner at Bridges","lat":52.370928,"lng":4.895255,"when":"do 31 dec","time":"vanaf 18:30","addr":"Bridges, Sofitel Legend The Grand, Oudezijds Voorburgwal 197, Amsterdam","nyeTags":["dinner-only"]},{"id":"zoku-rooftop-nye-2026","name":"Zoku Rooftop NYE","lat":52.3639,"lng":4.9068,"when":"do 31 dec","time":"21:00–01:30","addr":"Zoku, Weesperstraat 105, Amsterdam","nyeTags":["club-only","all-inclusive"]},{"id":"tower-of-love-loft-nye-2026","name":"Tower of Love NYE","lat":52.383622,"lng":4.902248,"when":"do 31 dec","time":"22:00–05:00","addr":"The Loft, A'DAM Toren, Overhoeksplein 1, Amsterdam","nyeTags":["club-only"]},{"id":"happy-feelings-nye-2026","name":"Happy Feelings NYE","lat":52.395628,"lng":4.875378,"when":"do 31 dec","time":"22:00–06:00","addr":"The Other Side, Rigakade 10, Amsterdam","nyeTags":["club-only"]},{"id":"crowne-plaza-nye-2026","name":"NYE Party at Crowne Plaza Amsterdam-South","lat":52.335606,"lng":4.874761,"when":"do 31 dec","time":"diner vanaf 18:00; feest 21:00–01:00","addr":"Crowne Plaza Amsterdam-South (De Japanner), George Gershwinlaan 101, Amsterdam","nyeTags":["dinner-club"]},{"id":"shelter-nye-2026","name":"Shelter NYE","lat":52.3835,"lng":4.901,"when":"do 31 dec","time":"23:00–06:00","addr":"Shelter, Overhoeksplein 3, onder de A'DAM Toren, Amsterdam","nyeTags":["club-only"]},{"id":"baila-dembow-ijland-nye-2026","name":"Baila Dembow","lat":52.411129,"lng":4.877232,"when":"do 31 dec","time":"23:00–05:00","addr":"IJLAND, Tt. Vasumweg 171, Amsterdam","nyeTags":["club-only"]},{"id":"luminair-nye-2026","name":"LuminAir NYE at The Bar Above Amsterdam","lat":52.376792,"lng":4.904873,"when":"do 31 dec","time":"20:00–03:00","addr":"The Bar Above Amsterdam, DoubleTree, Oosterdoksstraat 4, Amsterdam","nyeTags":["dinner-club"]},{"id":"jimmy-woo-nye-2026","name":"Jimmy Woo WOO №27","lat":52.3648,"lng":4.8824,"when":"do 31 dec","time":"vanaf 21:00","addr":"Jimmy Woo, Korte Leidsedwarsstraat 18, Amsterdam","nyeTags":["club-only"]},{"id":"chez-van-rijn-nye-2026","name":"Chez van Rijn NYE dinner","lat":52.36642,"lng":4.896701,"when":"do 31 dec","time":"twee sittings; de tweede loopt tot na middernacht","addr":"Chez van Rijn, Rembrandtplein 17, Amsterdam","nyeTags":["dinner-only"]},{"id":"cafe-de-kroon-nye-2026","name":"Café de Kroon NYE","lat":52.36642,"lng":4.896701,"when":"do 31 dec","time":"aankomst 19:00–19:30; keuken tot 22:30; clubavond vanaf 23:00","addr":"Café de Kroon, Rembrandtplein 17-I, Amsterdam","nyeTags":["dinner-club"]},{"id":"flore-nye-dinner-2026","name":"Flore NYE dinner","lat":52.36766,"lng":4.894309,"when":"do 31 dec","time":"16:45–20:45","addr":"Flore, De L'Europe, Nieuwe Doelenstraat 2-14, Amsterdam","nyeTags":["dinner-only"]},{"id":"teletech-nyd-afas-2027","name":"Teletech New Year's Day","lat":52.312261,"lng":4.944217,"when":"vr 1 jan","time":"deuren 16:00, einde rond 01:00","addr":"AFAS Live, Johan Cruijff Boulevard 590, Amsterdam","nyeTags":["club-only","new-years-day"]},{"id":"wereldkerstcircus-carre-1-jan-2027","name":"40th World Christmas Circus","lat":52.362378,"lng":4.903881,"when":"vr 1 jan","time":"13:00 en 17:00","addr":"Koninklijk Theater Carré, Amstel 115-125, Amsterdam","nyeTags":["family","concerts","new-years-day"]},{"id":"thuishaven-nieuwjaarsdans-2027","name":"Thuishaven Nieuwjaarsdans","lat":52.396762,"lng":4.856394,"when":"vr 1 jan","time":"14:00–23:00, laatste binnenkomst 22:00","addr":"Thuishaven, Contactweg 68, Amsterdam","nyeTags":["club-only","new-years-day"]},{"id":"bibi-shelter-1-jan-2027","name":"BiBi at Shelter","lat":52.3835,"lng":4.901,"when":"vr 1 jan","time":"23:00–06:00","addr":"Shelter, Overhoeksplein 3, onder de A'DAM Toren, Amsterdam","nyeTags":["club-only","new-years-day"]},{"id":"rose-ringed-ijland-2027","name":"Rose Ringed 6hrs: first dance of the year","lat":52.411129,"lng":4.877232,"when":"vr 1 jan","time":"16:00–23:59","addr":"IJLAND, Tt. Vasumweg 171, Amsterdam","nyeTags":["club-only","new-years-day"]},{"id":"nbe-nieuwjaarsconcert-2027","name":"NBE New Year's Concert","lat":52.3564,"lng":4.8795,"when":"vr 1 jan","time":"13:30 en 16:30","addr":"Concertgebouw, Concertgebouwplein 10, Amsterdam","nyeTags":["family","concerts","new-years-day"]}]</script>
   </section>
   <script>
 (function(){
@@ -1940,30 +1959,46 @@ function initSeasonMap(){
     }).addTo(map);
   });
   var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
-  var groups = {};
-  events.forEach(function(ev){
-    var key = ev.lat + "," + ev.lng;
-    if(!groups[key]) groups[key] = [];
-    groups[key].push(ev);
-  });
-  Object.keys(groups).forEach(function(key){
-    var group = groups[key];
-    var ev = group[0];
-    var html = group.map(function(e){
-      var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
-      return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
-    }).join("<hr>");
-    L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(map);
-  });
-  var pts = events.map(function(e){ return [e.lat, e.lng]; });
-  if(pts.length) map.fitBounds(pts, {padding:[40,40], maxZoom:14});
-  setTimeout(function(){ map.invalidateSize(); }, 0);
+  var layer = L.layerGroup().addTo(map);
+  function draw(list){
+    layer.clearLayers();
+    var groups = {};
+    list.forEach(function(ev){
+      var key = ev.lat + "," + ev.lng;
+      if(!groups[key]) groups[key] = [];
+      groups[key].push(ev);
+    });
+    Object.keys(groups).forEach(function(key){
+      var group = groups[key];
+      var ev = group[0];
+      var html = group.map(function(e){
+        var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
+        return "<b><a href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "");
+      }).join("<hr>");
+      L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(layer);
+    });
+    if(list.length){
+      map.fitBounds(list.map(function(e){ return [e.lat, e.lng]; }), {padding:[40,40], maxZoom:14});
+    }
+    setTimeout(function(){ map.invalidateSize(); }, 0);
+  }
+  function filterEvents(tag){
+    if(!tag || tag === "all") return events;
+    return events.filter(function(e){
+      return (e.nyeTags || []).indexOf(tag) !== -1;
+    });
+  }
+  window.applySeasonMapFilter = function(tag){
+    draw(filterEvents(tag));
+  };
+  draw(filterEvents(window.__pendingSeasonMapFilter || "all"));
 }
+
 
   </script>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
-    <li id="e-nela-nye-drinks-dance-2026" data-end="2026-12-31">
+    <li id="e-nela-nye-drinks-dance-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Nela New Year&#39;s Eve Drinks &amp; Dance</h2>
         <p class="meta">Nachtleven · Drinken</p>
@@ -1977,7 +2012,7 @@ function initSeasonMap(){
         <p><a href="https://nelarestaurant.com/amsterdam/festive/">Details en tickets voor Nela New Year&#39;s Eve Drinks &amp; Dance<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-pllek-nye-2026" data-end="2026-12-31">
+    <li id="e-pllek-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>Pllek New Year&#39;s Eve</h2>
         <p class="meta">Nachtleven · Eten · Drinken</p>
@@ -1991,7 +2026,7 @@ function initSeasonMap(){
         <p><a href="https://pllek.nl/en/pllek-new-years-eve-2026/">Details en tickets voor Pllek New Year&#39;s Eve<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-goede-voornemen-nye-2026" data-end="2026-12-31">
+    <li id="e-goede-voornemen-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Het Goede Voornemen</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2005,7 +2040,7 @@ function initSeasonMap(){
         <p><a href="https://www.paradiso.nl/en/program/het-goede-voornemen/2950706">Details en tickets voor Het Goede Voornemen<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-further-nye-radion-2026" data-end="2026-12-31">
+    <li id="e-further-nye-radion-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>DJ Bone presents FURTHER NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2019,7 +2054,7 @@ function initSeasonMap(){
         <p><a href="https://radion.amsterdam/program/dj-bone-presents-further-nye-2026/">Details en tickets voor DJ Bone presents FURTHER NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-we-love-80s-nye-2026" data-end="2026-12-31">
+    <li id="e-we-love-80s-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>We Love 80s New Year&#39;s Eve</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2033,7 +2068,7 @@ function initSeasonMap(){
         <p><a href="https://www.paradiso.nl/en/program/we-love-80s-oud-nieuw/2932040">Details en tickets voor We Love 80s New Year&#39;s Eve<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-electric-fireworks-museumplein-2026" data-end="2026-12-31">
+    <li id="e-electric-fireworks-museumplein-2026" data-end="2026-12-31" data-nye-tags="free-fireworks family">
       <article>
         <h2>Electric Fireworks at Museumplein</h2>
         <p class="meta">Gezin &amp; Kids · Muziek</p>
@@ -2047,7 +2082,7 @@ function initSeasonMap(){
         <p><a href="https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/">Details en tickets voor Electric Fireworks at Museumplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-fireworks-sloterplas-2026" data-end="2026-12-31">
+    <li id="e-fireworks-sloterplas-2026" data-end="2026-12-31" data-nye-tags="free-fireworks family">
       <article>
         <h2>New Year&#39;s fireworks at Sloterplas</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2061,7 +2096,7 @@ function initSeasonMap(){
         <p><a href="https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/">Details en tickets voor New Year&#39;s fireworks at Sloterplas<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-fireworks-ijburg-2026" data-end="2026-12-31">
+    <li id="e-fireworks-ijburg-2026" data-end="2026-12-31" data-nye-tags="free-fireworks family">
       <article>
         <h2>New Year&#39;s fireworks at IJburg</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2075,7 +2110,7 @@ function initSeasonMap(){
         <p><a href="https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/">Details en tickets voor New Year&#39;s fireworks at IJburg<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-fireworks-mandelapark-2026" data-end="2026-12-31">
+    <li id="e-fireworks-mandelapark-2026" data-end="2026-12-31" data-nye-tags="free-fireworks family">
       <article>
         <h2>New Year&#39;s fireworks at Nelson Mandelapark</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2089,7 +2124,7 @@ function initSeasonMap(){
         <p><a href="https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/">Details en tickets voor New Year&#39;s fireworks at Nelson Mandelapark<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-fireworks-buikslotermeerplein-2026" data-end="2026-12-31">
+    <li id="e-fireworks-buikslotermeerplein-2026" data-end="2026-12-31" data-nye-tags="free-fireworks family">
       <article>
         <h2>New Year&#39;s fireworks at Buikslotermeerplein</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2103,7 +2138,7 @@ function initSeasonMap(){
         <p><a href="https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/">Details en tickets voor New Year&#39;s fireworks at Buikslotermeerplein<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-fireworks-weesp-2026" data-end="2026-12-31">
+    <li id="e-fireworks-weesp-2026" data-end="2026-12-31" data-nye-tags="free-fireworks family">
       <article>
         <h2>New Year&#39;s fireworks in Weesp</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2117,7 +2152,7 @@ function initSeasonMap(){
         <p><a href="https://www.amsterdam.nl/nieuws/evenementen-herdenkingen/oud-nieuw-amsterdam/oud-en-nieuw-vieringen/">Details en tickets voor New Year&#39;s fireworks in Weesp<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-beatclub-stardust-nye-2026" data-end="2026-12-31">
+    <li id="e-beatclub-stardust-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Amsterdam BeatClub Stardust NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2131,7 +2166,7 @@ function initSeasonMap(){
         <p><a href="https://www.paradiso.nl/programma/amsterdam-beatclub-stardust-nye/2943006">Details en tickets voor Amsterdam BeatClub Stardust NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-encore-nye-melkweg-2026" data-end="2026-12-31">
+    <li id="e-encore-nye-melkweg-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Encore New Year&#39;s Eve</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2145,7 +2180,7 @@ function initSeasonMap(){
         <p><a href="https://www.melkweg.nl/nl/agenda/encore-new-years-eve-2026-31-12-2026/">Details en tickets voor Encore New Year&#39;s Eve<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-sieraad-olivier-weiter-nye-2026" data-end="2026-12-31">
+    <li id="e-sieraad-olivier-weiter-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Olivier Weiter b2b Miss Melera</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2159,7 +2194,7 @@ function initSeasonMap(){
         <p><a href="https://hetsieraad.nl/events/olivier-weiter-b2b-miss-melera-all-night-long-191447">Details en tickets voor Olivier Weiter b2b Miss Melera<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-vunzige-deuntjes-nye-2026" data-end="2026-12-31">
+    <li id="e-vunzige-deuntjes-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Vunzige Deuntjes NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2173,7 +2208,7 @@ function initSeasonMap(){
         <p><a href="https://www.westweelde.nl/events/vunzige-deuntjes-nye-2026-2026-12-31">Details en tickets voor Vunzige Deuntjes NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-q-factory-nye-festival-2026" data-end="2026-12-31">
+    <li id="e-q-factory-nye-festival-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Q-Factory Indoor NYE Festival</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2187,7 +2222,7 @@ function initSeasonMap(){
         <p><a href="https://q-factory.com/en/events/amsterdam-s-biggest-indoor-new-year-s-eve-festival">Details en tickets voor Q-Factory Indoor NYE Festival<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-escape-nye-2026" data-end="2026-12-31">
+    <li id="e-escape-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club club-only">
       <article>
         <h2>Escape NYE</h2>
         <p class="meta">Nachtleven · Muziek · Eten</p>
@@ -2201,7 +2236,7 @@ function initSeasonMap(){
         <p><a href="https://escape.nl/en/2026-12-31_nye-2026-2027/">Details en tickets voor Escape NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-teletech-nye-afas-2026" data-end="2026-12-31">
+    <li id="e-teletech-nye-afas-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Teletech NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2215,7 +2250,7 @@ function initSeasonMap(){
         <p><a href="https://www.afaslive.nl/agenda/teletech-new-years">Details en tickets voor Teletech NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-palet-lofi-nye-2026" data-end="2026-12-31">
+    <li id="e-palet-lofi-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Palet x Lofi NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2229,7 +2264,7 @@ function initSeasonMap(){
         <p><a href="https://lofi.amsterdam/events/">Details en tickets voor Palet x Lofi NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-olieboulen-nye-mooie-boules-2026" data-end="2026-12-31">
+    <li id="e-olieboulen-nye-mooie-boules-2026" data-end="2026-12-31" data-nye-tags="club-only all-inclusive">
       <article>
         <h2>Olieboulen NYE</h2>
         <p class="meta">Nachtleven · Drinken</p>
@@ -2243,7 +2278,7 @@ function initSeasonMap(){
         <p><a href="https://mooieboules.nl/amsterdamwest/">Details en tickets voor Olieboulen NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-canvas-nye-volkshotel-2026" data-end="2026-12-31">
+    <li id="e-canvas-nye-volkshotel-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>Canvas NYE</h2>
         <p class="meta">Nachtleven · Eten · Drinken</p>
@@ -2257,7 +2292,7 @@ function initSeasonMap(){
         <p><a href="https://www.volkshotel.nl/en/agenda/canvas/canvas-nye-2026/">Details en tickets voor Canvas NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-pasar-makan-nye-jakarta-2026" data-end="2026-12-31">
+    <li id="e-pasar-makan-nye-jakarta-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>Pasar Makan NYE</h2>
         <p class="meta">Nachtleven · Eten · Drinken</p>
@@ -2271,7 +2306,7 @@ function initSeasonMap(){
         <p><a href="https://hoteljakarta.amsterdam/feestdagen-2026/">Details en tickets voor Pasar Makan NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-van-de-werf-nye-2026" data-end="2026-12-31">
+    <li id="e-van-de-werf-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club all-inclusive">
       <article>
         <h2>Oud en Nieuw Van de Werf</h2>
         <p class="meta">Nachtleven · Eten · Drinken</p>
@@ -2285,7 +2320,7 @@ function initSeasonMap(){
         <p><a href="https://vandewerf.amsterdam/oud-en-nieuw-2026-amsterdam/">Details en tickets voor Oud en Nieuw Van de Werf<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-wereldkerstcircus-carre-31-dec-2026" data-end="2026-12-31">
+    <li id="e-wereldkerstcircus-carre-31-dec-2026" data-end="2026-12-31" data-nye-tags="family concerts">
       <article>
         <h2>40th World Christmas Circus</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2299,7 +2334,7 @@ function initSeasonMap(){
         <p><a href="https://carre.nl/voorstelling/wereldkerstcircus-2627">Details en tickets voor 40th World Christmas Circus<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-nomad-aan-het-ij-nye-2026" data-end="2026-12-31">
+    <li id="e-nomad-aan-het-ij-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>Nomad aan het IJ New Year&#39;s Eve</h2>
         <p class="meta">Eten · Drinken</p>
@@ -2313,7 +2348,7 @@ function initSeasonMap(){
         <p><a href="https://nomadaanhetij.nl/oud-en-nieuw/">Details en tickets voor Nomad aan het IJ New Year&#39;s Eve<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-bridges-nye-dinner-2026" data-end="2026-12-31">
+    <li id="e-bridges-nye-dinner-2026" data-end="2026-12-31" data-nye-tags="dinner-only">
       <article>
         <h2>New Year&#39;s Eve dinner at Bridges</h2>
         <p class="meta">Eten · Drinken</p>
@@ -2327,7 +2362,7 @@ function initSeasonMap(){
         <p><a href="https://bridgesrestaurant.nl/festive-season/">Details en tickets voor New Year&#39;s Eve dinner at Bridges<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-zoku-rooftop-nye-2026" data-end="2026-12-31">
+    <li id="e-zoku-rooftop-nye-2026" data-end="2026-12-31" data-nye-tags="club-only all-inclusive">
       <article>
         <h2>Zoku Rooftop NYE</h2>
         <p class="meta">Nachtleven · Drinken · Eten</p>
@@ -2341,7 +2376,7 @@ function initSeasonMap(){
         <p><a href="https://livezoku.com/amsterdam/events/rooftop-new-years-eve-party/">Details en tickets voor Zoku Rooftop NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-tower-of-love-loft-nye-2026" data-end="2026-12-31">
+    <li id="e-tower-of-love-loft-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Tower of Love NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2355,7 +2390,7 @@ function initSeasonMap(){
         <p><a href="https://theloftamsterdam.com/2026/12/31/ade-closing-party-copy-copy-copy-copy/">Details en tickets voor Tower of Love NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-happy-feelings-nye-2026" data-end="2026-12-31">
+    <li id="e-happy-feelings-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Happy Feelings NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2369,7 +2404,7 @@ function initSeasonMap(){
         <p><a href="https://happyfeelings.nl/en/events/happy-feelings-nye-amsterdam/">Details en tickets voor Happy Feelings NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-crowne-plaza-nye-2026" data-end="2026-12-31">
+    <li id="e-crowne-plaza-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>NYE Party at Crowne Plaza Amsterdam-South</h2>
         <p class="meta">Nachtleven · Eten · Drinken</p>
@@ -2383,7 +2418,7 @@ function initSeasonMap(){
         <p><a href="https://crowneplazaamsterdam.com/offers/nye-party-at-crowne-plaza-amsterdam-south/">Details en tickets voor NYE Party at Crowne Plaza Amsterdam-South<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-shelter-nye-2026" data-end="2026-12-31">
+    <li id="e-shelter-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Shelter NYE</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2397,7 +2432,7 @@ function initSeasonMap(){
         <p><a href="https://shelteramsterdam.nl/">Details en tickets voor Shelter NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-baila-dembow-ijland-nye-2026" data-end="2026-12-31">
+    <li id="e-baila-dembow-ijland-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Baila Dembow</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2411,7 +2446,7 @@ function initSeasonMap(){
         <p><a href="https://ijland.nl/agenda/baila-dembow-2/">Details en tickets voor Baila Dembow<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-luminair-nye-2026" data-end="2026-12-31">
+    <li id="e-luminair-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>LuminAir NYE at The Bar Above Amsterdam</h2>
         <p class="meta">Nachtleven · Eten · Drinken</p>
@@ -2425,7 +2460,7 @@ function initSeasonMap(){
         <p><a href="https://www.luminairamsterdam.com/program/new-year-s-eve">Details en tickets voor LuminAir NYE at The Bar Above Amsterdam<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-jimmy-woo-nye-2026" data-end="2026-12-31">
+    <li id="e-jimmy-woo-nye-2026" data-end="2026-12-31" data-nye-tags="club-only">
       <article>
         <h2>Jimmy Woo WOO №27</h2>
         <p class="meta">Nachtleven · Muziek · Drinken</p>
@@ -2439,7 +2474,7 @@ function initSeasonMap(){
         <p><a href="https://www.jimmywoo.com/tickets">Details en tickets voor Jimmy Woo WOO №27<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-chez-van-rijn-nye-2026" data-end="2026-12-31">
+    <li id="e-chez-van-rijn-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-only">
       <article>
         <h2>Chez van Rijn NYE dinner</h2>
         <p class="meta">Eten · Drinken · Muziek</p>
@@ -2453,7 +2488,7 @@ function initSeasonMap(){
         <p><a href="https://chezvanrijn.nl/nl/oud-en-nieuw-amsterdam/">Details en tickets voor Chez van Rijn NYE dinner<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-cafe-de-kroon-nye-2026" data-end="2026-12-31">
+    <li id="e-cafe-de-kroon-nye-2026" data-end="2026-12-31" data-nye-tags="dinner-club">
       <article>
         <h2>Café de Kroon NYE</h2>
         <p class="meta">Eten · Nachtleven · Drinken</p>
@@ -2467,7 +2502,7 @@ function initSeasonMap(){
         <p><a href="https://dekroon.nl/en/menu/nye-2026-2027/">Details en tickets voor Café de Kroon NYE<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-flore-nye-dinner-2026" data-end="2026-12-31">
+    <li id="e-flore-nye-dinner-2026" data-end="2026-12-31" data-nye-tags="dinner-only">
       <article>
         <h2>Flore NYE dinner</h2>
         <p class="meta">Eten</p>
@@ -2481,7 +2516,7 @@ function initSeasonMap(){
         <p><a href="https://restaurantflore.com/">Details en tickets voor Flore NYE dinner<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-teletech-nyd-afas-2027" data-end="2027-01-01">
+    <li id="e-teletech-nyd-afas-2027" data-end="2027-01-01" data-nye-tags="club-only new-years-day">
       <article>
         <h2>Teletech New Year&#39;s Day</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2495,7 +2530,7 @@ function initSeasonMap(){
         <p><a href="https://www.afaslive.nl/agenda/teletech-new-years">Details en tickets voor Teletech New Year&#39;s Day<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-wereldkerstcircus-carre-1-jan-2027" data-end="2027-01-01">
+    <li id="e-wereldkerstcircus-carre-1-jan-2027" data-end="2027-01-01" data-nye-tags="family concerts new-years-day">
       <article>
         <h2>40th World Christmas Circus</h2>
         <p class="meta">Gezin &amp; Kids</p>
@@ -2509,7 +2544,7 @@ function initSeasonMap(){
         <p><a href="https://carre.nl/voorstelling/wereldkerstcircus-2627">Details en tickets voor 40th World Christmas Circus<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-thuishaven-nieuwjaarsdans-2027" data-end="2027-01-01">
+    <li id="e-thuishaven-nieuwjaarsdans-2027" data-end="2027-01-01" data-nye-tags="club-only new-years-day">
       <article>
         <h2>Thuishaven Nieuwjaarsdans</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2523,7 +2558,7 @@ function initSeasonMap(){
         <p><a href="https://thuishaven.nl/01-jan-de-thuishaven-nieuwjaarsdans-tra/">Details en tickets voor Thuishaven Nieuwjaarsdans<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-bibi-shelter-1-jan-2027" data-end="2027-01-01">
+    <li id="e-bibi-shelter-1-jan-2027" data-end="2027-01-01" data-nye-tags="club-only new-years-day">
       <article>
         <h2>BiBi at Shelter</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2537,7 +2572,7 @@ function initSeasonMap(){
         <p><a href="https://shelteramsterdam.nl/">Details en tickets voor BiBi at Shelter<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-rose-ringed-ijland-2027" data-end="2027-01-01">
+    <li id="e-rose-ringed-ijland-2027" data-end="2027-01-01" data-nye-tags="club-only new-years-day">
       <article>
         <h2>Rose Ringed 6hrs: first dance of the year</h2>
         <p class="meta">Nachtleven · Muziek</p>
@@ -2551,7 +2586,7 @@ function initSeasonMap(){
         <p><a href="https://watt-events.nl/events/rose-ringed-6hrs-the-new-year-dance/">Details en tickets voor Rose Ringed 6hrs: first dance of the year<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
-    <li id="e-nbe-nieuwjaarsconcert-2027" data-end="2027-01-01">
+    <li id="e-nbe-nieuwjaarsconcert-2027" data-end="2027-01-01" data-nye-tags="family concerts new-years-day">
       <article>
         <h2>NBE New Year&#39;s Concert</h2>
         <p class="meta">Muziek · Gezin &amp; Kids</p>
@@ -2590,6 +2625,64 @@ function applyFromToday(today){
   if(status) status.removeAttribute("hidden");
 }
 applyFromToday();
+(function(){
+  var chips = document.getElementById("nye-chips");
+  if(!chips) return;
+  chips.removeAttribute("hidden");
+  var list = document.getElementById("list");
+  var status = document.getElementById("nye-filter-status");
+  var lang = (document.documentElement.lang || "en").slice(0,2);
+  function today(){ return new Date().toLocaleDateString("en-CA", {timeZone:"Europe/Amsterdam"}); }
+  function isPast(li){
+    var end = li.getAttribute("data-end");
+    return !!(end && end < today());
+  }
+  function evWord(n){
+    if(lang === "nl") return n === 1 ? "evenement" : "evenementen";
+    return n === 1 ? "event" : "events";
+  }
+  function apply(tag){
+    chips.querySelectorAll(".chip").forEach(function(b){
+      var on = b.getAttribute("data-nye-tag") === tag;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+    var shown = 0;
+    if(list){
+      Array.prototype.forEach.call(list.children, function(li){
+        if(isPast(li)){ li.setAttribute("hidden", ""); return; }
+        var tags = (li.getAttribute("data-nye-tags") || "").split(/\s+/).filter(Boolean);
+        var match = tag === "all" || tags.indexOf(tag) !== -1;
+        if(match){ li.removeAttribute("hidden"); shown++; }
+        else li.setAttribute("hidden", "");
+      });
+    }
+    if(status){
+      status.textContent = lang === "nl"
+        ? (shown + " " + evWord(shown) + " getoond")
+        : (shown + " " + evWord(shown) + " shown");
+    }
+    if(typeof window.applySeasonMapFilter === "function"){
+      window.applySeasonMapFilter(tag);
+    } else {
+      window.__pendingSeasonMapFilter = tag;
+    }
+  }
+  chips.addEventListener("click", function(ev){
+    var b = ev.target.closest ? ev.target.closest(".chip") : null;
+    if(!b || !chips.contains(b)) return;
+    var tag = b.getAttribute("data-nye-tag");
+    if(tag) apply(tag);
+  });
+  chips.addEventListener("keydown", function(ev){
+    if(ev.key !== "Enter" && ev.key !== " ") return;
+    var b = ev.target.closest ? ev.target.closest(".chip") : null;
+    if(!b || !chips.contains(b)) return;
+    ev.preventDefault();
+    var tag = b.getAttribute("data-nye-tag");
+    if(tag) apply(tag);
+  });
+})();
   </script>
   <section class="faq" aria-labelledby="faq-h">
     <h2 id="faq-h">Veelgestelde vragen</h2>
