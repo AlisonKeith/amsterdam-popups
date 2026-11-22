@@ -182,6 +182,7 @@ if(!list.length) throw new Error(`no events for week ${week.id}`);
 const introHtml = s => esc(s).replace(/\[([^\]]+)\]\((\/[a-z0-9\/-]*)\)/g, '<a href="$2">$1</a>');
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const priceText = (e, L) => e.price === null ? TXT[L].free : (e.price && e.price[L]) || "";
+const priceHtml = (e, L) => priceText(e, L).split("\n").map(esc).join("<br>");
 const pageCats = CATEGORIES.filter(c => !NO_PAGE.has(c.id));
 const catPath = (id, L) => (L === "nl" ? "/nl/" : "/") + CAT_PAGES[id][L].slug + "/";
 const inCat = id => list.filter(e => e.cats.includes(id));
@@ -282,7 +283,7 @@ const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <l
         <dl>
           <dt>${T.when}</dt><dd>${esc(e.when[L])}${(!e.schedule || !e.schedule.length) && e.time && e.time[L] && e.time[L] !== e.when[L] ? ", " + esc(e.time[L]) : ""}</dd>
           <dt>${T.where}</dt><dd>${esc(e.addr[L])}${e.hood && e.hood[L] ? " (" + esc(e.hood[L]) + ")" : ""}</dd>
-          <dt>${T.price}</dt><dd>${esc(priceText(e, L))}</dd>
+          <dt>${T.price}</dt><dd>${priceHtml(e, L)}</dd>
 ${e.org ? `          <dt>${T.org}</dt><dd>${e.org.url ? `<a href="${esc(e.org.url)}">${esc(e.org.name)}</a>` : esc(e.org.name)}</dd>
 ` : ""}        </dl>
         <p>${esc(e.blurb[L])}</p>
