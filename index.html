@@ -6545,10 +6545,40 @@ function eventStillOn(ev){
   const last = lastDayISO(ev);
   return last !== null && last >= todayISO();
 }
+/* On the Sunday a new edition goes live, last week's events still on today stay in
+   "This week" until midnight (Amsterdam time). An event re-listed in the new week
+   (same link or name) shows once, as the new-week card, and keeps today's date for the day filters. */
+function weekTwinKey(ev){ return ev.url || ev.name; }
+function carryoverState(){
+  const empty = { list:[], hidden:new Set(), extraDays:{} };
+  const prev = WEEKS[1];
+  if(!prev || todayISO() >= currentWeek.id) return empty;
+  const cur = EVENTS.filter(e => e.week === currentWeek.id);
+  const twin = {};
+  cur.forEach(e => { twin[weekTwinKey(e)] = e; twin[e.name] = e; });
+  const st = { list:[], hidden:new Set(), extraDays:{} };
+  EVENTS.filter(e => e.week === prev.id && eventStillOn(e)).forEach(e => {
+    st.hidden.add(e.id);
+    const tw = twin[weekTwinKey(e)] || twin[e.name];
+    if(tw) st.extraDays[tw.id] = (st.extraDays[tw.id] || []).concat(e.days || []);
+    else st.list.push(e);
+  });
+  return st;
+}
+function thisWeekEvents(){
+  const carry = carryoverState();
+  const cur = weekStillLive(currentWeek.id) ? EVENTS.filter(e => e.week === currentWeek.id && eventStillOn(e)) : [];
+  const seen = new Set();
+  return carry.list.concat(cur).filter(e => !seen.has(e.id) && seen.add(e.id));
+}
+function eventDays(ev){
+  const extra = carryoverState().extraDays[ev.id];
+  return extra ? (ev.days || []).concat(extra) : (ev.days || []);
+}
 function isWeekendISO(s){ const g=new Date(s+"T12:00:00").getDay(); return g===0||g===6; }
 function dayPass(ev){
   if(dayFilter==="all") return true;
-  const days = ev.days || [];
+  const days = eventDays(ev);
   if(dayFilter==="today") return days.includes(todayISO());
   if(dayFilter==="weekend") return days.some(isWeekendISO);
   return true;
@@ -6633,8 +6663,7 @@ function renderThisWeek(){
   closeMapChooser(false);
   const weekLive = weekStillLive(currentWeek.id);
   document.getElementById("weekrange").textContent = weekLive ? currentWeek.label[lang] : "";
-  const published = EVENTS.filter(e => e.week === currentWeek.id);
-  let list = weekLive ? published.filter(eventStillOn) : [];
+  let list = thisWeekEvents();
   if(activeCat !== "all") list = list.filter(e => e.cats.includes(activeCat));
   list = list.filter(dayPass);
   list = list.filter(recurPass);
@@ -6676,8 +6705,9 @@ function renderArchive(){
     return hay.includes(q);
   };
   let html = "", any = false;
+  const shownThisWeek = carryoverState().hidden;
   WEEKS.forEach(w => {
-    const list = EVENTS.filter(e => e.week === w.id && match(e));
+    const list = EVENTS.filter(e => e.week === w.id && !shownThisWeek.has(e.id) && match(e));
     if(!list.length) return;
     any = true;
     html += `<div class="weekgroup"><div class="weeklabel">${w.label[lang]}${w.id===currentWeek.id && weekStillLive(w.id)?` <small>${t("thisweek").toLowerCase()}</small>`:""}</div><div class="cards">${list.map(cardHtml).join("")}</div></div>`;
@@ -6961,7 +6991,7 @@ function schemaOffer(e){
 }
 // Text fields follow the page language at load (English on /, Dutch on /nl/).
 function injectEventSchema(){
-  const list = weekStillLive(currentWeek.id) ? EVENTS.filter(e => e.week === currentWeek.id && eventStillOn(e)) : [];
+  const list = thisWeekEvents();
   const items = list.map(e => {
     const ev = {
       "@type":SCHEMA_TYPE[e.cats[0]] || "Event",
