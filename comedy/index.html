@@ -149,6 +149,44 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
  "@context": "https://schema.org",
  "@graph": [
   {
+   "@type": "ComedyEvent",
+   "name": "This Year in Comedy: 1996!",
+   "keywords": "Comedy",
+   "description": "A one-night comedy variety show where Amsterdam comedians team up around the year 1996. Ages 18+.",
+   "url": "https://www.eventbrite.nl/e/this-year-in-comedy-1996-tickets-2004127540423",
+   "eventStatus": "https://schema.org/EventScheduled",
+   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+   "location": {
+    "@type": "Place",
+    "name": "De Dijktheater",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Da Costakade 160",
+     "addressLocality": "Amsterdam",
+     "addressCountry": "NL"
+    },
+    "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": 52.3679,
+     "longitude": 4.872
+    }
+   },
+   "startDate": "2026-11-25T19:30:00+01:00",
+   "endDate": "2026-11-25T21:15:00+01:00",
+   "organizer": {
+    "@type": "Organization",
+    "name": "Amsterdam Comedy Studio"
+   },
+   "offers": {
+    "@type": "Offer",
+    "price": "11.98",
+    "priceCurrency": "EUR",
+    "url": "https://www.eventbrite.nl/e/this-year-in-comedy-1996-tickets-2004127540423",
+    "availability": "https://schema.org/InStock",
+    "description": "€11.98"
+   }
+  },
+  {
    "@type": "SportsEvent",
    "name": "Pro Wrestling Holland x Boom Chicago (8th edition)",
    "keywords": "Sport, Comedy",
@@ -187,44 +225,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
     "url": "https://boomchicago.nl/pro-wrestling-holland/",
     "availability": "https://schema.org/InStock",
     "description": "€20.95 early bird; €25.95 ringside standing; seats with drink service €38.95–€75"
-   }
-  },
-  {
-   "@type": "ComedyEvent",
-   "name": "Srefidensi Comedyshow",
-   "keywords": "Comedy, Food",
-   "description": "A Surinamese Independence Day comedy night with Roué, Deng Boy, Jay and others, plus music and Surinamese food. In Dutch.",
-   "url": "https://meervaart.nl/agenda/srefidensi",
-   "eventStatus": "https://schema.org/EventScheduled",
-   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-   "location": {
-    "@type": "Place",
-    "name": "Meervaart",
-    "address": {
-     "@type": "PostalAddress",
-     "streetAddress": "Meer en Vaart 300",
-     "addressLocality": "Amsterdam",
-     "addressCountry": "NL"
-    },
-    "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 52.3591,
-     "longitude": 4.8074
-    }
-   },
-   "startDate": "2026-11-29T20:15:00+01:00",
-   "organizer": {
-    "@type": "Organization",
-    "name": "Meervaart",
-    "url": "https://meervaart.nl/"
-   },
-   "offers": {
-    "@type": "Offer",
-    "price": "32.50",
-    "priceCurrency": "EUR",
-    "url": "https://meervaart.nl/agenda/srefidensi",
-    "availability": "https://schema.org/InStock",
-    "description": "€32.50 incl. a drink + €2 booking fee"
    }
   },
   {
@@ -370,6 +370,20 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Stand-up, improv, sketch and other comedy nights, from open mics to full-length shows. Many listings say whether a show is in English or Dutch, so it is easy to pick one you will follow. The list is refreshed every week. Every listing is checked on the organiser's own page. Times and prices can change, so check the organiser's link before you go.</p>
   <p id="from-today" hidden role="status">Showing today onwards</p>
   <ol id="list">
+    <li id="e-comedy-studio-1996" data-end="2026-11-25">
+      <article>
+        <h2>This Year in Comedy: 1996!</h2>
+        <p class="meta">Comedy</p>
+        <dl>
+          <dt>When</dt><dd>Wed 25 Nov, 19:30–21:15 (doors 19:00)</dd>
+          <dt>Where</dt><dd>De Dijktheater, Da Costakade 160, Amsterdam (Oud-West)</dd>
+          <dt>Price</dt><dd>€11.98</dd>
+          <dt>Organiser</dt><dd>Amsterdam Comedy Studio</dd>
+        </dl>
+        <p>A one-night comedy variety show where Amsterdam comedians team up around the year 1996. Ages 18+.</p>
+        <p><a href="https://www.eventbrite.nl/e/this-year-in-comedy-1996-tickets-2004127540423">Details and tickets for This Year in Comedy: 1996!<span class="sr-only"> (organiser's site)</span></a></p>
+      </article>
+    </li>
     <li id="e-boom-pro-wrestling-holland" data-end="2026-11-27">
       <article>
         <h2>Pro Wrestling Holland x Boom Chicago (8th edition)</h2>
@@ -382,20 +396,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         </dl>
         <p>Live pro wrestling takes over the Boom Chicago stage for one night, with acrobatics, taunts and comedy around the ring.</p>
         <p><a href="https://boomchicago.nl/pro-wrestling-holland/">Details and tickets for Pro Wrestling Holland x Boom Chicago (8th edition)<span class="sr-only"> (organiser's site)</span></a></p>
-      </article>
-    </li>
-    <li id="e-meervaart-srefidensi-comedy" data-end="2026-11-29">
-      <article>
-        <h2>Srefidensi Comedyshow</h2>
-        <p class="meta">Comedy · Food</p>
-        <dl>
-          <dt>When</dt><dd>Sun 29 Nov, 20:15</dd>
-          <dt>Where</dt><dd>Meervaart, Meer en Vaart 300, Amsterdam (Osdorp, Nieuw-West)</dd>
-          <dt>Price</dt><dd>€32.50 incl. a drink + €2 booking fee</dd>
-          <dt>Organiser</dt><dd><a href="https://meervaart.nl/">Meervaart</a></dd>
-        </dl>
-        <p>A Surinamese Independence Day comedy night with Roué, Deng Boy, Jay and others, plus music and Surinamese food. In Dutch.</p>
-        <p><a href="https://meervaart.nl/agenda/srefidensi">Details and tickets for Srefidensi Comedyshow<span class="sr-only"> (organiser's site)</span></a></p>
       </article>
     </li>
     <li id="e-boom-su-at-boom" data-end="2026-11-29">
@@ -469,6 +469,7 @@ applyFromToday();
       <li><a href="/comedy/" aria-current="page">Comedy</a></li>
       <li><a href="/workshops/">Workshops</a></li>
       <li><a href="/queer/">Queer</a></li>
+      <li><a href="/networking/">Networking</a></li>
     </ul>
   </nav>
   <p>Generated from the weekly edition (week starting 2026-11-23). <a href="/">Back to the full guide</a> · <a href="/about/">About</a> · <a href="/privacy.html">Privacy</a> · Know a pop-up? Email <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>

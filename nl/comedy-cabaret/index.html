@@ -149,6 +149,44 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
  "@context": "https://schema.org",
  "@graph": [
   {
+   "@type": "ComedyEvent",
+   "name": "This Year in Comedy: 1996!",
+   "keywords": "Comedy/Cabaret",
+   "description": "Eenmalige comedy-variétéshow waarin Amsterdamse comedians samen het jaar 1996 op de hak nemen. Vanaf 18 jaar.",
+   "url": "https://www.eventbrite.nl/e/this-year-in-comedy-1996-tickets-2004127540423",
+   "eventStatus": "https://schema.org/EventScheduled",
+   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+   "location": {
+    "@type": "Place",
+    "name": "De Dijktheater",
+    "address": {
+     "@type": "PostalAddress",
+     "streetAddress": "Da Costakade 160",
+     "addressLocality": "Amsterdam",
+     "addressCountry": "NL"
+    },
+    "geo": {
+     "@type": "GeoCoordinates",
+     "latitude": 52.3679,
+     "longitude": 4.872
+    }
+   },
+   "startDate": "2026-11-25T19:30:00+01:00",
+   "endDate": "2026-11-25T21:15:00+01:00",
+   "organizer": {
+    "@type": "Organization",
+    "name": "Amsterdam Comedy Studio"
+   },
+   "offers": {
+    "@type": "Offer",
+    "price": "11.98",
+    "priceCurrency": "EUR",
+    "url": "https://www.eventbrite.nl/e/this-year-in-comedy-1996-tickets-2004127540423",
+    "availability": "https://schema.org/InStock",
+    "description": "€11,98"
+   }
+  },
+  {
    "@type": "SportsEvent",
    "name": "Pro Wrestling Holland x Boom Chicago (8th edition)",
    "keywords": "Sport, Comedy/Cabaret",
@@ -187,44 +225,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
     "url": "https://boomchicago.nl/pro-wrestling-holland/",
     "availability": "https://schema.org/InStock",
     "description": "€20,95 early bird; €25,95 staan aan de ring; zitplaatsen met drankservice €38,95–€75"
-   }
-  },
-  {
-   "@type": "ComedyEvent",
-   "name": "Srefidensi Comedyshow",
-   "keywords": "Comedy/Cabaret, Eten",
-   "description": "Een comedyavond rond Srefidensi met Roué, Deng Boy, Jay en anderen, plus muziek en heerlijk Surinaams eten.",
-   "url": "https://meervaart.nl/agenda/srefidensi",
-   "eventStatus": "https://schema.org/EventScheduled",
-   "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-   "location": {
-    "@type": "Place",
-    "name": "Meervaart",
-    "address": {
-     "@type": "PostalAddress",
-     "streetAddress": "Meer en Vaart 300",
-     "addressLocality": "Amsterdam",
-     "addressCountry": "NL"
-    },
-    "geo": {
-     "@type": "GeoCoordinates",
-     "latitude": 52.3591,
-     "longitude": 4.8074
-    }
-   },
-   "startDate": "2026-11-29T20:15:00+01:00",
-   "organizer": {
-    "@type": "Organization",
-    "name": "Meervaart",
-    "url": "https://meervaart.nl/"
-   },
-   "offers": {
-    "@type": "Offer",
-    "price": "32.50",
-    "priceCurrency": "EUR",
-    "url": "https://meervaart.nl/agenda/srefidensi",
-    "availability": "https://schema.org/InStock",
-    "description": "€32,50 incl. consumptie + €2 boekingskosten"
    }
   },
   {
@@ -370,6 +370,20 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
   <p>Stand-up, improvisatie, cabaret en andere comedyavonden, van open mics tot avondvullende shows. Bij veel vermeldingen staat of de show in het Nederlands of Engels is, zodat je makkelijk iets kiest wat je kunt volgen. De lijst wordt elke week vernieuwd. Elke vermelding is gecontroleerd op de eigen pagina van de organisator. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat.</p>
   <p id="from-today" hidden role="status">Vanaf vandaag</p>
   <ol id="list">
+    <li id="e-comedy-studio-1996" data-end="2026-11-25">
+      <article>
+        <h2>This Year in Comedy: 1996!</h2>
+        <p class="meta">Comedy/Cabaret</p>
+        <dl>
+          <dt>Wanneer</dt><dd>wo 25 nov, 19:30–21:15 (deur open 19:00)</dd>
+          <dt>Waar</dt><dd>De Dijktheater, Da Costakade 160, Amsterdam (Oud-West)</dd>
+          <dt>Prijs</dt><dd>€11,98</dd>
+          <dt>Organisator</dt><dd>Amsterdam Comedy Studio</dd>
+        </dl>
+        <p>Eenmalige comedy-variétéshow waarin Amsterdamse comedians samen het jaar 1996 op de hak nemen. Vanaf 18 jaar.</p>
+        <p><a href="https://www.eventbrite.nl/e/this-year-in-comedy-1996-tickets-2004127540423">Details en tickets voor This Year in Comedy: 1996!<span class="sr-only"> (site van de organisator)</span></a></p>
+      </article>
+    </li>
     <li id="e-boom-pro-wrestling-holland" data-end="2026-11-27">
       <article>
         <h2>Pro Wrestling Holland x Boom Chicago (8th edition)</h2>
@@ -382,20 +396,6 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
         </dl>
         <p>Eén avond live pro wrestling op het podium van Boom Chicago, met acrobatiek, grootspraak en comedy rond de ring.</p>
         <p><a href="https://boomchicago.nl/pro-wrestling-holland/">Details en tickets voor Pro Wrestling Holland x Boom Chicago (8th edition)<span class="sr-only"> (site van de organisator)</span></a></p>
-      </article>
-    </li>
-    <li id="e-meervaart-srefidensi-comedy" data-end="2026-11-29">
-      <article>
-        <h2>Srefidensi Comedyshow</h2>
-        <p class="meta">Comedy/Cabaret · Eten</p>
-        <dl>
-          <dt>Wanneer</dt><dd>zo 29 nov, 20:15</dd>
-          <dt>Waar</dt><dd>Meervaart, Meer en Vaart 300, Amsterdam (Osdorp, Nieuw-West)</dd>
-          <dt>Prijs</dt><dd>€32,50 incl. consumptie + €2 boekingskosten</dd>
-          <dt>Organisator</dt><dd><a href="https://meervaart.nl/">Meervaart</a></dd>
-        </dl>
-        <p>Een comedyavond rond Srefidensi met Roué, Deng Boy, Jay en anderen, plus muziek en heerlijk Surinaams eten.</p>
-        <p><a href="https://meervaart.nl/agenda/srefidensi">Details en tickets voor Srefidensi Comedyshow<span class="sr-only"> (site van de organisator)</span></a></p>
       </article>
     </li>
     <li id="e-boom-su-at-boom" data-end="2026-11-29">
@@ -469,6 +469,7 @@ applyFromToday();
       <li><a href="/nl/comedy-cabaret/" aria-current="page">Comedy/Cabaret</a></li>
       <li><a href="/nl/workshops/">Workshops</a></li>
       <li><a href="/nl/queer/">Queer</a></li>
+      <li><a href="/nl/netwerken/">Netwerken</a></li>
     </ul>
   </nav>
   <p>Gemaakt op basis van de weekeditie (week vanaf 2026-11-23). <a href="/nl/">Terug naar de volledige gids</a> · <a href="/nl/over/">Over ons</a> · <a href="/privacy.html">Privacy (Engels)</a> · Ken je een pop-up? Mail <a href="mailto:hello@amsterdampopups.com">hello@amsterdampopups.com</a></p>

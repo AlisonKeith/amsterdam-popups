@@ -414,4 +414,22 @@
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/networking/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/networking/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/netwerken/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/networking/"/>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/netwerken/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/networking/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/netwerken/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/networking/"/>
+    <lastmod>2026-11-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
