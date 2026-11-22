@@ -6928,12 +6928,14 @@ function eventStillOn(ev){
 }
 /* On the Sunday a new edition goes live, last week's events still on today stay in
    "This week" until midnight (Amsterdam time). An event re-listed in the new week
-   (same link or name) shows once, as the new-week card, and keeps today's date for the day filters. */
+   (same link or name) shows once, as the new-week card, and keeps today's date for the day filters.
+   KEEP_TODAY is the off switch: set it to true to bring that carry-over back. */
+const KEEP_TODAY = false;
 function weekTwinKey(ev){ return ev.url || ev.name; }
 function carryoverState(){
   const empty = { list:[], hidden:new Set(), extraDays:{} };
   const prev = WEEKS[1];
-  if(!prev || todayISO() >= currentWeek.id) return empty;
+  if(!KEEP_TODAY || !prev || todayISO() >= currentWeek.id) return empty;
   const cur = EVENTS.filter(e => e.week === currentWeek.id);
   const twin = {};
   cur.forEach(e => { twin[weekTwinKey(e)] = e; twin[e.name] = e; });
