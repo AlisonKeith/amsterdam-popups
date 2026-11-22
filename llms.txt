@@ -4,7 +4,7 @@
 
 The guide is edited by hand and updated every week (Monday to Sunday). Each listing has a date, time, venue address, price and a link to the organiser's page. Past weeks stay in the Archive on the main site.
 
-## This week (23 – 29 Nov, 88 events)
+## This week (23 – 29 Nov, 92 events)
 
 - [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
@@ -19,9 +19,9 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - [Markets this week](https://www.amsterdampopups.com/markets/): 12 events (Dutch: [Markten](https://www.amsterdampopups.com/nl/markten/))
 - [Christmas Markets this week](https://www.amsterdampopups.com/christmas-markets/): 7 events (Dutch: [Kerstmarkten](https://www.amsterdampopups.com/nl/kerstmarkten/))
 - [Sinterklaas this week](https://www.amsterdampopups.com/sinterklaas/): 11 events (Dutch: [Sinterklaas](https://www.amsterdampopups.com/nl/sinterklaas/))
-- [Fashion & Vintage this week](https://www.amsterdampopups.com/fashion-vintage/): 8 events (Dutch: [Mode & Vintage](https://www.amsterdampopups.com/nl/mode-vintage/))
-- [Art & Design this week](https://www.amsterdampopups.com/art-design/): 14 events (Dutch: [Kunst & Design](https://www.amsterdampopups.com/nl/kunst-design/))
-- [Pop-up Shops this week](https://www.amsterdampopups.com/pop-up-shops/): 8 events (Dutch: [Pop-upwinkels](https://www.amsterdampopups.com/nl/pop-upwinkels/))
+- [Fashion & Vintage this week](https://www.amsterdampopups.com/fashion-vintage/): 11 events (Dutch: [Mode & Vintage](https://www.amsterdampopups.com/nl/mode-vintage/))
+- [Art & Design this week](https://www.amsterdampopups.com/art-design/): 15 events (Dutch: [Kunst & Design](https://www.amsterdampopups.com/nl/kunst-design/))
+- [Pop-up Shops this week](https://www.amsterdampopups.com/pop-up-shops/): 12 events (Dutch: [Pop-upwinkels](https://www.amsterdampopups.com/nl/pop-upwinkels/))
 - [Music this week](https://www.amsterdampopups.com/music/): 28 events (Dutch: [Muziek](https://www.amsterdampopups.com/nl/muziek/))
 - [Nightlife this week](https://www.amsterdampopups.com/nightlife/): 2 events (Dutch: [Nachtleven](https://www.amsterdampopups.com/nl/nachtleven/))
 - [Film this week](https://www.amsterdampopups.com/film/): 2 events (Dutch: [Film](https://www.amsterdampopups.com/nl/film/))
