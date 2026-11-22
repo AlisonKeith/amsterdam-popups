@@ -1534,21 +1534,41 @@ const EVENTS = [
     url:"https://www.cinetol.nl/events/otto-club",
     org:{name:"Cinetol",url:"https://www.cinetol.nl/"} },
 
-  { id:"afvalpaleis-holiday-gifts-1125", week:"2026-11-23", cats:["shops","christmas","workshops"], recur:"oneoff",
+  { id:"afvalpaleis-holiday-gifts-1125", week:"2026-11-23", cats:["shops","christmas"], recur:"oneoff",
     name:"Afvalpaleis holiday gift shop",
     hood:{en:"Dapperbuurt, Oost",nl:"Dapperbuurt, Oost"}, lat:52.3614, lng:4.9280,
     when:{en:"Wed 25 – Sat 28 Nov",nl:"wo 25 – za 28 nov"}, time:{en:"12:00–17:00",nl:"12:00–17:00"},
     days:["2026-11-25","2026-11-26","2026-11-27","2026-11-28"],
     addr:{en:"Het Afvalpaleis, Dapperstraat 76-82, Amsterdam",nl:"Het Afvalpaleis, Dapperstraat 76-82, Amsterdam"}, price:{en:"Free entry; items on a donation basis, pay what you can",nl:"Gratis toegang; spullen op donatiebasis, naar draagkracht"},
-    blurb:{en:"The Afvalpaleis give-away shop puts second-hand gifts and Christmas decorations in the spotlight, with a table of leftover materials for making your own presents.",
-           nl:"De doorgeefwinkel van het Afvalpaleis zet tweedehands cadeaus en kerstversiering extra in de kijker, met een tafel vol restmaterialen om zelf iets te maken."},
-    // Workshops (city calendar): afvalpaleis-circulaire-cadeau-inpaktafel, afvalpaleis-workshop-kaarsen-maken
-    schedule:[
-      {en:"Wed 25 – Sat 28 Nov, 12:00–17:00: give-away shop (regular opening hours)",nl:"wo 25 – za 28 nov, 12:00–17:00: doorgeefwinkel (vaste openingstijden)"},
-      {en:"Fri 27 Nov, 14:00–16:00: candle-making workshop with leftover wax (bring your own if you have some)",nl:"vr 27 nov, 14:00–16:00: workshop kaarsen trekken van restjes kaarsvet (neem gerust je eigen restjes mee)"},
-      {en:"Fri 27 & Sat 28 Nov, 14:00–16:00: wrapping table with reused paper and old maps",nl:"vr 27 & za 28 nov, 14:00–16:00: circulaire inpaktafel met hergebruikt papier en oude kaarten"}
-    ],
+    blurb:{en:"The Afvalpaleis give-away shop puts second-hand gifts and Christmas decorations in the spotlight, with a table of leftover materials for making your own presents. Open during regular shop hours.",
+           nl:"De doorgeefwinkel van het Afvalpaleis zet tweedehands cadeaus en kerstversiering extra in de kijker, met een tafel vol restmaterialen om zelf iets te maken. Open tijdens de vaste openingstijden."},
     url:"https://activiteiten.amsterdam.nl/activiteiten/2026/11/afvalpaleis-cadeaus-feestdagen/",
+    org:{name:"Het Afvalpaleis",url:"https://www.jungle.amsterdam/afvalpaleis"} },
+
+  { id:"afvalpaleis-candle-workshop-1127", week:"2026-11-23", cats:["workshops","christmas"], recur:"oneoff",
+    name:"Afvalpaleis candle-making workshop",
+    hood:{en:"Dapperbuurt, Oost",nl:"Dapperbuurt, Oost"}, lat:52.3614, lng:4.9280,
+    when:{en:"Fri 27 Nov",nl:"vr 27 nov"}, time:{en:"14:00–16:00",nl:"14:00–16:00"},
+    days:["2026-11-27"],
+    addr:{en:"Het Afvalpaleis, Dapperstraat 76-82, Amsterdam",nl:"Het Afvalpaleis, Dapperstraat 76-82, Amsterdam"}, price:{en:"Donation-based; no fixed price listed",nl:"Op donatiebasis; geen vaste prijs vermeld"},
+    blurb:{en:"Dip your own candle, layer by layer, from leftover wax collected at the Afvalpaleis, with volunteers to help; bring old wax from home if you have some.",
+           nl:"Trek laagje voor laagje je eigen kaars van restjes kaarsvet die bij het Afvalpaleis zijn ingezameld, met hulp van vrijwilligers; neem gerust oud kaarsvet van thuis mee."},
+    url:"https://activiteiten.amsterdam.nl/activiteiten/2026/11/afvalpaleis-workshop-kaarsen-maken/",
+    org:{name:"Het Afvalpaleis",url:"https://www.jungle.amsterdam/afvalpaleis"} },
+
+  { id:"afvalpaleis-wrapping-table-1127", week:"2026-11-23", cats:["workshops","christmas"], recur:"oneoff",
+    name:"Afvalpaleis circular gift-wrapping table",
+    hood:{en:"Dapperbuurt, Oost",nl:"Dapperbuurt, Oost"}, lat:52.3614, lng:4.9280,
+    when:{en:"Fri 27 & Sat 28 Nov",nl:"vr 27 & za 28 nov"}, time:{en:"14:00–16:00",nl:"14:00–16:00"},
+    days:["2026-11-27","2026-11-28"],
+    addr:{en:"Het Afvalpaleis, Dapperstraat 76-82, Amsterdam",nl:"Het Afvalpaleis, Dapperstraat 76-82, Amsterdam"}, price:{en:"Donation-based; no fixed price listed",nl:"Op donatiebasis; geen vaste prijs vermeld"},
+    blurb:{en:"Wrap your presents in reused gift paper, old road maps, ribbons and string, with volunteers on hand and coffee or tea.",
+           nl:"Pak je cadeaus in met hergebruikt cadeaupapier, oude wegenkaarten, linten en touw, met hulp van vrijwilligers en een kop koffie of thee."},
+    schedule:[
+      {en:"Fri 27 Nov, 14:00–16:00",nl:"vr 27 nov, 14:00–16:00"},
+      {en:"Sat 28 Nov, 14:00–16:00",nl:"za 28 nov, 14:00–16:00"}
+    ],
+    url:"https://activiteiten.amsterdam.nl/activiteiten/2026/11/afvalpaleis-circulaire-cadeau-inpaktafel/",
     org:{name:"Het Afvalpaleis",url:"https://www.jungle.amsterdam/afvalpaleis"} },
 
   // ---- 16 – 22 Nov ----
