@@ -4,7 +4,7 @@
 
 The guide is edited by hand and updated every week (Monday to Sunday). Each listing has a date, time, venue address, price and a link to the organiser's page. Past weeks stay in the Archive on the main site.
 
-## This week (23 – 29 Nov, 98 events)
+## This week (23 – 29 Nov, 99 events)
 
 - [This week's events as a plain list](https://www.amsterdampopups.com/this-week.html): every event with date, time, venue, price, organiser, description and link; readable without JavaScript
 - [Interactive guide](https://www.amsterdampopups.com/): map, category and day filters, English/Dutch toggle, archive
@@ -16,7 +16,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 
 - [Food this week](https://www.amsterdampopups.com/food/): 17 events (Dutch: [Eten](https://www.amsterdampopups.com/nl/eten/))
 - [Drink this week](https://www.amsterdampopups.com/drink/): 8 events (Dutch: [Drinken](https://www.amsterdampopups.com/nl/drinken/))
-- [Markets this week](https://www.amsterdampopups.com/markets/): 12 events (Dutch: [Markten](https://www.amsterdampopups.com/nl/markten/))
+- [Markets this week](https://www.amsterdampopups.com/markets/): 13 events (Dutch: [Markten](https://www.amsterdampopups.com/nl/markten/))
 - [Christmas Markets this week](https://www.amsterdampopups.com/christmas-markets/): 7 events (Dutch: [Kerstmarkten](https://www.amsterdampopups.com/nl/kerstmarkten/))
 - [Sinterklaas this week](https://www.amsterdampopups.com/sinterklaas/): 12 events (Dutch: [Sinterklaas](https://www.amsterdampopups.com/nl/sinterklaas/))
 - [Fashion & Vintage this week](https://www.amsterdampopups.com/fashion-vintage/): 11 events (Dutch: [Mode & Vintage](https://www.amsterdampopups.com/nl/mode-vintage/))
