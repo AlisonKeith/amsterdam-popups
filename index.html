@@ -2954,7 +2954,7 @@ const EVENTS = [
     org:{name:"Pure Markt",url:"https://puremarkt.nl/"} },
 
   { id:"groot-melkhuis-kerstmarkt", week:"2026-11-23", cats:["christmas","markets","food","drink","family"], recur:"oneoff", season:"christmas",
-    name:"Christmas market at Groot Melkhuis",
+    name:{en:"Christmas market at Groot Melkhuis",nl:"Kerstmarkt bij Groot Melkhuis in het Vondelpark"},
     hood:{en:"Vondelpark, Zuid",nl:"Vondelpark, Zuid"}, lat:52.3585, lng:4.8684,
     when:{en:"Sun 29 Nov",nl:"zo 29 nov"}, time:{en:"11:00–16:00",nl:"11:00–16:00"},
     days:["2026-11-29"],
@@ -6762,8 +6762,13 @@ function mapChooserLinks(lat, lng, label){
     { key:"mapsOsm",    href:`https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=17/${lat}/${lng}` }
   ];
 }
+function eventName(e, L){
+  const n = e.name;
+  if(n && typeof n === "object") return n[L] || n.en || "";
+  return n || "";
+}
 function mapsButton(ev){
-  const label = ev.addr[lang] || ev.name;
+  const label = ev.addr[lang] || eventName(ev, lang);
   return `<button type="button" class="fact-maps" aria-expanded="false" aria-controls="mapchooser" aria-label="${escapeHtml(t("mapsAria")(label))}" data-lat="${ev.lat}" data-lng="${ev.lng}" data-label="${escapeHtml(label)}" onclick="event.stopPropagation(); toggleMapChooser(this)">${ICO.pin}<span>${escapeHtml(ev.addr[lang])}</span></button>`;
 }
 
@@ -6875,14 +6880,14 @@ function renderMap(list){
       const items = group.map(e => {
         const ec = catBy[e.cats[0]];
         const ep = `<span class="pop-cat" style="background:${tintBg(ec.hex)};color:${darkText(ec.hex)}">${catLabelHtml(ec)}</span>`;
-        return `<div class="pop-item" data-href="${e.url}">${ep} <b>${e.name}</b><br>${eventWhenLine(e)}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
+        return `<div class="pop-item" data-href="${e.url}">${ep} <b>${eventName(e, lang)}</b><br>${eventWhenLine(e)}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
       }).join("<hr style='margin:6px 0;border-color:#eee'>");
       popupHtml = `${mapsButton(ev)}<br>${ev.hood[lang]}<br><br>${items}`;
     } else if(count === 1) {
-      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
+      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${eventName(ev, lang)}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
     } else {
       // Stacked markers below first — bind same popup as first
-      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${ev.name}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
+      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${eventName(ev, lang)}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
     }
     m.bindPopup(popupHtml);
     markers[ev.id] = m;
@@ -6927,18 +6932,18 @@ function eventStillOn(ev){
    (same link or name) shows once, as the new-week card, and keeps today's date for the day filters.
    KEEP_TODAY is the off switch: set it to true to bring that carry-over back. */
 const KEEP_TODAY = false;
-function weekTwinKey(ev){ return ev.url || ev.name; }
+function weekTwinKey(ev){ return ev.url || eventName(ev, "en"); }
 function carryoverState(){
   const empty = { list:[], hidden:new Set(), extraDays:{} };
   const prev = WEEKS[1];
   if(!KEEP_TODAY || !prev || todayISO() >= currentWeek.id) return empty;
   const cur = EVENTS.filter(e => e.week === currentWeek.id);
   const twin = {};
-  cur.forEach(e => { twin[weekTwinKey(e)] = e; twin[e.name] = e; });
+  cur.forEach(e => { twin[weekTwinKey(e)] = e; twin[eventName(e, "en")] = e; });
   const st = { list:[], hidden:new Set(), extraDays:{} };
   EVENTS.filter(e => e.week === prev.id && eventStillOn(e)).forEach(e => {
     st.hidden.add(e.id);
-    const tw = twin[weekTwinKey(e)] || twin[e.name];
+    const tw = twin[weekTwinKey(e)] || twin[eventName(e, "en")];
     if(tw) st.extraDays[tw.id] = (st.extraDays[tw.id] || []).concat(e.days || []);
     else st.list.push(e);
   });
@@ -7019,7 +7024,7 @@ function cardHtml(ev){
       <span class="card-meta">${ev.hood[lang]}</span>
     </div>
     ${cardTagsHtml(ev)}
-    <h3>${ev.name}</h3>
+    <h3>${eventName(ev, lang)}</h3>
     <p>${ev.blurb[lang]}</p>
     ${scheduleHtml(ev)}
     ${facts}
@@ -7079,7 +7084,7 @@ function renderArchive(){
   const el = document.getElementById("archive");
   const match = ev => {
     if(!q) return true;
-    const hay = [ev.name, ev.hood.en, ev.hood.nl, ev.addr.en, ev.addr.nl, ev.blurb.en, ev.blurb.nl, ...(ev.schedule||[]).flatMap(s => [s.en, s.nl]),
+    const hay = [eventName(ev, "en"), eventName(ev, "nl"), ev.hood.en, ev.hood.nl, ev.addr.en, ev.addr.nl, ev.blurb.en, ev.blurb.nl, ...(ev.schedule||[]).flatMap(s => [s.en, s.nl]),
       ...ev.cats.flatMap(id => [catBy[id].label.en, catBy[id].label.nl])].join(" ").toLowerCase();
     return hay.includes(q);
   };
@@ -7374,7 +7379,7 @@ function injectEventSchema(){
   const items = list.map(e => {
     const ev = {
       "@type":SCHEMA_TYPE[e.cats[0]] || "Event",
-      "name":e.name,
+      "name":eventName(e, lang),
       "keywords":e.cats.map(id => catBy[id].label[lang]).join(", "),
       "description":e.blurb[lang],
       "url":e.url,

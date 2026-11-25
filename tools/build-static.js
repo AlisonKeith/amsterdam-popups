@@ -215,12 +215,19 @@ function timeBounds(timeStr){
   return null;
 }
 
+// Listing title: a bilingual {en, nl} object, or a single string used in both languages.
+function eventName(e, L){
+  const n = e.name;
+  if(n && typeof n === "object") return n[L] || n.en || "";
+  return n || "";
+}
+
 // Same fields as injectEventSchema() in index.html; organiser and image only when the data names them.
 // startDate includes a local time (Europe/Amsterdam) when the listing's time field has a clock.
 function schemaEvent(e, L){
   const ev = {
     "@type":SCHEMA_TYPE[e.cats[0]] || "Event",
-    "name":e.name,
+    "name":eventName(e, L),
     "keywords":e.cats.map(id => catBy[id].label[L]).join(", "),
     "description":e.blurb[L],
     "url":e.url,
@@ -278,7 +285,7 @@ ${faqs.map(f => `    <h3>${esc(f.q)}</h3>\n    <p>${f.a}</p>`).join("\n")}
 
 const item = (e, L, h) => { const T = TXT[L], end = lastDayOf(e); return `    <li id="e-${esc(e.id)}"${end ? ` data-end="${end}"` : ""}${e.nyeTags && e.nyeTags.length ? ` data-nye-tags="${e.nyeTags.map(esc).join(" ")}"` : ""}>
       <article>
-        <${h}>${esc(e.name)}</${h}>
+        <${h}>${esc(eventName(e, L))}</${h}>
         <p class="meta">${e.cats.map(c => esc(catBy[c] ? catBy[c].label[L] : c)).join(" · ")}${e.recur === "regular" ? " · " + T.regular : ""}</p>
         <dl>
           <dt>${T.when}</dt><dd>${esc(e.when[L])}${(!e.schedule || !e.schedule.length) && e.time && e.time[L] && e.time[L] !== e.when[L] ? ", " + esc(e.time[L]) : ""}</dd>
@@ -290,7 +297,7 @@ ${e.org ? `          <dt>${T.org}</dt><dd>${e.org.url ? `<a href="${esc(e.org.ur
 ${e.schedule && e.schedule.length ? `        <ul class="schedule" aria-label="${L === "nl" ? "Programma" : "Programme"}">
 ${e.schedule.map(s => `          <li>${esc(s[L])}</li>`).join("\n")}
         </ul>
-` : ""}        <p><a href="${esc(e.url)}">${esc(T.details(e.name))}<span class="sr-only">${T.detailsSr}</span></a></p>
+` : ""}        <p><a href="${esc(e.url)}">${esc(T.details(eventName(e, L)))}<span class="sr-only">${T.detailsSr}</span></a></p>
       </article>
     </li>`; };
 
@@ -573,7 +580,7 @@ function mapSection(L, events){
   const label = L === "nl" ? "Kaart met de locaties van de events op deze pagina" : "Map of the event locations on this page";
   const data = JSON.stringify(mappable.map(e => {
     const row = {
-      id:e.id, name:e.name, lat:e.lat, lng:e.lng, url:e.url,
+      id:e.id, name:eventName(e, L), lat:e.lat, lng:e.lng, url:e.url,
       when:e.when[L], time:(e.time && e.time[L]) || "", addr:e.addr[L]
     };
     if(Array.isArray(e.nyeTags) && e.nyeTags.length) row.nyeTags = e.nyeTags;
