@@ -213,6 +213,21 @@ const OLIEBOLLEN_STANDS = [
     lat: 52.3553334, lng: 4.9282265
   },
   {
+    id: "de-banne",
+    district: "Noord",
+    name: {en: "Oliebollenkraam De Banne (Willy van Dam)", nl: "Oliebollenkraam De Banne (Willy van Dam)"},
+    location: {
+      en: "Bezaanjachtplein, in front of Winkelcentrum Banne Centrum (corner of IJdoornlaan and Banne Buikslootlaan), 1034 CR",
+      nl: "Bezaanjachtplein, voor Winkelcentrum Banne Centrum (hoek IJdoornlaan / Banne Buikslootlaan), 1034 CR"
+    },
+    note: {
+      en: "In its 34th year, and open seven days a week this winter.",
+      nl: "Dit is het 34e jaar, en de kraam is dit seizoen zeven dagen per week open."
+    },
+    source: "https://www.rodi.nl/amsterdam-noord/nieuws/513087/willy-bakt-al-34-jaar-oliebollen-in-noord-wij-zijn-niet-anders-gewend",
+    lat: 52.408159, lng: 4.916012
+  },
+  {
     id: "old-dutch-holendrecht",
     district: "Zuidoost",
     name: {en: "Old Dutch Bakery", nl: "Old Dutch Bakery"},
