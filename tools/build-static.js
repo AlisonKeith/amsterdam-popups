@@ -911,7 +911,7 @@ const xmasEn = listPage({
 });
 const xmasNl = listPage({
   L:"nl", alt:XMAS_ALT,
-  title:"Kerst pop-ups en evenementen in Amsterdam 2026",
+  title:"Kerst in Amsterdam 2026: kerstmarkten, pop-ups en events",
   desc:"Spontane kerst pop-ups en eenmalige events in Amsterdam, eind november tot begin januari: markten, winterterrassen, workshops en lichtwandelingen.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
   h1:"Kerst pop-ups en evenementen in Amsterdam",
