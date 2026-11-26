@@ -17,6 +17,18 @@ const OLIEBOLLEN_STANDS = [
     lat: 52.3744897, lng: 4.8845596
   },
   {
+    id: "haarlemmerplein",
+    district: "Centrum",
+    name: {en: "Oliebollenkraam Haarlemmerplein (Bakker's Gebakkraam)", nl: "Oliebollenkraam Haarlemmerplein (Bakker's Gebakkraam)"},
+    location: {en: "Haarlemmerplein 3, 1013 HP", nl: "Haarlemmerplein 3, 1013 HP"},
+    note: {
+      en: "A Bakker's Gebakkraam stall on Haarlemmerplein, open again this season.",
+      nl: "Een kraam van Bakker's Gebakkraam op het Haarlemmerplein, ook dit seizoen weer open."
+    },
+    source: "https://oliebollenhaarlemmerplein.nl/",
+    lat: 52.3846965, lng: 4.8836609
+  },
+  {
     id: "bakkers",
     district: "West",
     name: {en: "Bakker's Oliebollenkraam", nl: "Bakker's Oliebollenkraam"},

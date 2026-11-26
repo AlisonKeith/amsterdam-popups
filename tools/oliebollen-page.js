@@ -844,8 +844,8 @@ ${consentBlock(L)}
 }
 
 function buildOliebollenPages(deps){
-  if(OLIEBOLLEN_STANDS.length !== 21){
-    throw new Error(`expected 21 confirmed 2026 oliebollen stands, found ${OLIEBOLLEN_STANDS.length}`);
+  if(OLIEBOLLEN_STANDS.length !== 22){
+    throw new Error(`expected 22 confirmed 2026 oliebollen stands, found ${OLIEBOLLEN_STANDS.length}`);
   }
   for(const s of OLIEBOLLEN_STANDS){
     if(typeof s.lat !== "number" || typeof s.lng !== "number") throw new Error(`missing coordinates for ${s.id}`);
