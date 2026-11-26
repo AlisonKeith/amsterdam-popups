@@ -1001,8 +1001,8 @@ ${consentBlock(L)}
 function buildOliebollenPages(deps){
   const confirmedCount = OLIEBOLLEN_STANDS.filter(s => !s.unconfirmed).length;
   const unconfirmedCount = OLIEBOLLEN_STANDS.filter(s => s.unconfirmed).length;
-  if(confirmedCount !== 23 || unconfirmedCount !== 20){
-    throw new Error(`expected 23 confirmed and 20 unconfirmed 2026 oliebollen stands, found ${confirmedCount} confirmed and ${unconfirmedCount} unconfirmed`);
+  if(confirmedCount !== 24 || unconfirmedCount !== 20){
+    throw new Error(`expected 24 confirmed and 20 unconfirmed 2026 oliebollen stands, found ${confirmedCount} confirmed and ${unconfirmedCount} unconfirmed`);
   }
   for(const s of OLIEBOLLEN_STANDS){
     if(typeof s.lat !== "number" || typeof s.lng !== "number") throw new Error(`missing coordinates for ${s.id}`);

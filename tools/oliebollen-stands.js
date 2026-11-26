@@ -55,6 +55,18 @@ const OLIEBOLLEN_STANDS = [
     lat: 52.3744983, lng: 4.8728149
   },
   {
+    id: "mercatorplein",
+    district: "West",
+    name: {en: "Oliebollenkraam Mercatorplein", nl: "Oliebollenkraam Mercatorplein"},
+    location: {en: "Mercatorplein, 1057 CC", nl: "Mercatorplein, 1057 CC"},
+    note: {
+      en: "A winter stall on Mercatorplein, open again this season.",
+      nl: "Een winterkraam op het Mercatorplein, ook dit seizoen weer open."
+    },
+    source: "https://www.google.com/maps/place/?q=place_id:ChIJ-_ZmDJTjxUcRg1UnTif6_dw",
+    lat: 52.3700619, lng: 4.8511915
+  },
+  {
     id: "belgieplein",
     district: "Nieuw-West",
     name: {en: "De Amsterdamse Oliebollenkraam (Belgiëplein)", nl: "De Amsterdamse Oliebollenkraam (Belgiëplein)"},
