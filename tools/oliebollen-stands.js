@@ -305,7 +305,281 @@ const OLIEBOLLEN_STANDS = [
     price: {en: "Plain oliebol price not published", nl: "Prijs van een gewone oliebol niet bekend"},
     source: "https://oliebollengids.nl/amsterdam/oliebollenkraam-amsterdam-7",
     lat: 52.2960119, lng: 4.9474215
-  }
+  },
+  // Unconfirmed: city permit granted this season, not yet confirmed open.
+  {
+    id: "leidseplein",
+    district: "Centrum",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Leidseplein", nl: "Oliebollenkraam Leidseplein"},
+    location: {en: "Leidseplein", nl: "Leidseplein"},
+    note: {
+      en: "A seasonal municipal pitch at Leidseplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Leidseplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3641049, lng: 4.8829166
+  },
+  {
+    id: "rembrandtplein",
+    district: "Centrum",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Rembrandtplein", nl: "Oliebollenkraam Rembrandtplein"},
+    location: {en: "Rembrandtplein", nl: "Rembrandtplein"},
+    note: {
+      en: "A seasonal municipal pitch at Rembrandtplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Rembrandtplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3660204, lng: 4.8969400
+  },
+  {
+    id: "gulden-winckelplantsoen",
+    district: "West",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Bos en Lommer", nl: "Oliebollenkraam Bos en Lommer"},
+    location: {
+      en: "Gulden Winckelplantsoen / Bos en Lommerplein",
+      nl: "Gulden Winckelplantsoen / Bos en Lommerplein"
+    },
+    note: {
+      en: "A winter stall at Gulden Winckelplantsoen, named this year as Boersma-Stuij.",
+      nl: "Een winterkraam aan het Gulden Winckelplantsoen, dit jaar vermeld als Boersma-Stuij."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3785324, lng: 4.8459537
+  },
+  {
+    id: "admiraal-de-ruijterweg",
+    district: "West",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Admiraal de Ruijterweg", nl: "Oliebollenkraam Admiraal de Ruijterweg"},
+    location: {
+      en: "Admiraal de Ruijterweg / Willem de Zwijgerlaan",
+      nl: "Admiraal de Ruijterweg / Willem de Zwijgerlaan"
+    },
+    note: {
+      en: "A seasonal municipal pitch at Admiraal de Ruijterweg / Willem de Zwijgerlaan this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op de Admiraal de Ruijterweg / Willem de Zwijgerlaan deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3708529, lng: 4.8638060
+  },
+  {
+    id: "kinkerstraat",
+    district: "West",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Kinkerstraat", nl: "Oliebollenkraam Kinkerstraat"},
+    location: {en: "Kinkerstraat / Bilderdijkkade", nl: "Kinkerstraat / Bilderdijkkade"},
+    note: {
+      en: "A seasonal municipal pitch at Kinkerstraat / Bilderdijkkade this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op de Kinkerstraat / Bilderdijkkade deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3668171, lng: 4.8707925
+  },
+  {
+    id: "osdorpplein",
+    district: "Nieuw-West",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Osdorpplein", nl: "Oliebollenkraam Osdorpplein"},
+    location: {
+      en: "Osdorpplein (the NVV lists it by the C&A)",
+      nl: "Osdorpplein (volgens de NVV bij de C&A)"
+    },
+    note: {
+      en: "A seasonal municipal pitch on Osdorpplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Osdorpplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3596945, lng: 4.8070201
+  },
+  {
+    id: "carrascoplein",
+    district: "Nieuw-West",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Carrascoplein (Sloterdijk)", nl: "Oliebollenkraam Carrascoplein (Sloterdijk)"},
+    location: {
+      en: "Carrascoplein, by Station Sloterdijk, 1043",
+      nl: "Carrascoplein, bij station Sloterdijk, 1043"
+    },
+    note: {
+      en: "A seasonal municipal pitch on Carrascoplein, by Sloterdijk station, this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Carrascoplein, bij station Sloterdijk, deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3885756, lng: 4.8385314
+  },
+  {
+    id: "berchvliet",
+    district: "Nieuw-West",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Berchvliet", nl: "Oliebollenkraam Berchvliet"},
+    location: {en: "Berchvliet, Sloterdijk Poort, 1046", nl: "Berchvliet, Sloterdijk Poort, 1046"},
+    note: {
+      en: "A seasonal municipal pitch at Berchvliet this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan de Berchvliet deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3917761, lng: 4.7974794
+  },
+  {
+    id: "gustav-mahlerplein",
+    district: "Zuid",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Gustav Mahlerplein", nl: "Oliebollenkraam Gustav Mahlerplein"},
+    location: {en: "Gustav Mahlerplein, Zuidas", nl: "Gustav Mahlerplein, Zuidas"},
+    note: {
+      en: "A seasonal municipal pitch on Gustav Mahlerplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Gustav Mahlerplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3368105, lng: 4.8735646
+  },
+  {
+    id: "buitenveldertselaan",
+    district: "Zuid",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Buitenveldertselaan", nl: "Oliebollenkraam Buitenveldertselaan"},
+    location: {en: "Buitenveldertselaan", nl: "Buitenveldertselaan"},
+    note: {
+      en: "A seasonal municipal pitch at Buitenveldertselaan this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan de Buitenveldertselaan deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3351148, lng: 4.8686144
+  },
+  {
+    id: "olympiaplein",
+    district: "Zuid",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Olympiaplein", nl: "Oliebollenkraam Olympiaplein"},
+    location: {en: "Olympiaplein", nl: "Olympiaplein"},
+    note: {
+      en: "A seasonal municipal pitch on Olympiaplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Olympiaplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3464463, lng: 4.8682625
+  },
+  {
+    id: "maasstraat",
+    district: "Zuid",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Maasstraat", nl: "Oliebollenkraam Maasstraat"},
+    location: {en: "Maasstraat, Rivierenbuurt", nl: "Maasstraat, Rivierenbuurt"},
+    note: {
+      en: "A seasonal municipal pitch at Maasstraat this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan de Maasstraat deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3453905, lng: 4.8952918
+  },
+  {
+    id: "scheldeplein",
+    district: "Zuid",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Scheldeplein", nl: "Oliebollenkraam Scheldeplein"},
+    location: {en: "Scheldeplein, Rivierenbuurt", nl: "Scheldeplein, Rivierenbuurt"},
+    note: {
+      en: "A seasonal municipal pitch on Scheldeplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Scheldeplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3444807, lng: 4.8903361
+  },
+  {
+    id: "javastraat",
+    district: "Oost",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Javastraat", nl: "Oliebollenkraam Javastraat"},
+    location: {en: "Javastraat", nl: "Javastraat"},
+    note: {
+      en: "A seasonal municipal pitch at Javastraat this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan de Javastraat deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3634615, lng: 4.9313244
+  },
+  {
+    id: "buikslotermeerplein",
+    district: "Noord",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Buikslotermeerplein", nl: "Oliebollenkraam Buikslotermeerplein"},
+    location: {en: "Buikslotermeerplein", nl: "Buikslotermeerplein"},
+    note: {
+      en: "A seasonal municipal pitch at Buikslotermeerplein this winter.",
+      nl: "Een seizoensstandplaats van de gemeente op het Buikslotermeerplein deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3983436, lng: 4.9380253
+  },
+  {
+    id: "buiksloterweg",
+    district: "Noord",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Buiksloterweg", nl: "Oliebollenkraam Buiksloterweg"},
+    location: {en: "Buiksloterweg (near the IJ)", nl: "Buiksloterweg (bij het IJ)"},
+    note: {
+      en: "A seasonal municipal pitch at Buiksloterweg this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan de Buiksloterweg deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3828407, lng: 4.9043590
+  },
+  {
+    id: "molenwijk",
+    district: "Noord",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Winkelcentrum Molenwijk", nl: "Oliebollenkraam Winkelcentrum Molenwijk"},
+    location: {en: "Winkelcentrum Molenwijk", nl: "Winkelcentrum Molenwijk"},
+    note: {
+      en: "A seasonal municipal pitch at Winkelcentrum Molenwijk this winter.",
+      nl: "Een seizoensstandplaats van de gemeente bij Winkelcentrum Molenwijk deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.4175989, lng: 4.8930605
+  },
+  {
+    id: "maasdrielhof",
+    district: "Zuidoost",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Maasdrielhof", nl: "Oliebollenkraam Maasdrielhof"},
+    location: {en: "Maasdrielhof, Holendrecht, 1106", nl: "Maasdrielhof, Holendrecht, 1106"},
+    note: {
+      en: "A seasonal municipal pitch at Maasdrielhof this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan de Maasdrielhof deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.3012113, lng: 4.9646475
+  },
+  {
+    id: "reigersbos",
+    district: "Zuidoost",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Reigersbos", nl: "Oliebollenkraam Reigersbos"},
+    location: {en: "Reigersbos", nl: "Reigersbos"},
+    note: {
+      en: "A seasonal municipal pitch at Reigersbos this winter.",
+      nl: "Een seizoensstandplaats van de gemeente in Reigersbos deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.2957039, lng: 4.9742373
+  },
+  {
+    id: "wisseloord",
+    district: "Zuidoost",
+    unconfirmed: true,
+    name: {en: "Oliebollenkraam Wisseloord", nl: "Oliebollenkraam Wisseloord"},
+    location: {en: "Wisseloord, Gein / Driemond, 1106 MA", nl: "Wisseloord, Gein / Driemond, 1106 MA"},
+    note: {
+      en: "A seasonal municipal pitch at Wisseloord this winter.",
+      nl: "Een seizoensstandplaats van de gemeente aan Wisseloord deze winter."
+    },
+    source: "https://maps.amsterdam.nl/staanplaatsen/",
+    lat: 52.2968992, lng: 4.9873565
+  },
+
 ];
 
 const OLIEBOLLEN_BAKERIES = [
