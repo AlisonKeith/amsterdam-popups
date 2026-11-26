@@ -332,6 +332,7 @@ form{margin-top:18px; max-width:520px}
 .submit:hover{background:var(--submit-hover)}
 .form-thanks{display:none; margin-top:14px; padding:12px 14px; background:var(--red-tint); border:1px solid var(--red-tint-border); border-radius:10px; font-size:13.5px; color:var(--red-deep)}
 .hp{position:absolute; left:-9999px}
+.oliebol-turnstile{margin:.55rem 0 0}
 
 footer{border-top:1px solid var(--line); margin-top:30px}
 footer .wrap{padding:18px; font-size:12px; color:var(--faint); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
@@ -425,6 +426,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
   ]
 }
 </script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 <body>
 
@@ -569,7 +571,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     <section id="view-tip" class="view prose" aria-labelledby="heading-tip">
       <h1 id="heading-tip" data-i18n="tip">Know a pop-up?</h1>
       <p data-i18n="tipIntro"></p>
-      <form name="tips" action="https://formspree.io/f/xjgqowrq" method="POST" onsubmit="return submitTip(event)">
+      <form id="tips-form" name="tips" action="https://formspree.io/f/xjgqowrq" method="POST" onsubmit="return submitTip(event)">
         <p class="hp" aria-hidden="true"><label>Don't fill this in: <input name="_gotcha" tabindex="-1" autocomplete="off" /></label></p>
         <div class="field">
           <fieldset style="border:0;padding:0;margin:0">
@@ -591,8 +593,9 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
         <div class="field"><label data-i18n="fWhen">When</label><input name="when" /></div>
         <div class="field"><label data-i18n="fLink">Link (Instagram, site, tickets)</label><input name="link" /></div>
         <div class="field"><label data-i18n="fEmail">Your email (optional)</label><input name="email" type="email" /></div>
+        <div id="tips-turnstile" class="oliebol-turnstile"></div>
         <button class="submit" type="submit" data-i18n="fSend">Send tip</button>
-        <div class="form-thanks" id="formThanks" data-i18n="fThanks"></div>
+        <div class="form-thanks" id="formThanks" role="status" data-i18n="fThanks"></div>
         <p class="form-note" data-i18n="fPriv">We only use this to follow up on your tip. See the Privacy page.</p>
       </form>
     </section>
@@ -7490,6 +7493,10 @@ function switchView(name){
   document.querySelectorAll(".tab").forEach(tb => tb.classList.toggle("on", tb.dataset.view===name));
   if(name==="thisweek" && map){ setTimeout(()=>{ map.invalidateSize(); renderThisWeek(); },30); }
   if(name==="archive") renderArchive();
+  if(name==="tip"){
+    var tipForm = document.getElementById("tips-form");
+    if(tipForm) getTurnstileToken(tipForm, function(){});
+  }
   window.scrollTo({top:0, behavior:"smooth"});
   // Move focus to the new view's heading so screen reader / keyboard users are told the view changed.
   const heading = document.getElementById("heading-"+name);
@@ -7531,24 +7538,113 @@ function setLang(l){
 }
 
 /* ---- tip form ---- */
+// Public Turnstile site key for the "Amsterdam Pop-ups forms" widget.
+// Never put the secret key in this file — enter it only in Formspree settings.
+var TURNSTILE_SITEKEY = "0x4AAAAAAGUseqgx0d_W769H";
+function whenTurnstileReady(done){
+  if(window.turnstile && typeof window.turnstile.render === "function"){
+    done();
+    return;
+  }
+  var tries = 0;
+  var t = setInterval(function(){
+    tries++;
+    if(window.turnstile && typeof window.turnstile.render === "function"){
+      clearInterval(t);
+      done();
+    } else if(tries >= 50){
+      clearInterval(t);
+      done(new Error("turnstile"));
+    }
+  }, 100);
+}
+function getTurnstileToken(mountEl, done){
+  whenTurnstileReady(function(err){
+    if(err){ done(err); return; }
+    if(!mountEl){ done(new Error("turnstile")); return; }
+    var holder = mountEl.querySelector(".oliebol-turnstile");
+    if(!holder){
+      holder = document.createElement("div");
+      holder.className = "oliebol-turnstile";
+      mountEl.appendChild(holder);
+    }
+    var settled = false;
+    var poll;
+    function finish(error, token){
+      if(settled) return;
+      settled = true;
+      if(poll) clearInterval(poll);
+      if(error || !token) done(error || new Error("turnstile"));
+      else done(null, token);
+    }
+    var existingId = holder.getAttribute("data-widget-id");
+    if(existingId){
+      var current = window.turnstile.getResponse(existingId);
+      if(current){ finish(null, current); return; }
+      try { window.turnstile.reset(existingId); } catch (e){}
+    } else {
+      var id;
+      try {
+        id = window.turnstile.render(holder, {
+          sitekey: TURNSTILE_SITEKEY,
+          appearance: "interaction-only",
+          callback: function(token){ finish(null, token); },
+          "error-callback": function(){ finish(new Error("turnstile")); },
+          "timeout-callback": function(){ finish(new Error("turnstile")); }
+        });
+      } catch (e){
+        finish(e);
+        return;
+      }
+      if(id != null) holder.setAttribute("data-widget-id", String(id));
+    }
+    var tries = 0;
+    poll = setInterval(function(){
+      tries++;
+      var wid = holder.getAttribute("data-widget-id");
+      var token = wid ? window.turnstile.getResponse(wid) : "";
+      if(token) finish(null, token);
+      else if(tries >= 50) finish(new Error("turnstile"));
+    }, 100);
+  });
+}
+function resetTurnstile(mountEl){
+  if(!mountEl || !window.turnstile) return;
+  var holder = mountEl.querySelector(".oliebol-turnstile");
+  var id = holder && holder.getAttribute("data-widget-id");
+  if(id){
+    try { window.turnstile.reset(id); } catch (e){}
+  }
+}
 function submitTip(e){
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector("button[type=submit]");
   btn.disabled = true;
-  fetch(form.action, {
-    method: "POST",
-    body: new FormData(form),
-    headers: { Accept: "application/json" }
-  }).then(r => {
-    if(r.ok){
-      document.getElementById("formThanks").style.display = "block";
-      form.reset();
-    } else {
-      alert("Something went wrong — please try again.");
+  const err = "Something went wrong — please try again.";
+  getTurnstileToken(form, function(tokenErr, token){
+    if(tokenErr){
+      btn.disabled = false;
+      alert(err);
+      return;
     }
-  }).catch(() => alert("Something went wrong — please try again."))
-    .finally(() => { btn.disabled = false; });
+    const fd = new FormData(form);
+    if(token) fd.set("cf-turnstile-response", token);
+    fetch(form.action, {
+      method: "POST",
+      body: fd,
+      headers: { Accept: "application/json" }
+    }).then(r => {
+      if(r.ok){
+        document.getElementById("formThanks").style.display = "block";
+        form.reset();
+        resetTurnstile(form);
+      } else {
+        alert(err);
+      }
+    }).catch(() => alert(err))
+      .finally(() => { btn.disabled = false; });
+  });
   return false;
 }
 

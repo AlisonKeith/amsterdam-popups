@@ -6,14 +6,13 @@ const { OLIEBOLLEN_STANDS, OLIEBOLLEN_BAKERIES, DISTRICT_ORDER } = require("./ol
 
 const OLIEBOLLEN_ALT = {en: "/oliebollen/", nl: "/nl/oliebollen/"};
 
-// Public Turnstile site key only. Replace TURNSTILE_SITEKEY_PLACEHOLDER
-// with the real key after the Cloudflare widget is created.
+// Public Turnstile site key for the "Amsterdam Pop-ups forms" widget.
 // Never put the secret key in this file — enter it only in Formspree
 // form settings (Settings → CAPTCHA → Cloudflare Turnstile).
 // Local tests may set OLIEBOLLEN_TURNSTILE_SITEKEY to Cloudflare's
 // always-pass visible test key 1x00000000000000000000AA.
 const TURNSTILE_SITEKEY_PLACEHOLDER = "TURNSTILE_SITEKEY_PLACEHOLDER";
-const TURNSTILE_SITEKEY = process.env.OLIEBOLLEN_TURNSTILE_SITEKEY || TURNSTILE_SITEKEY_PLACEHOLDER;
+const TURNSTILE_SITEKEY = process.env.OLIEBOLLEN_TURNSTILE_SITEKEY || "0x4AAAAAAGUseqgx0d_W769H";
 
 const COPY = {
   en: {
