@@ -207,10 +207,12 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .oliebol-vote-btn:disabled{opacity:.55;cursor:default}
 .oliebol-vote-thanks{font-size:13.5px;margin:.5rem 0 0;color:var(--red-deep, #7a1212)}
 .oliebol-vote-thanks:empty{display:none}
+.oliebol-turnstile{margin:.55rem 0 0}
 .leaflet-popup .oliebol-vote{margin-top:.65rem}
 .leaflet-popup .oliebollen-status{margin:.35rem 0;font-weight:600}
 
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 <body>
 <a class="skip-link" href="#stands">Skip to the list of stands</a>
@@ -1275,6 +1277,90 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
     <script type="application/json" id="map-stands">[{"id":"westermarkt","name":"Oliebollenkraam Westermarkt (Amsterdamse Gebakkraam)","location":"Westermarkt, beside the Westerkerk, 1016 DL","lat":52.3744897,"lng":4.8845596,"hours":"Wednesday, Saturday and Sunday 11:00–18:00. On 31 December 2026 open from 10:00; closing time not published.","price":"€2","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-westermarkt-amsterdam"},{"id":"haarlemmerplein","name":"Oliebollenkraam Haarlemmerplein (Bakker's Gebakkraam)","location":"Haarlemmerplein 3, 1013 HP","lat":52.3846965,"lng":4.8836609,"note":"A Bakker's Gebakkraam stall on Haarlemmerplein, open again this season.","source":"https://oliebollenhaarlemmerplein.nl/"},{"id":"bakkers","name":"Bakker's Oliebollenkraam","location":"Spaarndammerstraat 792, 1013 TK","lat":52.3909696,"lng":4.8784189,"hours":"From 1 October 2026. Monday–Saturday 10:00–19:00; Sunday 11:00–19:00 (Sunday start time: ask at the stall).","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/bakkers-oliebollenkraam-amsterdam"},{"id":"hugo-de-grootplein","name":"Hollandse Gebakkraam Hugo de Grootplein","location":"Hugo de Grootplein, 1052 KV","lat":52.3744983,"lng":4.8728149,"hours":"Tuesday–Saturday 10:30–20:00; Sunday 12:00–18:00. 5 and 24 December 10:30–18:00; 25–26 December and 1 January closed; 31 December 07:00–18:00; also 2 January 10:30–20:00 and 3 January 12:00–18:00.","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/hollandse-gebakkraam-hugo-de-grootplein-amsterdam"},{"id":"mercatorplein","name":"Oliebollenkraam Mercatorplein","location":"Mercatorplein, 1057 CC","lat":52.3700619,"lng":4.8511915,"note":"A winter stall on Mercatorplein, open again this season.","source":"https://www.google.com/maps/place/?q=place_id:ChIJ-_ZmDJTjxUcRg1UnTif6_dw"},{"id":"belgieplein","name":"De Amsterdamse Oliebollenkraam (Belgiëplein)","location":"Belgiëplein, 1066 RC, Nieuw Sloten","lat":52.3457509,"lng":4.8111832,"hours":"Standing in late October 2026; season dates and hours not published.","price":"Plain oliebol price not published","source":"https://www.metronieuws.nl/lifestyle/eten-drinken/2026/10/durf-jij-het-aan-een-oliebol-met-pizzasmaak-gesmolten-kaas-salami/"},{"id":"van-den-noord","name":"Oliebollenkraam Van den Noord","location":"Lambertus Zijlplein, Geuzenveld","lat":52.3774908,"lng":4.8027827,"hours":"From 1 October 2026 (third season). Hours not published in the news report.","price":"Plain oliebol price not published","source":"https://www.at5.nl/artikelen/240728/oliebollenbakker-yessin-laat-zich-niet-uit-het-veld-slaan-ondanks-vernielingen-wil-klanten-blij-maken"},{"id":"sierplein","name":"Oliebollenkraam Sierplein","location":"Sierplein, 1065 LM","lat":52.3555607,"lng":4.8265086,"hours":"1 October–31 December 2026. Monday–Friday 11:00–19:00; Saturday 11:00–18:00; Sunday closed. Holiday hours: ask at the stall.","price":"€1","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-sierplein-amsterdam"},{"id":"plein-40-45","name":"Oliebollenkraam Plein ’40-’45 (W. Reede & Zonen)","location":"Plein ’40-’45, Slotermeer","lat":52.3800585,"lng":4.8215334,"hours":"Monday–Saturday 10:00–18:00; Sunday 11:00–18:00. Holiday hours not confirmed.","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-plein-40-45-amsterdam"},{"id":"gekroonde-oliebol","name":"De Gekroonde Oliebol","location":"Car park at Tuincentrum Osdorp, Osdorperweg 247, 1069 LL","lat":52.3520073,"lng":4.7900035,"hours":"Almost year-round; closed in very hot weather. Monday–Saturday 10:00–17:30; Sunday 10:00–17:00.","price":"€1.75","source":"https://www.degekroondeoliebol.nl/"},{"id":"museumplein","name":"Oliebollenkraam Museumplein","location":"Van Baerlestraat side of Museumplein, opposite the Concertgebouw, by the Q-Park entrance","lat":52.357106,"lng":4.8797028,"note":"A long-running winter stall on Museumplein, open again this season."},{"id":"van-woustraat","name":"Oliebollenkraam Van Woustraat","location":"Van Woustraat 246, 1073 NC","lat":52.3493195,"lng":4.9038118,"hours":"10 October 2026–3 January. Tuesday–Saturday 10:00–19:00; Sunday 11:00–19:00; Monday closed; 24 December 10:00–17:00; 25–26 December closed; 1 January 12:00–18:00.","price":"Plain oliebol price not published","source":"https://oliebollenkaart.nl/kraam/amsterdam-oliebollenkraam-van-woustraat-1c5325"},{"id":"marie-heinekenplein","name":"Oliebollenkraam Marie Heinekenplein (family Geisterfer)","location":"Marie Heinekenplein, 1072 MH","lat":52.3571117,"lng":4.8915465,"hours":"1 October–31 December 2026. Monday 11:00–19:00; Tuesday–Friday 10:00–19:00; Saturday 10:00–18:00; Sunday 11:00–18:00.","price":"€1.40","source":"https://oliebollengids.nl/amsterdam/de-hollandse-gebakkraam-amsterdam"},{"id":"cornelis-schuytplein","name":"De Oliebollenbakkerij, Cornelis Schuytplein","location":"Cornelis Schuytplein, at Johannes Verhulststraat, 1071 JG","lat":52.3542852,"lng":4.871761,"note":"A seasonal stall on Cornelis Schuytplein, listed this winter as De Oliebollenbakkerij.","source":"https://www.google.com/maps/place/?q=place_id:ChIJNxCt_wYJxkcRKpcqjdbcpco"},{"id":"cornelis-troostplein","name":"Oliebollenkraam JT van Gemert","location":"Cornelis Troostplein, 1072 JJ","lat":52.3511725,"lng":4.8917082,"hours":"Wednesday–Saturday 09:00–18:00; Sunday 10:00–18:00; 25–26 December closed; 31 December 03:00–17:00 (as published).","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/van-gemert-cornelis-troostplein-amsterdam"},{"id":"stadionplein","name":"Oliebollenkraam Stadionplein (Jan van Gemert)","location":"Stadionplein, opposite the Olympisch Stadion, by the large Albert Heijn, 1076 CK","lat":52.3436442,"lng":4.8571618,"hours":"Wednesday, Thursday, Saturday and Sunday 09:00–18:00 (Friday not listed); 25–26 December and 1 January closed; 31 December hours not published.","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-j-c-van-gemert-en-zn-amsterdam"},{"id":"hoofddorpplein","name":"Gebakkraam Hoofddorpplein","location":"Hoofddorpplein, 1059 CV","lat":52.3511136,"lng":4.8502977,"hours":"Monday–Friday 11:00–19:00; Saturday 11:00–18:00; Sunday closed.","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/gebakkraam-hoofddorpplein-amsterdam"},{"id":"w-boon","name":"Oliebollenkraam W. Boon, Zeeburg","location":"Oostelijke Handelskade, by Winkelcentrum Brazilië (near 1065)","lat":52.3739386,"lng":4.9386165,"hours":"From 5 October. Tuesday–Saturday 10:00–18:30; Sunday 11:00–18:00 (Monday not listed).","price":"€1.50","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-w-boon-amsterdam"},{"id":"de-beer","name":"Oliebollenkraam De Beer","location":"Oetewalerbrug, Linnaeusstraat/Middenweg, by the Linnaeuskade","lat":52.3553334,"lng":4.9282265,"hours":"From 1 November 2026. Hours not published.","price":"Plain oliebol price not published","source":"https://oliebollengids.nl/amsterdam/de-hollandse-gebakkraam-amsterdam-2"},{"id":"de-banne","name":"Oliebollenkraam De Banne (Willy van Dam)","location":"Bezaanjachtplein, in front of Winkelcentrum Banne Centrum (corner of IJdoornlaan and Banne Buikslootlaan), 1034 CR","lat":52.408159,"lng":4.916012,"note":"In its 34th year, and open seven days a week this winter.","source":"https://www.rodi.nl/amsterdam-noord/nieuws/513087/willy-bakt-al-34-jaar-oliebollen-in-noord-wij-zijn-niet-anders-gewend"},{"id":"old-dutch-holendrecht","name":"Old Dutch Bakery","location":"Opposite station Holendrecht and Amsterdam UMC","lat":52.29715,"lng":4.9589885,"hours":"3 September 2026–31 March. 10:00–18:30; New Year's Eve until late; 25–26 December closed.","price":"Plain oliebol price not published","source":"https://oliebollenkaart.nl/kraam/amsterdam-old-dutch-bakery-10e26a/"},{"id":"oliebollen-arena","name":"Oliebollen Arena","location":"Johan Cruijff Boulevard 600, 1101 DS","lat":52.3123633,"lng":4.9457053,"hours":"From 1 October 2026. Daily 11:00–19:00.","price":"Plain oliebol price not published","source":"https://oliebollengids.nl/amsterdam/oliebollen-arena-amsterdam"},{"id":"bijlmerplein","name":"Verwijk's Oliebollen Bijlmerplein","location":"Bijlmerplein, Zuidoost","lat":52.314578,"lng":4.9542585,"hours":"1 October–31 December 2026. Daily 10:00–17:30.","price":"Plain oliebol price not published","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-amsterdam-8"},{"id":"gebakkraam-bos","name":"Gebakkraam Bos, Mega Praxis car park","location":"Stekkenbergweg, Mega Praxis car park, Zuidoost","lat":52.2960119,"lng":4.9474215,"hours":"From 1 October 2026. Daily 10:00–17:30.","price":"Plain oliebol price not published","source":"https://oliebollengids.nl/amsterdam/oliebollenkraam-amsterdam-7"},{"id":"leidseplein","name":"Oliebollenkraam Leidseplein","location":"Leidseplein","lat":52.3641049,"lng":4.8829166,"note":"A seasonal municipal pitch at Leidseplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"rembrandtplein","name":"Oliebollenkraam Rembrandtplein","location":"Rembrandtplein","lat":52.3660204,"lng":4.89694,"note":"A seasonal municipal pitch at Rembrandtplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"gulden-winckelplantsoen","name":"Oliebollenkraam Bos en Lommer","location":"Gulden Winckelplantsoen / Bos en Lommerplein","lat":52.3785324,"lng":4.8459537,"note":"A winter stall at Gulden Winckelplantsoen, named this year as Boersma-Stuij.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"admiraal-de-ruijterweg","name":"Oliebollenkraam Admiraal de Ruijterweg","location":"Admiraal de Ruijterweg / Willem de Zwijgerlaan","lat":52.3708529,"lng":4.863806,"note":"A seasonal municipal pitch at Admiraal de Ruijterweg / Willem de Zwijgerlaan this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"kinkerstraat","name":"Oliebollenkraam Kinkerstraat","location":"Kinkerstraat / Bilderdijkkade","lat":52.3668171,"lng":4.8707925,"note":"A seasonal municipal pitch at Kinkerstraat / Bilderdijkkade this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"osdorpplein","name":"Oliebollenkraam Osdorpplein","location":"Osdorpplein (the NVV lists it by the C&A)","lat":52.3596945,"lng":4.8070201,"note":"A seasonal municipal pitch on Osdorpplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"carrascoplein","name":"Oliebollenkraam Carrascoplein (Sloterdijk)","location":"Carrascoplein, by Station Sloterdijk, 1043","lat":52.3885756,"lng":4.8385314,"note":"A seasonal municipal pitch on Carrascoplein, by Sloterdijk station, this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"berchvliet","name":"Oliebollenkraam Berchvliet","location":"Berchvliet, Sloterdijk Poort, 1046","lat":52.3917761,"lng":4.7974794,"note":"A seasonal municipal pitch at Berchvliet this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"gustav-mahlerplein","name":"Oliebollenkraam Gustav Mahlerplein","location":"Gustav Mahlerplein, Zuidas","lat":52.3368105,"lng":4.8735646,"note":"A seasonal municipal pitch on Gustav Mahlerplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"buitenveldertselaan","name":"Oliebollenkraam Buitenveldertselaan","location":"Buitenveldertselaan","lat":52.3351148,"lng":4.8686144,"note":"A seasonal municipal pitch at Buitenveldertselaan this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"olympiaplein","name":"Oliebollenkraam Olympiaplein","location":"Olympiaplein","lat":52.3464463,"lng":4.8682625,"note":"A seasonal municipal pitch on Olympiaplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"maasstraat","name":"Oliebollenkraam Maasstraat","location":"Maasstraat, Rivierenbuurt","lat":52.3453905,"lng":4.8952918,"note":"A seasonal municipal pitch at Maasstraat this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"scheldeplein","name":"Oliebollenkraam Scheldeplein","location":"Scheldeplein, Rivierenbuurt","lat":52.3444807,"lng":4.8903361,"note":"A seasonal municipal pitch on Scheldeplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"javastraat","name":"Oliebollenkraam Javastraat","location":"Javastraat","lat":52.3634615,"lng":4.9313244,"note":"A seasonal municipal pitch at Javastraat this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"buikslotermeerplein","name":"Oliebollenkraam Buikslotermeerplein","location":"Buikslotermeerplein","lat":52.3983436,"lng":4.9380253,"note":"A seasonal municipal pitch at Buikslotermeerplein this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"buiksloterweg","name":"Oliebollenkraam Buiksloterweg","location":"Buiksloterweg (near the IJ)","lat":52.3828407,"lng":4.904359,"note":"A seasonal municipal pitch at Buiksloterweg this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"molenwijk","name":"Oliebollenkraam Winkelcentrum Molenwijk","location":"Winkelcentrum Molenwijk","lat":52.4175989,"lng":4.8930605,"note":"A seasonal municipal pitch at Winkelcentrum Molenwijk this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"maasdrielhof","name":"Oliebollenkraam Maasdrielhof","location":"Maasdrielhof, Holendrecht, 1106","lat":52.3012113,"lng":4.9646475,"note":"A seasonal municipal pitch at Maasdrielhof this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"reigersbos","name":"Oliebollenkraam Reigersbos","location":"Reigersbos","lat":52.2957039,"lng":4.9742373,"note":"A seasonal municipal pitch at Reigersbos this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true},{"id":"wisseloord","name":"Oliebollenkraam Wisseloord","location":"Wisseloord, Gein / Driemond, 1106 MA","lat":52.2968992,"lng":4.9873565,"note":"A seasonal municipal pitch at Wisseloord this winter.","source":"https://maps.amsterdam.nl/staanplaatsen/","unconfirmed":true}]</script>
   </section>
   <script>
+var TURNSTILE_SITEKEY = "TURNSTILE_SITEKEY_PLACEHOLDER";
+var TURNSTILE_SITEKEY_PLACEHOLDER = "TURNSTILE_SITEKEY_PLACEHOLDER";
+function hasTurnstileSitekey(){
+  return !!(TURNSTILE_SITEKEY && TURNSTILE_SITEKEY !== TURNSTILE_SITEKEY_PLACEHOLDER);
+}
+function whenTurnstileReady(done){
+  if(window.turnstile && typeof window.turnstile.render === "function"){
+    done();
+    return;
+  }
+  var tries = 0;
+  var t = setInterval(function(){
+    tries++;
+    if(window.turnstile && typeof window.turnstile.render === "function"){
+      clearInterval(t);
+      done();
+    } else if(tries >= 50){
+      clearInterval(t);
+      done(new Error("turnstile"));
+    }
+  }, 100);
+}
+function getTurnstileToken(mountEl, done){
+  if(!hasTurnstileSitekey()){
+    done(null, "");
+    return;
+  }
+  whenTurnstileReady(function(err){
+    if(err){ done(err); return; }
+    if(!mountEl){ done(new Error("turnstile")); return; }
+    var holder = mountEl.querySelector(".oliebol-turnstile");
+    if(!holder){
+      holder = document.createElement("div");
+      holder.className = "oliebol-turnstile";
+      mountEl.appendChild(holder);
+    }
+    var settled = false;
+    var poll;
+    function finish(error, token){
+      if(settled) return;
+      settled = true;
+      if(poll) clearInterval(poll);
+      if(error || !token) done(error || new Error("turnstile"));
+      else done(null, token);
+    }
+    var existingId = holder.getAttribute("data-widget-id");
+    if(existingId){
+      var current = window.turnstile.getResponse(existingId);
+      if(current){ finish(null, current); return; }
+      try { window.turnstile.reset(existingId); } catch (e){}
+    } else {
+      var id;
+      try {
+        id = window.turnstile.render(holder, {
+          sitekey: TURNSTILE_SITEKEY,
+          appearance: "interaction-only",
+          callback: function(token){ finish(null, token); },
+          "error-callback": function(){ finish(new Error("turnstile")); },
+          "timeout-callback": function(){ finish(new Error("turnstile")); }
+        });
+      } catch (e){
+        finish(e);
+        return;
+      }
+      if(id != null) holder.setAttribute("data-widget-id", String(id));
+    }
+    var tries = 0;
+    poll = setInterval(function(){
+      tries++;
+      var wid = holder.getAttribute("data-widget-id");
+      var token = wid ? window.turnstile.getResponse(wid) : "";
+      if(token) finish(null, token);
+      else if(tries >= 50) finish(new Error("turnstile"));
+    }, 100);
+  });
+}
+function resetTurnstile(mountEl){
+  if(!mountEl || !window.turnstile) return;
+  var holder = mountEl.querySelector(".oliebol-turnstile");
+  var id = holder && holder.getAttribute("data-widget-id");
+  if(id){
+    try { window.turnstile.reset(id); } catch (e){}
+  }
+}
 (function(){
   var el = document.getElementById("map");
   if(!el) return;
@@ -1421,19 +1507,29 @@ function submitTip(e){
   var btn = form.querySelector("button[type=submit]");
   btn.disabled = true;
   var err = form.getAttribute("data-error") || "Something went wrong — please try again.";
-  fetch(form.action, {
-    method: "POST",
-    body: new FormData(form),
-    headers: { Accept: "application/json" }
-  }).then(function(r){
-    if(r.ok){
-      document.getElementById("formThanks").style.display = "block";
-      form.reset();
-    } else {
+  getTurnstileToken(form, function(tokenErr, token){
+    if(tokenErr){
+      btn.disabled = false;
       alert(err);
+      return;
     }
-  }).catch(function(){ alert(err); })
-    .finally(function(){ btn.disabled = false; });
+    var fd = new FormData(form);
+    if(token) fd.set("cf-turnstile-response", token);
+    fetch(form.action, {
+      method: "POST",
+      body: fd,
+      headers: { Accept: "application/json" }
+    }).then(function(r){
+      if(r.ok){
+        document.getElementById("formThanks").style.display = "block";
+        form.reset();
+        resetTurnstile(form);
+      } else {
+        alert(err);
+      }
+    }).catch(function(){ alert(err); })
+      .finally(function(){ btn.disabled = false; });
+  });
   return false;
 }
 var VOTE_STORE = "amsterdampopups-oliebollen-vote:";
@@ -1466,25 +1562,34 @@ function submitOliebollenVote(widget, vote){
   var thanksText = widget.getAttribute("data-thanks") || "";
   var buttons = widget.querySelectorAll("button");
   buttons.forEach(function(b){ b.disabled = true; });
-  var fd = new FormData();
-  fd.append("submitter_type", "oliebollen-vote");
-  fd.append("stand", name);
-  fd.append("vote", vote);
-  fd.append("lang", lang);
-  fd.append("_gotcha", "");
-  fd.append("_subject", "Oliebollen vote: " + name);
-  fetch("https://formspree.io/f/xjgqowrq", {
-    method: "POST",
-    body: fd,
-    headers: { Accept: "application/json" }
-  }).then(function(r){
-    if(!r.ok) throw new Error("bad status");
-    rememberOliebollenVote(id, vote);
-    var thanks = widget.querySelector(".oliebol-vote-thanks");
-    if(thanks) thanks.textContent = thanksText;
-  }).catch(function(){
-    buttons.forEach(function(b){ b.disabled = false; });
-    alert(errMsg);
+  getTurnstileToken(widget, function(tokenErr, token){
+    if(tokenErr){
+      buttons.forEach(function(b){ b.disabled = false; });
+      alert(errMsg);
+      return;
+    }
+    var fd = new FormData();
+    fd.append("submitter_type", "oliebollen-vote");
+    fd.append("stand", name);
+    fd.append("vote", vote);
+    fd.append("lang", lang);
+    fd.append("_gotcha", "");
+    fd.append("_subject", "Oliebollen vote: " + name);
+    if(token) fd.append("cf-turnstile-response", token);
+    fetch("https://formspree.io/f/xjgqowrq", {
+      method: "POST",
+      body: fd,
+      headers: { Accept: "application/json" }
+    }).then(function(r){
+      if(!r.ok) throw new Error("bad status");
+      rememberOliebollenVote(id, vote);
+      var thanks = widget.querySelector(".oliebol-vote-thanks");
+      if(thanks) thanks.textContent = thanksText;
+      resetTurnstile(widget);
+    }).catch(function(){
+      buttons.forEach(function(b){ b.disabled = false; });
+      alert(errMsg);
+    });
   });
 }
 document.addEventListener("click", function(e){
@@ -1498,7 +1603,11 @@ document.addEventListener("click", function(e){
   if(vote !== "yes" && vote !== "no") return;
   submitOliebollenVote(widget, vote);
 });
-document.addEventListener("DOMContentLoaded", function(){ applyOliebollenVoteState(document); });
+document.addEventListener("DOMContentLoaded", function(){
+  applyOliebollenVoteState(document);
+  var tipForm = document.getElementById("oliebollen-form");
+  if(tipForm && hasTurnstileSitekey()) getTurnstileToken(tipForm, function(){});
+});
   </script>
   <h2 id="stands">Stands by district</h2>
   <p class="oliebollen-confirm-note">Stands marked “Unconfirmed: permit granted” have a city permit this season; we have not yet confirmed they are open.</p>
@@ -2046,6 +2155,7 @@ document.addEventListener("DOMContentLoaded", function(){ applyOliebollenVoteSta
       <div class="field"><label for="ob-location">Location</label><input id="ob-location" name="location" required autocomplete="off" /></div>
       <div class="field"><label for="ob-hours">Hours and price (optional)</label><textarea id="ob-hours" name="hours_price"></textarea></div>
       <div class="field"><label for="ob-email">Your email (optional)</label><input id="ob-email" name="email" type="email" autocomplete="email" /></div>
+      <div id="oliebollen-tip-turnstile" class="oliebol-turnstile"></div>
       <button class="submit" type="submit">Send tip</button>
       <div class="form-thanks" id="formThanks" role="status">Thanks — tip received. We&#39;ll take a look.</div>
       <p class="form-note">We only use this to follow up on your tip. See the <a href="/privacy.html">Privacy page</a>.</p>

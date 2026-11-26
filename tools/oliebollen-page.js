@@ -6,6 +6,15 @@ const { OLIEBOLLEN_STANDS, OLIEBOLLEN_BAKERIES, DISTRICT_ORDER } = require("./ol
 
 const OLIEBOLLEN_ALT = {en: "/oliebollen/", nl: "/nl/oliebollen/"};
 
+// Public Turnstile site key only. Replace TURNSTILE_SITEKEY_PLACEHOLDER
+// with the real key after the Cloudflare widget is created.
+// Never put the secret key in this file — enter it only in Formspree
+// form settings (Settings → CAPTCHA → Cloudflare Turnstile).
+// Local tests may set OLIEBOLLEN_TURNSTILE_SITEKEY to Cloudflare's
+// always-pass visible test key 1x00000000000000000000AA.
+const TURNSTILE_SITEKEY_PLACEHOLDER = "TURNSTILE_SITEKEY_PLACEHOLDER";
+const TURNSTILE_SITEKEY = process.env.OLIEBOLLEN_TURNSTILE_SITEKEY || TURNSTILE_SITEKEY_PLACEHOLDER;
+
 const COPY = {
   en: {
     title: "Oliebollen stands in Amsterdam 2026 · Amsterdam Pop-ups",
@@ -155,6 +164,7 @@ const EXTRA_CSS = `
 .oliebol-vote-btn:disabled{opacity:.55;cursor:default}
 .oliebol-vote-thanks{font-size:13.5px;margin:.5rem 0 0;color:var(--red-deep, #7a1212)}
 .oliebol-vote-thanks:empty{display:none}
+.oliebol-turnstile{margin:.55rem 0 0}
 .leaflet-popup .oliebol-vote{margin-top:.65rem}
 .leaflet-popup .oliebollen-status{margin:.35rem 0;font-weight:600}
 `;
@@ -640,7 +650,91 @@ function oliebolIconHtml(id, unconfirmed){
 }
 
 function mapScript(esc){
-  return `(function(){
+  return `var TURNSTILE_SITEKEY = ${JSON.stringify(TURNSTILE_SITEKEY)};
+var TURNSTILE_SITEKEY_PLACEHOLDER = ${JSON.stringify(TURNSTILE_SITEKEY_PLACEHOLDER)};
+function hasTurnstileSitekey(){
+  return !!(TURNSTILE_SITEKEY && TURNSTILE_SITEKEY !== TURNSTILE_SITEKEY_PLACEHOLDER);
+}
+function whenTurnstileReady(done){
+  if(window.turnstile && typeof window.turnstile.render === "function"){
+    done();
+    return;
+  }
+  var tries = 0;
+  var t = setInterval(function(){
+    tries++;
+    if(window.turnstile && typeof window.turnstile.render === "function"){
+      clearInterval(t);
+      done();
+    } else if(tries >= 50){
+      clearInterval(t);
+      done(new Error("turnstile"));
+    }
+  }, 100);
+}
+function getTurnstileToken(mountEl, done){
+  if(!hasTurnstileSitekey()){
+    done(null, "");
+    return;
+  }
+  whenTurnstileReady(function(err){
+    if(err){ done(err); return; }
+    if(!mountEl){ done(new Error("turnstile")); return; }
+    var holder = mountEl.querySelector(".oliebol-turnstile");
+    if(!holder){
+      holder = document.createElement("div");
+      holder.className = "oliebol-turnstile";
+      mountEl.appendChild(holder);
+    }
+    var settled = false;
+    var poll;
+    function finish(error, token){
+      if(settled) return;
+      settled = true;
+      if(poll) clearInterval(poll);
+      if(error || !token) done(error || new Error("turnstile"));
+      else done(null, token);
+    }
+    var existingId = holder.getAttribute("data-widget-id");
+    if(existingId){
+      var current = window.turnstile.getResponse(existingId);
+      if(current){ finish(null, current); return; }
+      try { window.turnstile.reset(existingId); } catch (e){}
+    } else {
+      var id;
+      try {
+        id = window.turnstile.render(holder, {
+          sitekey: TURNSTILE_SITEKEY,
+          appearance: "interaction-only",
+          callback: function(token){ finish(null, token); },
+          "error-callback": function(){ finish(new Error("turnstile")); },
+          "timeout-callback": function(){ finish(new Error("turnstile")); }
+        });
+      } catch (e){
+        finish(e);
+        return;
+      }
+      if(id != null) holder.setAttribute("data-widget-id", String(id));
+    }
+    var tries = 0;
+    poll = setInterval(function(){
+      tries++;
+      var wid = holder.getAttribute("data-widget-id");
+      var token = wid ? window.turnstile.getResponse(wid) : "";
+      if(token) finish(null, token);
+      else if(tries >= 50) finish(new Error("turnstile"));
+    }, 100);
+  });
+}
+function resetTurnstile(mountEl){
+  if(!mountEl || !window.turnstile) return;
+  var holder = mountEl.querySelector(".oliebol-turnstile");
+  var id = holder && holder.getAttribute("data-widget-id");
+  if(id){
+    try { window.turnstile.reset(id); } catch (e){}
+  }
+}
+(function(){
   var el = document.getElementById("map");
   if(!el) return;
   var loaded = false;
@@ -786,19 +880,29 @@ function submitTip(e){
   var btn = form.querySelector("button[type=submit]");
   btn.disabled = true;
   var err = form.getAttribute("data-error") || "Something went wrong — please try again.";
-  fetch(form.action, {
-    method: "POST",
-    body: new FormData(form),
-    headers: { Accept: "application/json" }
-  }).then(function(r){
-    if(r.ok){
-      document.getElementById("formThanks").style.display = "block";
-      form.reset();
-    } else {
+  getTurnstileToken(form, function(tokenErr, token){
+    if(tokenErr){
+      btn.disabled = false;
       alert(err);
+      return;
     }
-  }).catch(function(){ alert(err); })
-    .finally(function(){ btn.disabled = false; });
+    var fd = new FormData(form);
+    if(token) fd.set("cf-turnstile-response", token);
+    fetch(form.action, {
+      method: "POST",
+      body: fd,
+      headers: { Accept: "application/json" }
+    }).then(function(r){
+      if(r.ok){
+        document.getElementById("formThanks").style.display = "block";
+        form.reset();
+        resetTurnstile(form);
+      } else {
+        alert(err);
+      }
+    }).catch(function(){ alert(err); })
+      .finally(function(){ btn.disabled = false; });
+  });
   return false;
 }
 var VOTE_STORE = "amsterdampopups-oliebollen-vote:";
@@ -831,25 +935,34 @@ function submitOliebollenVote(widget, vote){
   var thanksText = widget.getAttribute("data-thanks") || "";
   var buttons = widget.querySelectorAll("button");
   buttons.forEach(function(b){ b.disabled = true; });
-  var fd = new FormData();
-  fd.append("submitter_type", "oliebollen-vote");
-  fd.append("stand", name);
-  fd.append("vote", vote);
-  fd.append("lang", lang);
-  fd.append("_gotcha", "");
-  fd.append("_subject", "Oliebollen vote: " + name);
-  fetch("https://formspree.io/f/xjgqowrq", {
-    method: "POST",
-    body: fd,
-    headers: { Accept: "application/json" }
-  }).then(function(r){
-    if(!r.ok) throw new Error("bad status");
-    rememberOliebollenVote(id, vote);
-    var thanks = widget.querySelector(".oliebol-vote-thanks");
-    if(thanks) thanks.textContent = thanksText;
-  }).catch(function(){
-    buttons.forEach(function(b){ b.disabled = false; });
-    alert(errMsg);
+  getTurnstileToken(widget, function(tokenErr, token){
+    if(tokenErr){
+      buttons.forEach(function(b){ b.disabled = false; });
+      alert(errMsg);
+      return;
+    }
+    var fd = new FormData();
+    fd.append("submitter_type", "oliebollen-vote");
+    fd.append("stand", name);
+    fd.append("vote", vote);
+    fd.append("lang", lang);
+    fd.append("_gotcha", "");
+    fd.append("_subject", "Oliebollen vote: " + name);
+    if(token) fd.append("cf-turnstile-response", token);
+    fetch("https://formspree.io/f/xjgqowrq", {
+      method: "POST",
+      body: fd,
+      headers: { Accept: "application/json" }
+    }).then(function(r){
+      if(!r.ok) throw new Error("bad status");
+      rememberOliebollenVote(id, vote);
+      var thanks = widget.querySelector(".oliebol-vote-thanks");
+      if(thanks) thanks.textContent = thanksText;
+      resetTurnstile(widget);
+    }).catch(function(){
+      buttons.forEach(function(b){ b.disabled = false; });
+      alert(errMsg);
+    });
   });
 }
 document.addEventListener("click", function(e){
@@ -863,7 +976,11 @@ document.addEventListener("click", function(e){
   if(vote !== "yes" && vote !== "no") return;
   submitOliebollenVote(widget, vote);
 });
-document.addEventListener("DOMContentLoaded", function(){ applyOliebollenVoteState(document); });
+document.addEventListener("DOMContentLoaded", function(){
+  applyOliebollenVoteState(document);
+  var tipForm = document.getElementById("oliebollen-form");
+  if(tipForm && hasTurnstileSitekey()) getTurnstileToken(tipForm, function(){});
+});
 `;
 }
 
@@ -974,6 +1091,7 @@ ${socialMeta({L, title:C.title, desc:C.desc, url, imageAlt:C.imageAlt})}
 ${GA_HEAD}${STYLE}<style>
 ${EXTRA_CSS}
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
 </head>
 <body>
 ${siteChrome(L, {alt:OLIEBOLLEN_ALT, skipHref:"#stands", skipText:C.skip})}
@@ -1011,6 +1129,7 @@ ${bakeries}
       <div class="field"><label for="ob-location">${esc(C.fLocation)}</label><input id="ob-location" name="location" required autocomplete="off" /></div>
       <div class="field"><label for="ob-hours">${esc(C.fHours)}</label><textarea id="ob-hours" name="hours_price"></textarea></div>
       <div class="field"><label for="ob-email">${esc(C.fEmail)}</label><input id="ob-email" name="email" type="email" autocomplete="email" /></div>
+      <div id="oliebollen-tip-turnstile" class="oliebol-turnstile"></div>
       <button class="submit" type="submit">${esc(C.fSend)}</button>
       <div class="form-thanks" id="formThanks" role="status">${esc(C.fThanks)}</div>
       <p class="form-note">${privNote}</p>
