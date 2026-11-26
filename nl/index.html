@@ -7227,12 +7227,12 @@ function weekCountText(n, scope){
     if(scope==="ended") return "Nog geen evenementen deze week";
     if(scope==="today") return n===0 ? "Geen evenementen vandaag" : n===1 ? "1 evenement vandaag" : `${n} evenementen vandaag`;
     if(scope==="weekend") return n===0 ? "Geen evenementen dit weekend" : n===1 ? "1 evenement dit weekend" : `${n} evenementen dit weekend`;
-    return n===0 ? "Geen evenementen deze week" : n===1 ? "1 evenement deze week" : `${n} evenementen deze week`;
+    return n===0 ? "Geen evenementen meer deze week" : n===1 ? "1 evenement deze week" : `${n} evenementen deze week`;
   }
   if(scope==="ended") return "No events this week yet";
   if(scope==="today") return n===0 ? "No events today" : n===1 ? "1 event today" : `${n} events today`;
   if(scope==="weekend") return n===0 ? "No events this weekend" : n===1 ? "1 event this weekend" : `${n} events this weekend`;
-  return n===0 ? "No events this week" : n===1 ? "1 event this week" : `${n} events this week`;
+  return n===0 ? "No events left this week" : n===1 ? "1 event this week" : `${n} events this week`;
 }
 function renderThisWeek(){
   closeMapChooser(false);
