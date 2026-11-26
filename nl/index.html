@@ -261,6 +261,11 @@ main{padding:18px 0 40px}
 .pop-cat{font-size:11px; font-weight:500; padding:2px 7px; border-radius:999px; display:inline-flex; align-items:center; gap:4px; margin-bottom:5px}
 .pop-link{color:var(--red-text); font-weight:500; text-decoration:none}
 .pop-item{cursor:pointer}
+.pop-list{list-style:none;margin:8px 0 0;padding:0;max-height:min(240px,50vh);overflow:auto}
+.pop-list:focus{outline:2px solid var(--red-text);outline-offset:2px}
+.pop-list li{margin:0;padding:8px 0;border-top:1px solid var(--line)}
+.pop-list li:first-child{border-top:0;padding-top:2px}
+.pop-list .pop-when{color:var(--faint);font-size:12px}
 
 /* ---- cards ---- */
 .cards{display:flex; flex-direction:column; gap:11px}
@@ -6748,6 +6753,8 @@ const I18N = {
     cookieText:"This site stays cookie-free until you allow ads. Accept to enable advertising and basic measurement; reject to keep only what's strictly necessary — you can change this anytime on the Privacy page.",
     cookieAccept:"Accept", cookieReject:"Reject", cookieSettings:"Cookie settings", cookieFab:"Cookie choices",
     footL:"Made by locals · not affiliated with the City of Amsterdam", more:"Details", alsoIn:"Also in",
+    mapListTitle:(n)=>n===1?"1 event at this location":`${n} events at this location`,
+    mapClose:"Close",
     themeAuto:"Auto", themeLight:"Light", themeDark:"Dark",
     themeAriaTpl:(cur,next)=>`Theme: ${cur} — click to switch to ${next}`,
     listenStart:"Listen", listenStop:"Stop listening",
@@ -6774,6 +6781,8 @@ const I18N = {
     cookieText:"Deze site gebruikt geen cookies totdat je advertenties toestaat. Accepteer om advertenties en basismeting in te schakelen; weiger om alleen het strikt noodzakelijke te houden — je kunt dit altijd aanpassen op de Privacy-pagina.",
     cookieAccept:"Accepteren", cookieReject:"Weigeren", cookieSettings:"Cookie-instellingen", cookieFab:"Cookievoorkeuren",
     footL:"Gemaakt door locals · geen onderdeel van de gemeente Amsterdam", more:"Bekijk", alsoIn:"Ook in",
+    mapListTitle:(n)=>n===1?"1 evenement op deze locatie":`${n} evenementen op deze locatie`,
+    mapClose:"Sluiten",
     themeAuto:"Automatisch", themeLight:"Licht", themeDark:"Donker",
     themeAriaTpl:(cur,next)=>`Thema: ${cur} — klik om te wisselen naar ${next}`,
     listenStart:"Voorlezen", listenStop:"Stop met voorlezen",
@@ -6892,6 +6901,8 @@ function initMap(){
   map = L.map("map",{ scrollWheelZoom:true, touchZoom:true }).setView([52.3676,4.9041],12.5);
   baseTiles = makeBaseTiles().addTo(map);
   markerLayer = L.layerGroup().addTo(map);
+  map.on("popupopen", onMapPopupOpen);
+  document.addEventListener("keydown", onMapPopupKeydown);
   // Follow the OS theme live, but only when the visitor hasn't picked an explicit theme.
   if(window.matchMedia){
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
@@ -6997,50 +7008,80 @@ function mapChooserKey(e){
     closeMapChooser(true);
   }
 }
-/* whole map card opens the organiser page; links and buttons inside keep their own action */
+function onMapPopupOpen(e){
+  const root = e.popup && e.popup.getElement();
+  if(!root) return;
+  const close = root.querySelector("a.leaflet-popup-close-button");
+  if(close) close.setAttribute("aria-label", t("mapClose"));
+  const list = root.querySelector(".pop-list");
+  if(list) list.focus();
+}
+function onMapPopupKeydown(e){
+  if(e.key !== "Escape") return;
+  if(mapChooserEl && mapChooserEl.classList.contains("open")) return;
+  if(!map || !document.querySelector(".leaflet-popup")) return;
+  e.preventDefault();
+  map.closePopup();
+}
+/* same-location list links scroll to the event card; a click on the rest of a single-event popup still opens the organiser page */
 document.addEventListener("click", e => {
+  const cardLink = e.target.closest(".leaflet-popup .pop-card-link");
+  if(cardLink){
+    const id = cardLink.getAttribute("data-id");
+    if(id){
+      e.preventDefault();
+      if(map) map.closePopup();
+      flashCard(id);
+    }
+    return;
+  }
   const it = e.target.closest(".leaflet-popup .pop-item");
   if(!it || e.target.closest("a,button")) return;
   window.open(it.dataset.href, "_blank", "noopener");
 });
+/* Pins closer than this still sit on top of each other at max zoom (16px pin ≈ 3m at zoom 19). */
+const MAP_MERGE_METERS = 5;
+function groupEventsForMap(list){
+  const exact = {};
+  list.forEach(ev => {
+    const key = ev.lat + "," + ev.lng;
+    if(!exact[key]) exact[key] = [];
+    exact[key].push(ev);
+  });
+  const merged = [];
+  Object.keys(exact).forEach(key => {
+    const group = exact[key];
+    const ev = group[0];
+    const hit = merged.find(other => L.latLng(other[0].lat, other[0].lng).distanceTo(L.latLng(ev.lat, ev.lng)) < MAP_MERGE_METERS);
+    if(hit) hit.push.apply(hit, group);
+    else merged.push(group.slice());
+  });
+  return merged;
+}
 function renderMap(list){
   markerLayer.clearLayers(); markers = {};
   const pts = [];
-  // Group events by coordinate key
-  const groups = {};
-  list.forEach(ev => {
-    const key = `${ev.lat},${ev.lng}`;
-    if(!groups[key]) groups[key] = [];
-    groups[key].push(ev);
-  });
-  list.forEach(ev => {
-    const key = `${ev.lat},${ev.lng}`;
-    const group = groups[key];
+  groupEventsForMap(list).forEach(group => {
+    const ev = group[0];
     const c = catBy[ev.cats[0]];
     const count = group.length;
     const badge = count > 1 ? `<span class="pin-badge">${count}</span>` : "";
     const icon = L.divIcon({ className:"", iconSize:[16,16], iconAnchor:[8,8],
       html:`<div class="pin" style="background:${catSwatch(c)}">${c.tree?treeSvg():""}${badge}</div>` });
-    const m = L.marker([ev.lat,ev.lng],{icon}).addTo(markerLayer);
-    const pill = `<span class="pop-cat" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>`;
-    // Build popup listing all events at this location
+    const title = count > 1 ? t("mapListTitle")(count) : eventName(ev, lang);
+    const m = L.marker([ev.lat,ev.lng],{icon, keyboard:true, title, alt:title}).addTo(markerLayer);
     let popupHtml;
-    if(count > 1 && group[0].id === ev.id){
-      // Only render the stacked popup on the first event (to avoid duplicates)
-      const items = group.map(e => {
-        const ec = catBy[e.cats[0]];
-        const ep = `<span class="pop-cat" style="background:${tintBg(ec.hex)};color:${darkText(ec.hex)}">${catLabelHtml(ec)}</span>`;
-        return `<div class="pop-item" data-href="${e.url}">${ep} <b>${eventName(e, lang)}</b><br>${eventWhenLine(e)}<br><a class="pop-link" href="${e.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
-      }).join("<hr style='margin:6px 0;border-color:#eee'>");
-      popupHtml = `${mapsButton(ev)}<br>${ev.hood[lang]}<br><br>${items}`;
-    } else if(count === 1) {
-      popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${eventName(ev, lang)}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
+    if(count > 1){
+      const items = group.map(e =>
+        `<li><a class="pop-link pop-card-link" href="#e-${escapeHtml(e.id)}" data-id="${escapeHtml(e.id)}">${escapeHtml(eventName(e, lang))}</a><div class="pop-when">${escapeHtml(eventWhenLine(e))}</div></li>`
+      ).join("");
+      popupHtml = `${mapsButton(ev)}<br>${escapeHtml(ev.hood[lang])}<ul class="pop-list" tabindex="-1" aria-label="${escapeHtml(t("mapListTitle")(count))}">${items}</ul>`;
     } else {
-      // Stacked markers below first — bind same popup as first
+      const pill = `<span class="pop-cat" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>`;
       popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${eventName(ev, lang)}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
     }
-    m.bindPopup(popupHtml);
-    markers[ev.id] = m;
+    m.bindPopup(popupHtml, { maxWidth:280, maxHeight:280, closeButton:true, closeOnEscapeKey:true, autoPan:true });
+    group.forEach(e => { markers[e.id] = m; });
     pts.push([ev.lat,ev.lng]);
   });
   if(pts.length) map.fitBounds(pts,{padding:[40,40], maxZoom:14});
@@ -7168,7 +7209,7 @@ function scheduleHtml(ev){
 function cardHtml(ev){
   const c = catBy[ev.cats[0]];
   const facts = `<div class="facts">${fact(ICO.clock, eventWhenLine(ev))}${mapsButton(ev)}${priceFacts(ev)}</div>`;
-  return `<article class="card" data-id="${ev.id}" onclick="focusEvent('${ev.id}')">
+  return `<article class="card" id="e-${ev.id}" data-id="${ev.id}" onclick="focusEvent('${ev.id}')">
     <div class="card-top">
       <span class="pill" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>
       <span class="card-meta">${ev.hood[lang]}</span>

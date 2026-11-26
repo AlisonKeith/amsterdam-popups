@@ -125,12 +125,19 @@ p{margin:0 0 8px} footer{border-top:1px solid var(--line);margin:0;padding:16px 
 .leaflet-popup-content{margin:11px 13px;font-size:13px;line-height:1.45;color:var(--ink)}
 .leaflet-popup-content b{font-size:13.5px}
 .pop-item{cursor:pointer}
+.pop-list{list-style:none;margin:8px 0 0;padding:0;max-height:min(240px,50vh);overflow:auto}
+.pop-list:focus{outline:2px solid var(--red);outline-offset:2px}
+.pop-list li{margin:0;padding:8px 0;border-top:1px solid var(--line)}
+.pop-list li:first-child{border-top:0;padding-top:2px}
+.pop-list .pop-when{color:var(--faint);font-size:12px}
 .leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--card);color:var(--ink)}
 .leaflet-control-zoom a{background:var(--card)!important;color:var(--ink)!important;border-color:var(--line)!important}
 .leaflet-control-attribution{background:var(--card)!important;color:var(--faint)!important}
 .leaflet-control-attribution a{color:var(--red)!important}
 .leaflet-popup-content hr{margin:8px 0;border:0;border-top:1px solid var(--line)}
-.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.pin{width:16px;height:16px;border-radius:50%;background:var(--red);border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);position:relative}
+.pin-badge{position:absolute;top:-7px;right:-7px;background:#111;color:#fff;border-radius:999px;font-size:9px;font-weight:700;line-height:1;padding:2px 4px;min-width:14px;text-align:center;box-shadow:0 0 0 1.5px #fff;pointer-events:none}
+#list li:target article,#list article.flash{outline:2px solid var(--red);outline-offset:2px}
 .browse ul{list-style:none;padding:0;margin:0 0 12px;display:flex;flex-wrap:wrap;gap:2px 14px} .browse li{border:0;padding:0}
 .browse h2{font-size:.95rem;margin:0 0 4px;color:var(--ink)}
 .consent{position:fixed; left:0; right:0; bottom:0; z-index:1500; background:var(--card); border-top:1px solid var(--line); padding:14px 18px; display:flex; align-items:center; gap:14px; flex-wrap:wrap; box-shadow:0 -6px 20px rgba(0,0,0,.16)}
@@ -1076,35 +1083,92 @@ function initSeasonMap(){
       maxZoom:19, crossOrigin:true, attribution:"&copy; OpenStreetMap contributors"
     }).addTo(map);
   });
-  var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true"></div>'});
   var layer = L.layerGroup().addTo(map);
+  var isNl = (document.documentElement.lang || "en").slice(0, 2) === "nl";
+  function mapListTitle(n){
+    if(isNl) return n === 1 ? "1 evenement op deze locatie" : n + " evenementen op deze locatie";
+    return n === 1 ? "1 event at this location" : n + " events at this location";
+  }
+  var MAP_MERGE_METERS = 5;
+  function groupEventsForMap(list){
+    var exact = {};
+    list.forEach(function(ev){
+      var key = ev.lat + "," + ev.lng;
+      if(!exact[key]) exact[key] = [];
+      exact[key].push(ev);
+    });
+    var merged = [];
+    Object.keys(exact).forEach(function(key){
+      var group = exact[key];
+      var ev = group[0];
+      var hit = merged.filter(function(other){
+        return L.latLng(other[0].lat, other[0].lng).distanceTo(L.latLng(ev.lat, ev.lng)) < MAP_MERGE_METERS;
+      })[0];
+      if(hit) hit.push.apply(hit, group);
+      else merged.push(group.slice());
+    });
+    return merged;
+  }
+  map.on("popupopen", function(e){
+    var root = e.popup && e.popup.getElement();
+    if(!root) return;
+    var close = root.querySelector("a.leaflet-popup-close-button");
+    if(close) close.setAttribute("aria-label", isNl ? "Sluiten" : "Close");
+    var listEl = root.querySelector(".pop-list");
+    if(listEl) listEl.focus();
+  });
+  document.addEventListener("keydown", function(e){
+    if(e.key !== "Escape") return;
+    if(!document.querySelector(".leaflet-popup")) return;
+    e.preventDefault();
+    map.closePopup();
+  });
   document.addEventListener("click", function(e){
+    var cardLink = e.target.closest(".leaflet-popup .pop-card-link");
+    if(cardLink){
+      var hid = (cardLink.getAttribute("href") || "").replace(/^#/, "");
+      var card = hid && document.getElementById(hid);
+      if(card){
+        e.preventDefault();
+        map.closePopup();
+        card.scrollIntoView({behavior:"smooth", block:"center"});
+        var art = card.tagName === "ARTICLE" ? card : card.querySelector("article");
+        if(art){ art.classList.add("flash"); setTimeout(function(){ art.classList.remove("flash"); }, 1200); }
+        if(history.replaceState) history.replaceState(null, "", "#" + hid);
+      }
+      return;
+    }
     var it = e.target.closest(".leaflet-popup .pop-item");
     if(!it || e.target.closest("a,button")) return;
     window.open(it.getAttribute("data-href"), "_blank", "noopener");
   });
   function draw(list){
     layer.clearLayers();
-    var groups = {};
-    list.forEach(function(ev){
-      var key = ev.lat + "," + ev.lng;
-      if(!groups[key]) groups[key] = [];
-      groups[key].push(ev);
-    });
-    Object.keys(groups).forEach(function(key){
-      var group = groups[key];
+    groupEventsForMap(list).forEach(function(group){
       var ev = group[0];
-      var html = group.map(function(e){
-        var when = escapeHtml(e.when) + (e.time ? " \u00b7 " + escapeHtml(e.time) : "");
-        return "<div class=\"pop-item\" data-href=\"" + escapeHtml(e.url) + "\"><b><a href=\"" + escapeHtml(e.url) + "\" target=\"_blank\" rel=\"noopener\">" + escapeHtml(e.name) + " \u2197</a></b><br>" + when + "<br>" + escapeHtml(e.addr || "") + "</div>";
-      }).join("<hr>");
-      L.marker([ev.lat, ev.lng], {icon:pin, alt:ev.name, keyboard:true, title:ev.name}).bindPopup(html).addTo(layer);
+      var count = group.length;
+      var badge = count > 1 ? "<span class=\"pin-badge\">" + count + "</span>" : "";
+      var pin = L.divIcon({className:"", iconSize:[16,16], iconAnchor:[8,8], html:'<div class="pin" aria-hidden="true">' + badge + "</div>"});
+      var title = count > 1 ? mapListTitle(count) : ev.name;
+      var html;
+      if(count > 1){
+        var items = group.map(function(e){
+          var when = escapeHtml(e.when) + (e.time ? " · " + escapeHtml(e.time) : "");
+          return "<li><a class=\"pop-link pop-card-link\" href=\"#e-" + escapeHtml(e.id) + "\">" + escapeHtml(e.name) + "</a><div class=\"pop-when\">" + when + "</div></li>";
+        }).join("");
+        html = "<ul class=\"pop-list\" tabindex=\"-1\" aria-label=\"" + escapeHtml(mapListTitle(count)) + "\">" + items + "</ul>";
+      } else {
+        var when = escapeHtml(ev.when) + (ev.time ? " · " + escapeHtml(ev.time) : "");
+        html = "<div class=\"pop-item\" data-href=\"" + escapeHtml(ev.url) + "\"><b><a href=\"" + escapeHtml(ev.url) + "\" target=\"_blank\" rel=\"noopener\">" + escapeHtml(ev.name) + " ↗</a></b><br>" + when + "<br>" + escapeHtml(ev.addr || "") + "</div>";
+      }
+      L.marker([ev.lat, ev.lng], {icon:pin, alt:title, keyboard:true, title:title}).bindPopup(html, {maxWidth:280, maxHeight:280, closeButton:true, closeOnEscapeKey:true, autoPan:true}).addTo(layer);
     });
     if(list.length){
       map.fitBounds(list.map(function(e){ return [e.lat, e.lng]; }), {padding:[40,40], maxZoom:14});
     }
     setTimeout(function(){ map.invalidateSize(); }, 0);
   }
+
   function filterEvents(tag){
     if(!tag || tag === "all") return events;
     return events.filter(function(e){
