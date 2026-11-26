@@ -372,7 +372,7 @@ ${CONSENT_CSS}
 // Footer link list to every category page that has events this week (current page marked).
 function browseNav(L, currentId){
   const links = pageCats.filter(c => inCat(c.id).length).map(c =>
-    `      <li><a href="${catPath(c.id, L)}"${c.id === currentId ? ' aria-current="page"' : ""}>${esc(c.label[L])}</a></li>`).join("\n");
+    `      <li><a href="${catPath(c.id, L)}"${c.id === currentId ? ' aria-current="page"' : ""}>${esc((c.pageLabel||c.label)[L])}</a></li>`).join("\n");
   return `  <nav class="browse" aria-labelledby="browse-h">
     <h2 id="browse-h">${TXT[L].browse}</h2>
     <ul>
@@ -866,7 +866,7 @@ const dezeWeek = listPage({
 // A category with no events this week still gets its page (stable URL, "nothing this week" note),
 // but it is marked noindex and left out of the sitemap, llms.txt and the footer links.
 function catPage(c, L){
-  const evs = inCat(c.id), T = TXT[L], label = c.label[L];
+  const evs = inCat(c.id), T = TXT[L], label = (c.pageLabel||c.label)[L];
   return listPage({
     L, alt:{en:catPath(c.id, "en"), nl:catPath(c.id, "nl")}, currentId:c.id,
     title:T.catTitle(label, week.label[L]),
@@ -1088,7 +1088,7 @@ const browseBlock = `<!-- build-static:browse:start -->
     <p class="plain-list-link"><a href="/new-years-eve/" data-href-en="/new-years-eve/" data-href-nl="/nl/oud-en-nieuw/" data-txt-en="New Year's Eve pop-ups and events in Amsterdam" data-txt-nl="Pop-ups en evenementen voor oud en nieuw in Amsterdam">New Year's Eve pop-ups and events in Amsterdam</a></p>
     <h2 id="browse-h" data-txt-en="${TXT.en.browse}" data-txt-nl="${TXT.nl.browse}">${TXT.en.browse}</h2>
     <ul>
-${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc(c.label.en)}" data-txt-nl="${esc(c.label.nl)}">${esc(c.label.en)}</a></li>`).join("\n")}
+${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc((c.pageLabel||c.label).en)}" data-txt-nl="${esc((c.pageLabel||c.label).nl)}">${esc((c.pageLabel||c.label).en)}</a></li>`).join("\n")}
     </ul>
   </nav>
 <!-- build-static:browse:end -->`;
