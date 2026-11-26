@@ -3,6 +3,7 @@
 //   this-week.html         plain HTML list of this week's events (with Event JSON-LD), for crawlers, AI search and readers without JavaScript
 //   christmas/index.html   season-long Christmas page (EN);  nl/kerst/index.html  Dutch pair
 //   new-years-eve/index.html  season-long New Year's Eve page (EN);  nl/oud-en-nieuw/index.html  Dutch pair
+//   oliebollen/index.html  season-long oliebollen stands page (EN);  nl/oliebollen/index.html  Dutch pair
 //   <slug>/index.html      one plain page per category (this week's events in it, with Event JSON-LD)
 //   nl/index.html          the Dutch main page: a copy of index.html that starts in Dutch (Dutch text in the HTML,
 //                          lang="nl", NL canonical); same code, so the map, filters and expired-event hiding work as on /
@@ -22,6 +23,7 @@
 "use strict";
 const fs = require("fs");
 const path = require("path");
+const { buildOliebollenPages, OLIEBOLLEN_ALT } = require("./oliebollen-page");
 
 const ROOT = path.join(__dirname, "..");
 const SITE = "https://www.amsterdampopups.com";
@@ -465,18 +467,21 @@ const HOLIDAY_LINKS = {
   en:[
     ["sinterklaas", "/sinterklaas/", "Sinterklaas"],
     ["christmas", "/christmas/", "Christmas"],
-    ["nye", "/new-years-eve/", "New Year's Eve"]
+    ["nye", "/new-years-eve/", "New Year's Eve"],
+    ["oliebollen", "/oliebollen/", "Oliebollen"]
   ],
   nl:[
     ["sinterklaas", "/nl/sinterklaas/", "Sinterklaas"],
     ["christmas", "/nl/kerst/", "Kerst"],
-    ["nye", "/nl/oud-en-nieuw/", "Oud en nieuw"]
+    ["nye", "/nl/oud-en-nieuw/", "Oud en nieuw"],
+    ["oliebollen", "/nl/oliebollen/", "Oliebollen"]
   ]
 };
 const HOLIDAY_CURRENT = {
   "/sinterklaas/":"sinterklaas", "/nl/sinterklaas/":"sinterklaas",
   "/christmas/":"christmas", "/nl/kerst/":"christmas",
-  "/new-years-eve/":"nye", "/nl/oud-en-nieuw/":"nye"
+  "/new-years-eve/":"nye", "/nl/oud-en-nieuw/":"nye",
+  "/oliebollen/":"oliebollen", "/nl/oliebollen/":"oliebollen"
 };
 const NAV_DROP_JS = `(function(){
   var drops = document.querySelectorAll("details.nav-drop");
@@ -966,7 +971,7 @@ const xmasEn = listPage({
   desc:"Spontaneous Christmas pop-ups and one-off events in Amsterdam, late November to early January: markets, winter terraces, workshops and light walks.",
   headerExtra:` · <a href="/this-week.html">${TXT.en.allWeek}</a>`,
   h1:"Christmas pop-ups and events in Amsterdam",
-  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run pop-ups: markets, winter terraces, workshops and light walks. Some pop ups last a weekend, others run all season. Here are the one-off and limited-run ones from now to early January, if you want ideas for a spontaneous evening out. ${TXT.en.check} Looking only for markets? See our <a href="/christmas-markets/">Christmas markets page</a>. For New Year's Eve, see our <a href="/new-years-eve/">New Year's Eve pop-ups page</a>.</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
+  lead:`  <p>Christmas in Amsterdam is less one big market than a string of short-run pop-ups: markets, winter terraces, workshops and light walks. Some pop ups last a weekend, others run all season. Here are the one-off and limited-run ones from now to early January, if you want ideas for a spontaneous evening out. ${TXT.en.check} Looking only for markets? See our <a href="/christmas-markets/">Christmas markets page</a>. For New Year's Eve, see our <a href="/new-years-eve/">New Year's Eve pop-ups page</a>. Looking for oliebollen stands? See our <a href="/oliebollen/">oliebollen stands in Amsterdam</a>.</p>\n  <p>${xmasList.length} events, listed by date.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "en"),
   footerText:"A season list of Christmas events from late November 2026 to early January 2027.",
   keywords:"Christmas pop-ups Amsterdam, Christmas pop ups, Christmas popups, kerstmarkt Amsterdam, winter terraces, light walks",
@@ -979,7 +984,7 @@ const xmasNl = listPage({
   desc:"Spontane kerst pop-ups en eenmalige events in Amsterdam, eind november tot begin januari: markten, winterterrassen, workshops en lichtwandelingen.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
   h1:"Kerst pop-ups en evenementen in Amsterdam",
-  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: markten, winterterrassen, workshops en lichtwandelingen. Sommige pop ups duren een weekend, andere lopen het hele seizoen. Hier staan de eenmalige en tijdelijke evenementen van nu tot begin januari, mooi als je zin hebt in een spontane avond. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>. Voor oud en nieuw, zie onze <a href="/nl/oud-en-nieuw/">pagina met pop-ups voor oud en nieuw</a>.</p>\n  <p>${TXT.nl.count(xmasList.length)}, op datum.</p>`,
+  lead:`  <p>Kerst in Amsterdam is niet één grote markt, maar een reeks korte pop-ups: markten, winterterrassen, workshops en lichtwandelingen. Sommige pop ups duren een weekend, andere lopen het hele seizoen. Hier staan de eenmalige en tijdelijke evenementen van nu tot begin januari, mooi als je zin hebt in een spontane avond. ${TXT.nl.check} Alleen op zoek naar markten? Bekijk onze <a href="/nl/kerstmarkten/">pagina met kerstmarkten</a>. Voor oud en nieuw, zie onze <a href="/nl/oud-en-nieuw/">pagina met pop-ups voor oud en nieuw</a>. Op zoek naar oliebollenkramen? Bekijk onze <a href="/nl/oliebollen/">pagina met oliebollenkramen in Amsterdam</a>.</p>\n  <p>${TXT.nl.count(xmasList.length)}, op datum.</p>`,
   events:xmasList, ld:jsonLd(xmasList, "nl"),
   footerText:"Een seizoenslijst van kerstevents van eind november 2026 tot begin januari 2027.",
   keywords:"Kerst pop-ups Amsterdam, kerst pop ups, Christmas popups, kerstmarkt Amsterdam, winterterrassen, lichtwandelingen",
@@ -1028,7 +1033,7 @@ const nyeEn = listPage({
   desc:"New Year's Eve in Amsterdam 2026: pop-ups, one-off parties, club nights, special dinners and free fireworks shows, with times, prices, a map and organiser links.",
   headerExtra:` · <a href="/this-week.html">${TXT.en.allWeek}</a>`,
   h1:"New Year's Eve pop-ups and events in Amsterdam",
-  lead:`  <p>Looking for something different on New Year's Eve in Amsterdam? Beyond the big free countdown at Museumplein, here are the pop-ups, one-off parties and special dinners we've checked on each organiser's own page, plus a few things to do on New Year's Day. Times and prices can change, so check the organiser's link before you go. Looking for Christmas? See our <a href="/christmas/">Christmas pop-ups page</a>.</p>\n  <p>Listed by date.</p>`,
+  lead:`  <p>Looking for something different on New Year's Eve in Amsterdam? Beyond the big free countdown at Museumplein, here are the pop-ups, one-off parties and special dinners we've checked on each organiser's own page, plus a few things to do on New Year's Day. Times and prices can change, so check the organiser's link before you go. Looking for Christmas? See our <a href="/christmas/">Christmas pop-ups page</a>. Looking for oliebollen stands? See our <a href="/oliebollen/">oliebollen stands in Amsterdam</a>.</p>\n  <p>Listed by date.</p>`,
   events:nyeList, ld:jsonLd(nyeList, "en"), faq:nyeFaqEn,
   footerText:"A season list of New Year's Eve and New Year's Day events in Amsterdam.",
   keywords:"New Year's Eve pop-ups Amsterdam, NYE Amsterdam 2026, things to do New Year's Eve Amsterdam, pop ups, popups",
@@ -1042,7 +1047,7 @@ const nyeNl = listPage({
   desc:"Oud en nieuw in Amsterdam 2026: pop-ups, eenmalige feesten, clubnachten, speciale diners en gratis vuurwerkshows, met tijden, prijzen, kaart en links naar de organisator.",
   headerExtra:` · <a href="/nl/deze-week.html">${TXT.nl.allWeek}</a>`,
   h1:"Pop-ups en evenementen voor oud en nieuw in Amsterdam",
-  lead:`  <p>Zin in iets anders met oud en nieuw in Amsterdam? Naast het grote gratis aftelmoment op het Museumplein vind je hier de pop-ups, eenmalige feesten en speciale diners die we op de eigen pagina van elke organisator hebben nagelopen, plus een paar uitjes voor nieuwjaarsdag. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat. Op zoek naar kerst? Zie onze <a href="/nl/kerst/">pagina met kerst pop-ups</a>.</p>\n  <p>Op datum.</p>`,
+  lead:`  <p>Zin in iets anders met oud en nieuw in Amsterdam? Naast het grote gratis aftelmoment op het Museumplein vind je hier de pop-ups, eenmalige feesten en speciale diners die we op de eigen pagina van elke organisator hebben nagelopen, plus een paar uitjes voor nieuwjaarsdag. Tijden en prijzen kunnen veranderen, dus check de link van de organisator voordat je gaat. Op zoek naar kerst? Zie onze <a href="/nl/kerst/">pagina met kerst pop-ups</a>. Op zoek naar oliebollenkramen? Bekijk onze <a href="/nl/oliebollen/">pagina met oliebollenkramen in Amsterdam</a>.</p>\n  <p>Op datum.</p>`,
   events:nyeList, ld:jsonLd(nyeList, "nl"), faq:nyeFaqNl,
   footerText:"Een seizoenslijst van events voor oudejaarsavond en nieuwjaarsdag in Amsterdam.",
   keywords:"oud en nieuw Amsterdam, oudejaarsavond Amsterdam uitgaan, oudjaar, NYE Amsterdam, pop-ups, pop ups, popups",
@@ -1051,6 +1056,10 @@ const nyeNl = listPage({
   nyeFilters:true
 });
 writes.push([path.join("new-years-eve", "index.html"), nyeEn], [path.join("nl", "oud-en-nieuw", "index.html"), nyeNl]);
+writes.push(...buildOliebollenPages({
+  esc, siteChrome, STYLE, GA_HEAD, consentBlock, hreflang, socialMeta,
+  SITE, GENERATED, TXT, browseNav, path
+}));
 
 
 // ---- About pages: /about/ and /nl/over/ (text in the HTML; the first paragraph is I18N.aboutBody from index.html) ----
@@ -1150,6 +1159,7 @@ const browseBlock = `<!-- build-static:browse:start -->
     <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
     <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas pop-ups and events in Amsterdam" data-txt-nl="Kerst pop-ups en evenementen in Amsterdam">Christmas pop-ups and events in Amsterdam</a></p>
     <p class="plain-list-link"><a href="/new-years-eve/" data-href-en="/new-years-eve/" data-href-nl="/nl/oud-en-nieuw/" data-txt-en="New Year's Eve pop-ups and events in Amsterdam" data-txt-nl="Pop-ups en evenementen voor oud en nieuw in Amsterdam">New Year's Eve pop-ups and events in Amsterdam</a></p>
+    <p class="plain-list-link"><a href="/oliebollen/" data-href-en="/oliebollen/" data-href-nl="/nl/oliebollen/" data-txt-en="Oliebollen stands in Amsterdam" data-txt-nl="Oliebollenkramen in Amsterdam">Oliebollen stands in Amsterdam</a></p>
     <h2 id="browse-h" data-txt-en="${TXT.en.browse}" data-txt-nl="${TXT.nl.browse}">${TXT.en.browse}</h2>
     <ul>
 ${live.map(c => `      <li><a href="${catPath(c.id, "en")}" data-href-en="${catPath(c.id, "en")}" data-href-nl="${catPath(c.id, "nl")}" data-txt-en="${esc((c.pageLabel||c.label).en)}" data-txt-nl="${esc((c.pageLabel||c.label).nl)}">${esc((c.pageLabel||c.label).en)}</a></li>`).join("\n")}
@@ -1217,6 +1227,8 @@ function buildNlIndex(){
   swap('<a id="lang-nl" href="/nl/" hreflang="nl" lang="nl">', '<a id="lang-nl" class="on" href="/nl/" hreflang="nl" lang="nl" aria-current="page">');
   swap('<p class="intro-text" id="intro-en">', '<p class="intro-text" id="intro-en" style="display:none">');
   swap('<p class="intro-text" id="intro-nl" style="display:none">', '<p class="intro-text" id="intro-nl">');
+  swap('<p class="oliebollen-home-line" id="oliebollen-line-en">', '<p class="oliebollen-home-line" id="oliebollen-line-en" style="display:none">');
+  swap('<p class="oliebollen-home-line" id="oliebollen-line-nl" style="display:none">', '<p class="oliebollen-home-line" id="oliebollen-line-nl">');
   swap(/<noscript>\n      <p>[^\n]*<\/p>\n    <\/noscript>/,
        `<noscript>\n      <p>Deze gids heeft JavaScript nodig voor de kaart en filters. <a href="/nl/deze-week.html">Lees de events van deze week als gewone lijst</a>, met data, locaties, prijzen en links naar de organisator.</p>\n    </noscript>`);
   swap('<span id="listen-label">Listen</span>', `<span id="listen-label">${esc(I18N.nl.listenStart)}</span>`);
@@ -1277,6 +1289,7 @@ The guide is edited by hand and updated every week (Monday to Sunday). Each list
 - Dutch versions: [interactive guide](${SITE}/nl/), [plain list](${SITE}/nl/deze-week.html), and each category page below under /nl/
 - [Christmas pop-ups and events in Amsterdam](${SITE}/christmas/): season-long list of short-run Christmas markets, winter terraces, workshops and light-festival walks (Dutch: [Kerst pop-ups en evenementen in Amsterdam](${SITE}/nl/kerst/))
 - [New Year's Eve pop-ups and events in Amsterdam](${SITE}/new-years-eve/): New Year's Eve and New Year's Day pop-ups, one-off parties, club nights, special dinners and free fireworks shows (Dutch: [Oud en nieuw pop-ups en evenementen in Amsterdam](${SITE}/nl/oud-en-nieuw/))
+- [Oliebollen stands in Amsterdam](${SITE}/oliebollen/): seasonal oliebollen stands for winter 2026, with a map, hours, prices and source links (Dutch: [Oliebollenkramen in Amsterdam](${SITE}/nl/oliebollen/))
 
 ## This week by category
 
@@ -1313,6 +1326,8 @@ ${[
   urlEntry("/nl/kerst/", lastmod, "weekly", "0.8", XMAS_ALT),
   urlEntry("/new-years-eve/", lastmod, "weekly", "0.8", NYE_ALT),
   urlEntry("/nl/oud-en-nieuw/", lastmod, "weekly", "0.8", NYE_ALT),
+  urlEntry("/oliebollen/", lastmod, "weekly", "0.8", OLIEBOLLEN_ALT),
+  urlEntry("/nl/oliebollen/", lastmod, "weekly", "0.8", OLIEBOLLEN_ALT),
   urlEntry("/about/", lastmod, "monthly", "0.5", ABOUT_ALT),
   urlEntry("/nl/over/", lastmod, "monthly", "0.5", ABOUT_ALT),
   ...live.flatMap(c => { const alt = {en:catPath(c.id, "en"), nl:catPath(c.id, "nl")};
@@ -1377,4 +1392,4 @@ ${CONSENT_CSS}
 }
 updatePrivacyConsent();
 
-console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); christmas: ${xmasList.length} events; nye: ${nyeList.length} events; llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 10} URLs, lastmod ${lastmod}`);
+console.log(`this-week.html: ${list.length} events (${week.label.en}); ${pageCats.length} category pages (${live.length} with events, ${pageCats.length - live.length} empty/noindex); christmas: ${xmasList.length} events; nye: ${nyeList.length} events; llms.txt: ${CATEGORIES.length} categories; nl/index.html; sitemap: ${2 * live.length + 12} URLs, lastmod ${lastmod}`);

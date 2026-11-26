@@ -73,6 +73,24 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.amsterdampopups.com/oliebollen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/oliebollen/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/oliebollen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/oliebollen/"/>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.amsterdampopups.com/nl/oliebollen/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/oliebollen/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/oliebollen/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.amsterdampopups.com/oliebollen/"/>
+    <lastmod>2026-11-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.amsterdampopups.com/about/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.amsterdampopups.com/about/"/>
     <xhtml:link rel="alternate" hreflang="nl" href="https://www.amsterdampopups.com/nl/over/"/>

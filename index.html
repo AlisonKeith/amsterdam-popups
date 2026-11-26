@@ -247,6 +247,9 @@ main{padding:18px 0 40px}
 #map{height:380px; border-radius:14px; border:1px solid var(--line); margin:6px 0 16px; z-index:1; background:var(--map-bg)}
 .leaflet-container{font-family:"Inter",sans-serif; background:var(--map-bg)}
 .intro-text{font-size:.75rem;color:var(--faint);margin:.35rem 0 .6rem;line-height:1.5;width:100%;box-sizing:border-box}
+.oliebollen-home-line{font-size:14px;line-height:1.5;margin:0 0 12px;color:var(--ink);width:100%;box-sizing:border-box}
+.oliebollen-home-line a{color:var(--red-text);font-weight:500}
+.oliebollen-home-line a:focus,.oliebollen-home-line a:focus-visible{outline:2px solid var(--red-text);outline-offset:2px}
 .plain-list-link{margin:0 0 14px;font-size:14px;line-height:1.4}
 .plain-list-link a{color:var(--red-text)}
 .pin{width:16px; height:16px; border-radius:50%; border:2px solid var(--pin-ring); box-shadow:0 0 0 1px rgba(0,0,0,0.12); position:relative; display:flex; align-items:center; justify-content:center}
@@ -472,6 +475,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
         <li><a href="/sinterklaas/" data-href-en="/sinterklaas/" data-href-nl="/nl/sinterklaas/" data-txt-en="Sinterklaas" data-txt-nl="Sinterklaas">Sinterklaas</a></li>
         <li><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas" data-txt-nl="Kerst">Christmas</a></li>
         <li><a href="/new-years-eve/" data-href-en="/new-years-eve/" data-href-nl="/nl/oud-en-nieuw/" data-txt-en="New Year's Eve" data-txt-nl="Oud en nieuw">New Year's Eve</a></li>
+        <li><a href="/oliebollen/" data-href-en="/oliebollen/" data-href-nl="/nl/oliebollen/" data-txt-en="Oliebollen" data-txt-nl="Oliebollen">Oliebollen</a></li>
       </ul>
     </details>
     <a class="tab" href="/about/" data-href-en="/about/" data-href-nl="/nl/over/"><span data-i18n="about">About</span></a>
@@ -522,6 +526,8 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
           <p class="intro-text" id="intro-nl" style="display:none">De wekelijkse gids voor pop-upevenementen in Amsterdam — straatvoedselmarkten, comedy en cabaret, theater en dans, livemuziek, nachtleven, kunstopeningen, supperclubs, Sinterklaasfeesten en eenmalige avonden in Centrum, Noord, Oost, West, De Pijp, Jordaan en verder. Elke week bijgewerkt.</p>
           <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
           <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas pop-ups and events in Amsterdam" data-txt-nl="Kerst pop-ups en evenementen in Amsterdam">Christmas pop-ups and events in Amsterdam</a></p>
+          <p class="oliebollen-home-line" id="oliebollen-line-en">For a <a href="/oliebollen/" data-href-en="/oliebollen/" data-href-nl="/nl/oliebollen/">map of delicious oliebollen stands</a> to snack on while you roam Amsterdam.</p>
+          <p class="oliebollen-home-line" id="oliebollen-line-nl" style="display:none">Zin in een warme oliebol onderweg? Bekijk onze <a href="/nl/oliebollen/" data-href-en="/oliebollen/" data-href-nl="/nl/oliebollen/">kaart met oliebollenkramen</a>.</p>
           <p id="map-desc" class="sr-only">Interactive map of Amsterdam pop-ups. Use arrow keys to pan, +/- to zoom, and click markers for event details. The full event list appears below the map.</p>
           <div id="map" role="img" aria-label="Amsterdam pop-ups map" aria-describedby="map-desc"></div>
           <!-- AD 1 on mobile: high in-content, just under the map (above the fold). Hidden on desktop (the rail is used there).
@@ -622,6 +628,7 @@ nav.tabs .wrap::-webkit-scrollbar{display:none}
     <p class="plain-list-link"><a href="/this-week.html" data-href-en="/this-week.html" data-href-nl="/nl/deze-week.html" data-txt-en="This week's events as a plain list" data-txt-nl="De events van deze week als gewone lijst">This week's events as a plain list</a></p>
     <p class="plain-list-link"><a href="/christmas/" data-href-en="/christmas/" data-href-nl="/nl/kerst/" data-txt-en="Christmas pop-ups and events in Amsterdam" data-txt-nl="Kerst pop-ups en evenementen in Amsterdam">Christmas pop-ups and events in Amsterdam</a></p>
     <p class="plain-list-link"><a href="/new-years-eve/" data-href-en="/new-years-eve/" data-href-nl="/nl/oud-en-nieuw/" data-txt-en="New Year's Eve pop-ups and events in Amsterdam" data-txt-nl="Pop-ups en evenementen voor oud en nieuw in Amsterdam">New Year's Eve pop-ups and events in Amsterdam</a></p>
+    <p class="plain-list-link"><a href="/oliebollen/" data-href-en="/oliebollen/" data-href-nl="/nl/oliebollen/" data-txt-en="Oliebollen stands in Amsterdam" data-txt-nl="Oliebollenkramen in Amsterdam">Oliebollen stands in Amsterdam</a></p>
     <h2 id="browse-h" data-txt-en="This week by category" data-txt-nl="Deze week per categorie">This week by category</h2>
     <ul>
       <li><a href="/food/" data-href-en="/food/" data-href-nl="/nl/eten/" data-txt-en="Food" data-txt-nl="Eten">Food</a></li>
@@ -7515,6 +7522,10 @@ function setLang(l){
   document.getElementById("lang-nl").classList.toggle("on", l==="nl");
   document.getElementById("intro-en").style.display = l==="en" ? "" : "none";
   document.getElementById("intro-nl").style.display = l==="nl" ? "" : "none";
+  const obEn = document.getElementById("oliebollen-line-en");
+  const obNl = document.getElementById("oliebollen-line-nl");
+  if(obEn) obEn.style.display = l==="en" ? "" : "none";
+  if(obNl) obNl.style.display = l==="nl" ? "" : "none";
   applyI18n(); renderHousePromos(); renderChips(); renderThisWeek(); renderArchive();
   updateThemeButton(); updateListenButton(false);
 }
