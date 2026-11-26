@@ -108,6 +108,20 @@ const OLIEBOLLEN_STANDS = [
     lat: 52.3520073, lng: 4.7900035
   },
   {
+    id: "museumplein",
+    district: "Zuid",
+    name: {en: "Oliebollenkraam Museumplein", nl: "Oliebollenkraam Museumplein"},
+    location: {
+      en: "Van Baerlestraat side of Museumplein, opposite the Concertgebouw, by the Q-Park entrance",
+      nl: "Aan de Van Baerlestraat-kant van het Museumplein, tegenover het Concertgebouw, bij de ingang van Q-Park"
+    },
+    note: {
+      en: "A long-running winter stall on Museumplein, open again this season.",
+      nl: "Een vaste winterkraam op het Museumplein, ook dit seizoen weer open."
+    },
+    lat: 52.3571060, lng: 4.8797028
+  },
+  {
     id: "van-woustraat",
     district: "Zuid",
     name: {en: "Oliebollenkraam Van Woustraat", nl: "Oliebollenkraam Van Woustraat"},

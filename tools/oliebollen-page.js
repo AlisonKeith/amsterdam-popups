@@ -663,11 +663,12 @@ function initOliebollenMap(){
     source: el.getAttribute("data-source-label") || "Source"
   };
   stands.forEach(function(s){
-    var html = "<div><b>" + escapeHtml(s.name) + "</b><br>" +
-      escapeHtml(s.location) + "<br>" +
-      escapeHtml(labels.hours) + ": " + escapeHtml(s.hours) + "<br>" +
-      escapeHtml(labels.price) + ": " + escapeHtml(s.price) + "<br>" +
-      "<a href=\\"" + escapeHtml(s.source) + "\\" target=\\"_blank\\" rel=\\"noopener\\">" + escapeHtml(labels.source) + " \\u2197</a></div>";
+    var html = "<div><b>" + escapeHtml(s.name) + "</b><br>" + escapeHtml(s.location);
+    if(s.note) html += "<br>" + escapeHtml(s.note);
+    if(s.hours) html += "<br>" + escapeHtml(labels.hours) + ": " + escapeHtml(s.hours);
+    if(s.price) html += "<br>" + escapeHtml(labels.price) + ": " + escapeHtml(s.price);
+    if(s.source) html += "<br><a href=\\"" + escapeHtml(s.source) + "\\" target=\\"_blank\\" rel=\\"noopener\\">" + escapeHtml(labels.source) + " \\u2197</a>";
+    html += "</div>";
     L.marker([s.lat, s.lng], {icon:oliebolIcon(s.id), alt:s.name, keyboard:true, title:s.name})
       .bindPopup(html, {maxWidth:280, closeButton:true, closeOnEscapeKey:true, autoPan:true, autoPanPaddingTopLeft:[50,10]})
       .addTo(map);
@@ -728,28 +729,36 @@ function pageHtml(L, deps){
   const C = COPY[L];
   const T = TXT[L];
   const url = OLIEBOLLEN_ALT[L];
-  const mapData = OLIEBOLLEN_STANDS.map(s => ({
-    id: s.id,
-    name: s.name[L],
-    location: s.location[L],
-    hours: s.hours[L],
-    price: s.price[L],
-    source: s.source,
-    lat: s.lat,
-    lng: s.lng
-  }));
+  const mapData = OLIEBOLLEN_STANDS.map(s => {
+    const row = {
+      id: s.id,
+      name: s.name[L],
+      location: s.location[L],
+      lat: s.lat,
+      lng: s.lng
+    };
+    if(s.note) row.note = s.note[L];
+    if(s.hours) row.hours = s.hours[L];
+    if(s.price) row.price = s.price[L];
+    if(s.source) row.source = s.source;
+    return row;
+  });
   const intro = C.intro.map(p => `  <p>${esc(p)}</p>`).join("\n");
   const tips = C.tips.length
     ? `  <h2>${esc(C.tipsHeading)}</h2>\n  <ul class="oliebollen-tips">\n${C.tips.map(t => `    <li>${esc(t)}</li>`).join("\n")}\n  </ul>\n`
     : "";
   const list = groupedStands().map(([district, stands]) => {
-    const items = stands.map(s => `      <li id="stand-${esc(s.id)}">
-        <h4>${esc(s.name[L])}</h4>
-        <p>${esc(s.location[L])}</p>
-        <p>${esc(C.hoursLabel)}: ${esc(s.hours[L])}</p>
-        <p>${esc(C.priceLabel)}: ${esc(s.price[L])}</p>
-        <p><a href="${esc(s.source)}" rel="noopener">${esc(C.sourceLabel)}</a></p>
-      </li>`).join("\n");
+    const items = stands.map(s => {
+      const rows = [
+        `        <h4>${esc(s.name[L])}</h4>`,
+        `        <p>${esc(s.location[L])}</p>`
+      ];
+      if(s.note) rows.push(`        <p>${esc(s.note[L])}</p>`);
+      if(s.hours) rows.push(`        <p>${esc(C.hoursLabel)}: ${esc(s.hours[L])}</p>`);
+      if(s.price) rows.push(`        <p>${esc(C.priceLabel)}: ${esc(s.price[L])}</p>`);
+      if(s.source) rows.push(`        <p><a href="${esc(s.source)}" rel="noopener">${esc(C.sourceLabel)}</a></p>`);
+      return `      <li id="stand-${esc(s.id)}">\n${rows.join("\n")}\n      </li>`;
+    }).join("\n");
     return `    <section class="oliebollen-district" aria-labelledby="d-${esc(district)}">
       <h3 id="d-${esc(district)}">${esc(district)}</h3>
       <ul class="oliebollen-list">
@@ -835,8 +844,8 @@ ${consentBlock(L)}
 }
 
 function buildOliebollenPages(deps){
-  if(OLIEBOLLEN_STANDS.length !== 19){
-    throw new Error(`expected 19 confirmed 2026 oliebollen stands, found ${OLIEBOLLEN_STANDS.length}`);
+  if(OLIEBOLLEN_STANDS.length !== 20){
+    throw new Error(`expected 20 confirmed 2026 oliebollen stands, found ${OLIEBOLLEN_STANDS.length}`);
   }
   for(const s of OLIEBOLLEN_STANDS){
     if(typeof s.lat !== "number" || typeof s.lng !== "number") throw new Error(`missing coordinates for ${s.id}`);
