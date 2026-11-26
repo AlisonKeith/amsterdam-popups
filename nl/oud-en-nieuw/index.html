@@ -2111,7 +2111,7 @@ function initSeasonMap(){
         var when = escapeHtml(ev.when) + (ev.time ? " · " + escapeHtml(ev.time) : "");
         html = "<div class=\"pop-item\" data-href=\"" + escapeHtml(ev.url) + "\"><b><a href=\"" + escapeHtml(ev.url) + "\" target=\"_blank\" rel=\"noopener\">" + escapeHtml(ev.name) + " ↗</a></b><br>" + when + "<br>" + escapeHtml(ev.addr || "") + "</div>";
       }
-      L.marker([ev.lat, ev.lng], {icon:pin, alt:title, keyboard:true, title:title}).bindPopup(html, {maxWidth:280, maxHeight:280, closeButton:true, closeOnEscapeKey:true, autoPan:true}).addTo(layer);
+      L.marker([ev.lat, ev.lng], {icon:pin, alt:title, keyboard:true, title:title}).bindPopup(html, {maxWidth:280, maxHeight:280, closeButton:true, closeOnEscapeKey:true, autoPan:true, autoPanPaddingTopLeft:[50,10]}).addTo(layer);
     });
     if(list.length){
       map.fitBounds(list.map(function(e){ return [e.lat, e.lng]; }), {padding:[40,40], maxZoom:14});

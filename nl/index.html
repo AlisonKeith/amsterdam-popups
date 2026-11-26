@@ -7080,7 +7080,7 @@ function renderMap(list){
       const pill = `<span class="pop-cat" style="background:${tintBg(c.hex)};color:${darkText(c.hex)}">${catLabelHtml(c)}</span>`;
       popupHtml = `<div class="pop-item" data-href="${ev.url}">${pill}<br><b>${eventName(ev, lang)}</b><br>${ev.hood[lang]} · ${eventWhenLine(ev)}<br>${mapsButton(ev)}<br><a class="pop-link" href="${ev.url}" target="_blank" rel="noopener">${t("more")} ↗</a></div>`;
     }
-    m.bindPopup(popupHtml, { maxWidth:280, maxHeight:280, closeButton:true, closeOnEscapeKey:true, autoPan:true });
+    m.bindPopup(popupHtml, { maxWidth:280, maxHeight:280, closeButton:true, closeOnEscapeKey:true, autoPan:true, autoPanPaddingTopLeft:[50,10] });
     group.forEach(e => { markers[e.id] = m; });
     pts.push([ev.lat,ev.lng]);
   });
