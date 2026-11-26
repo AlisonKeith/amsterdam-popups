@@ -160,6 +160,21 @@ const OLIEBOLLEN_STANDS = [
     lat: 52.3571117, lng: 4.8915465
   },
   {
+    id: "cornelis-schuytplein",
+    district: "Zuid",
+    name: {en: "De Oliebollenbakkerij, Cornelis Schuytplein", nl: "De Oliebollenbakkerij, Cornelis Schuytplein"},
+    location: {
+      en: "Cornelis Schuytplein, at Johannes Verhulststraat, 1071 JG",
+      nl: "Cornelis Schuytplein, aan de Johannes Verhulststraat, 1071 JG"
+    },
+    note: {
+      en: "A seasonal stall on Cornelis Schuytplein, listed this winter as De Oliebollenbakkerij.",
+      nl: "Een seizoenskraam op het Cornelis Schuytplein, dit winterseizoen vermeld als De Oliebollenbakkerij."
+    },
+    source: "https://www.google.com/maps/place/?q=place_id:ChIJNxCt_wYJxkcRKpcqjdbcpco",
+    lat: 52.3542852, lng: 4.8717610
+  },
+  {
     id: "cornelis-troostplein",
     district: "Zuid",
     name: {en: "Oliebollenkraam JT van Gemert", nl: "Oliebollenkraam JT van Gemert"},
