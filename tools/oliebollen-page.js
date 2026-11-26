@@ -14,7 +14,7 @@ const COPY = {
     imageAlt: "Amsterdam Pop-ups — oliebollen stands in Amsterdam",
     h1: "Oliebollen stands in Amsterdam",
     intro: [
-      "Oliebollen are balls of yeast dough, fried in hot oil until golden. They often have currants or raisins in the dough, and are eaten warm with powdered sugar. In the Netherlands they are a favourite on New Year's Eve, a custom that took hold in the nineteenth century. Seasonal stalls usually appear from October, and 31 December is the busiest day."
+      "Oliebollen are a bit like doughnuts: soft balls of dough, fried until golden. They often have currants or raisins in the dough, and are eaten warm with powdered sugar. In the Netherlands they are a favourite on New Year's Eve, a custom that took hold in the nineteenth century. Seasonal stalls usually appear from October, and 31 December is the busiest day."
     ],
     tipsHeading: "A few practical tips",
     tips: [
