@@ -938,7 +938,9 @@ function catPage(c, L){
   const evs = inCat(c.id), T = TXT[L], label = (c.pageLabel||c.label)[L];
   return listPage({
     L, alt:{en:catPath(c.id, "en"), nl:catPath(c.id, "nl")}, currentId:c.id,
-    title:T.catTitle(label, week.label[L]),
+    title:(c.id === "christmas" && L === "en")
+      ? "Amsterdam Christmas Markets 2026: This Week's Dates and Prices"
+      : T.catTitle(label, week.label[L]),
     desc:T.catDesc(label, evs.length, week.label[L]),
     robots:evs.length ? "" : "noindex, follow",
     headerExtra:` · <a href="${L === "nl" ? "/nl/deze-week.html" : "/this-week.html"}">${T.allWeek}</a>`,
